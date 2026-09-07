@@ -624,90 +624,12 @@ function speak(text){
   }catch(e){}
 }
 
+// Every card in data/vocabulary.json carries its own hand-written example.
+// If a word is ever added without one, show no example rather than a
+// generated template sentence — those read as filler and teach nothing.
 function exampleFor(card){
   if(card.example && card.example.de && card.example.en) return card.example;
-  const hash = Array.from(card.stem + card.type + (card.category || '')).reduce((sum, char) => sum + char.charCodeAt(0), 0);
-  const pick = (templates) => templates[hash % templates.length];
-  if(card.type === 'noun'){
-    const baseArticle = card.article ? card.article.split('/')[0] : '';
-    if(!baseArticle) return {
-      de:'Das Wort '+card.stem+' ist heute wichtig.',
-      en:'The word '+card.en+' is useful today.'
-    };
-    const articles = {
-      der: { nom:'der', acc:'den', dat:'dem' },
-      die: { nom:'die', acc:'die', dat:'der' },
-      das: { nom:'das', acc:'das', dat:'dem' }
-    }[baseArticle];
-    const contexts = {
-      food: [
-        ['Ich kaufe {acc} {word} auf dem Markt.', 'I buy the {meaning} at the market.'],
-        ['Wir essen {acc} {word} heute Abend.', 'We are eating the {meaning} this evening.'],
-        ['{Nom} {word} schmeckt sehr gut.', 'The {meaning} tastes very good.']
-      ],
-      travel_transport: [
-        ['Ich brauche {acc} {word} für die Reise.', 'I need the {meaning} for the trip.'],
-        ['Wo finde ich {acc} {word}?', 'Where can I find the {meaning}?'],
-        ['Wir sehen {acc} {word} am Bahnhof.', 'We see the {meaning} at the station.']
-      ],
-      shopping_clothing: [
-        ['Ich probiere {acc} {word} an.', 'I try on the {meaning}.'],
-        ['Wie viel kostet {Nom} {word}?', 'How much does the {meaning} cost?'],
-        ['Sie sucht {acc} {word} im Geschäft.', 'She is looking for the {meaning} in the shop.']
-      ],
-      school_education: [
-        ['Wir lernen heute etwas über {acc} {word}.', 'Today we learn about the {meaning}.'],
-        ['Der Lehrer erklärt {acc} {word}.', 'The teacher explains the {meaning}.'],
-        ['Ich schreibe {acc} {word} in mein Heft.', 'I write the {meaning} in my notebook.']
-      ],
-      work_office: [
-        ['Wir besprechen {acc} {word} im Büro.', 'We discuss the {meaning} at the office.'],
-        ['Ich brauche {acc} {word} für meine Arbeit.', 'I need the {meaning} for my work.'],
-        ['{Nom} {word} ist für das Team wichtig.', 'The {meaning} is important for the team.']
-      ]
-    };
-    const templates = contexts[card.category] || [
-      ['{Nom} {word} ist heute wichtig.', 'The {meaning} is important today.'],
-      ['Ich sehe {acc} {word}.', 'I see the {meaning}.'],
-      ['Wir sprechen über {acc} {word}.', 'We are talking about the {meaning}.'],
-      ['Ich denke oft an {acc} {word}.', 'I often think about the {meaning}.'],
-      ['Mit {Dat} {word} geht alles leichter.', 'Everything is easier with the {meaning}.'],
-      ['Wo ist {Nom} {word}?', 'Where is the {meaning}?']
-    ];
-    const sentence = pick(templates);
-    return {
-      de: sentence[0].replace('{Nom}', articles.nom[0].toUpperCase()+articles.nom.slice(1)).replace('{acc}', articles.acc).replace('{Dat}', articles.dat).replace('{word}', card.stem),
-      en: sentence[1].replace('{meaning}', card.en)
-    };
-  }
-  if(card.type === 'adj'){
-    const sentence = pick([
-      ['Der Film ist {word}.', 'The film is {meaning}.'],
-      ['Das Essen schmeckt {word}.', 'The food tastes {meaning}.'],
-      ['Ich finde die Aufgabe {word}.', 'I find the task {meaning}.'],
-      ['Heute ist das Wetter {word}.', 'Today the weather is {meaning}.'],
-      ['Sie trägt ein {word} Kleid.', 'She is wearing a {meaning} dress.']
-    ]);
-    return { de:sentence[0].replace('{word}', card.stem), en:sentence[1].replace('{meaning}', card.en) };
-  }
-  if(card.type === 'adverb'){
-    const sentence = pick([
-      ['Er kommt {word}.', 'He comes {meaning}.'],
-      ['Wir treffen uns {word}.', 'We meet {meaning}.'],
-      ['Sie spricht {word}.', 'She speaks {meaning}.'],
-      ['Ich mache das {word}.', 'I do that {meaning}.'],
-      ['Der Zug fährt {word} ab.', 'The train leaves {meaning}.']
-    ]);
-    return { de:sentence[0].replace('{word}', card.stem), en:sentence[1].replace('{meaning}', card.en) };
-  }
-  const sentence = pick([
-    ['Ich möchte {word}.', 'I would like to {meaning}.'],
-    ['Wir können heute {word}.', 'We can {meaning} today.'],
-    ['Sie versucht zu {word}.', 'She tries to {meaning}.'],
-    ['Er muss noch {word}.', 'He still has to {meaning}.'],
-    ['Wir lernen, wie man {word}.', 'We are learning how to {meaning}.']
-  ]);
-  return { de:sentence[0].replace('{word}', card.stem), en:sentence[1].replace('{meaning}', card.en) };
+  return null;
 }
 
 // --- Auto-play mode ---
@@ -815,7 +737,7 @@ function renderCard(){
       '<div class="face back">' +
         '<div class="type-chip">'+TYPE_LABELS[card.type]+'</div>' +
         '<div class="chip-row"><div class="level-chip '+card.level+'">'+card.level+'</div>'+(card.cognate?'<div class="cognate-chip">≈ EN</div>':'')+'</div>' +
-        '<div class="face-inner"><div class="word-en">'+card.en+'</div><div class="hint">'+ (card.article ? card.article+' '+card.stem : card.de) +'</div><div class="example-box"><span class="example-de">'+example.de+'</span><span class="example-en">'+example.en+'</span></div>'+(card.mnemonic?'<div class="mnemonic-box"><span class="mnemonic-label">💡 Memory tip</span><span class="mnemonic-text">'+card.mnemonic+'</span></div>':'')+(card.opposite?'<div class="opposite-box"><span class="opposite-icon">↔</span><div class="opposite-text"><span class="opposite-label">Opposite</span><span class="opposite-word">'+card.opposite+'</span>'+(oppMeaning?'<span class="opposite-meaning">'+oppMeaning+'</span>':'')+'</div><button class="opposite-speak" id="oppSpeakBtn" title="Hear opposite">🔊</button></div>':'')+'</div>' +
+        '<div class="face-inner"><div class="word-en">'+card.en+'</div><div class="hint">'+ (card.article ? card.article+' '+card.stem : card.de) +'</div>'+(example?'<div class="example-box"><span class="example-de">'+example.de+'</span><span class="example-en">'+example.en+'</span></div>':'')+(card.mnemonic?'<div class="mnemonic-box"><span class="mnemonic-label">💡 Memory tip</span><span class="mnemonic-text">'+card.mnemonic+'</span></div>':'')+(card.opposite?'<div class="opposite-box"><span class="opposite-icon">↔</span><div class="opposite-text"><span class="opposite-label">Opposite</span><span class="opposite-word">'+card.opposite+'</span>'+(oppMeaning?'<span class="opposite-meaning">'+oppMeaning+'</span>':'')+'</div><button class="opposite-speak" id="oppSpeakBtn" title="Hear opposite">🔊</button></div>':'')+'</div>' +
       '</div>' +
     '</div>';
 
