@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Präpositionen Trainer</title>
+
+
+<style>
+  :root{
+    --bg:#F5F6F8;
+    --surface:#FFFFFF;
+    --surface-2:#EEF0F3;
+    --border:#DCE0E6;
+    --text:#161A1F;
+    --text-muted:#4B5563;
+    --text-dim:#8A93A0;
+    --akk:#B5620A;
+    --akk-dim:#FBEBD8;
+    --dat:#1B6FA8;
+    --dat-dim:#E1EEF6;
+    --gen:#7A4FA0;
+    --gen-dim:#F0E6F7;
+    --success:#227A50;
+    --success-dim:#E4F3EA;
+    --error:#B23A2C;
+    --error-dim:#FBE7E4;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(22,26,31,0.04), 0 4px 14px rgba(22,26,31,0.05);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+  }
+  .app{
+    max-width:760px;width:100%;margin:0 auto;
+    height:100%;
+    padding:12px 16px;
+    display:flex;flex-direction:column;
+    gap:10px;
+    min-height:0;
+  }
+
+  /* TOPBAR */
+  .topbar{display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:8px;}
+  .brand{display:flex;align-items:center;gap:8px;min-width:0;}
+  .compass{display:inline-flex;width:22px;height:22px;flex-shrink:0;color:var(--dat);}
+  .brand h1{
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;margin:0;
+    letter-spacing:-0.01em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .brand .sub{font-size:11px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .topbar-actions{display:flex;gap:6px;flex-shrink:0;}
+  .icon-btn{
+    display:flex;align-items:center;gap:6px;
+    background:var(--surface);border:1px solid var(--border);color:var(--text);
+    font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;
+    padding:7px 11px;border-radius:9px;cursor:pointer;white-space:nowrap;
+  }
+  .icon-btn:hover{border-color:var(--text-dim);}
+  .icon-btn.ghost{color:var(--text-dim);}
+
+  /* FILTERS */
+  .filters{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
+  .filter-row{display:flex;align-items:center;gap:8px;}
+  .filter-label{
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;
+    text-transform:uppercase;color:var(--text-dim);width:46px;flex-shrink:0;
+  }
+  .chips{
+    display:flex;gap:5px;overflow-x:auto;flex:1;min-width:0;
+    scrollbar-width:none;padding:2px 0;
+  }
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{
+    font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+    padding:5px 10px;border-radius:16px;border:1px solid var(--border);
+    background:var(--surface);color:var(--text-muted);cursor:pointer;user-select:none;
+    transition:all .15s ease;white-space:nowrap;flex-shrink:0;
+  }
+  .chip:hover{border-color:var(--text-dim);color:var(--text);}
+  .chip.active{background:var(--text);color:var(--surface);border-color:var(--text);}
+
+  /* STATS BAR */
+  .stats{
+    display:flex;background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:8px 12px;gap:0;box-shadow:var(--shadow);flex-shrink:0;
+  }
+  .stat{flex:1;text-align:center;}
+  .stat + .stat{border-left:1px solid var(--border);}
+  .stat-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;line-height:1.1;color:var(--text);}
+  .stat-label{font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin-top:1px;}
+
+  /* CARD */
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:18px 20px;position:relative;box-shadow:var(--shadow);
+    flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;
+  }
+  .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px;flex-shrink:0;}
+  .tag-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+  .art-tag{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    padding:3px 7px;border-radius:6px;
+  }
+  .art-tag.bestimmt{background:var(--dat-dim);color:var(--dat);}
+  .art-tag.unbestimmt{background:var(--gen-dim);color:var(--gen);}
+  .art-tag.possessiv{background:var(--success-dim);color:var(--success);}
+  .art-tag.negativ{background:var(--error-dim);color:var(--error);}
+  .art-tag.ohne{background:var(--akk-dim);color:var(--akk);}
+  .cat-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);}
+  .card-top-right{display:flex;align-items:center;gap:10px;}
+  .remaining{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);white-space:nowrap;}
+  .known-btn{
+    background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;
+    display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:6px;
+  }
+  .known-btn:hover{color:var(--text-muted);background:var(--surface-2);}
+
+  .sentence{font-size:clamp(17px,4vw,21px);line-height:1.5;font-weight:500;margin:4px 0 12px;color:var(--text);}
+  .blank-input{
+    font-family:'JetBrains Mono',monospace;font-size:0.92em;font-weight:600;
+    margin:0 1px;
+    background:var(--surface-2);border:none;border-bottom:2.5px solid var(--text-dim);
+    color:var(--text);padding:2px 6px;width:auto;min-width:90px;max-width:220px;
+    text-align:center;outline:none;border-radius:5px 5px 0 0;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .blank-input:focus{border-color:var(--dat);background:#fff;}
+  .blank-input.correct{border-color:var(--success);background:var(--success-dim);color:var(--success);}
+  .blank-input.incorrect{border-color:var(--error);background:var(--error-dim);color:var(--error);}
+  .blank-input:disabled{opacity:1;}
+
+  .translation{font-size:12.5px;color:var(--text-dim);font-style:italic;margin-bottom:2px;}
+
+  .card-fill{flex:1;min-height:0;}
+
+  .feedback{display:none;margin-top:10px;padding:11px 14px;border-radius:10px;border:1px solid var(--border);flex-shrink:0;}
+  .feedback.show{display:block;}
+  .feedback.correct{background:var(--success-dim);border-color:var(--success);}
+  .feedback.incorrect{background:var(--error-dim);border-color:var(--error);}
+  .feedback-head{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;margin-bottom:5px;flex-wrap:wrap;}
+  .feedback.correct .feedback-head{color:var(--success);}
+  .feedback.incorrect .feedback-head{color:var(--error);}
+  .case-badge{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:12px;letter-spacing:0.02em;}
+  .case-badge.Akkusativ{background:var(--akk-dim);color:var(--akk);}
+  .case-badge.Dativ{background:var(--dat-dim);color:var(--dat);}
+  .case-badge.Genitiv{background:var(--gen-dim);color:var(--gen);}
+  .answer-line{font-size:13px;color:var(--text-muted);margin-bottom:5px;}
+  .answer-line b{color:var(--text);font-family:'JetBrains Mono',monospace;}
+  .explanation{font-size:12.5px;color:var(--text-muted);line-height:1.45;}
+
+  .actions{display:flex;gap:10px;margin-top:12px;flex-shrink:0;}
+  .btn{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:10px 18px;
+    border-radius:10px;border:none;cursor:pointer;flex:1;transition:all .15s ease;
+  }
+  .btn-primary{background:var(--text);color:var(--surface);}
+  .btn-primary:hover{opacity:0.88;}
+  .btn-primary:disabled{opacity:0.35;cursor:not-allowed;}
+  .btn-secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border);}
+  .btn-secondary:hover{border-color:var(--text-dim);}
+
+  .empty-state{text-align:center;padding:30px 20px;color:var(--text-muted);margin:auto;}
+  .empty-state .compass{width:28px;height:28px;margin-bottom:12px;opacity:0.5;}
+
+  /* REFERENCE MODAL */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(22,26,31,0.42);
+    z-index:50;align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{
+    background:var(--surface);border-radius:16px;max-width:480px;width:100%;
+    max-height:min(640px,86vh);display:flex;flex-direction:column;
+    box-shadow:0 12px 40px rgba(22,26,31,0.22);overflow:hidden;
+  }
+  .modal-header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;
+  }
+  .modal-header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .meaning-toggle{
+    display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:12px;
+    font-weight:600;color:var(--text-muted);cursor:pointer;user-select:none;white-space:nowrap;
+  }
+  .meaning-toggle input{accent-color:var(--text);cursor:pointer;}
+  .modal-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;margin:0;color:var(--text);}
+  .modal-close{
+    background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+    width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:15px;line-height:1;
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .modal-close:hover{border-color:var(--text-dim);}
+  .modal-body{padding:6px 18px 18px;overflow-y:auto;}
+  .ref-section{padding:12px 0;border-top:1px solid var(--border);}
+  .ref-section:first-child{border-top:none;}
+  .ref-section-head{
+    display:flex;align-items:center;gap:7px;
+    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;
+    margin-bottom:5px;color:var(--text);
+  }
+  .ref-note{font-size:12px;color:var(--text-dim);line-height:1.5;margin-bottom:9px;}
+  .ref-note b{color:var(--text-muted);}
+  .ref-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .ref-tag{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    padding:4px 9px;border-radius:8px;border:1px solid transparent;cursor:default;
+  }
+  .ref-tag.akk{background:var(--akk-dim);color:var(--akk);}
+  .ref-tag.dat{background:var(--dat-dim);color:var(--dat);}
+  .ref-tag.gen{background:var(--gen-dim);color:var(--gen);}
+  .ref-tag.wechsel{background:var(--surface-2);color:var(--text);border-color:var(--border);}
+
+  /* PROGRESS MODAL */
+  .prog-summary{
+    display:flex;background:var(--surface-2);border-radius:10px;padding:10px 14px;margin:4px 0 14px;gap:0;
+  }
+  .prog-summary .stat{flex:1;text-align:center;}
+  .prog-summary .stat + .stat{border-left:1px solid var(--border);}
+  .prog-row{
+    padding:11px 0;border-top:1px solid var(--border);cursor:pointer;
+  }
+  .prog-row:first-of-type{border-top:none;}
+  .prog-row:hover .prog-name{text-decoration:underline;}
+  .prog-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .prog-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;color:var(--text);}
+  .prog-count{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-dim);}
+  .prog-bar-track{
+    height:8px;border-radius:5px;background:var(--surface-2);overflow:hidden;display:flex;
+  }
+  .prog-bar-correct{background:var(--success);height:100%;}
+  .prog-bar-wrong{background:var(--error);height:100%;}
+  .prog-detail{
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);margin-top:5px;
+    display:flex;gap:10px;
+  }
+  .prog-detail span.c{color:var(--success);}
+  .prog-detail span.w{color:var(--error);}
+  #modalBody.show-meanings .ref-tag::after{
+    content:" — " attr(data-meaning);
+    font-family:'Inter',sans-serif;font-weight:400;font-style:italic;opacity:0.75;
+  }
+  .ref-wohin-wo{display:flex;gap:10px;margin-bottom:9px;flex-wrap:wrap;}
+  .ref-wohin-wo div{flex:1;min-width:120px;font-size:11.5px;background:var(--surface-2);border-radius:8px;padding:7px 9px;}
+  .ref-wohin-wo .lbl{font-family:'JetBrains Mono',monospace;font-weight:600;display:block;margin-bottom:2px;}
+  .ref-wohin-wo .akkl .lbl{color:var(--akk);}
+  .ref-wohin-wo .datl .lbl{color:var(--dat);}
+  .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;}
+  .dot.akk{background:var(--akk);}
+  .dot.dat{background:var(--dat);}
+  .dot.gen{background:var(--gen);}
+
+  /* UMLAUT TOOLBAR */
+  .umlaut-bar{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px;flex-shrink:0;}
+  .umlaut-btn{
+    font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;
+    background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+    width:30px;height:28px;border-radius:7px;cursor:pointer;
+  }
+  .umlaut-btn:hover{border-color:var(--text-dim);}
+  .umlaut-btn:active{background:var(--dat-dim);border-color:var(--dat);color:var(--dat);}
+
+  @media (max-width:480px){
+    .app{padding:10px 12px;gap:8px;}
+    .brand h1{font-size:17px;}
+    .brand .sub{display:none;}
+    .filter-label{width:40px;}
+    .card{padding:14px 16px;}
+    .stat-num{font-size:16px;}
+  }
+  @media (max-height:640px){
+    .brand .sub{display:none;}
+    .sentence{margin:2px 0 6px;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+<link rel="stylesheet" href="../shared/theme.css">
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">
+      <svg class="compass" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M15.5 8.5L13 13L8.5 15.5L11 11L15.5 8.5Z" fill="currentColor"/>
+      </svg>
+      <div>
+        <h1 id="appTitle">Präpositionen</h1>
+        <div class="sub" id="appSubtitle">Wohin? · Wo? · Warum?</div>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn ghost" id="langToggle" title="Switch language">EN</button>
+      <button class="icon-btn" id="progressToggle">📊 <span id="progressBtnLabel">Fortschritt</span></button>
+      <button class="icon-btn" id="refToggle">📖 <span id="refBtnLabel">Übersicht</span></button>
+      <button class="icon-btn ghost" id="resetProgress" title="Fortschritt zurücksetzen">↺</button>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div class="filter-row">
+      <div class="filter-label" id="labelCategory">Kategorie</div>
+      <div class="chips" id="catChips"></div>
+    </div>
+    <div class="filter-row">
+      <div class="filter-label" id="labelArtikel">Artikel</div>
+      <div class="chips" id="artikelChips"></div>
+    </div>
+    <div class="filter-row">
+      <div class="filter-label" id="labelStatus">Status</div>
+      <div class="chips" id="statusChips"></div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="statCorrect">0</div><div class="stat-label" id="labelStatCorrect">Richtig</div></div>
+    <div class="stat"><div class="stat-num" id="statTotal">0</div><div class="stat-label" id="labelStatTotal">Versuche</div></div>
+    <div class="stat"><div class="stat-num" id="statAcc">–</div><div class="stat-label" id="labelStatAcc">Genauigkeit</div></div>
+    <div class="stat"><div class="stat-num" id="statStreak">0</div><div class="stat-label" id="labelStatStreak">Serie</div></div>
+  </div>
+
+  <div class="card" id="card"></div>
+
+</div>
+
+<!-- REFERENCE MODAL -->
+<div class="modal-overlay" id="refOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitleText">Alle Präpositionen</h2>
+      <div class="modal-header-actions">
+        <label class="meaning-toggle"><input type="checkbox" id="meaningToggle"> <span id="meaningToggleLabel">Bedeutungen</span></label>
+        <button class="modal-close" id="refClose">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="modalBody">
+
+      <section class="ref-section">
+        <div class="ref-section-head"><span class="dot akk"></span><span id="sectionAkkTitle">Akkusativ</span></div>
+        <div class="ref-note" id="noteAkkText">Immer Akkusativ. Merkhilfe: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.</div>
+        <div class="ref-tags">
+          <span class="ref-tag akk" data-meaning="until, by">bis</span>
+          <span class="ref-tag akk" data-meaning="through, across">durch</span>
+          <span class="ref-tag akk" data-meaning="for">für</span>
+          <span class="ref-tag akk" data-meaning="against, towards">gegen</span>
+          <span class="ref-tag akk" data-meaning="without">ohne</span>
+          <span class="ref-tag akk" data-meaning="around, at (time)">um</span>
+          <span class="ref-tag akk" data-meaning="along (after the noun)" title="steht meist nach dem Nomen">entlang*</span>
+        </div>
+      </section>
+
+      <section class="ref-section">
+        <div class="ref-section-head"><span class="dot dat"></span><span id="sectionDatTitle">Dativ</span></div>
+        <div class="ref-note" id="noteDatText">Immer Dativ. Merkhilfe: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.</div>
+        <div class="ref-tags">
+          <span class="ref-tag dat" data-meaning="from, as of">ab</span>
+          <span class="ref-tag dat" data-meaning="out of, from">aus</span>
+          <span class="ref-tag dat" data-meaning="except for, besides">außer</span>
+          <span class="ref-tag dat" data-meaning="at, near, with">bei</span>
+          <span class="ref-tag dat" data-meaning="opposite, across from" title="steht oft nach dem Nomen">gegenüber*</span>
+          <span class="ref-tag dat" data-meaning="with, by (means of)">mit</span>
+          <span class="ref-tag dat" data-meaning="after, to (cities/countries)">nach</span>
+          <span class="ref-tag dat" data-meaning="since, for (duration)">seit</span>
+          <span class="ref-tag dat" data-meaning="from, of, by">von</span>
+          <span class="ref-tag dat" data-meaning="to, at">zu</span>
+        </div>
+      </section>
+
+      <section class="ref-section">
+        <div class="ref-section-head" id="sectionWechselTitle">Wechselpräpositionen</div>
+        <div class="ref-wohin-wo">
+          <div class="akkl"><span class="lbl" id="wohinLabel">Wohin? → Akkusativ</span><span id="wohinDesc">Bewegung zu einem Ziel</span></div>
+          <div class="datl"><span class="lbl" id="woLabel">Wo? → Dativ</span><span id="woDesc">Feste Position, kein Ziel</span></div>
+        </div>
+        <div class="ref-tags">
+          <span class="ref-tag wechsel" data-meaning="on (vertical), at, by">an</span>
+          <span class="ref-tag wechsel" data-meaning="on top of (horizontal)">auf</span>
+          <span class="ref-tag wechsel" data-meaning="behind">hinter</span>
+          <span class="ref-tag wechsel" data-meaning="in, into, inside">in</span>
+          <span class="ref-tag wechsel" data-meaning="next to, beside">neben</span>
+          <span class="ref-tag wechsel" data-meaning="over, above, across">über</span>
+          <span class="ref-tag wechsel" data-meaning="under, beneath, among">unter</span>
+          <span class="ref-tag wechsel" data-meaning="in front of, before">vor</span>
+          <span class="ref-tag wechsel" data-meaning="between">zwischen</span>
+        </div>
+      </section>
+
+      <section class="ref-section">
+        <div class="ref-section-head"><span class="dot gen"></span><span id="sectionGenTitle">Genitiv</span></div>
+        <div class="ref-note" id="noteGenText">Formell Genitiv — in der Umgangssprache oft mit Dativ.</div>
+        <div class="ref-tags">
+          <span class="ref-tag gen" data-meaning="outside of">außerhalb</span>
+          <span class="ref-tag gen" data-meaning="inside of, within">innerhalb</span>
+          <span class="ref-tag gen" data-meaning="above">oberhalb</span>
+          <span class="ref-tag gen" data-meaning="below">unterhalb</span>
+          <span class="ref-tag gen" data-meaning="instead of">statt / anstatt</span>
+          <span class="ref-tag gen" data-meaning="despite, in spite of">trotz</span>
+          <span class="ref-tag gen" data-meaning="during">während</span>
+          <span class="ref-tag gen" data-meaning="because of">wegen</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS MODAL -->
+<div class="modal-overlay" id="progressOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="progressTitleText">Fortschritt</h2>
+      <button class="modal-close" id="progressClose">✕</button>
+    </div>
+    <div class="modal-body" id="progressBody"></div>
+  </div>
+</div>
+
+<script>function loadJson(path){var request=new XMLHttpRequest();request.open("GET",path,false);request.send(null);if(request.status!==200 && request.status!==0){throw new Error("Could not load " + path);}return JSON.parse(request.responseText);}</script><script>
+/* ============================================================
+   DATA
+   Each item: id, level (A1-C2), category (akk/dat/gen/wechsel/verb),
+   mode ("mit" = preposition + declined article, "ohne" = preposition
+   alone, before a pronoun/proper noun/mass noun that needs no article),
+   case (Akkusativ/Dativ/Genitiv), prep (display label),
+   before / after (sentence text around the blank),
+   ans (array of accepted answers, case-insensitive),
+   tr (English translation), ex (explanation)
+   ============================================================ */
+const DATA = loadJson("../data/prepositions.json");
+
+/* ============================================================
+   UI STRINGS (bilingual interface)
+   ============================================================ */
+const STRINGS = {
+  de: {
+    appTitle:"Präpositionen", appSubtitle:"Wohin? · Wo? · Warum?",
+    refBtnLabel:"Übersicht", resetTitle:"Fortschritt zurücksetzen",
+    labelCategory:"Kategorie", labelArtikel:"Artikel",
+    catAll:"Alle", catAkk:"Akkusativ", catDat:"Dativ", catGen:"Genitiv", catWechsel:"Wechsel", catVerb:"Verb + Präp",
+    artAll:"Alle", artBestimmt:"Bestimmter Artikel", artUnbestimmt:"Unbestimmter Artikel", artPossessiv:"Possessivartikel", artNegativ:"Negativartikel", artOhne:"Ohne Artikel",
+    labelStatCorrect:"Richtig", labelStatTotal:"Versuche", labelStatAcc:"Genauigkeit", labelStatStreak:"Serie",
+    remaining:n=>`${n} übrig`,
+    knownBtn:"✓ Kenne ich", skipBtn:"Überspringen", checkBtn:"Prüfen", nextBtn:"Weiter →",
+    correctLabel:"✓ Richtig", incorrectLabel:"✕ Nicht ganz", correctPrefix:"Richtig:",
+    emptyTitle:"Nichts zu üben", emptyBody:"Alle Sätze in dieser Auswahl sind als bekannt markiert, oder kein Satz passt zu den Filtern.",
+    modalTitleText:"Alle Präpositionen", meaningToggleLabel:"Bedeutungen",
+    resetConfirm:"Gesamten Fortschritt zurücksetzen? Dies kann nicht rückgängig gemacht werden.",
+    sectionAkkTitle:"Akkusativ", sectionDatTitle:"Dativ", sectionWechselTitle:"Wechselpräpositionen", sectionGenTitle:"Genitiv",
+    noteAkkText:'Immer Akkusativ. Merkhilfe: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.',
+    noteDatText:'Immer Dativ. Merkhilfe: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.',
+    noteGenText:"Formell Genitiv — in der Umgangssprache oft mit Dativ.",
+    wohinLabel:"Wohin? → Akkusativ", wohinDesc:"Bewegung zu einem Ziel",
+    woLabel:"Wo? → Dativ", woDesc:"Feste Position, kein Ziel",
+    langToggleLabel:"EN",
+    labelStatus:"Status", statusAll:"Alle", statusUnsolved:"Ungelöst", statusWrong:"Falsch",
+    progressBtnLabel:"Fortschritt", progressTitleText:"Fortschritt",
+    progOverall:"Gesamt", progTotal:"gesamt", progCorrect:"richtig", progWrong:"falsch", progUnsolved:"offen",
+  },
+  en: {
+    appTitle:"Prepositions", appSubtitle:"Where to? · Where? · Why?",
+    refBtnLabel:"Overview", resetTitle:"Reset progress",
+    labelCategory:"Category", labelArtikel:"Article",
+    catAll:"All", catAkk:"Accusative", catDat:"Dative", catGen:"Genitive", catWechsel:"Two-way", catVerb:"Verb + Prep",
+    artAll:"All", artBestimmt:"Definite article", artUnbestimmt:"Indefinite article", artPossessiv:"Possessive article", artNegativ:"Negative article", artOhne:"No article",
+    labelStatCorrect:"Correct", labelStatTotal:"Attempts", labelStatAcc:"Accuracy", labelStatStreak:"Streak",
+    remaining:n=>`${n} left`,
+    knownBtn:"✓ I know this", skipBtn:"Skip", checkBtn:"Check", nextBtn:"Next →",
+    correctLabel:"✓ Correct", incorrectLabel:"✕ Not quite", correctPrefix:"Correct:",
+    emptyTitle:"Nothing to practice", emptyBody:"All sentences in this selection are marked known, or none match the current filters.",
+    modalTitleText:"All Prepositions", meaningToggleLabel:"Meanings",
+    resetConfirm:"Reset all progress? This cannot be undone.",
+    sectionAkkTitle:"Accusative", sectionDatTitle:"Dative", sectionWechselTitle:"Two-way prepositions", sectionGenTitle:"Genitive",
+    noteAkkText:'Always accusative. Mnemonic: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.',
+    noteDatText:'Always dative. Mnemonic: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.',
+    noteGenText:"Formally genitive — often replaced by dative in everyday speech.",
+    wohinLabel:"Where to? → Accusative", wohinDesc:"Movement toward a destination",
+    woLabel:"Where? → Dative", woDesc:"Fixed position, no destination",
+    langToggleLabel:"DE",
+    labelStatus:"Status", statusAll:"All", statusUnsolved:"Unsolved", statusWrong:"Mistaken",
+    progressBtnLabel:"Progress", progressTitleText:"Progress",
+    progOverall:"Overall", progTotal:"total", progCorrect:"correct", progWrong:"wrong", progUnsolved:"unsolved",
+  },
+};
+function t(key){ return STRINGS[uiLang][key]; }
+
+const CATS = [
+  {id:"all",key:"catAll"},
+  {id:"akk",key:"catAkk"},
+  {id:"dat",key:"catDat"},
+  {id:"gen",key:"catGen"},
+  {id:"wechsel",key:"catWechsel"},
+  {id:"verb",key:"catVerb"},
+];
+const ARTIKELTYPEN = [
+  {id:"all",key:"artAll"},
+  {id:"bestimmt",key:"artBestimmt"},
+  {id:"unbestimmt",key:"artUnbestimmt"},
+  {id:"possessiv",key:"artPossessiv"},
+  {id:"negativ",key:"artNegativ"},
+  {id:"ohne",key:"artOhne"},
+];
+const STATUSES = [
+  {id:"all",key:"statusAll"},
+  {id:"unsolved",key:"statusUnsolved"},
+  {id:"wrong",key:"statusWrong"},
+];
+
+/* ============================================================
+   STATE / STORAGE
+   ============================================================ */
+const STORE_KEY = "praep_trainer_v3";
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return {items:{}, streak:0, activeCat:"all", activeArtikel:"all", activeStatus:"all", lang:"de"};
+}
+function saveStore(){ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }
+
+let store = loadStore();
+if(!store.items) store.items = {};
+if(!store.activeCat) store.activeCat = "all";
+if(!store.activeArtikel) store.activeArtikel = "all";
+if(!store.activeStatus) store.activeStatus = "all";
+if(typeof store.streak !== "number") store.streak = 0;
+Object.values(store.items).forEach(s=>{
+  if(typeof s.lastCorrect === "undefined") s.lastCorrect = s.attempts > 0 ? (s.correct > 0) : null;
+});
+let uiLang = store.lang === "en" ? "en" : "de";
+
+let pool = [];
+let currentIndex = 0;
+let current = null;
+let answered = false;
+let activeInput = null;
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function normalize(s){
+  return s.trim().toLowerCase().replace(/\s+/g," ");
+}
+function itemStat(id){
+  if(!store.items[id]) store.items[id] = {correct:0, attempts:0, known:false, lastCorrect:null};
+  return store.items[id];
+}
+function buildPool(){
+  pool = DATA.filter(d=>{
+    const catOk = store.activeCat === "all" || store.activeCat === d.category;
+    let artOk;
+    if(store.activeArtikel === "all") artOk = true;
+    else if(store.activeArtikel === "ohne") artOk = d.mode === "ohne";
+    else artOk = d.articleType === store.activeArtikel;
+    const stat = itemStat(d.id);
+    let statusOk;
+    if(store.activeStatus === "all") statusOk = true;
+    else if(store.activeStatus === "unsolved") statusOk = stat.attempts === 0;
+    else if(store.activeStatus === "wrong") statusOk = stat.attempts > 0 && stat.lastCorrect === false;
+    return catOk && artOk && statusOk && !stat.known;
+  });
+  for(let i=pool.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [pool[i],pool[j]] = [pool[j],pool[i]];
+  }
+  currentIndex = 0;
+}
+
+/* ============================================================
+   RENDER: FILTERS
+   ============================================================ */
+function renderCatChips(){
+  const el = document.getElementById("catChips");
+  el.innerHTML = "";
+  CATS.forEach(c=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (store.activeCat === c.id ? " active" : "");
+    chip.textContent = t(c.key);
+    chip.onclick = ()=>{
+      store.activeCat = c.id;
+      saveStore();
+      renderCatChips();
+      buildPool();
+      renderCard();
+      updateStats();
+    };
+    el.appendChild(chip);
+  });
+}
+function renderArtikelChips(){
+  const el = document.getElementById("artikelChips");
+  el.innerHTML = "";
+  ARTIKELTYPEN.forEach(m=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (store.activeArtikel === m.id ? " active" : "");
+    chip.textContent = t(m.key);
+    chip.onclick = ()=>{
+      store.activeArtikel = m.id;
+      saveStore();
+      renderArtikelChips();
+      buildPool();
+      renderCard();
+      updateStats();
+    };
+    el.appendChild(chip);
+  });
+}
+function renderStatusChips(){
+  const el = document.getElementById("statusChips");
+  el.innerHTML = "";
+  STATUSES.forEach(s=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (store.activeStatus === s.id ? " active" : "");
+    chip.textContent = t(s.key);
+    chip.onclick = ()=>{
+      store.activeStatus = s.id;
+      saveStore();
+      renderStatusChips();
+      buildPool();
+      renderCard();
+      updateStats();
+    };
+    el.appendChild(chip);
+  });
+}
+
+/* ============================================================
+   REFERENCE MODAL
+   ============================================================ */
+const refToggle = document.getElementById("refToggle");
+const refOverlay = document.getElementById("refOverlay");
+const refClose = document.getElementById("refClose");
+const meaningToggle = document.getElementById("meaningToggle");
+const modalBody = document.getElementById("modalBody");
+function openRef(){ refOverlay.classList.add("show"); }
+function closeRef(){ refOverlay.classList.remove("show"); }
+refToggle.onclick = openRef;
+refClose.onclick = closeRef;
+refOverlay.addEventListener("click", (e)=>{ if(e.target === refOverlay) closeRef(); });
+document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeRef(); });
+meaningToggle.addEventListener("change", ()=>{
+  modalBody.classList.toggle("show-meanings", meaningToggle.checked);
+});
+
+/* ============================================================
+   PROGRESS MODAL
+   ============================================================ */
+const progressToggle = document.getElementById("progressToggle");
+const progressOverlay = document.getElementById("progressOverlay");
+const progressClose = document.getElementById("progressClose");
+const progressBody = document.getElementById("progressBody");
+function openProgress(){ renderProgress(); progressOverlay.classList.add("show"); }
+function closeProgress(){ progressOverlay.classList.remove("show"); }
+progressToggle.onclick = openProgress;
+progressClose.onclick = closeProgress;
+progressOverlay.addEventListener("click", (e)=>{ if(e.target === progressOverlay) closeProgress(); });
+document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeProgress(); });
+
+function catStats(catId){
+  const items = catId ? DATA.filter(d=>d.category===catId) : DATA;
+  let correct=0, wrong=0, unsolved=0;
+  items.forEach(d=>{
+    const s = itemStat(d.id);
+    if(s.attempts === 0) unsolved++;
+    else if(s.lastCorrect === true) correct++;
+    else wrong++;
+  });
+  return { total: items.length, correct, wrong, unsolved };
+}
+
+function renderProgress(){
+  const overall = catStats(null);
+  const pct = overall.total ? Math.round(overall.correct/overall.total*100) : 0;
+  let html = `
+    <div class="prog-summary">
+      <div class="stat"><div class="stat-num">${overall.total}</div><div class="stat-label">${t("progTotal")}</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--success)">${overall.correct}</div><div class="stat-label">${t("progCorrect")}</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--error)">${overall.wrong}</div><div class="stat-label">${t("progWrong")}</div></div>
+      <div class="stat"><div class="stat-num">${overall.unsolved}</div><div class="stat-label">${t("progUnsolved")}</div></div>
+    </div>
+  `;
+  CATS.filter(c=>c.id!=="all").forEach(c=>{
+    const s = catStats(c.id);
+    const cPct = s.total ? (s.correct/s.total*100) : 0;
+    const wPct = s.total ? (s.wrong/s.total*100) : 0;
+    html += `
+      <div class="prog-row" data-cat="${c.id}">
+        <div class="prog-row-head">
+          <span class="prog-name">${t(c.key)}</span>
+          <span class="prog-count">${s.correct + s.wrong}/${s.total}</span>
+        </div>
+        <div class="prog-bar-track">
+          <div class="prog-bar-correct" style="width:${cPct}%"></div>
+          <div class="prog-bar-wrong" style="width:${wPct}%"></div>
+        </div>
+        <div class="prog-detail">
+          <span class="c">${s.correct} ${t("progCorrect")}</span>
+          <span class="w">${s.wrong} ${t("progWrong")}</span>
+          <span>${s.unsolved} ${t("progUnsolved")}</span>
+        </div>
+      </div>
+    `;
+  });
+  progressBody.innerHTML = html;
+  progressBody.querySelectorAll(".prog-row").forEach(row=>{
+    row.addEventListener("click", ()=>{
+      store.activeCat = row.dataset.cat;
+      saveStore();
+      renderCatChips();
+      buildPool();
+      renderCard();
+      updateStats();
+      closeProgress();
+    });
+  });
+}
+
+/* ============================================================
+   RENDER: STATS
+   ============================================================ */
+function updateStats(){
+  let correct=0, total=0;
+  Object.values(store.items).forEach(s=>{ correct+=s.correct; total+=s.attempts; });
+  document.getElementById("statCorrect").textContent = correct;
+  document.getElementById("statTotal").textContent = total;
+  document.getElementById("statAcc").textContent = total ? Math.round(correct/total*100)+"%" : "–";
+  document.getElementById("statStreak").textContent = store.streak;
+  const remEl = document.getElementById("remainingLabel");
+  if(remEl) remEl.textContent = t("remaining")(pool.length);
+}
+
+/* ============================================================
+   RENDER: CARD
+   ============================================================ */
+function renderCard(){
+  const card = document.getElementById("card");
+  if(pool.length === 0){
+    card.innerHTML = `
+      <div class="empty-state">
+        <svg class="compass" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M15.5 8.5L13 13L8.5 15.5L11 11L15.5 8.5Z" fill="currentColor"/>
+        </svg>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:var(--text);margin-bottom:6px;">${t("emptyTitle")}</div>
+        <div>${t("emptyBody")}</div>
+      </div>`;
+    return;
+  }
+  if(currentIndex >= pool.length) currentIndex = 0;
+  current = pool[currentIndex];
+  answered = false;
+  activeInput = null;
+
+  const catLabel = t(CATS.find(c=>c.id===current.category).key);
+  const artLabel = current.mode === "ohne" ? t("artOhne") : t(ARTIKELTYPEN.find(a=>a.id===current.articleType).key);
+  const artClass = current.mode === "ohne" ? "ohne" : current.articleType;
+  card.innerHTML = `
+    <div class="card-top">
+      <div class="tag-row">
+        <span class="art-tag ${artClass}">${artLabel}</span>
+        <span class="cat-tag">${catLabel}</span>
+      </div>
+      <div class="card-top-right">
+        <span class="remaining" id="remainingLabel">${t("remaining")(pool.length)}</span>
+        <button class="known-btn" id="knownBtn">${t("knownBtn")}</button>
+      </div>
+    </div>
+    <div class="sentence" id="sentenceLine"></div>
+    <div class="translation">${current.tr}</div>
+    <div class="umlaut-bar" id="umlautBar">
+      ${["ä","ö","ü","ß","Ä","Ö","Ü"].map(c=>`<button type="button" class="umlaut-btn" data-ch="${c}">${c}</button>`).join("")}
+    </div>
+    <div class="feedback" id="feedback"></div>
+    <div class="card-fill"></div>
+    <div class="actions">
+      <button class="btn btn-secondary" id="skipBtn">${t("skipBtn")}</button>
+      <button class="btn btn-primary" id="checkBtn">${t("checkBtn")}</button>
+    </div>
+  `;
+
+  const line = document.getElementById("sentenceLine");
+  line.innerHTML = "";
+  const inputs = [];
+  current.segments.forEach(seg=>{
+    if(seg.blank){
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "blank-input";
+      input.dataset.blank = seg.blank;
+      input.autocomplete = "off";
+      input.autocapitalize = "off";
+      input.spellcheck = false;
+      input.addEventListener("focus", ()=>{ activeInput = input; });
+      line.appendChild(input);
+      inputs.push({el:input, ans:seg.ans});
+    } else if(seg.text){
+      line.appendChild(document.createTextNode(seg.text));
+    }
+  });
+
+  document.getElementById("checkBtn").onclick = ()=>checkAnswer(inputs);
+  document.getElementById("skipBtn").onclick = nextCard;
+  document.getElementById("knownBtn").onclick = toggleKnown;
+  document.querySelectorAll(".umlaut-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const target = activeInput || inputs[0].el;
+      if(!target || target.disabled) return;
+      const start = target.selectionStart ?? target.value.length;
+      const end = target.selectionEnd ?? target.value.length;
+      const ch = btn.dataset.ch;
+      target.value = target.value.slice(0,start) + ch + target.value.slice(end);
+      target.focus();
+      target.setSelectionRange(start+1, start+1);
+    });
+  });
+  inputs.forEach((inp, i)=>{
+    inp.el.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter"){
+        e.preventDefault();
+        if(!answered) checkAnswer(inputs); else nextCard();
+      }
+    });
+  });
+  activeInput = inputs[0].el;
+  inputs[0].el.focus();
+}
+
+const ARTIKEL_NOTES = {
+  bestimmt: "Bestimmter Artikel (der/die/das) im jeweiligen Fall.",
+  unbestimmt: "Unbestimmter Artikel (ein-) im jeweiligen Fall.",
+  possessiv: "Possessivartikel (mein-/dein-/sein-/ihr-...) folgt der ein-Deklination.",
+  negativ: "Negativartikel (kein-) folgt der ein-Deklination.",
+};
+function explainItem(item){
+  if(item.note) return item.note;
+  if(item.ex) return item.ex;
+  const parts = [`${item.prep} + ${item.case}.`];
+  if(item.category === "wechsel"){
+    parts.push(item.case === "Akkusativ" ? "Wohin? (Bewegung) → Akkusativ." : "Wo? (Position) → Dativ.");
+  }
+  if(item.mode === "ohne"){
+    parts.push("Ohne Artikel: Pronomen, Eigennamen und manche Stoffnamen stehen ohne Artikel.");
+  } else if(ARTIKEL_NOTES[item.articleType]){
+    parts.push(ARTIKEL_NOTES[item.articleType]);
+  }
+  return parts.join(" ");
+}
+
+function checkAnswer(inputs){
+  if(answered) return;
+  let allCorrect = true;
+  inputs.forEach(inp=>{
+    const val = normalize(inp.el.value);
+    const ok = inp.ans.some(a => normalize(a) === val) && val.length>0;
+    inp.el.disabled = true;
+    inp.el.classList.add(ok ? "correct" : "incorrect");
+    if(!ok) allCorrect = false;
+  });
+  answered = true;
+
+  const stat = itemStat(current.id);
+  stat.attempts += 1;
+  stat.lastCorrect = allCorrect;
+  if(allCorrect){
+    stat.correct += 1;
+    store.streak += 1;
+  } else {
+    store.streak = 0;
+  }
+  saveStore();
+
+  const fullSentence = current.segments.map(s => s.blank ? s.ans[0] : s.text).join("").replace(/\s+/g," ").trim();
+  const explanation = explainItem(current);
+
+  const fb = document.getElementById("feedback");
+  fb.classList.add("show", allCorrect ? "correct" : "incorrect");
+  fb.innerHTML = `
+    <div class="feedback-head">
+      <span>${allCorrect ? t("correctLabel") : t("incorrectLabel")}</span>
+      <span class="case-badge ${current.case}">${current.case}</span>
+    </div>
+    ${allCorrect ? "" : `<div class="answer-line">${t("correctPrefix")} <b>${fullSentence}</b></div>`}
+    ${explanation ? `<div class="explanation">${explanation}</div>` : ""}
+  `;
+
+  const checkBtn = document.getElementById("checkBtn");
+  checkBtn.textContent = t("nextBtn");
+  checkBtn.onclick = nextCard;
+
+  updateStats();
+}
+
+function nextCard(){
+  currentIndex += 1;
+  if(currentIndex >= pool.length){
+    buildPool();
+  }
+  renderCard();
+  updateStats();
+}
+
+function toggleKnown(){
+  const stat = itemStat(current.id);
+  stat.known = true;
+  saveStore();
+  pool = pool.filter(d=>d.id !== current.id);
+  if(currentIndex >= pool.length) currentIndex = 0;
+  renderCard();
+  updateStats();
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+document.getElementById("resetProgress").onclick = ()=>{
+  if(confirm(t("resetConfirm"))){
+    store = {items:{}, streak:0, activeCat:"all", activeArtikel:"all", activeStatus:"all", lang:uiLang};
+    saveStore();
+    renderCatChips();
+    renderArtikelChips();
+    renderStatusChips();
+    buildPool();
+    renderCard();
+    updateStats();
+  }
+};
+
+/* ============================================================
+   LANGUAGE TOGGLE
+   ============================================================ */
+function applyLanguage(){
+  document.getElementById("appTitle").textContent = t("appTitle");
+  document.getElementById("appSubtitle").textContent = t("appSubtitle");
+  document.getElementById("refBtnLabel").textContent = t("refBtnLabel");
+  document.getElementById("progressBtnLabel").textContent = t("progressBtnLabel");
+  document.getElementById("progressTitleText").textContent = t("progressTitleText");
+  document.getElementById("resetProgress").title = t("resetTitle");
+  document.getElementById("labelCategory").textContent = t("labelCategory");
+  document.getElementById("labelArtikel").textContent = t("labelArtikel");
+  document.getElementById("labelStatus").textContent = t("labelStatus");
+  document.getElementById("labelStatCorrect").textContent = t("labelStatCorrect");
+  document.getElementById("labelStatTotal").textContent = t("labelStatTotal");
+  document.getElementById("labelStatAcc").textContent = t("labelStatAcc");
+  document.getElementById("labelStatStreak").textContent = t("labelStatStreak");
+  document.getElementById("modalTitleText").textContent = t("modalTitleText");
+  document.getElementById("meaningToggleLabel").textContent = t("meaningToggleLabel");
+  document.getElementById("sectionAkkTitle").textContent = t("sectionAkkTitle");
+  document.getElementById("noteAkkText").innerHTML = t("noteAkkText");
+  document.getElementById("sectionDatTitle").textContent = t("sectionDatTitle");
+  document.getElementById("noteDatText").innerHTML = t("noteDatText");
+  document.getElementById("sectionWechselTitle").textContent = t("sectionWechselTitle");
+  document.getElementById("wohinLabel").textContent = t("wohinLabel");
+  document.getElementById("wohinDesc").textContent = t("wohinDesc");
+  document.getElementById("woLabel").textContent = t("woLabel");
+  document.getElementById("woDesc").textContent = t("woDesc");
+  document.getElementById("sectionGenTitle").textContent = t("sectionGenTitle");
+  document.getElementById("noteGenText").textContent = t("noteGenText");
+  document.getElementById("langToggle").textContent = t("langToggleLabel");
+  document.documentElement.lang = uiLang;
+}
+document.getElementById("langToggle").onclick = ()=>{
+  uiLang = uiLang === "de" ? "en" : "de";
+  store.lang = uiLang;
+  saveStore();
+  applyLanguage();
+  renderCatChips();
+  renderArtikelChips();
+  renderStatusChips();
+  renderCard();
+  updateStats();
+  if(progressOverlay.classList.contains("show")) renderProgress();
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+applyLanguage();
+renderCatChips();
+renderArtikelChips();
+renderStatusChips();
+buildPool();
+renderCard();
+updateStats();
+</script>
+</body>
+</html>

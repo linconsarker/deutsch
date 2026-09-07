@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#19324a">
+  <title>Deutsch Uben | German Practice Hub</title>
+  <style>
+    :root {
+      --ink: #19324a;
+      --muted: #a8bac8;
+      --nav: #19324a;
+      --nav-deep: #10263a;
+      --line: rgba(255, 255, 255, .14);
+      --accent: #e28a58;
+      --bg: #edf1f0;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    #shell { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+
+    #navbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px max(16px, calc((100vw - 1180px) / 2));
+      background: var(--nav);
+      box-shadow: 0 5px 18px rgba(16, 38, 58, .16);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    #navbar::-webkit-scrollbar { display: none; }
+
+    .brand {
+      flex: 0 0 auto;
+      margin-right: 12px;
+      color: #fffaf2;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: .9rem;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: background .18s ease, color .18s ease, border-color .18s ease;
+    }
+
+    .tab-btn:hover { background: rgba(255, 255, 255, .08); color: #fff; }
+    .tab-btn.active { background: #fffaf2; border-color: #fffaf2; color: var(--ink); }
+
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .tab-btn[data-tab="vocab"] .dot { background: #75a68c; }
+    .tab-btn[data-tab="prep"] .dot { background: #80a8c6; }
+
+    #frames { position: relative; flex: 1; min-height: 0; }
+
+    iframe {
+      display: none;
+      width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 67px);
+      min-height: calc(100dvh - 67px);
+      border: 0;
+      background: var(--bg);
+    }
+
+    iframe.active { display: block; }
+
+    .loading-msg {
+      display: grid;
+      min-height: calc(100vh - 67px);
+      min-height: calc(100dvh - 67px);
+      place-items: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 640px) {
+      #navbar { align-items: stretch; padding: 9px 10px; }
+      .brand { display: none; }
+      .tab-btn { padding: 8px 12px; font-size: .82rem; }
+      iframe { min-height: calc(100vh - 60px); min-height: calc(100dvh - 60px); }
+    }
+  </style>
+</head>
+<body>
+  <main id="shell">
+    <nav id="navbar" aria-label="Practice activities">
+      <div class="brand">Deutsch <span>Uben</span></div>
+      <button class="tab-btn active" data-tab="verbs" type="button"><span class="dot"></span>German Verbs</button>
+      <button class="tab-btn" data-tab="vocab" type="button"><span class="dot"></span>Vocabulary Flashcards</button>
+      <button class="tab-btn" data-tab="prep" type="button"><span class="dot"></span>Preposition Practice</button>
+    </nav>
+    <section id="frames" aria-live="polite">
+      <div class="loading-msg" id="loadingMsg">Loading practice...</div>
+    </section>
+  </main>
+  <script>
+    const LAST_TAB_KEY = "deutsch-hub-last-tab";
+    const frames = {};
+    const framesElement = document.getElementById("frames");
+    const loadingMessage = document.getElementById("loadingMsg");
+
+    function activateTab(tab) {
+      document.querySelectorAll(".tab-btn").forEach((button) => {
+        button.classList.toggle("active", button.dataset.tab === tab);
+      });
+
+      Object.entries(frames).forEach(([name, frame]) => {
+        frame.classList.toggle("active", name === tab);
+      });
+
+      if (!frames[tab]) {
+        const frame = document.createElement("iframe");
+        frame.title = document.querySelector(`[data-tab="${tab}"]`).textContent.trim();
+        frame.src = `apps/${tab}.html`;
+        frame.className = "active";
+        framesElement.appendChild(frame);
+        frames[tab] = frame;
+        loadingMessage?.remove();
+      }
+
+      try { localStorage.setItem(LAST_TAB_KEY, tab); } catch (error) { /* storage is optional */ }
+    }
+
+    document.querySelectorAll(".tab-btn").forEach((button) => {
+      button.addEventListener("click", () => activateTab(button.dataset.tab));
+    });
+
+    let startTab = "verbs";
+    try {
+      const savedTab = localStorage.getItem(LAST_TAB_KEY);
+      if (savedTab && document.querySelector(`[data-tab="${savedTab}"]`)) startTab = savedTab;
+    } catch (error) { /* storage is optional */ }
+    activateTab(startTab);
+  </script>
+</body>
+</html>

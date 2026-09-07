@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>German Irregular Verbs – Complete Reference</title>
+
+<style>
+:root {
+  --fund-bg: #ccfbf1;
+  --fund-accent: #0d9488;
+  --fund-light: #f0fdfa;
+  --modal-bg: #f3e8ff;
+  --modal-accent: #7c3aed;
+  --modal-light: #f5e6ff;
+  --simple-bg: #fef9c3;
+  --simple-accent: #a16207;
+  --simple-light: #fefce8;
+  --insep-bg: #e0f2fe;
+  --insep-accent: #0369a1;
+  --insep-light: #e0f5ff;
+  --sep-bg: #dcfce7;
+  --sep-accent: #16a34a;
+  --sep-light: #e6fff0;
+  --ieren-bg: #ffe4e6;
+  --ieren-accent: #e11d48;
+  --ieren-light: #fff1f2;
+  --opp-accent: #7c3aed;
+  --opp-light: #f3ecfe;
+  --bg: #f8f7f4;
+  --surface: #ffffff;
+  --border: #e0ddd8;
+  --text: #1a1a1a;
+  --muted: #888888;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+header {
+  padding: 40px 40px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2.4rem;
+  font-style: italic;
+  color: #1a1a1a;
+  letter-spacing: -0.5px;
+}
+.tagline { color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.search-box {
+  flex: 1;
+  min-width: 220px;
+  background: #fafaf8;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 16px;
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box:focus { border-color: #999; }
+.search-box::placeholder { color: var(--muted); }
+
+.filter-tabs {
+  display: flex;
+  gap: 6px;
+}
+.tab {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.tab.active-fund   { background: var(--fund-bg);   color: var(--fund-accent);   border-color: var(--fund-accent); }
+.tab.active-modal  { background: var(--modal-bg);  color: var(--modal-accent);  border-color: var(--modal-accent); }
+.tab.active-simple { background: var(--simple-bg); color: var(--simple-accent); border-color: var(--simple-accent); }
+.tab.active-insep  { background: var(--insep-bg);  color: var(--insep-accent);  border-color: var(--insep-accent); }
+.tab.active-sep    { background: var(--sep-bg);    color: var(--sep-accent);    border-color: var(--sep-accent); }
+.tab.active-ieren  { background: var(--ieren-bg);  color: var(--ieren-accent);  border-color: var(--ieren-accent); }
+.tab.active-all { background: #222; color: #1a1a1a; border-color: #555; }
+.tab:hover { opacity: 0.8; }
+
+.subtype-tabs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+.subtype-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-right: 2px;
+}
+.stab {
+  padding: 5px 13px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.stab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+.lvl-tab {
+  padding: 5px 13px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.lvl-tab:hover { opacity: 0.8; }
+.lvl-tab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+.lvl-tab.active[data-lvl="A1"] { background: #16a34a; border-color: #16a34a; }
+.lvl-tab.active[data-lvl="A2"] { background: #65a30d; border-color: #65a30d; }
+.lvl-tab.active[data-lvl="B1"] { background: #ca8a04; border-color: #ca8a04; }
+.lvl-tab.active[data-lvl="B2"] { background: #ea580c; border-color: #ea580c; }
+
+.level-badge {
+  font-size: 0.66rem;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+.level-badge.lvl-A1 { background: #16a34a; }
+.level-badge.lvl-A2 { background: #65a30d; }
+.level-badge.lvl-B1 { background: #ca8a04; }
+.level-badge.lvl-B2 { background: #ea580c; }
+
+.speak-btn {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+.speak-btn:hover { background: var(--opp-light); border-color: var(--opp-accent); color: var(--opp-accent); transform: scale(1.08); }
+.speak-btn.speaking { background: var(--opp-accent); border-color: var(--opp-accent); color: #fff; animation: speakPulse 0.9s ease-in-out infinite; }
+@keyframes speakPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.4); }
+  50% { box-shadow: 0 0 0 5px rgba(124,58,237,0); }
+}
+.stab:hover { opacity: 0.8; }
+
+.tense-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tense-btn {
+  padding: 6px 14px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tense-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+main { padding: 30px 40px; }
+
+.section {
+  margin-bottom: 50px;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.section-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.fund-dot   { background: var(--fund-accent);   box-shadow: 0 0 10px var(--fund-accent); }
+.modal-dot  { background: var(--modal-accent);  box-shadow: 0 0 10px var(--modal-accent); }
+.simple-dot { background: var(--simple-accent); box-shadow: 0 0 10px var(--simple-accent); }
+.insep-dot  { background: var(--insep-accent);  box-shadow: 0 0 10px var(--insep-accent); }
+.sep-dot    { background: var(--sep-accent);    box-shadow: 0 0 10px var(--sep-accent); }
+.ieren-dot  { background: var(--ieren-accent);  box-shadow: 0 0 10px var(--ieren-accent); }
+
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+.fund-title   { color: var(--fund-accent); }
+.modal-title  { color: var(--modal-accent); }
+.simple-title { color: var(--simple-accent); }
+.insep-title  { color: var(--insep-accent); }
+.sep-title    { color: var(--sep-accent); }
+.ieren-title  { color: var(--ieren-accent); }
+
+.section-count {
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: #fafaf8;
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-left: auto;
+}
+
+.verb-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subsection { margin-bottom: 26px; }
+.subsection:last-child { margin-bottom: 0; }
+.subsection-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+}
+.subsection-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.subsection-header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.subsection-count {
+  font-size: 0.68rem;
+  color: var(--muted);
+  background: #fafaf8;
+  border: 1px solid var(--border);
+  padding: 2px 9px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.verb-card {
+  background: #fafaf8;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.verb-card:hover { border-color: #bbb; }
+.verb-card.fundamental { border-left: 3px solid var(--fund-accent); }
+.verb-card.modal      { border-left: 3px solid var(--modal-accent); }
+.verb-card.simple     { border-left: 3px solid var(--simple-accent); }
+.verb-card.inseparable{ border-left: 3px solid var(--insep-accent); }
+.verb-card.separable  { border-left: 3px solid var(--sep-accent); }
+.verb-card.ieren      { border-left: 3px solid var(--ieren-accent); }
+
+.verb-header {
+  display: grid;
+  grid-template-columns: 30px 150px 50px minmax(160px, 1fr) 66px 120px 66px 148px 178px 20px;
+  align-items: center;
+  column-gap: 14px;
+  padding: 14px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+.verb-header:hover { background: rgba(255,255,255,0.02); }
+
+.conj-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  overflow: hidden;
+}
+.conj-col .conj-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+}
+.conj-col .conj-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.conj-value-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+}
+.speak-btn-sm {
+  width: 18px;
+  height: 18px;
+  font-size: 0.62rem;
+}
+.aux-col {
+  font-size: 0.7rem;
+  color: #888;
+  background: #f0f0ee;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+.icon-col {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.opp-col {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.fallback-badge {
+  font-size: 0.75rem;
+  cursor: default;
+  flex-shrink: 0;
+  title: "Forms estimated — may not be fully correct";
+}
+.custom-tag {
+  font-size: 0.62rem;
+  color: var(--muted);
+  background: #f0f0ee;
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.lookup-status {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 4px 0;
+}
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: #1a1a1a;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.lookup-error {
+  color: #c00;
+  background: #fff5f5;
+  border: 1px solid #fcc;
+  border-radius: 7px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  width: 100%;
+}
+.inf {
+  font-family: 'DM Mono', monospace;
+  font-size: 1rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fundamental .inf { color: var(--fund-accent); }
+.modal .inf      { color: var(--modal-accent); }
+.simple .inf     { color: var(--simple-accent); }
+.inseparable .inf{ color: var(--insep-accent); }
+.separable .inf  { color: var(--sep-accent); }
+.ieren .inf      { color: var(--ieren-accent); }
+
+.prefix {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.meanings {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+  overflow: hidden;
+}
+.en-meaning {
+  font-size: 0.82rem;
+  color: #bbb;
+  background: rgba(255,255,255,0.05);
+  padding: 2px 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.bn-meaning {
+  font-size: 0.8rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+.expand-btn {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.verb-card.open .expand-btn { transform: rotate(180deg); }
+
+.conj-panel {
+  display: none;
+  border-top: 1px solid var(--border);
+  padding: 16px 20px 20px;
+}
+.verb-card.open .conj-panel { display: block; }
+
+.card-tense-tabs {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  padding-bottom: 14px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.card-tense-tabs::-webkit-scrollbar { display: none; }
+.ctab {
+  padding: 5px 13px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.ctab:hover { border-color: #aaa; color: var(--text); }
+.fundamental .ctab.active { background: var(--fund-bg);  color: var(--fund-accent);  border-color: var(--fund-accent); }
+.modal      .ctab.active { background: var(--modal-bg);  color: var(--modal-accent);  border-color: var(--modal-accent); }
+.simple     .ctab.active { background: var(--simple-bg); color: var(--simple-accent); border-color: var(--simple-accent); }
+.inseparable.ctab.active { background: var(--insep-bg);  color: var(--insep-accent);  border-color: var(--insep-accent); }
+.separable  .ctab.active { background: var(--sep-bg);    color: var(--sep-accent);    border-color: var(--sep-accent); }
+.ieren      .ctab.active { background: var(--ieren-bg);  color: var(--ieren-accent);  border-color: var(--ieren-accent); }
+.tense-pane.hidden { display: none; }
+
+.conj-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.conj-cell {
+  background: #f9f9f7;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.pronoun {
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-weight: 300;
+}
+.form {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.form em { font-style: italic; color: var(--muted); font-size: 0.75rem; }
+
+.pp-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #f9f9f7;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.82rem;
+}
+.pp-row span { color: var(--muted); margin-right: 6px; font-size: 0.75rem; }
+.pp-row code { font-family: 'DM Mono', monospace; color: var(--text); }
+
+.opp-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: var(--opp-light);
+  border: 1px solid var(--opp-accent);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.opp-row:hover { opacity: 0.8; }
+.opp-row .opp-label { color: var(--opp-accent); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0; }
+.opp-row .opp-inf { font-family: 'DM Mono', monospace; color: var(--text); font-weight: 600; }
+.opp-row .opp-meanings { color: var(--muted); font-size: 0.78rem; }
+.opp-row .opp-en { margin-right: 8px; }
+
+.header-opp-icon {
+  font-size: 0.7rem;
+  color: var(--opp-accent);
+  background: var(--opp-light);
+  border: 1px solid var(--opp-accent);
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+@keyframes jumpFlash {
+  0%, 100% { box-shadow: none; }
+  20%, 60% { box-shadow: 0 0 0 3px var(--opp-accent); }
+}
+.verb-card.jump-highlight { animation: jumpFlash 1.6s ease; }
+
+.hidden { display: none !important; }
+
+.add-word-btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid #1a1a1a;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.add-word-btn:hover { opacity: 0.85; }
+
+.card-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.icon-btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.icon-btn:hover { border-color: #999; color: var(--text); }
+.icon-btn.delete-btn:hover { border-color: #d33; color: #d33; }
+.custom-badge {
+  font-size: 0.65rem;
+  color: var(--muted);
+  background: #f0f0ee;
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.word-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20,18,15,0.55);
+  z-index: 1000;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  overflow-y: auto;
+}
+.word-overlay.open { display: flex; }
+.word-dialog {
+  background: var(--surface);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 680px;
+  padding: 28px 28px 24px;
+  position: relative;
+}
+.word-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.word-dialog-title {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+}
+.word-close-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.3rem;
+  color: var(--muted);
+  cursor: pointer;
+  line-height: 1;
+}
+.word-close-btn:hover { color: var(--text); }
+
+.field-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.field {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.field input, .field select {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 9px 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  color: var(--text);
+  background: #fafaf8;
+  outline: none;
+}
+.field input:focus, .field select:focus { border-color: #999; }
+
+.form-section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin: 18px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.form-section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.autofill-btn {
+  border: 1px solid var(--modal-accent);
+  background: var(--modal-light);
+  color: var(--modal-accent);
+  border-radius: 7px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+.autofill-btn:hover { opacity: 0.85; }
+
+.pronoun-form-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.pronoun-form-grid .field { min-width: 0; }
+.pronoun-form-grid .field label { font-size: 0.65rem; }
+
+.word-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.btn-secondary, .btn-primary {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+}
+.btn-secondary { border: 1px solid var(--border); background: transparent; color: var(--text); }
+.btn-primary { border: 1px solid #1a1a1a; background: #1a1a1a; color: #fff; }
+.btn-primary:hover { opacity: 0.85; }
+
+@media (max-width: 900px) {
+  .verb-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .inf { flex: 0 0 auto; }
+  .meanings { flex: 1 1 100%; order: 4; overflow: visible; }
+  .conj-col { flex: 0 0 auto; }
+  .expand-btn { margin-left: auto; }
+}
+
+@media (max-width: 768px) {
+  .pronoun-form-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.stats-bar {
+  padding: 14px 40px;
+  background: #fafaf8;
+  border-top: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--muted);
+  display: flex;
+  gap: 20px;
+}
+.stats-bar b { color: var(--text); }
+
+@media (max-width: 768px) {
+  header, main { padding: 20px; }
+  .conj-grid { grid-template-columns: repeat(3, 1fr); }
+  h1 { font-size: 1.8rem; }
+}
+</style>
+<link rel="stylesheet" href="../shared/theme.css">
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>German Irregular Verbs</h1>
+    <p class="tagline" id="tagline">Click any word to see all tenses · All persons · Bengali &amp; English meanings · Add your own words anytime</p>
+  </div>
+  <div class="controls">
+    <input class="search-box" id="search" placeholder="Search infinitive or meaning…" oninput="doFilter()">
+    <div class="filter-tabs">
+      <button class="tab active-all" id="tab-all"    onclick="setType('all', this)">All 406</button>
+      <button class="tab" id="tab-fund"   onclick="setType('fundamental', this)">⭐ Fundamental</button>
+      <button class="tab" id="tab-modal"  onclick="setType('modal', this)">🎯 Modal</button>
+      <button class="tab" id="tab-simple" onclick="setType('simple', this)">◎ No Prefix</button>
+      <button class="tab" id="tab-insep"  onclick="setType('inseparable', this)">🔒 Prefix (fixed)</button>
+      <button class="tab" id="tab-sep"    onclick="setType('separable', this)">✂️ Prefix (sep.)</button>
+      <button class="tab" id="tab-ieren"  onclick="setType('ieren', this)">🌐 -ieren</button>
+    </div>
+    <button class="add-word-btn" onclick="openWordModal('add')">+ Add Word</button>
+  </div>
+  <div class="subtype-tabs">
+    <span class="subtype-label">Conjugation:</span>
+    <button class="stab active" id="stab-all"    onclick="setSubtype('all', this)">All</button>
+    <button class="stab" id="stab-weak"   onclick="setSubtype('weak', this)">Weak</button>
+    <button class="stab" id="stab-strong" onclick="setSubtype('strong', this)">Strong</button>
+    <button class="stab" id="stab-mixed"  onclick="setSubtype('mixed', this)">Mixed</button>
+  </div>
+  <div class="subtype-tabs">
+    <span class="subtype-label">Level:</span>
+    <button class="lvl-tab active" id="lvl-all" data-lvl="all" onclick="setLevel('all', this)">All</button>
+    <button class="lvl-tab" id="lvl-A1" data-lvl="A1" onclick="setLevel('A1', this)">A1</button>
+    <button class="lvl-tab" id="lvl-A2" data-lvl="A2" onclick="setLevel('A2', this)">A2</button>
+    <button class="lvl-tab" id="lvl-B1" data-lvl="B1" onclick="setLevel('B1', this)">B1</button>
+    <button class="lvl-tab" id="lvl-B2" data-lvl="B2" onclick="setLevel('B2', this)">B2</button>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<div class="stats-bar">
+  <span>Showing <b id="shown">0</b> verbs</span>
+  <span><b style="color:var(--fund-accent)"   id="fund-count">0</b> Fundamental</span>
+  <span><b style="color:var(--modal-accent)"  id="modal-count">5</b> Modal</span>
+  <span><b style="color:var(--simple-accent)" id="simple-count">0</b> No Prefix</span>
+  <span><b style="color:var(--insep-accent)"  id="insep-count">0</b> Prefix (fixed)</span>
+  <span><b style="color:var(--sep-accent)"    id="sep-count">0</b> Prefix (sep.)</span>
+  <span><b style="color:var(--ieren-accent)"  id="ieren-count">0</b> -ieren</span>
+</div>
+
+<div class="word-overlay" id="word-overlay">
+  <div class="word-dialog">
+    <div class="word-dialog-header">
+      <span class="word-dialog-title">Add a Word</span>
+      <button class="word-close-btn" onclick="closeWordModal()">×</button>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>German Infinitive</label>
+        <input id="f-inf" placeholder="z.B. machen, aufmachen, verstehen…" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+
+    <div class="lookup-status" id="lookup-status"></div>
+
+    <div class="word-dialog-actions">
+      <button type="button" class="btn-secondary" onclick="closeWordModal()">Cancel</button>
+      <button type="button" class="btn-primary" id="word-save-btn" onclick="lookupAndAdd()">Lookup &amp; Add</button>
+    </div>
+  </div>
+</div>
+
+<script>function loadJson(path){var request=new XMLHttpRequest();request.open("GET",path,false);request.send(null);if(request.status!==200 && request.status!==0){throw new Error("Could not load " + path);}return JSON.parse(request.responseText);}</script><script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+// type: 'modal' | 'trennbar' | 'untrennbar'
+// prefix: separable prefix (for trennbar) shown underlined
+// aux: 'haben' or 'sein' for Perfekt
+// Each verb has conjugation data for all tenses
+
+const VERBS = loadJson("../data/verbs.json");
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let currentType = 'all';
+let currentSubtype = 'all'; // 'all' | 'weak' | 'strong' | 'mixed'
+let currentLevel = 'all'; // 'all' | 'A1' | 'A2' | 'B1' | 'B2'
+let customVerbs = [];
+
+// ─── CUSTOM VERB PERSISTENCE ─────────────────────────────────────────────────
+const CUSTOM_STORE_KEY = 'germanVerbs_customVerbs_v2';
+
+function loadCustomVerbs() {
+  try {
+    const raw = localStorage.getItem(CUSTOM_STORE_KEY);
+    customVerbs = raw ? JSON.parse(raw) : [];
+  } catch(e) { customVerbs = []; }
+}
+
+function saveCustomVerbs() {
+  try { localStorage.setItem(CUSTOM_STORE_KEY, JSON.stringify(customVerbs)); }
+  catch(e) { console.error('Storage error', e); }
+}
+
+function getAllVerbs() { return VERBS.concat(customVerbs); }
+
+function getNextSn() {
+  return getAllVerbs().reduce((m, v) => Math.max(m, v.sn), 0) + 1;
+}
+
+// ─── CONJUGATION HELPERS ─────────────────────────────────────────────────────
+const PRONOUNS     = ['ich','du','er/sie/es','wir','ihr','sie/Sie'];
+const PRONOUN_KEYS = ['ich','du','er','wir','ihr','sie'];
+
+const TENSE_LABELS_SHORT = {
+  praesens:    'Präsens',
+  praeteritum: 'Präteritum',
+  perfekt:     'Perfekt',
+  plusquam:    'Plusquamperf.',
+  futur1:      'Futur I',
+  futur2:      'Futur II',
+};
+
+const TENSES_ORDER = ['praesens','praeteritum','perfekt','plusquam','futur1','futur2'];
+
+function getHelperVerb(pp_aux, tense, pronoun) {
+  const haben      = {ich:'habe', du:'hast',    er:'hat',  wir:'haben', ihr:'habt',  sie:'haben'};
+  const sein       = {ich:'bin',  du:'bist',    er:'ist',  wir:'sind',  ihr:'seid',  sie:'sind'};
+  const habenPast  = {ich:'hatte',du:'hattest', er:'hatte',wir:'hatten',ihr:'hattet',sie:'hatten'};
+  const seinPast   = {ich:'war',  du:'warst',   er:'war',  wir:'waren', ihr:'wart',  sie:'waren'};
+  const werden     = {ich:'werde',du:'wirst',   er:'wird', wir:'werden',ihr:'werdet',sie:'werden'};
+  if (tense==='perfekt')                    return pp_aux==='sein' ? sein[pronoun]      : haben[pronoun];
+  if (tense==='plusquam')                   return pp_aux==='sein' ? seinPast[pronoun]  : habenPast[pronoun];
+  if (tense==='futur1'||tense==='futur2')   return werden[pronoun];
+  return '';
+}
+
+function buildForm(verb, pronoun, tense) {
+  const p  = verb.praesens?.[pronoun];
+  const pt = verb.praeteritum?.[pronoun];
+  const pp = verb.pp;
+  const inf = verb.inf;
+  const aux = verb.pp_aux;
+  const h = getHelperVerb(aux, tense, pronoun);
+  const missing = !p || p === '—';
+
+  switch(tense) {
+    case 'praesens':    return missing ? '<em>—</em>' : p;
+    case 'praeteritum': return (!pt || pt==='—') ? '<em>—</em>' : pt;
+    case 'perfekt':     return `${h} ${pp}`;
+    case 'plusquam':    return `${h} ${pp}`;
+    case 'futur1':      return `${h} ${inf}`;
+    case 'futur2':      return `${h} ${pp} ${aux==='sein' ? 'sein' : 'haben'}`;
+    default:            return missing ? '<em>—</em>' : p;
+  }
+}
+
+// ─── PAST-PARTICIPLE SUBCATEGORY (weak / strong / mixed) ─────────────────────
+// Classifies a verb by how its infinitive stem relates to its past-participle
+// stem: no change + dental (-t) suffix = weak; changed stem + dental suffix =
+// mixed; -en/-n (non-dental) suffix = strong. The -ieren loan-verb category is
+// not sub-classified (per design, they're all uniform weak verbs).
+const PPCLASS_INSEP_PREFIXES = ['be','ver','ent','er','emp','ge','zer','miss','wider','hinter','voll','wieder','über','unter','durch'];
+
+function ppClassStripLongestPrefix(word, prefixes) {
+  let best = '';
+  for (const p of prefixes) {
+    if (word.startsWith(p) && p.length > best.length) best = p;
+  }
+  return { prefix: best, rest: word.slice(best.length) };
+}
+function ppClassStripInfEnding(w) {
+  if (/en$/.test(w)) return w.slice(0, -2);
+  if (/n$/.test(w))  return w.slice(0, -1);
+  return w;
+}
+function ppClassStripPpEnding(w) {
+  if (/et$/.test(w)) return w.slice(0, -2);
+  if (/t$/.test(w))  return w.slice(0, -1);
+  return w;
+}
+function ppClass(v) {
+  if (v.type === 'ieren') return null;
+  const inf = v.inf, pp = v.pp || '';
+  let infCore, ppCore;
+  if (v.type === 'separable') {
+    const pfx = v.prefix || '';
+    infCore = inf.startsWith(pfx) ? inf.slice(pfx.length) : inf;
+    const rest = pp.startsWith(pfx) ? pp.slice(pfx.length) : pp;
+    ppCore = rest.startsWith('ge') ? rest.slice(2) : rest;
+  } else if (v.type === 'inseparable') {
+    infCore = ppClassStripLongestPrefix(inf, PPCLASS_INSEP_PREFIXES).rest;
+    ppCore  = ppClassStripLongestPrefix(pp,  PPCLASS_INSEP_PREFIXES).rest;
+  } else {
+    infCore = inf;
+    ppCore = pp.startsWith('ge') ? pp.slice(2) : pp;
+  }
+  if (/t$/.test(ppCore)) {
+    const infStem = ppClassStripInfEnding(infCore);
+    const ppStem  = ppClassStripPpEnding(ppCore);
+    return infStem === ppStem ? 'weak' : 'mixed';
+  }
+  return 'strong';
+}
+const PPCLASS_ORDER = ['weak', 'strong', 'mixed'];
+const PPCLASS_LABELS = { weak: 'Weak Verbs — Schwache Verben', strong: 'Strong Verbs — Starke Verben', mixed: 'Mixed Verbs — Gemischte Verben' };
+
+// ─── RENDER ───────────────────────────────────────────────────────────────────
+function renderInfName(v) {
+  if (v.type==='trennbar' && v.prefix) {
+    return `<span class="prefix">${v.prefix}</span>${v.inf.slice(v.prefix.length)}`;
+  }
+  return v.inf;
+}
+
+function renderCard(v) {
+  const tenseTabs = TENSES_ORDER.map((t, i) =>
+    `<button class="ctab${i===0?' active':''}" onclick="event.stopPropagation();switchTense(${v.sn},'${t}',this)">${TENSE_LABELS_SHORT[t]}</button>`
+  ).join('');
+
+  const tensePanes = TENSES_ORDER.map((t, i) => `
+    <div class="tense-pane${i===0?'':' hidden'}" data-tense="${t}">
+      <div class="conj-grid">
+        ${PRONOUN_KEYS.map((p,j) => `
+          <div class="conj-cell">
+            <div class="pronoun">${PRONOUNS[j]}</div>
+            <div class="form">${buildForm(v, p, t)}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  const deleteBtn = v.custom
+    ? `<button class="icon-btn delete-btn" title="Delete" onclick="event.stopPropagation();deleteWord(${v.sn})">🗑</button>`
+    : '';
+  const fallbackBadge = v.fallback
+    ? `<span class="fallback-badge" title="Forms estimated by regular pattern — may not be fully correct">⚠️</span>`
+    : '';
+  const customTag = v.custom ? `<span class="custom-tag">added</span>` : '';
+
+  const enMeaning  = v.en ? `<span class="en-meaning">${v.en}</span>` : '';
+  const bnMeaning  = v.bn ? `<span class="bn-meaning">${v.bn}</span>` : '';
+
+  const oppHeaderBadge = v.opp
+    ? `<span class="header-opp-icon" title="Opposite: ${v.opp.inf}">⇄ ${v.opp.inf}</span>`
+    : '';
+  const oppRow = v.opp
+    ? `<div class="opp-row" onclick="event.stopPropagation();jumpToOpposite('${v.opp.inf}')">
+        <span class="opp-label">⇄ Opposite</span>
+        <span class="opp-inf">${v.opp.inf}</span>
+        <span class="opp-meanings"><span class="opp-en">${v.opp.en}</span>${v.opp.bn}</span>
+      </div>`
+    : '';
+
+  return `
+    <div class="verb-card ${v.type}" id="card-${v.sn}" onclick="toggleCard(${v.sn})">
+      <div class="verb-header">
+        <button class="speak-btn" onclick="speakGerman('${v.inf}', event, this)" title="Listen: ${v.inf}">🔊</button>
+        <span class="inf">${renderInfName(v)}</span>
+        <span class="level-badge lvl-${v.level}">${v.level}</span>
+        <div class="meanings">${enMeaning}${bnMeaning}</div>
+        <span class="aux-col">aux: ${v.pp_aux}</span>
+        <span class="opp-col">${oppHeaderBadge}</span>
+        <div class="icon-col">${fallbackBadge}${customTag}${deleteBtn}</div>
+        <div class="conj-col"><span class="conj-label">Präteritum</span><span class="conj-value-wrap"><button class="speak-btn speak-btn-sm" onclick="speakGerman('${v.praeteritum.er}', event, this)" title="Listen: ${v.praeteritum.er}">🔊</button><span class="conj-value" title="${v.praeteritum.er}">${v.praeteritum.er}</span></span></div>
+        <div class="conj-col"><span class="conj-label">Partizip II</span><span class="conj-value-wrap"><button class="speak-btn speak-btn-sm" onclick="speakGerman('${v.pp}', event, this)" title="Listen: ${v.pp}">🔊</button><span class="conj-value" title="${v.pp}">${v.pp}</span></span></div>
+        <span class="expand-btn">▾</span>
+      </div>
+      <div class="conj-panel">
+        <div class="card-tense-tabs">${tenseTabs}</div>
+        ${tensePanes}
+        <div class="pp-row">
+          <span>Partizip II</span><code>${v.pp}</code>
+          <span style="margin-left:12px">Infinitiv</span><code>${v.inf}</code>
+        </div>
+        ${oppRow}
+      </div>
+    </div>`;
+}
+
+function renderSection(title, type, cls) {
+  const filtered = getFiltered().filter(v => v.type === type);
+  if (!filtered.length) return '';
+  const sorted = [...filtered].sort((a,b) => a.inf.localeCompare(b.inf));
+
+  // The -ieren loan-verb category and the tiny Fundamental category (haben,
+  // sein) skip weak/strong/mixed subcategorization — flat, single group.
+  if (type === 'ieren' || type === 'fundamental') {
+    return `
+      <div class="section" id="sec-${type}">
+        <div class="section-header">
+          <span class="section-dot ${cls}-dot"></span>
+          <span class="section-title ${cls}-title">${title}</span>
+          <span class="section-count">${sorted.length} verbs</span>
+        </div>
+        <div class="verb-grid">${sorted.map(renderCard).join('')}</div>
+      </div>`;
+  }
+
+  const groups = {};
+  sorted.forEach(v => {
+    const c = ppClass(v);
+    (groups[c] = groups[c] || []).push(v);
+  });
+
+  const subsections = PPCLASS_ORDER
+    .filter(c => groups[c] && groups[c].length)
+    .map(c => `
+      <div class="subsection">
+        <div class="subsection-header">
+          <span class="subsection-title">${PPCLASS_LABELS[c]}</span>
+          <span class="subsection-count">${groups[c].length} verbs</span>
+        </div>
+        <div class="verb-grid">${groups[c].map(renderCard).join('')}</div>
+      </div>`)
+    .join('');
+
+  return `
+    <div class="section" id="sec-${type}">
+      <div class="section-header">
+        <span class="section-dot ${cls}-dot"></span>
+        <span class="section-title ${cls}-title">${title}</span>
+        <span class="section-count">${sorted.length} verbs</span>
+      </div>
+      ${subsections}
+    </div>`;
+}
+
+function getFiltered() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  return getAllVerbs().filter(v => {
+    const typeOk = currentType==='all' || v.type===currentType;
+    const subtypeOk = currentSubtype==='all' || ppClass(v)===currentSubtype;
+    const levelOk = currentLevel==='all' || v.level===currentLevel;
+    const searchOk = !q || v.inf.toLowerCase().includes(q) || v.en.toLowerCase().includes(q) || v.bn.includes(q);
+    return typeOk && subtypeOk && levelOk && searchOk;
+  });
+}
+
+function render() {
+  const filtered = getFiltered();
+  document.getElementById('main').innerHTML = [
+    renderSection('⭐ Fundamental Verbs — Grundverben',                    'fundamental','fund'),
+    renderSection('🎯 Modal Verbs — Modalverben',                       'modal',      'modal'),
+    renderSection('◎ Verbs without Prefix — Einfache Verben',           'simple',     'simple'),
+    renderSection('🔒 Verbs with Fixed Prefix — Untrennbare Verben',    'inseparable','insep'),
+    renderSection('✂️ Verbs with Separable Prefix — Trennbare Verben',  'separable',  'sep'),
+    renderSection('🌐 -ieren Verbs — Verben auf -ieren',                'ieren',      'ieren'),
+  ].join('') || '<p style="color:#888;text-align:center;padding:40px">No verbs found.</p>';
+
+  const all = getAllVerbs();
+  document.getElementById('shown').textContent        = filtered.length;
+  document.getElementById('fund-count').textContent  = all.filter(v=>v.type==='fundamental').length;
+  document.getElementById('modal-count').textContent  = all.filter(v=>v.type==='modal').length;
+  document.getElementById('simple-count').textContent = all.filter(v=>v.type==='simple').length;
+  document.getElementById('insep-count').textContent  = all.filter(v=>v.type==='inseparable').length;
+  document.getElementById('sep-count').textContent    = all.filter(v=>v.type==='separable').length;
+  document.getElementById('ieren-count').textContent  = all.filter(v=>v.type==='ieren').length;
+  document.getElementById('tab-all').textContent    = `All ${all.length}`;
+  document.getElementById('tab-fund').textContent   = `⭐ Fundamental (${all.filter(v=>v.type==='fundamental').length})`;
+  document.getElementById('tab-modal').textContent  = `🎯 Modal (${all.filter(v=>v.type==='modal').length})`;
+  document.getElementById('tab-simple').textContent = `◎ No Prefix (${all.filter(v=>v.type==='simple').length})`;
+  document.getElementById('tab-insep').textContent  = `🔒 Prefix fixed (${all.filter(v=>v.type==='inseparable').length})`;
+  document.getElementById('tab-sep').textContent    = `✂️ Prefix sep. (${all.filter(v=>v.type==='separable').length})`;
+  document.getElementById('tab-ieren').textContent  = `🌐 -ieren (${all.filter(v=>v.type==='ieren').length})`;
+
+  document.getElementById('stab-all').textContent    = `All ${all.length}`;
+  document.getElementById('stab-weak').textContent   = `Weak (${all.filter(v=>ppClass(v)==='weak').length})`;
+  document.getElementById('stab-strong').textContent = `Strong (${all.filter(v=>ppClass(v)==='strong').length})`;
+  document.getElementById('stab-mixed').textContent  = `Mixed (${all.filter(v=>ppClass(v)==='mixed').length})`;
+
+  document.getElementById('lvl-all').textContent = `All ${all.length}`;
+  ['A1','A2','B1','B2'].forEach(lvl => {
+    const el = document.getElementById('lvl-' + lvl);
+    if (el) el.textContent = `${lvl} (${all.filter(v=>v.level===lvl).length})`;
+  });
+}
+
+// ─── ACCORDION ────────────────────────────────────────────────────────────────
+function toggleCard(sn) {
+  const el = document.getElementById('card-' + sn);
+  const wasOpen = el.classList.contains('open');
+  // Close all open cards first
+  document.querySelectorAll('.verb-card.open').forEach(c => c.classList.remove('open'));
+  // Re-open if it was closed (toggle behaviour)
+  if (!wasOpen) el.classList.add('open');
+}
+
+function switchTense(sn, tense, btn) {
+  const card = document.getElementById('card-' + sn);
+  card.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  card.querySelectorAll('.tense-pane').forEach(p => {
+    p.classList.toggle('hidden', p.dataset.tense !== tense);
+  });
+}
+
+// ─── PRONUNCIATION (Web Speech API, fully client-side, no network calls) ─────
+let germanVoices = [];
+function loadGermanVoices() {
+  if (!('speechSynthesis' in window)) return;
+  const all = window.speechSynthesis.getVoices();
+  germanVoices = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('de'));
+}
+if ('speechSynthesis' in window) {
+  loadGermanVoices();
+  window.speechSynthesis.onvoiceschanged = loadGermanVoices;
+}
+
+function speakGerman(text, evt, btn) {
+  if (evt) evt.stopPropagation();
+  if (!('speechSynthesis' in window)) {
+    console.warn('Speech synthesis not supported in this browser.');
+    return;
+  }
+  window.speechSynthesis.cancel(); // stop any speech already in progress
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'de-DE';
+  utter.rate = 0.88;
+  utter.pitch = 1;
+  const preferred = germanVoices.find(v => v.lang === 'de-DE') || germanVoices[0];
+  if (preferred) utter.voice = preferred;
+
+  const el = btn || (evt && evt.currentTarget);
+  if (el) {
+    el.classList.add('speaking');
+    utter.onend = () => el.classList.remove('speaking');
+    utter.onerror = () => el.classList.remove('speaking');
+  }
+  window.speechSynthesis.speak(utter);
+}
+
+function jumpToOpposite(inf) {
+  const target = getAllVerbs().find(v => v.inf === inf);
+  if (!target) return;
+  // Reset all filters so the target verb is guaranteed to be visible.
+  currentType = 'all';
+  currentSubtype = 'all';
+  document.getElementById('search').value = '';
+  document.querySelectorAll('.tab').forEach(t => t.className = 'tab');
+  document.getElementById('tab-all').classList.add('active-all');
+  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  document.getElementById('stab-all').classList.add('active');
+  render();
+  requestAnimationFrame(() => {
+    const el = document.getElementById('card-' + target.sn);
+    if (!el) return;
+    if (typeof el.scrollIntoView === 'function') {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    document.querySelectorAll('.verb-card.open').forEach(c => c.classList.remove('open'));
+    el.classList.add('open');
+    el.classList.add('jump-highlight');
+    setTimeout(() => el.classList.remove('jump-highlight'), 1600);
+  });
+}
+
+// ─── FILTER / SEARCH ─────────────────────────────────────────────────────────
+function setType(type, btn) {
+  currentType = type;
+  document.querySelectorAll('.tab').forEach(t => t.className = 'tab');
+  const cls = {all:'all', fundamental:'fund', modal:'modal', simple:'simple', inseparable:'insep', separable:'sep', ieren:'ieren'}[type] || 'all';
+  btn.classList.add('active-' + cls);
+  render();
+}
+
+function setSubtype(subtype, btn) {
+  currentSubtype = subtype;
+  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function setLevel(level, btn) {
+  currentLevel = level;
+  document.querySelectorAll('.lvl-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function doFilter() { render(); }
+
+// ─── WIKTIONARY LOOKUP ────────────────────────────────────────────────────────
+async function fetchWikitext(title) {
+  try {
+    const url = `https://de.wiktionary.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=revisions&rvprop=content&format=json&formatversion=2&origin=*`;
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 10000);
+    const resp = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!resp.ok) return null;
+    const data = await resp.json();
+    const pg = data?.query?.pages?.[0];
+    if (!pg || pg.missing) return null;
+    return pg.revisions?.[0]?.content || null;
+  } catch(e) { return null; }
+}
+
+async function lookupVerbOnWiktionary(infinitive) {
+  // Try Flexion page first (has full conjugation table), then main article
+  const pages = [`Flexion:${infinitive}`, infinitive];
+  for (const page of pages) {
+    const wikitext = await fetchWikitext(page);
+    if (!wikitext) continue;
+    const result = parseWikiConjugation(wikitext);
+    if (result) return result;
+  }
+  return null;
+}
+
+function parseWikiConjugation(wikitext) {
+  // Extract a named template parameter (tries multiple key aliases)
+  function get(...keys) {
+    for (const key of keys) {
+      const esc = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const m = wikitext.match(new RegExp(`\\|\\s*${esc}\\s*=\\s*([^|}\n]+)`, 'i'));
+      if (m && m[1].trim()) return m[1].trim();
+    }
+    return null;
+  }
+
+  // Strip wiki markup
+  function clean(s) {
+    if (!s) return '—';
+    return s
+      .replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2')
+      .replace(/\[\[([^\]]+)\]\]/g, '$1')
+      .replace(/{{[^}]+}}/g, '').replace(/<[^>]+>/g, '')
+      .replace(/&[a-z]+;/gi, '').replace(/\s+/g, ' ').trim() || '—';
+  }
+
+  const hilfsverbRaw = get('Hilfsverb','Hilfsverb 1','Hilfsverb=');
+  const pp_aux = hilfsverbRaw && hilfsverbRaw.toLowerCase().includes('sein') ? 'sein' : 'haben';
+
+  const pp = clean(get(
+    'Partizip II','Partizip_II','Partizip Perfekt',
+    'Partizip II Aktiv','2. Partizip'
+  ));
+
+  const pr = {
+    ich: clean(get('Präsens_ich','Präsens 1 Singular','Präsens ich')),
+    du:  clean(get('Präsens_du', 'Präsens 2 Singular','Präsens du')),
+    er:  clean(get('Präsens_er, sie, es','Präsens_er','Präsens 3 Singular','Präsens er, sie, es','Präsens er/sie/es')),
+    wir: clean(get('Präsens_wir','Präsens 1 Plural','Präsens wir')),
+    ihr: clean(get('Präsens_ihr','Präsens 2 Plural','Präsens ihr')),
+    sie: clean(get('Präsens_sie, Sie','Präsens_sie','Präsens 3 Plural','Präsens sie, Sie')),
+  };
+
+  const pt = {
+    ich: clean(get('Präteritum_ich','Präteritum 1 Singular','Präteritum ich')),
+    du:  clean(get('Präteritum_du', 'Präteritum 2 Singular','Präteritum du')),
+    er:  clean(get('Präteritum_er, sie, es','Präteritum_er','Präteritum 3 Singular')),
+    wir: clean(get('Präteritum_wir','Präteritum 1 Plural')),
+    ihr: clean(get('Präteritum_ihr','Präteritum 2 Plural')),
+    sie: clean(get('Präteritum_sie, Sie','Präteritum_sie','Präteritum 3 Plural')),
+  };
+
+  // Need at least one real form to consider the parse successful
+  const hasData = Object.values(pr).some(v => v && v !== '—')
+               || Object.values(pt).some(v => v && v !== '—')
+               || (pp && pp !== '—');
+  if (!hasData) return null;
+
+  return { praesens: pr, praeteritum: pt, pp, pp_aux };
+}
+
+// ─── TYPE & PREFIX AUTO-DETECTION ────────────────────────────────────────────
+const MODAL_VERBS = ['können','müssen','dürfen','sollen','wollen','mögen'];
+
+// Verbs that happen to end in "-ieren" but are native German strong verbs,
+// NOT the (usually French/English-derived) -ieren loanword pattern —
+// e.g. "verlieren" (to lose), "frieren" (to freeze). These must stay out
+// of the -ieren category.
+const IEREN_NATIVE_EXCEPTIONS = ['verlieren', 'frieren'];
+
+// Unambiguous separable prefixes — verbs starting with these are reliably separable
+const SEPARABLE_PREFIXES_UNAMBIGUOUS = [
+  'heraus','herein','herunter','hervor','herab','heran','herauf','herbei',
+  'hinaus','hinein','hinunter','hinauf','hinab','hinterher','hinweg','hinzu',
+  'zurecht','zurück','zusammen','entgegen','entlang','gegenüber',
+  'voran','voraus','vorbei','vorüber','empor','nieder',
+  'fest','fehl','fern','frei','gleich','heim','statt','teil','weiter','zuvor',
+  'ab','an','auf','aus','bei','da','dar','ein','fort','her','hin','los','mit','nach','vor','weg','zu',
+].sort((a,b) => b.length - a.length);
+
+// Extended list (adds prefixes that CAN be separable or inseparable depending on the verb) —
+// only used to pull out the prefix substring once Wiktionary has already confirmed "trennbar"
+const SEPARABLE_PREFIXES_EXTENDED = SEPARABLE_PREFIXES_UNAMBIGUOUS
+  .concat(['durch','über','um','unter','wieder','wider','voll','hinter'])
+  .sort((a,b) => b.length - a.length);
+
+function findPrefix(inf, list) {
+  for (const p of list) {
+    if (inf.startsWith(p) && inf.length > p.length + 2) return p;
+  }
+  return null;
+}
+
+function headwordType(wikitext) {
+  const idx = wikitext.indexOf('{{Wortart|Verb|Deutsch}}');
+  if (idx === -1) return null;
+  const snippet = wikitext.slice(idx, idx + 200);
+  const line = snippet.split('\n')[0];
+  if (/untrennbar/i.test(line)) return 'untrennbar';
+  if (/trennbar/i.test(line)) return 'trennbar';
+  return null;
+}
+
+function categoryType(wikitext) {
+  const hasTrenn = /\[\[Kategorie:Verb trennbar \(Deutsch\)\]\]/i.test(wikitext);
+  const hasUntrenn = /\[\[Kategorie:Verb untrennbar \(Deutsch\)\]\]/i.test(wikitext);
+  if (hasTrenn && !hasUntrenn) return 'trennbar';
+  if (hasUntrenn && !hasTrenn) return 'untrennbar';
+  return null;
+}
+
+async function detectTypeAndPrefix(inf) {
+  if (inf === 'haben' || inf === 'sein') return { type: 'fundamental', prefix: null, certain: true };
+  if (MODAL_VERBS.includes(inf)) return { type: 'modal', prefix: null, certain: true };
+
+  // -ieren loanword verbs (studieren, organisieren, ...) are always weak,
+  // take no "ge-" in the participle, and never carry a separable/inseparable
+  // prefix — detect this reliable pattern before hitting the network.
+  if (/ieren$/.test(inf) && !IEREN_NATIVE_EXCEPTIONS.includes(inf)) {
+    return { type: 'ieren', prefix: null, certain: true };
+  }
+
+  const wikitext = await fetchWikitext(inf);
+  let type = null;
+  if (wikitext) {
+    type = categoryType(wikitext) || headwordType(wikitext);
+  }
+
+  if (type === 'separable' || type === 'trennbar') {
+    const prefix = findPrefix(inf, SEPARABLE_PREFIXES_EXTENDED);
+    if (prefix) return { type: 'separable', prefix, certain: true };
+    type = null;
+  }
+  if (type === 'inseparable' || type === 'untrennbar') return { type: 'inseparable', prefix: null, certain: true };
+
+  // Heuristic fallback
+  const prefix = findPrefix(inf, SEPARABLE_PREFIXES_UNAMBIGUOUS);
+  if (prefix) return { type: 'separable', prefix, certain: false };
+
+  const INSEP_STARTS = ['miss','empf','emp','ent','zer','be','er','ge','ver'];
+  for (const p of INSEP_STARTS) {
+    if (inf.startsWith(p) && inf.length > p.length + 2) {
+      return { type: 'inseparable', prefix: null, certain: false };
+    }
+  }
+
+  return { type: 'simple', prefix: null, certain: false };
+}
+
+// ─── REGULAR-PATTERN FALLBACK ────────────────────────────────────────────────
+function computeRegularForms(type, prefix, infinitive) {
+  const hasPrefix = type==='separable' && prefix;
+  const rootInf = hasPrefix ? infinitive.slice(prefix.length) : infinitive;
+  const stem = rootInf.endsWith('en') ? rootInf.slice(0,-2) : rootInf.slice(0,-1);
+  const endsInDT = /[dt]$/.test(stem);
+  const endsInSibilant = /[sßzx]$/.test(stem);
+  const w = (form) => hasPrefix ? `${form} ${prefix}` : form;
+
+  const praesens = {
+    ich: w(stem+'e'),
+    du:  w(endsInDT ? stem+'est' : (endsInSibilant ? stem+'t' : stem+'st')),
+    er:  w(endsInDT ? stem+'et' : stem+'t'),
+    wir: w(rootInf),
+    ihr: w(endsInDT ? stem+'et' : stem+'t'),
+    sie: w(rootInf),
+  };
+  const praeteritum = {
+    ich: w(stem+(endsInDT?'ete':'te')),
+    du:  w(stem+(endsInDT?'etest':'test')),
+    er:  w(stem+(endsInDT?'ete':'te')),
+    wir: w(stem+(endsInDT?'eten':'ten')),
+    ihr: w(stem+(endsInDT?'etet':'tet')),
+    sie: w(stem+(endsInDT?'eten':'ten')),
+  };
+  const ppStem = stem+(endsInDT?'et':'t');
+  const noGe = ['be','emp','ent','er','ge','ver','zer','miss'].some(p=>rootInf.startsWith(p)) || rootInf.endsWith('ieren');
+  const pp = hasPrefix ? (noGe ? prefix+ppStem : prefix+'ge'+ppStem)
+                       : (noGe ? ppStem : 'ge'+ppStem);
+  return { praesens, praeteritum, pp };
+}
+
+// ─── ADD / DELETE MODAL ───────────────────────────────────────────────────────
+function setLookupStatus(mode, msg) {
+  const el = document.getElementById('lookup-status');
+  if (mode==='loading') {
+    el.innerHTML = `<div class="spinner"></div><span>${msg}</span>`;
+  } else if (mode==='error') {
+    el.innerHTML = `<div class="lookup-error">${msg}</div>`;
+  } else {
+    el.innerHTML = '';
+  }
+}
+
+const TYPE_NAMES = { fundamental: '⭐ Fundamental', modal: '🎯 Modal', simple: '◎ No Prefix', inseparable: '🔒 Prefix (fixed)', separable: '✂️ Prefix (sep.)', ieren: '🌐 -ieren' };
+
+async function lookupAndAdd() {
+  const inf = document.getElementById('f-inf').value.trim().toLowerCase();
+
+  if (!inf) { setLookupStatus('error', 'Please type an infinitive first.'); return; }
+  if (getAllVerbs().some(v => v.inf===inf)) {
+    setLookupStatus('error', `"<strong>${inf}</strong>" is already in the list.`); return;
+  }
+
+  const btn = document.getElementById('word-save-btn');
+  btn.disabled = true;
+  setLookupStatus('loading', `Looking up <strong>${inf}</strong> on Wiktionary…`);
+
+  const { type, prefix, certain } = await detectTypeAndPrefix(inf);
+
+  setLookupStatus('loading', `Found type: ${TYPE_NAMES[type]} — fetching conjugation…`);
+
+  let conjugation = await lookupVerbOnWiktionary(inf);
+  let usedFallbackForms = false;
+
+  if (!conjugation) {
+    const forms = computeRegularForms(type, prefix, inf);
+    conjugation = { ...forms, pp_aux: 'haben' };
+    usedFallbackForms = true;
+  }
+
+  const uncertain = usedFallbackForms || !certain;
+
+  const verbObj = {
+    sn: getNextSn(),
+    type, inf,
+    en: '', bn: '',
+    pp_aux: conjugation.pp_aux || 'haben',
+    praesens: conjugation.praesens,
+    praeteritum: conjugation.praeteritum,
+    pp: conjugation.pp || '—',
+    custom: true,
+    fallback: uncertain,
+  };
+  if (type==='trennbar') verbObj.prefix = prefix;
+
+  customVerbs.push(verbObj);
+  saveCustomVerbs();
+  closeWordModal();
+  render();
+
+  if (uncertain) {
+    const notice = document.createElement('div');
+    notice.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:10px 18px;border-radius:8px;font-size:0.82rem;z-index:2000;opacity:1;transition:opacity 0.4s;max-width:90vw;text-align:center';
+    notice.textContent = `⚠️ Added "${inf}" as ${TYPE_NAMES[type].replace(/^\S+\s/,'')} — some details were estimated since Wiktionary data was incomplete. Delete and retry if incorrect.`;
+    document.body.appendChild(notice);
+    setTimeout(() => { notice.style.opacity='0'; setTimeout(() => notice.remove(), 500); }, 5000);
+  }
+}
+
+function openWordModal() {
+  document.getElementById('f-inf').value = '';
+  setLookupStatus('', '');
+  document.getElementById('word-save-btn').disabled = false;
+  document.getElementById('word-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('f-inf').focus(), 80);
+}
+
+function closeWordModal() {
+  document.getElementById('word-overlay').classList.remove('open');
+}
+
+function deleteWord(sn) {
+  if (!confirm('Delete this word? This cannot be undone.')) return;
+  customVerbs = customVerbs.filter(v => v.sn !== sn);
+  saveCustomVerbs();
+  render();
+}
+
+document.getElementById('word-overlay').addEventListener('click', e => {
+  if (e.target.id==='word-overlay') closeWordModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key==='Escape') closeWordModal();
+});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+loadCustomVerbs();
+render();
+</script>
+</body>
+</html>
