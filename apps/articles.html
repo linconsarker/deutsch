@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>German Articles Practice</title>
+  <link rel="stylesheet" href="../shared/theme.css">
+  <style>
+    :root {
+      --article-der: #3f6f9f;
+      --article-die: #b85b67;
+      --article-das: #bd843e;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 24px 16px;
+    }
+
+    .article-app {
+      width: min(100%, 720px);
+      margin: 0 auto;
+    }
+
+    .article-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--hub-accent) !important;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .12em !important;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 0; font-size: clamp(1.6rem, 5vw, 2.35rem); }
+
+    .score {
+      flex: 0 0 auto;
+      color: var(--hub-muted) !important;
+      font-size: .84rem;
+      text-align: right;
+    }
+
+    .score strong {
+      display: block;
+      color: var(--hub-ink) !important;
+      font-size: 1.35rem;
+    }
+
+    .tips-button { padding: 9px 12px; }
+
+    .tips-overlay {
+      position: fixed;
+      z-index: 5;
+      inset: 0;
+      display: none;
+      overflow: auto;
+      padding: 24px 16px;
+      background: rgba(25, 50, 74, .46);
+    }
+
+    .tips-overlay.open { display: block; }
+
+    .tips-panel {
+      width: min(100%, 760px);
+      margin: 0 auto;
+      padding: 22px;
+      border: 1px solid var(--hub-line);
+      border-radius: var(--hub-radius);
+      background: var(--hub-surface);
+      box-shadow: 0 18px 50px rgba(25, 50, 74, .2);
+    }
+
+    .tips-heading {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .tips-heading h2 { margin: 0; font-size: 1.45rem; }
+    .tips-close { padding: 8px 11px; }
+
+    .tip-item {
+      padding: 14px 0;
+      border-top: 1px solid var(--hub-line);
+    }
+
+    .tip-item h3 { margin: 0 0 5px; font-size: 1rem; }
+    .tip-item p { margin: 0 0 9px; color: var(--hub-muted) !important; }
+    .tip-examples { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tip-example { padding: 6px 9px; border-radius: 8px; background: #f1e6d8; font-size: .86rem; }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr minmax(180px, .8fr);
+      gap: 12px;
+      margin-bottom: 14px;
+      padding: 14px;
+      border: 1px solid var(--hub-line);
+      border-radius: var(--hub-radius);
+      background: rgba(255, 253, 248, .72);
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--hub-muted) !important;
+      font-size: .76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .levels { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .level-button {
+      min-width: 62px;
+      padding: 9px 10px;
+    }
+
+    .level-button.active {
+      background: var(--hub-ink) !important;
+      border-color: var(--hub-ink) !important;
+      color: #fff !important;
+    }
+
+    .category-select,
+    .search-input { width: 100%; padding: 10px 11px; }
+
+    .search-row { grid-column: 1 / -1; }
+
+    .search-modes { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 7px; }
+    .search-mode { padding: 7px 10px; font-size: .78rem !important; }
+    .search-mode.active { background: var(--hub-ink) !important; border-color: var(--hub-ink) !important; color: #fff !important; }
+
+    @media (max-width: 520px) {
+      .filters { grid-template-columns: 1fr; }
+      .search-row { grid-column: auto; }
+    }
+
+    .practice-card {
+      display: grid;
+      min-height: 390px;
+      padding: clamp(28px, 7vw, 56px) 20px 28px;
+      place-items: center;
+      border: 1px solid var(--hub-line);
+      border-radius: var(--hub-radius);
+      background: var(--hub-surface);
+      box-shadow: 0 12px 30px rgba(25, 50, 74, .08);
+      text-align: center;
+    }
+
+    .word-label {
+      margin-bottom: 10px;
+      color: var(--hub-muted) !important;
+      font-size: .86rem;
+    }
+
+    .word {
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      color: var(--hub-ink) !important;
+      font-size: clamp(2.35rem, 10vw, 4.8rem);
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .meaning { margin-top: 14px; color: var(--hub-muted) !important; font-size: 1rem; }
+
+    .feedback {
+      min-height: 28px;
+      margin-top: 18px;
+      color: var(--hub-muted) !important;
+      font-weight: 700;
+    }
+
+    .feedback.correct { color: var(--hub-success) !important; }
+    .feedback.wrong { color: var(--hub-accent-dark) !important; }
+
+    .article-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: min(100%, 520px);
+      margin: 22px auto 0;
+    }
+
+    .article-option {
+      min-height: 66px;
+      color: #fff !important;
+      border: 0 !important;
+      font-size: 1.15rem !important;
+    }
+
+    .article-option[data-article="der"] { background: var(--article-der) !important; }
+    .article-option[data-article="die"] { background: var(--article-die) !important; }
+    .article-option[data-article="das"] { background: var(--article-das) !important; }
+    .article-option:hover { filter: brightness(1.08); }
+    .article-option:disabled { color: #fff !important; filter: grayscale(.25); }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .secondary-action { padding: 11px 16px; }
+
+    @media (max-width: 520px) {
+      body { padding: 16px 10px; }
+      .article-header { align-items: start; }
+      .article-header h1 { font-size: 1.55rem; }
+      .practice-card { min-height: 360px; }
+      .article-options { gap: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-app">
+    <header class="article-header">
+      <div>
+        <p class="eyebrow">Nomen</p>
+        <h1>Choose the article</h1>
+      </div>
+      <div>
+        <div class="score"><strong id="score">0 / 0</strong>correct</div>
+        <button class="tips-button" id="tipsButton" type="button">Tips &amp; examples</button>
+      </div>
+    </header>
+
+    <section class="filters" aria-label="Article practice filters">
+      <div>
+        <span class="filter-label">Level</span>
+        <div class="levels" id="levels"></div>
+      </div>
+      <label>
+        <span class="filter-label">Category</span>
+        <select class="category-select" id="category"></select>
+      </label>
+      <label class="search-row">
+        <span class="filter-label">Search</span>
+        <input class="search-input" id="search" type="search" placeholder="Search a German word or meaning..." autocomplete="off">
+        <span class="search-modes" id="searchModes">
+          <button class="search-mode active" data-mode="starts" type="button">Starts</button>
+          <button class="search-mode" data-mode="contains" type="button">Contains</button>
+          <button class="search-mode" data-mode="ends" type="button">Ends</button>
+          <button class="search-mode" data-mode="meaning" type="button">Meaning</button>
+        </span>
+      </label>
+    </section>
+
+    <div class="tips-overlay" id="tipsOverlay" role="dialog" aria-modal="true" aria-labelledby="tipsTitle">
+      <section class="tips-panel">
+        <div class="tips-heading">
+          <h2 id="tipsTitle">Remembering German articles</h2>
+          <button class="tips-close" id="tipsClose" type="button" aria-label="Close tips">Close</button>
+        </div>
+        <div id="tipsList"></div>
+      </section>
+    </div>
+
+    <section class="practice-card" aria-live="polite">
+      <div>
+        <div class="word-label">Which article belongs to this word?</div>
+        <div class="word" id="word">Loading...</div>
+        <div class="meaning" id="meaning"></div>
+        <div class="feedback" id="feedback"></div>
+        <div class="article-options" id="options">
+          <button class="article-option" data-article="der" type="button">der</button>
+          <button class="article-option" data-article="die" type="button">die</button>
+          <button class="article-option" data-article="das" type="button">das</button>
+        </div>
+        <div class="actions">
+          <button class="secondary-action" id="next" type="button">Next word</button>
+          <button class="secondary-action" id="shuffle" type="button">Shuffle</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function loadJson(path) {
+      const request = new XMLHttpRequest();
+      request.open("GET", path, false);
+      request.send(null);
+      if (request.status !== 200 && request.status !== 0) throw new Error("Could not load " + path);
+      return JSON.parse(request.responseText);
+    }
+
+    const nouns = loadJson("../data/vocabulary.json").filter((card) =>
+      card.type === "noun" && ["der", "die", "das"].includes(card.article)
+    );
+    const articleTips = loadJson("../data/article-tips.json");
+    const levels = ["A1", "A2", "B1"];
+    const categoryLabels = {
+      general: "General", food: "Food & Drink", travel_transport: "Travel & Transport",
+      shopping_clothing: "Shopping & Clothing", home_living: "Home & Living",
+      work_office: "Work & Office", tech_media: "Tech & Media", school_education: "School & Education",
+      sports_leisure: "Sports & Leisure", colors: "Colors", body_parts: "Body Parts",
+      fruits_vegetables: "Fruits & Vegetables", time_seasons: "Time & Seasons",
+      countries: "Countries", language: "Language", communication: "Communication",
+      emotions_personality: "Emotions", events_celebrations: "Events & Celebrations", health: "Health",
+      nationality: "Nationality", nature_animals: "Nature & Animals", numbers: "Numbers",
+      people_relationships: "People & Family"
+    };
+    const categories = [...new Set(nouns.map((card) => card.category))].sort((a, b) =>
+      (categoryLabels[a] || a).localeCompare(categoryLabels[b] || b)
+    );
+    let activeLevels = levels.slice();
+    let activeCategory = "ALL";
+    let searchTerm = "";
+    let searchMode = "starts";
+    const levelsElement = document.getElementById("levels");
+    const categoryElement = document.getElementById("category");
+    const searchElement = document.getElementById("search");
+    const tipsOverlay = document.getElementById("tipsOverlay");
+    const wordElement = document.getElementById("word");
+    const meaningElement = document.getElementById("meaning");
+    const feedbackElement = document.getElementById("feedback");
+    const scoreElement = document.getElementById("score");
+    const optionElements = [...document.querySelectorAll(".article-option")];
+    let deck = [];
+    let index = 0;
+    let correct = 0;
+    let attempts = 0;
+    let answered = false;
+
+    function filteredNouns() {
+      const query = searchTerm.trim().toLowerCase();
+      return nouns.filter((card) => {
+        if (!activeLevels.includes(card.level)) return false;
+        if (activeCategory === "COGNATE" && !card.cognate) return false;
+        if (activeCategory === "OPPOSITE" && !card.opposite) return false;
+        if (! ["ALL", "COGNATE", "OPPOSITE"].includes(activeCategory) && card.category !== activeCategory) return false;
+        if (query) {
+          const value = searchMode === "meaning" ? card.en.toLowerCase() : card.stem.toLowerCase();
+          if (searchMode === "starts" && !value.startsWith(query)) return false;
+          if (searchMode === "contains" && !value.includes(query)) return false;
+          if (searchMode === "ends" && !value.endsWith(query)) return false;
+          if (searchMode === "meaning" && !value.includes(query)) return false;
+        }
+        return true;
+      });
+    }
+
+    function shuffle(items) {
+      for (let i = items.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+      return items;
+    }
+
+    function renderTips() {
+      document.getElementById("tipsList").innerHTML = articleTips.map((item) =>
+        '<article class="tip-item"><h3>'+item.title+'</h3><p>'+item.tip+'</p><div class="tip-examples">'+
+        item.examples.map((example) => '<span class="tip-example">'+example+'</span>').join("")+"</div></article>"
+      ).join("");
+    }
+
+    function updateScore() {
+      scoreElement.textContent = correct + " / " + attempts;
+    }
+
+    function renderCard() {
+      if (!deck.length) {
+        wordElement.textContent = "No words found";
+        meaningElement.textContent = "Try another level, category, or search.";
+        feedbackElement.textContent = "";
+        optionElements.forEach((button) => { button.disabled = true; });
+        return;
+      }
+      const card = deck[index];
+      answered = false;
+      wordElement.textContent = card.stem;
+      meaningElement.textContent = "";
+      feedbackElement.textContent = "";
+      feedbackElement.className = "feedback";
+      optionElements.forEach((button) => { button.disabled = false; });
+    }
+
+    function answer(article) {
+      if (answered) return;
+      answered = true;
+      const card = deck[index];
+      attempts += 1;
+      optionElements.forEach((button) => { button.disabled = true; });
+      if (article === card.article) {
+        correct += 1;
+        feedbackElement.textContent = "Correct";
+        feedbackElement.className = "feedback correct";
+      } else {
+        feedbackElement.textContent = "The answer is " + card.article;
+        feedbackElement.className = "feedback wrong";
+      }
+      meaningElement.textContent = card.en;
+      updateScore();
+    }
+
+    function nextWord() {
+      index = (index + 1) % deck.length;
+      renderCard();
+    }
+
+    function reshuffle() {
+      deck = shuffle(filteredNouns());
+      index = 0;
+      renderCard();
+    }
+
+    function renderFilters() {
+      levelsElement.innerHTML = "";
+      levels.forEach((level) => {
+        const button = document.createElement("button");
+        button.className = "level-button" + (activeLevels.includes(level) ? " active" : "");
+        button.type = "button";
+        button.textContent = level + " (" + nouns.filter((card) => card.level === level).length + ")";
+        button.addEventListener("click", () => {
+          if (activeLevels.includes(level)) {
+            if (activeLevels.length === 1) return;
+            activeLevels = activeLevels.filter((item) => item !== level);
+          } else {
+            activeLevels.push(level);
+          }
+          renderFilters();
+          reshuffle();
+        });
+        levelsElement.appendChild(button);
+      });
+
+      categoryElement.innerHTML = '<option value="ALL">All categories</option>' +
+        '<option value="COGNATE">≈ Like English (cognates)</option>' +
+        '<option value="OPPOSITE">↔ Words with Opposites</option>' +
+        categories.map((category) => '<option value="'+category+'">'+(categoryLabels[category] || category)+'</option>').join("");
+      categoryElement.value = activeCategory;
+    }
+
+    optionElements.forEach((button) => button.addEventListener("click", () => answer(button.dataset.article)));
+    document.getElementById("next").addEventListener("click", nextWord);
+    document.getElementById("shuffle").addEventListener("click", reshuffle);
+    document.getElementById("tipsButton").addEventListener("click", () => tipsOverlay.classList.add("open"));
+    document.getElementById("tipsClose").addEventListener("click", () => tipsOverlay.classList.remove("open"));
+    tipsOverlay.addEventListener("click", (event) => {
+      if (event.target === tipsOverlay) tipsOverlay.classList.remove("open");
+    });
+    categoryElement.addEventListener("change", () => {
+      activeCategory = categoryElement.value;
+      reshuffle();
+    });
+    searchElement.addEventListener("input", () => {
+      searchTerm = searchElement.value;
+      reshuffle();
+    });
+    document.querySelectorAll(".search-mode").forEach((button) => button.addEventListener("click", () => {
+      searchMode = button.dataset.mode;
+      document.querySelectorAll(".search-mode").forEach((item) => item.classList.toggle("active", item === button));
+      reshuffle();
+    }));
+    renderFilters();
+    renderTips();
+    reshuffle();
+  </script>
+</body>
+</html>

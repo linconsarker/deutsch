@@ -18,15 +18,16 @@
 
     * { box-sizing: border-box; }
 
-    html, body { margin: 0; min-height: 100%; }
+    html, body { width: 100%; height: 100%; margin: 0; }
 
     body {
       background: var(--bg);
       color: var(--ink);
       font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      overflow-x: hidden;
     }
 
-    #shell { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; }
+    #shell { width: 100%; min-width: 0; height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
 
     #navbar {
       display: flex;
@@ -35,11 +36,8 @@
       padding: 12px max(16px, calc((100vw - 1180px) / 2));
       background: var(--nav);
       box-shadow: 0 5px 18px rgba(16, 38, 58, .16);
-      overflow-x: auto;
-      scrollbar-width: none;
+      flex-wrap: wrap;
     }
-
-    #navbar::-webkit-scrollbar { display: none; }
 
     .brand {
       flex: 0 0 auto;
@@ -78,14 +76,14 @@
     .tab-btn[data-tab="vocab"] .dot { background: #75a68c; }
     .tab-btn[data-tab="prep"] .dot { background: #80a8c6; }
 
-    #frames { position: relative; flex: 1; min-height: 0; }
+    #frames { position: relative; flex: 1; min-width: 0; min-height: 0; }
 
     iframe {
       display: none;
       width: 100%;
       height: 100%;
-      min-height: calc(100vh - 67px);
-      min-height: calc(100dvh - 67px);
+      min-width: 0;
+      min-height: 0;
       border: 0;
       background: var(--bg);
     }
@@ -94,8 +92,7 @@
 
     .loading-msg {
       display: grid;
-      min-height: calc(100vh - 67px);
-      min-height: calc(100dvh - 67px);
+      min-height: 0;
       place-items: center;
       color: var(--muted);
     }
@@ -103,8 +100,9 @@
     @media (max-width: 640px) {
       #navbar { align-items: stretch; padding: 9px 10px; }
       .brand { display: none; }
-      .tab-btn { padding: 8px 12px; font-size: .82rem; }
-      iframe { min-height: calc(100vh - 60px); min-height: calc(100dvh - 60px); }
+      .tab-btn { min-width: 0; flex: 1 1 calc(50% - 4px); justify-content: center; padding: 8px 7px; font-size: .78rem; white-space: normal; }
+      .tab-label { min-width: 0; text-align: center; }
+      iframe { min-height: 0; }
     }
   </style>
 </head>
@@ -112,9 +110,10 @@
   <main id="shell">
     <nav id="navbar" aria-label="Practice activities">
       <div class="brand">Deutsch <span>Uben</span></div>
-      <button class="tab-btn active" data-tab="verbs" type="button"><span class="dot"></span>German Verbs</button>
-      <button class="tab-btn" data-tab="vocab" type="button"><span class="dot"></span>Vocabulary Flashcards</button>
-      <button class="tab-btn" data-tab="prep" type="button"><span class="dot"></span>Preposition Practice</button>
+      <button class="tab-btn active" data-tab="verbs" type="button"><span class="dot"></span><span class="tab-label">German Verbs</span></button>
+      <button class="tab-btn" data-tab="vocab" type="button"><span class="dot"></span><span class="tab-label">Vocabulary Flashcards</span></button>
+      <button class="tab-btn" data-tab="prep" type="button"><span class="dot"></span><span class="tab-label">Preposition Practice</span></button>
+      <button class="tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Practice</span></button>
     </nav>
     <section id="frames" aria-live="polite">
       <div class="loading-msg" id="loadingMsg">Loading practice...</div>
@@ -137,7 +136,7 @@
 
       if (!frames[tab]) {
         const frame = document.createElement("iframe");
-        frame.title = document.querySelector(`[data-tab="${tab}"]`).textContent.trim();
+        frame.title = document.querySelector(`[data-tab="${tab}"] .tab-label`).textContent.trim();
         frame.src = `apps/${tab}.html`;
         frame.className = "active";
         framesElement.appendChild(frame);

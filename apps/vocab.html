@@ -709,7 +709,7 @@ function renderCard(){
 
   const artColor = card.article ? (ARTICLE_COLORS[card.article.split('/')[0]] || 'var(--ink-soft)') : null;
   const frontInner = card.article
-    ? '<span class="article-pill" style="background:'+artColor+'">'+card.article+'</span><div class="word-de">'+card.stem+'</div>'
+    ? '<div class="word-de">'+card.article+' '+card.stem+'</div>'
     : '<div class="word-de">'+card.stem+'</div>';
   const speakText = (card.article ? card.article+' ' : '') + card.stem;
   let oppMeaning = '';
