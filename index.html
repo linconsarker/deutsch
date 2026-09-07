@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#19324a">
   <title>Deutsch Uben | German Practice Hub</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="shared/auth.js"></script>
   <style>
     :root {
       --ink: #19324a;
@@ -72,6 +74,25 @@
     .tab-btn:hover { background: rgba(255, 255, 255, .08); color: #fff; }
     .tab-btn.active { background: #fffaf2; border-color: #fffaf2; color: var(--ink); }
 
+    .account-area { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .account-email { max-width: 190px; overflow: hidden; color: var(--muted); font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
+    .account-btn { min-height: 36px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 9px; background: transparent; color: #fffaf2; cursor: pointer; font: inherit; font-size: .78rem; font-weight: 700; }
+    .account-btn:hover { background: rgba(255, 255, 255, .1); }
+
+    .auth-overlay { position: fixed; z-index: 10; inset: 0; display: none; place-items: center; padding: 16px; background: rgba(16, 38, 58, .58); }
+    .auth-overlay.open { display: grid; }
+    .auth-panel { width: min(100%, 390px); padding: 24px; border-radius: 14px; background: #fffaf2; box-shadow: 0 20px 60px rgba(16, 38, 58, .3); }
+    .auth-panel h2 { margin: 0 0 6px; color: var(--ink); font-size: 1.35rem; }
+    .auth-panel p { margin: 0 0 16px; color: #60758a; font-size: .88rem; }
+    .auth-panel label { display: block; margin: 10px 0 5px; color: var(--ink); font-size: .78rem; font-weight: 700; }
+    .auth-panel input { width: 100%; padding: 11px; border: 1px solid #d9e1e7; border-radius: 9px; font: inherit; }
+    .auth-actions { display: flex; gap: 8px; margin-top: 16px; }
+    .auth-actions button { flex: 1; padding: 10px; border: 0; border-radius: 9px; cursor: pointer; font: inherit; font-weight: 700; }
+    #authSubmit { background: var(--ink); color: #fff; }
+    #authCancel { background: #e7edf0; color: var(--ink); }
+    .auth-switch { margin-top: 12px !important; text-align: center; cursor: pointer; color: var(--accent) !important; }
+    .auth-status { min-height: 20px; margin-top: 10px !important; color: #8f4327 !important; }
+
     .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
     .tab-btn[data-tab="vocab"] .dot { background: #75a68c; }
     .tab-btn[data-tab="prep"] .dot { background: #80a8c6; }
@@ -114,16 +135,89 @@
       <button class="tab-btn" data-tab="vocab" type="button"><span class="dot"></span><span class="tab-label">Vocabulary Flashcards</span></button>
       <button class="tab-btn" data-tab="prep" type="button"><span class="dot"></span><span class="tab-label">Preposition Practice</span></button>
       <button class="tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Practice</span></button>
+      <div class="account-area">
+        <span class="account-email" id="accountEmail"></span>
+        <button class="account-btn" id="accountButton" type="button">Sign in</button>
+      </div>
     </nav>
     <section id="frames" aria-live="polite">
       <div class="loading-msg" id="loadingMsg">Loading practice...</div>
     </section>
   </main>
+  <div class="auth-overlay" id="authOverlay">
+    <form class="auth-panel" id="authForm">
+      <h2 id="authTitle">Sign in</h2>
+      <p id="authDescription">Use your verified email to keep your learning progress separate.</p>
+      <label for="authEmail">Email address</label>
+      <input id="authEmail" type="email" autocomplete="email" required>
+      <label for="authPassword">Password</label>
+      <input id="authPassword" type="password" minlength="6" autocomplete="current-password" required>
+      <p class="auth-status" id="authStatus"></p>
+      <div class="auth-actions"><button id="authCancel" type="button">Cancel</button><button id="authSubmit" type="submit">Sign in</button></div>
+      <p class="auth-switch" id="authSwitch">Create an account</p>
+    </form>
+  </div>
   <script>
     const LAST_TAB_KEY = "deutsch-hub-last-tab";
     const frames = {};
     const framesElement = document.getElementById("frames");
     const loadingMessage = document.getElementById("loadingMsg");
+    const accountButton = document.getElementById("accountButton");
+    const accountEmail = document.getElementById("accountEmail");
+    const authOverlay = document.getElementById("authOverlay");
+    const authForm = document.getElementById("authForm");
+    const authTitle = document.getElementById("authTitle");
+    const authDescription = document.getElementById("authDescription");
+    const authSubmit = document.getElementById("authSubmit");
+    const authSwitch = document.getElementById("authSwitch");
+    const authStatus = document.getElementById("authStatus");
+    let authMode = "signin";
+    let currentUserId = DeutschAuth.getScope();
+
+    function openAuth(mode) {
+      authMode = mode;
+      authTitle.textContent = mode === "signin" ? "Sign in" : "Create account";
+      authDescription.textContent = mode === "signin" ? "Use your verified email to keep your learning progress separate." : "We will send a verification link to your email address.";
+      authSubmit.textContent = mode === "signin" ? "Sign in" : "Create account";
+      authSwitch.textContent = mode === "signin" ? "Create an account" : "Already have an account? Sign in";
+      authStatus.textContent = "";
+      authOverlay.classList.add("open");
+    }
+
+    function refreshAccount(user) {
+      const nextId = user ? user.id : "guest";
+      const changed = currentUserId !== nextId;
+      currentUserId = nextId;
+      DeutschAuth.setScope(user);
+      accountEmail.textContent = user ? user.email : "";
+      accountButton.textContent = user ? "Sign out" : "Sign in";
+      if (changed && Object.keys(frames).length) {
+        Object.values(frames).forEach((frame) => { frame.src = frame.src.split("?")[0] + "?auth=" + Date.now(); });
+      }
+    }
+
+    accountButton.addEventListener("click", async () => {
+      if (currentUserId === "guest") openAuth("signin");
+      else await DeutschAuth.signOut();
+    });
+    document.getElementById("authCancel").addEventListener("click", () => authOverlay.classList.remove("open"));
+    authSwitch.addEventListener("click", () => openAuth(authMode === "signin" ? "signup" : "signin"));
+    authForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      authStatus.textContent = "Working...";
+      const email = document.getElementById("authEmail").value.trim();
+      const password = document.getElementById("authPassword").value;
+      const result = authMode === "signin" ? await DeutschAuth.signIn(email, password) : await DeutschAuth.signUp(email, password);
+      if (result.error) { authStatus.textContent = result.error.message; return; }
+      if (authMode === "signup" && !result.data.session) {
+        authStatus.textContent = "Check your email to verify your account.";
+        return;
+      }
+      authOverlay.classList.remove("open");
+    });
+
+    DeutschAuth.getSession().then(({ data }) => refreshAccount(data.session?.user || null));
+    DeutschAuth.onAuthStateChange((_event, session) => refreshAccount(session?.user || null));
 
     function activateTab(tab) {
       document.querySelectorAll(".tab-btn").forEach((button) => {

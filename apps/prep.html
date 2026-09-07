@@ -517,7 +517,8 @@ const STATUSES = [
 /* ============================================================
    STATE / STORAGE
    ============================================================ */
-const STORE_KEY = "praep_trainer_v3";
+const USER_SCOPE = (()=>{ try{ return localStorage.getItem("deutsch-auth-user-id") || "guest"; }catch(e){ return "guest"; } })();
+const STORE_KEY = "praep_trainer_v3:" + USER_SCOPE;
 function loadStore(){
   try{
     const raw = localStorage.getItem(STORE_KEY);

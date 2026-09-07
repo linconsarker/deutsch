@@ -386,10 +386,11 @@ const CATEGORY_LABELS = {
 };
 const PRIMARY_CATS = ['food','travel_transport','shopping_clothing','home_living','work_office','tech_media','school_education','sports_leisure','colors','body_parts','fruits_vegetables','time_seasons','countries','language'];
 
-const STORAGE_KEY = 'wortschatz-progress-v1';
-const LEVEL_KEY = 'wortschatz-levels-v1';
-const CAT_KEY = 'wortschatz-cats-v1';
-const FONTSIZE_KEY = 'wortschatz-fontsize-v1';
+const USER_SCOPE = (()=>{ try{ return localStorage.getItem('deutsch-auth-user-id') || 'guest'; }catch(e){ return 'guest'; } })();
+const STORAGE_KEY = 'wortschatz-progress-v1:' + USER_SCOPE;
+const LEVEL_KEY = 'wortschatz-levels-v1:' + USER_SCOPE;
+const CAT_KEY = 'wortschatz-cats-v1:' + USER_SCOPE;
+const FONTSIZE_KEY = 'wortschatz-fontsize-v1:' + USER_SCOPE;
 function loadJSON(key, fallback){
   try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; }
 }
@@ -633,7 +634,7 @@ function exampleFor(card){
 }
 
 // --- Auto-play mode ---
-const AUTOPLAY_KEY = 'wortschatz-autoplay-interval-v1';
+const AUTOPLAY_KEY = 'wortschatz-autoplay-interval-v1:' + USER_SCOPE;
 let autoPlayOn = false;
 let autoPlayTimer = null;
 let autoPlaySeconds = loadJSON(AUTOPLAY_KEY, 5);

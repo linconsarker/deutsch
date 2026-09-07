@@ -885,7 +885,8 @@ let currentLevel = 'all'; // 'all' | 'A1' | 'A2' | 'B1' | 'B2'
 let customVerbs = [];
 
 // ─── CUSTOM VERB PERSISTENCE ─────────────────────────────────────────────────
-const CUSTOM_STORE_KEY = 'germanVerbs_customVerbs_v2';
+const USER_SCOPE = (()=>{ try{ return localStorage.getItem('deutsch-auth-user-id') || 'guest'; }catch(e){ return 'guest'; } })();
+const CUSTOM_STORE_KEY = 'germanVerbs_customVerbs_v2:' + USER_SCOPE;
 
 function loadCustomVerbs() {
   try {
