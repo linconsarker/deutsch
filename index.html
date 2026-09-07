@@ -56,6 +56,20 @@
       white-space: nowrap;
     }
 
+    @media (min-width: 992px) {
+      #navContent { min-width: 0; }
+      #navContent .navbar-nav {
+        min-width: 0;
+        flex: 1 1 auto;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      #navContent .navbar-nav::-webkit-scrollbar { display: none; }
+      #navContent > .d-flex { flex: 0 0 auto; }
+    }
+
     .account-btn {
       --bs-btn-color: #fffaf2;
       --bs-btn-border-color: rgba(255, 255, 255, .3);
@@ -114,7 +128,7 @@
             <button class="btn tab-btn" data-tab="prep" type="button"><span class="dot"></span><span class="tab-label">Preposition Practice</span></button>
             <button class="btn tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Practice</span></button>
           </div>
-          <div class="d-flex align-items-center gap-2 ms-lg-auto mt-2 mt-lg-0">
+          <div class="account-area d-flex align-items-center gap-2 ms-lg-auto mt-2 mt-lg-0">
             <span class="account-email" id="accountEmail"></span>
             <button class="btn btn-outline-light account-btn" id="accountButton" type="button">Sign in</button>
           </div>
