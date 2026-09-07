@@ -4,75 +4,65 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title>Präpositionen Trainer</title>
-
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../shared/theme.css">
 <style>
   :root{
-    --bg:#F5F6F8;
-    --surface:#FFFFFF;
-    --surface-2:#EEF0F3;
-    --border:#DCE0E6;
-    --text:#161A1F;
-    --text-muted:#4B5563;
-    --text-dim:#8A93A0;
-    --akk:#B5620A;
-    --akk-dim:#FBEBD8;
-    --dat:#1B6FA8;
-    --dat-dim:#E1EEF6;
+    --bg:var(--du-paper);
+    --surface:var(--du-surface);
+    --surface-2:var(--du-surface-2);
+    --border:var(--du-line);
+    --text:var(--du-ink);
+    --text-muted:var(--du-ink-soft);
+    --text-dim:var(--du-muted);
+    --akk:#a8632a;
+    --akk-dim:#f7e9db;
+    --dat:var(--du-der);
+    --dat-dim:#e4eef6;
     --gen:#7A4FA0;
     --gen-dim:#F0E6F7;
-    --success:#227A50;
-    --success-dim:#E4F3EA;
-    --error:#B23A2C;
-    --error-dim:#FBE7E4;
-    --radius:14px;
-    --shadow:0 1px 2px rgba(22,26,31,0.04), 0 4px 14px rgba(22,26,31,0.05);
+    --success:var(--du-success);
+    --success-dim:#e4f1ea;
+    --error:var(--du-danger);
+    --error-dim:#f8e8e5;
   }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;height:100%;overflow:hidden;}
+  html,body{height:100%;}
   body{
     background:var(--bg);
     color:var(--text);
-    font-family:'Inter',system-ui,sans-serif;
+    font-family:var(--du-font);
     -webkit-font-smoothing:antialiased;
     height:100dvh;
     display:flex;
     flex-direction:column;
+    overflow:hidden;
   }
   .app{
     max-width:760px;width:100%;margin:0 auto;
-    height:100%;
+    flex:1;
     padding:12px 16px;
     display:flex;flex-direction:column;
     gap:10px;
     min-height:0;
   }
 
-  /* TOPBAR */
-  .topbar{display:flex;justify-content:space-between;align-items:center;flex-shrink:0;gap:8px;}
-  .brand{display:flex;align-items:center;gap:8px;min-width:0;}
+
+  /* BRAND */
+  .brand{display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 auto;}
+  /* the inner wrapper needs min-width:0 too, or the nowrap h1 inside it
+     refuses to shrink and the button group lands on top of the title */
+  .brand > div{min-width:0;}
   .compass{display:inline-flex;width:22px;height:22px;flex-shrink:0;color:var(--dat);}
   .brand h1{
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;margin:0;
+    font-family:var(--du-font);font-weight:700;font-size:19px;margin:0;
     letter-spacing:-0.01em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   }
   .brand .sub{font-size:11px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .topbar-actions{display:flex;gap:6px;flex-shrink:0;}
-  .icon-btn{
-    display:flex;align-items:center;gap:6px;
-    background:var(--surface);border:1px solid var(--border);color:var(--text);
-    font-family:'Inter',sans-serif;font-weight:600;font-size:12.5px;
-    padding:7px 11px;border-radius:9px;cursor:pointer;white-space:nowrap;
-  }
-  .icon-btn:hover{border-color:var(--text-dim);}
-  .icon-btn.ghost{color:var(--text-dim);}
 
   /* FILTERS */
-  .filters{display:flex;flex-direction:column;gap:5px;flex-shrink:0;}
-  .filter-row{display:flex;align-items:center;gap:8px;}
   .filter-label{
-    font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;
-    text-transform:uppercase;color:var(--text-dim);width:46px;flex-shrink:0;
+    font-family:var(--du-mono);font-size:9.5px;letter-spacing:0.08em;
+    width:46px;flex-shrink:0;
   }
   .chips{
     display:flex;gap:5px;overflow-x:auto;flex:1;min-width:0;
@@ -80,34 +70,20 @@
   }
   .chips::-webkit-scrollbar{display:none;}
   .chip{
-    font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
-    padding:5px 10px;border-radius:16px;border:1px solid var(--border);
-    background:var(--surface);color:var(--text-muted);cursor:pointer;user-select:none;
-    transition:all .15s ease;white-space:nowrap;flex-shrink:0;
+    font-family:var(--du-font);font-size:12px;font-weight:600;
+    white-space:nowrap;flex-shrink:0;
   }
-  .chip:hover{border-color:var(--text-dim);color:var(--text);}
   .chip.active{background:var(--text);color:var(--surface);border-color:var(--text);}
 
   /* STATS BAR */
-  .stats{
-    display:flex;background:var(--surface);border:1px solid var(--border);
-    border-radius:12px;padding:8px 12px;gap:0;box-shadow:var(--shadow);flex-shrink:0;
-  }
-  .stat{flex:1;text-align:center;}
-  .stat + .stat{border-left:1px solid var(--border);}
-  .stat-num{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;line-height:1.1;color:var(--text);}
-  .stat-label{font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin-top:1px;}
+  .stat-num{font-family:var(--du-font);font-weight:700;font-size:17px;line-height:1.1;color:var(--text);}
+  .stat-label{font-size:9px;font-family:var(--du-mono);letter-spacing:0.06em;color:var(--text-dim);margin-top:1px;}
 
   /* CARD */
-  .card{
-    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-    padding:18px 20px;position:relative;box-shadow:var(--shadow);
-    flex:1;min-height:0;display:flex;flex-direction:column;overflow-y:auto;
-  }
-  .card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px;flex-shrink:0;}
+  #card{background:var(--surface);border:1px solid var(--border);flex:0 1 auto;min-height:0;overflow-y:auto;}
   .tag-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
   .art-tag{
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    font-family:var(--du-mono);font-size:10.5px;font-weight:600;
     padding:3px 7px;border-radius:6px;
   }
   .art-tag.bestimmt{background:var(--dat-dim);color:var(--dat);}
@@ -115,18 +91,12 @@
   .art-tag.possessiv{background:var(--success-dim);color:var(--success);}
   .art-tag.negativ{background:var(--error-dim);color:var(--error);}
   .art-tag.ohne{background:var(--akk-dim);color:var(--akk);}
-  .cat-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);}
-  .card-top-right{display:flex;align-items:center;gap:10px;}
-  .remaining{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);white-space:nowrap;}
-  .known-btn{
-    background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:12px;font-family:'Inter',sans-serif;
-    display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:6px;
-  }
-  .known-btn:hover{color:var(--text-muted);background:var(--surface-2);}
+  .cat-tag{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);}
+  .remaining{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);white-space:nowrap;}
 
   .sentence{font-size:clamp(17px,4vw,21px);line-height:1.5;font-weight:500;margin:4px 0 12px;color:var(--text);}
   .blank-input{
-    font-family:'JetBrains Mono',monospace;font-size:0.92em;font-weight:600;
+    font-family:var(--du-mono);font-size:0.92em;font-weight:600;
     margin:0 1px;
     background:var(--surface-2);border:none;border-bottom:2.5px solid var(--text-dim);
     color:var(--text);padding:2px 6px;width:auto;min-width:90px;max-width:220px;
@@ -140,117 +110,62 @@
 
   .translation{font-size:12.5px;color:var(--text-dim);font-style:italic;margin-bottom:2px;}
 
-  .card-fill{flex:1;min-height:0;}
-
   .feedback{display:none;margin-top:10px;padding:11px 14px;border-radius:10px;border:1px solid var(--border);flex-shrink:0;}
   .feedback.show{display:block;}
   .feedback.correct{background:var(--success-dim);border-color:var(--success);}
   .feedback.incorrect{background:var(--error-dim);border-color:var(--error);}
-  .feedback-head{display:flex;align-items:center;gap:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;margin-bottom:5px;flex-wrap:wrap;}
+  .feedback-head{display:flex;align-items:center;gap:8px;font-family:var(--du-font);font-weight:700;font-size:14px;margin-bottom:5px;flex-wrap:wrap;}
   .feedback.correct .feedback-head{color:var(--success);}
   .feedback.incorrect .feedback-head{color:var(--error);}
-  .case-badge{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:12px;letter-spacing:0.02em;}
+  .case-badge{font-family:var(--du-mono);font-size:10.5px;font-weight:600;padding:3px 9px;letter-spacing:0.02em;}
   .case-badge.Akkusativ{background:var(--akk-dim);color:var(--akk);}
   .case-badge.Dativ{background:var(--dat-dim);color:var(--dat);}
   .case-badge.Genitiv{background:var(--gen-dim);color:var(--gen);}
   .answer-line{font-size:13px;color:var(--text-muted);margin-bottom:5px;}
-  .answer-line b{color:var(--text);font-family:'JetBrains Mono',monospace;}
+  .answer-line b{color:var(--text);font-family:var(--du-mono);}
   .explanation{font-size:12.5px;color:var(--text-muted);line-height:1.45;}
-
-  .actions{display:flex;gap:10px;margin-top:12px;flex-shrink:0;}
-  .btn{
-    font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:10px 18px;
-    border-radius:10px;border:none;cursor:pointer;flex:1;transition:all .15s ease;
-  }
-  .btn-primary{background:var(--text);color:var(--surface);}
-  .btn-primary:hover{opacity:0.88;}
-  .btn-primary:disabled{opacity:0.35;cursor:not-allowed;}
-  .btn-secondary{background:var(--surface-2);color:var(--text);border:1px solid var(--border);}
-  .btn-secondary:hover{border-color:var(--text-dim);}
 
   .empty-state{text-align:center;padding:30px 20px;color:var(--text-muted);margin:auto;}
   .empty-state .compass{width:28px;height:28px;margin-bottom:12px;opacity:0.5;}
 
-  /* REFERENCE MODAL */
-  .modal-overlay{
-    display:none;position:fixed;inset:0;background:rgba(22,26,31,0.42);
-    z-index:50;align-items:center;justify-content:center;padding:20px;
-  }
-  .modal-overlay.show{display:flex;}
-  .modal{
-    background:var(--surface);border-radius:16px;max-width:480px;width:100%;
-    max-height:min(640px,86vh);display:flex;flex-direction:column;
-    box-shadow:0 12px 40px rgba(22,26,31,0.22);overflow:hidden;
-  }
-  .modal-header{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:16px 18px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;
-  }
-  .modal-header-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;}
-  .meaning-toggle{
-    display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-size:12px;
-    font-weight:600;color:var(--text-muted);cursor:pointer;user-select:none;white-space:nowrap;
-  }
-  .meaning-toggle input{accent-color:var(--text);cursor:pointer;}
-  .modal-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;margin:0;color:var(--text);}
-  .modal-close{
-    background:var(--surface-2);border:1px solid var(--border);color:var(--text);
-    width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:15px;line-height:1;
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-  }
-  .modal-close:hover{border-color:var(--text-dim);}
-  .modal-body{padding:6px 18px 18px;overflow-y:auto;}
+  /* REFERENCE / PROGRESS MODALS */
   .ref-section{padding:12px 0;border-top:1px solid var(--border);}
   .ref-section:first-child{border-top:none;}
   .ref-section-head{
     display:flex;align-items:center;gap:7px;
-    font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;
+    font-family:var(--du-font);font-weight:700;font-size:14.5px;
     margin-bottom:5px;color:var(--text);
   }
   .ref-note{font-size:12px;color:var(--text-dim);line-height:1.5;margin-bottom:9px;}
   .ref-note b{color:var(--text-muted);}
   .ref-tags{display:flex;flex-wrap:wrap;gap:6px;}
   .ref-tag{
-    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
-    padding:4px 9px;border-radius:8px;border:1px solid transparent;cursor:default;
+    font-family:var(--du-mono);font-size:12px;font-weight:600;
+    padding:5px 10px;cursor:default;
   }
   .ref-tag.akk{background:var(--akk-dim);color:var(--akk);}
   .ref-tag.dat{background:var(--dat-dim);color:var(--dat);}
   .ref-tag.gen{background:var(--gen-dim);color:var(--gen);}
-  .ref-tag.wechsel{background:var(--surface-2);color:var(--text);border-color:var(--border);}
+  .ref-tag.wechsel{background:var(--surface-2);color:var(--text);}
 
-  /* PROGRESS MODAL */
-  .prog-summary{
-    display:flex;background:var(--surface-2);border-radius:10px;padding:10px 14px;margin:4px 0 14px;gap:0;
-  }
-  .prog-summary .stat{flex:1;text-align:center;}
-  .prog-summary .stat + .stat{border-left:1px solid var(--border);}
-  .prog-row{
-    padding:11px 0;border-top:1px solid var(--border);cursor:pointer;
-  }
+  .prog-row{padding:11px 0;border-top:1px solid var(--border);cursor:pointer;}
   .prog-row:first-of-type{border-top:none;}
   .prog-row:hover .prog-name{text-decoration:underline;}
-  .prog-row-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
-  .prog-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14.5px;color:var(--text);}
-  .prog-count{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--text-dim);}
-  .prog-bar-track{
-    height:8px;border-radius:5px;background:var(--surface-2);overflow:hidden;display:flex;
-  }
-  .prog-bar-correct{background:var(--success);height:100%;}
-  .prog-bar-wrong{background:var(--error);height:100%;}
+  .prog-name{font-family:var(--du-font);font-weight:700;font-size:14.5px;color:var(--text);}
+  .prog-count{font-family:var(--du-mono);font-size:11.5px;color:var(--text-dim);}
   .prog-detail{
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--text-dim);margin-top:5px;
+    font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);margin-top:5px;
     display:flex;gap:10px;
   }
   .prog-detail span.c{color:var(--success);}
   .prog-detail span.w{color:var(--error);}
   #modalBody.show-meanings .ref-tag::after{
     content:" — " attr(data-meaning);
-    font-family:'Inter',sans-serif;font-weight:400;font-style:italic;opacity:0.75;
+    font-family:var(--du-font);font-weight:400;font-style:italic;opacity:0.75;
   }
   .ref-wohin-wo{display:flex;gap:10px;margin-bottom:9px;flex-wrap:wrap;}
   .ref-wohin-wo div{flex:1;min-width:120px;font-size:11.5px;background:var(--surface-2);border-radius:8px;padding:7px 9px;}
-  .ref-wohin-wo .lbl{font-family:'JetBrains Mono',monospace;font-weight:600;display:block;margin-bottom:2px;}
+  .ref-wohin-wo .lbl{font-family:var(--du-mono);font-weight:600;display:block;margin-bottom:2px;}
   .ref-wohin-wo .akkl .lbl{color:var(--akk);}
   .ref-wohin-wo .datl .lbl{color:var(--dat);}
   .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;}
@@ -261,19 +176,22 @@
   /* UMLAUT TOOLBAR */
   .umlaut-bar{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px;flex-shrink:0;}
   .umlaut-btn{
-    font-family:'JetBrains Mono',monospace;font-weight:600;font-size:13px;
-    background:var(--surface-2);border:1px solid var(--border);color:var(--text);
-    width:30px;height:28px;border-radius:7px;cursor:pointer;
+    font-family:var(--du-mono);font-weight:600;font-size:13px;
+    width:32px;height:30px;padding:0;
   }
-  .umlaut-btn:hover{border-color:var(--text-dim);}
-  .umlaut-btn:active{background:var(--dat-dim);border-color:var(--dat);color:var(--dat);}
 
+  @media (max-width:560px){
+    /* the four toolbar buttons need a full line of their own down here,
+       otherwise they squeeze the title down to a couple of letters */
+    .app-header{flex-wrap:wrap;}
+    .brand{flex:1 1 100%;}
+    .app-header > .d-flex{flex:1 1 100%;justify-content:flex-end;}
+  }
   @media (max-width:480px){
     .app{padding:10px 12px;gap:8px;}
     .brand h1{font-size:17px;}
     .brand .sub{display:none;}
     .filter-label{width:40px;}
-    .card{padding:14px 16px;}
     .stat-num{font-size:16px;}
   }
   @media (max-height:640px){
@@ -282,12 +200,21 @@
   }
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
 </style>
-<link rel="stylesheet" href="../shared/theme.css">
 </head>
 <body>
+<nav class="site-navbar" aria-label="Practice activities">
+  <a class="site-brand" href="../index.html">Deutsch <span>Uben</span></a>
+  <div class="site-links">
+    <a class="site-link" href="verbs.html">German Verbs</a>
+    <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
+    <a class="site-link active" href="prep.html">Preposition Practice</a>
+    <a class="site-link" href="articles.html">Article Practice</a>
+  </div>
+</nav>
+<script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
 <div class="app">
 
-  <div class="topbar">
+  <div class="app-header d-flex justify-content-between align-items-center flex-shrink-0 gap-2">
     <div class="brand">
       <svg class="compass" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.6"/>
@@ -298,132 +225,138 @@
         <div class="sub" id="appSubtitle">Wohin? · Wo? · Warum?</div>
       </div>
     </div>
-    <div class="topbar-actions">
-      <button class="icon-btn ghost" id="langToggle" title="Switch language">EN</button>
-      <button class="icon-btn" id="progressToggle">📊 <span id="progressBtnLabel">Fortschritt</span></button>
-      <button class="icon-btn" id="refToggle">📖 <span id="refBtnLabel">Übersicht</span></button>
-      <button class="icon-btn ghost" id="resetProgress" title="Fortschritt zurücksetzen">↺</button>
+    <div class="d-flex gap-1 flex-shrink-0">
+      <button class="btn btn-sm btn-outline-secondary" id="langToggle" title="Switch language">EN</button>
+      <button class="btn btn-sm btn-outline-secondary" id="progressToggle">📊 <span id="progressBtnLabel">Fortschritt</span></button>
+      <button class="btn btn-sm btn-outline-secondary" id="refToggle">📖 <span id="refBtnLabel">Übersicht</span></button>
+      <button class="btn btn-sm btn-outline-secondary" id="resetProgress" title="Fortschritt zurücksetzen">↺</button>
     </div>
   </div>
 
-  <div class="filters">
-    <div class="filter-row">
-      <div class="filter-label" id="labelCategory">Kategorie</div>
+  <div class="d-flex flex-column gap-1 flex-shrink-0">
+    <div class="d-flex align-items-center gap-2">
+      <div class="filter-label text-uppercase text-muted" id="labelCategory">Kategorie</div>
       <div class="chips" id="catChips"></div>
     </div>
-    <div class="filter-row">
-      <div class="filter-label" id="labelArtikel">Artikel</div>
+    <div class="d-flex align-items-center gap-2">
+      <div class="filter-label text-uppercase text-muted" id="labelArtikel">Artikel</div>
       <div class="chips" id="artikelChips"></div>
     </div>
-    <div class="filter-row">
-      <div class="filter-label" id="labelStatus">Status</div>
+    <div class="d-flex align-items-center gap-2">
+      <div class="filter-label text-uppercase text-muted" id="labelStatus">Status</div>
       <div class="chips" id="statusChips"></div>
     </div>
   </div>
 
-  <div class="stats">
-    <div class="stat"><div class="stat-num" id="statCorrect">0</div><div class="stat-label" id="labelStatCorrect">Richtig</div></div>
-    <div class="stat"><div class="stat-num" id="statTotal">0</div><div class="stat-label" id="labelStatTotal">Versuche</div></div>
-    <div class="stat"><div class="stat-num" id="statAcc">–</div><div class="stat-label" id="labelStatAcc">Genauigkeit</div></div>
-    <div class="stat"><div class="stat-num" id="statStreak">0</div><div class="stat-label" id="labelStatStreak">Serie</div></div>
+  <div class="row row-cols-4 g-0 text-center bg-white border rounded-3 shadow-sm py-2 flex-shrink-0">
+    <div class="col"><div class="stat-num" id="statCorrect">0</div><div class="stat-label" id="labelStatCorrect">Richtig</div></div>
+    <div class="col border-start"><div class="stat-num" id="statTotal">0</div><div class="stat-label" id="labelStatTotal">Versuche</div></div>
+    <div class="col border-start"><div class="stat-num" id="statAcc">–</div><div class="stat-label" id="labelStatAcc">Genauigkeit</div></div>
+    <div class="col border-start"><div class="stat-num" id="statStreak">0</div><div class="stat-label" id="labelStatStreak">Serie</div></div>
   </div>
 
-  <div class="card" id="card"></div>
+  <div class="rounded-4 shadow-sm p-3 p-md-4 d-flex flex-column" id="card"></div>
 
 </div>
 
 <!-- REFERENCE MODAL -->
-<div class="modal-overlay" id="refOverlay">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title" id="modalTitleText">Alle Präpositionen</h2>
-      <div class="modal-header-actions">
-        <label class="meaning-toggle"><input type="checkbox" id="meaningToggle"> <span id="meaningToggleLabel">Bedeutungen</span></label>
-        <button class="modal-close" id="refClose">✕</button>
+<div class="modal fade" id="refModal" tabindex="-1" aria-labelledby="modalTitleText" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalTitleText">Alle Präpositionen</h2>
+        <div class="form-check form-switch d-flex align-items-center gap-2 ms-auto me-2 mb-0">
+          <input class="form-check-input" type="checkbox" role="switch" id="meaningToggle">
+          <label class="form-check-label small fw-semibold text-muted mb-0" for="meaningToggle"><span id="meaningToggleLabel">Bedeutungen</span></label>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-    </div>
-    <div class="modal-body" id="modalBody">
+      <div class="modal-body" id="modalBody">
 
-      <section class="ref-section">
-        <div class="ref-section-head"><span class="dot akk"></span><span id="sectionAkkTitle">Akkusativ</span></div>
-        <div class="ref-note" id="noteAkkText">Immer Akkusativ. Merkhilfe: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.</div>
-        <div class="ref-tags">
-          <span class="ref-tag akk" data-meaning="until, by">bis</span>
-          <span class="ref-tag akk" data-meaning="through, across">durch</span>
-          <span class="ref-tag akk" data-meaning="for">für</span>
-          <span class="ref-tag akk" data-meaning="against, towards">gegen</span>
-          <span class="ref-tag akk" data-meaning="without">ohne</span>
-          <span class="ref-tag akk" data-meaning="around, at (time)">um</span>
-          <span class="ref-tag akk" data-meaning="along (after the noun)" title="steht meist nach dem Nomen">entlang*</span>
-        </div>
-      </section>
+        <section class="ref-section">
+          <div class="ref-section-head"><span class="dot akk"></span><span id="sectionAkkTitle">Akkusativ</span></div>
+          <div class="ref-note" id="noteAkkText">Immer Akkusativ. Merkhilfe: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.</div>
+          <div class="ref-tags">
+            <span class="ref-tag akk badge rounded-pill" data-meaning="until, by">bis</span>
+            <span class="ref-tag akk badge rounded-pill" data-meaning="through, across">durch</span>
+            <span class="ref-tag akk badge rounded-pill" data-meaning="for">für</span>
+            <span class="ref-tag akk badge rounded-pill" data-meaning="against, towards">gegen</span>
+            <span class="ref-tag akk badge rounded-pill" data-meaning="without">ohne</span>
+            <span class="ref-tag akk badge rounded-pill" data-meaning="around, at (time)">um</span>
+            <span class="ref-tag akk badge rounded-pill" data-meaning="along (after the noun)" title="steht meist nach dem Nomen">entlang*</span>
+          </div>
+        </section>
 
-      <section class="ref-section">
-        <div class="ref-section-head"><span class="dot dat"></span><span id="sectionDatTitle">Dativ</span></div>
-        <div class="ref-note" id="noteDatText">Immer Dativ. Merkhilfe: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.</div>
-        <div class="ref-tags">
-          <span class="ref-tag dat" data-meaning="from, as of">ab</span>
-          <span class="ref-tag dat" data-meaning="out of, from">aus</span>
-          <span class="ref-tag dat" data-meaning="except for, besides">außer</span>
-          <span class="ref-tag dat" data-meaning="at, near, with">bei</span>
-          <span class="ref-tag dat" data-meaning="opposite, across from" title="steht oft nach dem Nomen">gegenüber*</span>
-          <span class="ref-tag dat" data-meaning="with, by (means of)">mit</span>
-          <span class="ref-tag dat" data-meaning="after, to (cities/countries)">nach</span>
-          <span class="ref-tag dat" data-meaning="since, for (duration)">seit</span>
-          <span class="ref-tag dat" data-meaning="from, of, by">von</span>
-          <span class="ref-tag dat" data-meaning="to, at">zu</span>
-        </div>
-      </section>
+        <section class="ref-section">
+          <div class="ref-section-head"><span class="dot dat"></span><span id="sectionDatTitle">Dativ</span></div>
+          <div class="ref-note" id="noteDatText">Immer Dativ. Merkhilfe: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.</div>
+          <div class="ref-tags">
+            <span class="ref-tag dat badge rounded-pill" data-meaning="from, as of">ab</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="out of, from">aus</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="except for, besides">außer</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="at, near, with">bei</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="opposite, across from" title="steht oft nach dem Nomen">gegenüber*</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="with, by (means of)">mit</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="after, to (cities/countries)">nach</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="since, for (duration)">seit</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="from, of, by">von</span>
+            <span class="ref-tag dat badge rounded-pill" data-meaning="to, at">zu</span>
+          </div>
+        </section>
 
-      <section class="ref-section">
-        <div class="ref-section-head" id="sectionWechselTitle">Wechselpräpositionen</div>
-        <div class="ref-wohin-wo">
-          <div class="akkl"><span class="lbl" id="wohinLabel">Wohin? → Akkusativ</span><span id="wohinDesc">Bewegung zu einem Ziel</span></div>
-          <div class="datl"><span class="lbl" id="woLabel">Wo? → Dativ</span><span id="woDesc">Feste Position, kein Ziel</span></div>
-        </div>
-        <div class="ref-tags">
-          <span class="ref-tag wechsel" data-meaning="on (vertical), at, by">an</span>
-          <span class="ref-tag wechsel" data-meaning="on top of (horizontal)">auf</span>
-          <span class="ref-tag wechsel" data-meaning="behind">hinter</span>
-          <span class="ref-tag wechsel" data-meaning="in, into, inside">in</span>
-          <span class="ref-tag wechsel" data-meaning="next to, beside">neben</span>
-          <span class="ref-tag wechsel" data-meaning="over, above, across">über</span>
-          <span class="ref-tag wechsel" data-meaning="under, beneath, among">unter</span>
-          <span class="ref-tag wechsel" data-meaning="in front of, before">vor</span>
-          <span class="ref-tag wechsel" data-meaning="between">zwischen</span>
-        </div>
-      </section>
+        <section class="ref-section">
+          <div class="ref-section-head" id="sectionWechselTitle">Wechselpräpositionen</div>
+          <div class="ref-wohin-wo">
+            <div class="akkl"><span class="lbl" id="wohinLabel">Wohin? → Akkusativ</span><span id="wohinDesc">Bewegung zu einem Ziel</span></div>
+            <div class="datl"><span class="lbl" id="woLabel">Wo? → Dativ</span><span id="woDesc">Feste Position, kein Ziel</span></div>
+          </div>
+          <div class="ref-tags">
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="on (vertical), at, by">an</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="on top of (horizontal)">auf</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="behind">hinter</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="in, into, inside">in</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="next to, beside">neben</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="over, above, across">über</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="under, beneath, among">unter</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="in front of, before">vor</span>
+            <span class="ref-tag wechsel badge rounded-pill" data-meaning="between">zwischen</span>
+          </div>
+        </section>
 
-      <section class="ref-section">
-        <div class="ref-section-head"><span class="dot gen"></span><span id="sectionGenTitle">Genitiv</span></div>
-        <div class="ref-note" id="noteGenText">Formell Genitiv — in der Umgangssprache oft mit Dativ.</div>
-        <div class="ref-tags">
-          <span class="ref-tag gen" data-meaning="outside of">außerhalb</span>
-          <span class="ref-tag gen" data-meaning="inside of, within">innerhalb</span>
-          <span class="ref-tag gen" data-meaning="above">oberhalb</span>
-          <span class="ref-tag gen" data-meaning="below">unterhalb</span>
-          <span class="ref-tag gen" data-meaning="instead of">statt / anstatt</span>
-          <span class="ref-tag gen" data-meaning="despite, in spite of">trotz</span>
-          <span class="ref-tag gen" data-meaning="during">während</span>
-          <span class="ref-tag gen" data-meaning="because of">wegen</span>
-        </div>
-      </section>
+        <section class="ref-section">
+          <div class="ref-section-head"><span class="dot gen"></span><span id="sectionGenTitle">Genitiv</span></div>
+          <div class="ref-note" id="noteGenText">Formell Genitiv — in der Umgangssprache oft mit Dativ.</div>
+          <div class="ref-tags">
+            <span class="ref-tag gen badge rounded-pill" data-meaning="outside of">außerhalb</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="inside of, within">innerhalb</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="above">oberhalb</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="below">unterhalb</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="instead of">statt / anstatt</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="despite, in spite of">trotz</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="during">während</span>
+            <span class="ref-tag gen badge rounded-pill" data-meaning="because of">wegen</span>
+          </div>
+        </section>
 
+      </div>
     </div>
   </div>
 </div>
 
 <!-- PROGRESS MODAL -->
-<div class="modal-overlay" id="progressOverlay">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title" id="progressTitleText">Fortschritt</h2>
-      <button class="modal-close" id="progressClose">✕</button>
+<div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressTitleText" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="progressTitleText">Fortschritt</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="progressBody"></div>
     </div>
-    <div class="modal-body" id="progressBody"></div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>function loadJson(path){var request=new XMLHttpRequest();request.open("GET",path,false);request.send(null);if(request.status!==200 && request.status!==0){throw new Error("Could not load " + path);}return JSON.parse(request.responseText);}</script><script>
 /* ============================================================
    DATA
@@ -583,8 +516,9 @@ function renderCatChips(){
   const el = document.getElementById("catChips");
   el.innerHTML = "";
   CATS.forEach(c=>{
-    const chip = document.createElement("div");
-    chip.className = "chip" + (store.activeCat === c.id ? " active" : "");
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "btn btn-sm rounded-pill chip" + (store.activeCat === c.id ? " active" : "");
     chip.textContent = t(c.key);
     chip.onclick = ()=>{
       store.activeCat = c.id;
@@ -601,8 +535,9 @@ function renderArtikelChips(){
   const el = document.getElementById("artikelChips");
   el.innerHTML = "";
   ARTIKELTYPEN.forEach(m=>{
-    const chip = document.createElement("div");
-    chip.className = "chip" + (store.activeArtikel === m.id ? " active" : "");
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "btn btn-sm rounded-pill chip" + (store.activeArtikel === m.id ? " active" : "");
     chip.textContent = t(m.key);
     chip.onclick = ()=>{
       store.activeArtikel = m.id;
@@ -619,8 +554,9 @@ function renderStatusChips(){
   const el = document.getElementById("statusChips");
   el.innerHTML = "";
   STATUSES.forEach(s=>{
-    const chip = document.createElement("div");
-    chip.className = "chip" + (store.activeStatus === s.id ? " active" : "");
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "btn btn-sm rounded-pill chip" + (store.activeStatus === s.id ? " active" : "");
     chip.textContent = t(s.key);
     chip.onclick = ()=>{
       store.activeStatus = s.id;
@@ -638,16 +574,10 @@ function renderStatusChips(){
    REFERENCE MODAL
    ============================================================ */
 const refToggle = document.getElementById("refToggle");
-const refOverlay = document.getElementById("refOverlay");
-const refClose = document.getElementById("refClose");
+const refModal = new bootstrap.Modal(document.getElementById("refModal"));
 const meaningToggle = document.getElementById("meaningToggle");
 const modalBody = document.getElementById("modalBody");
-function openRef(){ refOverlay.classList.add("show"); }
-function closeRef(){ refOverlay.classList.remove("show"); }
-refToggle.onclick = openRef;
-refClose.onclick = closeRef;
-refOverlay.addEventListener("click", (e)=>{ if(e.target === refOverlay) closeRef(); });
-document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeRef(); });
+refToggle.onclick = ()=> refModal.show();
 meaningToggle.addEventListener("change", ()=>{
   modalBody.classList.toggle("show-meanings", meaningToggle.checked);
 });
@@ -656,15 +586,9 @@ meaningToggle.addEventListener("change", ()=>{
    PROGRESS MODAL
    ============================================================ */
 const progressToggle = document.getElementById("progressToggle");
-const progressOverlay = document.getElementById("progressOverlay");
-const progressClose = document.getElementById("progressClose");
+const progressModal = new bootstrap.Modal(document.getElementById("progressModal"));
 const progressBody = document.getElementById("progressBody");
-function openProgress(){ renderProgress(); progressOverlay.classList.add("show"); }
-function closeProgress(){ progressOverlay.classList.remove("show"); }
-progressToggle.onclick = openProgress;
-progressClose.onclick = closeProgress;
-progressOverlay.addEventListener("click", (e)=>{ if(e.target === progressOverlay) closeProgress(); });
-document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeProgress(); });
+progressToggle.onclick = ()=>{ renderProgress(); progressModal.show(); };
 
 function catStats(catId){
   const items = catId ? DATA.filter(d=>d.category===catId) : DATA;
@@ -680,13 +604,12 @@ function catStats(catId){
 
 function renderProgress(){
   const overall = catStats(null);
-  const pct = overall.total ? Math.round(overall.correct/overall.total*100) : 0;
   let html = `
-    <div class="prog-summary">
-      <div class="stat"><div class="stat-num">${overall.total}</div><div class="stat-label">${t("progTotal")}</div></div>
-      <div class="stat"><div class="stat-num" style="color:var(--success)">${overall.correct}</div><div class="stat-label">${t("progCorrect")}</div></div>
-      <div class="stat"><div class="stat-num" style="color:var(--error)">${overall.wrong}</div><div class="stat-label">${t("progWrong")}</div></div>
-      <div class="stat"><div class="stat-num">${overall.unsolved}</div><div class="stat-label">${t("progUnsolved")}</div></div>
+    <div class="row row-cols-4 g-0 text-center bg-light rounded-3 py-2 mb-3">
+      <div class="col"><div class="stat-num">${overall.total}</div><div class="stat-label">${t("progTotal")}</div></div>
+      <div class="col"><div class="stat-num" style="color:var(--success)">${overall.correct}</div><div class="stat-label">${t("progCorrect")}</div></div>
+      <div class="col"><div class="stat-num" style="color:var(--error)">${overall.wrong}</div><div class="stat-label">${t("progWrong")}</div></div>
+      <div class="col"><div class="stat-num">${overall.unsolved}</div><div class="stat-label">${t("progUnsolved")}</div></div>
     </div>
   `;
   CATS.filter(c=>c.id!=="all").forEach(c=>{
@@ -695,13 +618,13 @@ function renderProgress(){
     const wPct = s.total ? (s.wrong/s.total*100) : 0;
     html += `
       <div class="prog-row" data-cat="${c.id}">
-        <div class="prog-row-head">
+        <div class="d-flex justify-content-between align-items-baseline mb-2">
           <span class="prog-name">${t(c.key)}</span>
           <span class="prog-count">${s.correct + s.wrong}/${s.total}</span>
         </div>
-        <div class="prog-bar-track">
-          <div class="prog-bar-correct" style="width:${cPct}%"></div>
-          <div class="prog-bar-wrong" style="width:${wPct}%"></div>
+        <div class="progress" style="height:8px;">
+          <div class="progress-bar" style="width:${cPct}%;background:var(--success);"></div>
+          <div class="progress-bar" style="width:${wPct}%;background:var(--error);"></div>
         </div>
         <div class="prog-detail">
           <span class="c">${s.correct} ${t("progCorrect")}</span>
@@ -720,7 +643,7 @@ function renderProgress(){
       buildPool();
       renderCard();
       updateStats();
-      closeProgress();
+      progressModal.hide();
     });
   });
 }
@@ -765,26 +688,26 @@ function renderCard(){
   const artLabel = current.mode === "ohne" ? t("artOhne") : t(ARTIKELTYPEN.find(a=>a.id===current.articleType).key);
   const artClass = current.mode === "ohne" ? "ohne" : current.articleType;
   card.innerHTML = `
-    <div class="card-top">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
       <div class="tag-row">
         <span class="art-tag ${artClass}">${artLabel}</span>
         <span class="cat-tag">${catLabel}</span>
       </div>
-      <div class="card-top-right">
+      <div class="d-flex align-items-center gap-2">
         <span class="remaining" id="remainingLabel">${t("remaining")(pool.length)}</span>
-        <button class="known-btn" id="knownBtn">${t("knownBtn")}</button>
+        <button class="btn btn-sm btn-link text-decoration-none text-muted" id="knownBtn">${t("knownBtn")}</button>
       </div>
     </div>
     <div class="sentence" id="sentenceLine"></div>
     <div class="translation">${current.tr}</div>
     <div class="umlaut-bar" id="umlautBar">
-      ${["ä","ö","ü","ß","Ä","Ö","Ü"].map(c=>`<button type="button" class="umlaut-btn" data-ch="${c}">${c}</button>`).join("")}
+      ${["ä","ö","ü","ß","Ä","Ö","Ü"].map(c=>`<button type="button" class="btn btn-sm btn-outline-secondary umlaut-btn" data-ch="${c}">${c}</button>`).join("")}
     </div>
     <div class="feedback" id="feedback"></div>
-    <div class="card-fill"></div>
-    <div class="actions">
-      <button class="btn btn-secondary" id="skipBtn">${t("skipBtn")}</button>
-      <button class="btn btn-primary" id="checkBtn">${t("checkBtn")}</button>
+
+    <div class="d-flex gap-2 mt-3">
+      <button class="btn btn-outline-secondary flex-fill" id="skipBtn">${t("skipBtn")}</button>
+      <button class="btn btn-dark flex-fill" id="checkBtn">${t("checkBtn")}</button>
     </div>
   `;
 
@@ -887,7 +810,7 @@ function checkAnswer(inputs){
   fb.innerHTML = `
     <div class="feedback-head">
       <span>${allCorrect ? t("correctLabel") : t("incorrectLabel")}</span>
-      <span class="case-badge ${current.case}">${current.case}</span>
+      <span class="case-badge badge rounded-pill ${current.case}">${current.case}</span>
     </div>
     ${allCorrect ? "" : `<div class="answer-line">${t("correctPrefix")} <b>${fullSentence}</b></div>`}
     ${explanation ? `<div class="explanation">${explanation}</div>` : ""}
@@ -978,7 +901,7 @@ document.getElementById("langToggle").onclick = ()=>{
   renderStatusChips();
   renderCard();
   updateStats();
-  if(progressOverlay.classList.contains("show")) renderProgress();
+  if(document.getElementById("progressModal").classList.contains("show")) renderProgress();
 };
 
 /* ============================================================

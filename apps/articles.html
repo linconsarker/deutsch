@@ -4,281 +4,334 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>German Articles Practice</title>
-  <link rel="stylesheet" href="../shared/theme.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../shared/theme.css">
   <style>
     :root {
-      --article-der: #3f6f9f;
-      --article-die: #b85b67;
-      --article-das: #bd843e;
+      --ink: var(--du-ink);
+      --ink-soft: var(--du-ink-soft);
+      --muted: var(--du-muted);
+      --line: var(--du-line);
+      --card: var(--du-surface);
+      --accent: var(--du-action);
+      --accent-dark: var(--du-action-dark);
+      --success: var(--du-success);
+      --article-der: var(--du-der);
+      --article-die: var(--du-die);
+      --article-das: var(--du-das);
+      --shadow: var(--du-shadow);
     }
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
 
     body {
-      height: 100%;
-      min-height: 100vh;
-      min-height: 100dvh;
+      margin: 0;
+      height: 100dvh;
       overflow: hidden;
-      padding: 24px 16px;
-    }
-
-    .article-app {
-      width: min(100%, 720px);
-      height: 100%;
-      margin: 0 auto;
       display: flex;
       flex-direction: column;
     }
 
-    .article-header {
+    /* ---- page shell: everything fits, nothing scrolls ---- */
+    main {
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: clamp(10px, 2.2vh, 20px) 16px clamp(12px, 2.4vh, 22px);
       display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(8px, 1.6vh, 14px);
+      overflow: hidden;
     }
 
-    .eyebrow {
-      margin: 0 0 5px;
-      color: var(--hub-accent) !important;
-      font-size: .76rem;
+    /* ---- top strip ---- */
+    .topbar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: clamp(1rem, 2.6vh, 1.3rem);
       font-weight: 700;
-      letter-spacing: .12em !important;
+      letter-spacing: -.01em;
+    }
+
+    .page-title small {
+      display: block;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 400;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
-    h1 { margin: 0; font-size: clamp(1.6rem, 5vw, 2.35rem); }
+    .topbar-right { display: flex; align-items: center; gap: 10px; }
 
     .score {
-      flex: 0 0 auto;
-      color: var(--hub-muted) !important;
-      font-size: .84rem;
-      text-align: right;
-    }
-
-    .score strong {
-      display: block;
-      color: var(--hub-ink) !important;
-      font-size: 1.35rem;
-    }
-
-    .tips-button { padding: 9px 12px; }
-
-    .tips-overlay {
-      position: fixed;
-      z-index: 5;
-      inset: 0;
-      display: none;
-      overflow: auto;
-      padding: 24px 16px;
-      background: rgba(25, 50, 74, .46);
-    }
-
-    .tips-overlay.open { display: block; }
-
-    .tips-panel {
-      width: min(100%, 760px);
-      margin: 0 auto;
-      padding: 22px;
-      border: 1px solid var(--hub-line);
-      border-radius: var(--hub-radius);
-      background: var(--hub-surface);
-      box-shadow: 0 18px 50px rgba(25, 50, 74, .2);
-    }
-
-    .tips-heading {
       display: flex;
-      align-items: start;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 16px;
+      align-items: baseline;
+      gap: 6px;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--muted);
+      font-size: .72rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
     }
 
-    .tips-heading h2 { margin: 0; font-size: 1.45rem; }
-    .tips-close { padding: 8px 11px; }
+    .score strong { color: var(--ink); font-size: 1rem; letter-spacing: 0; }
 
-    .tip-item {
-      padding: 14px 0;
-      border-top: 1px solid var(--hub-line);
+    .ghost-btn {
+      height: 32px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      color: var(--ink-soft);
+      font: 600 .78rem inherit;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: border-color .15s, color .15s;
     }
 
-    .tip-item h3 { margin: 0 0 5px; font-size: 1rem; }
-    .tip-item p { margin: 0 0 9px; color: var(--hub-muted) !important; }
-    .tip-examples { display: flex; flex-wrap: wrap; gap: 7px; }
-    .tip-example { padding: 6px 9px; border-radius: 8px; background: #f1e6d8; font-size: .86rem; }
+    .ghost-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
 
+    /* ---- filters ---- */
     .filters {
-      display: grid;
-      grid-template-columns: 1fr minmax(180px, .8fr);
-      gap: 12px;
-      margin-bottom: 14px;
-      padding: 14px;
-      border: 1px solid var(--hub-line);
-      border-radius: var(--hub-radius);
-      background: rgba(255, 253, 248, .72);
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .filter-label {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--hub-muted) !important;
-      font-size: .76rem;
+      color: var(--muted);
+      font-size: .68rem;
       font-weight: 700;
+      letter-spacing: .1em;
       text-transform: uppercase;
     }
 
-    .levels { display: flex; flex-wrap: wrap; gap: 7px; }
+    .levels { display: flex; gap: 6px; }
 
     .level-button {
-      min-width: 62px;
-      padding: 9px 10px;
+      height: 30px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      color: var(--muted);
+      font: 600 .74rem inherit;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all .15s;
     }
 
-    .level-button.active {
-      background: var(--hub-ink) !important;
-      border-color: var(--hub-ink) !important;
-      color: #fff !important;
+    .level-button:hover { border-color: var(--ink-soft); color: var(--ink); }
+    .level-button.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    .category-select {
+      flex: 1 1 180px;
+      min-width: 150px;
+      height: 30px;
+      padding: 0 30px 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background-color: var(--card);
+      color: var(--ink);
+      font: 600 .74rem inherit;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2361798f'><path d='M5.5 7.5l4.5 5 4.5-5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 13px;
     }
 
-    .category-select { width: 100%; padding: 10px 11px; }
+    .category-select:focus { outline: none; border-color: var(--accent); }
 
-    @media (max-width: 520px) {
-      .filters { grid-template-columns: 1fr; }
-      body { padding: 12px 10px; }
-      .article-header { margin-bottom: 10px; }
-      .filters { gap: 8px; margin-bottom: 8px; padding: 10px; }
-      .filter-label { margin-bottom: 5px; }
+    /* ---- the card ---- */
+    .card-area {
+      flex: 0 1 auto;
+      min-height: 0;
+      margin-top: clamp(6px, 2vh, 18px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .practice-card {
-      display: grid;
-      flex: 1;
-      min-height: 0;
-      padding: clamp(18px, 4vw, 40px) 20px 20px;
-      place-items: center;
-      border: 1px solid var(--hub-line);
-      border-radius: var(--hub-radius);
-      background: var(--hub-surface);
-      box-shadow: 0 12px 30px rgba(25, 50, 74, .08);
+      flex: 0 1 auto;
+      width: 100%;
+      max-width: 480px;
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(14px, 2.6vh, 26px) clamp(16px, 3vw, 26px);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--card);
+      box-shadow: var(--shadow);
       text-align: center;
     }
 
-    .word-label {
-      margin-bottom: 10px;
-      color: var(--hub-muted) !important;
-      font-size: .86rem;
+    .word-zone {
+      flex: 1 1 auto;
+      min-height: clamp(84px, 15vh, 132px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(2px, .8vh, 8px);
+      overflow: hidden;
     }
 
     .word {
-      max-width: 100%;
-      overflow-wrap: anywhere;
-      color: var(--hub-ink) !important;
-      font-size: clamp(2.35rem, 10vw, 4.8rem);
+      font-size: clamp(1.6rem, min(8vw, 6.4vh), 3.4rem);
       font-weight: 700;
-      line-height: 1.05;
+      line-height: 1.08;
+      overflow-wrap: anywhere;
     }
 
-    .meaning { margin-top: 14px; color: var(--hub-muted) !important; font-size: 1rem; }
+    .meaning {
+      color: var(--muted);
+      font-size: clamp(.82rem, 2vh, 1rem);
+      line-height: 1.3;
+    }
 
     .feedback {
-      min-height: 28px;
-      margin-top: 18px;
-      color: var(--hub-muted) !important;
+      min-height: 1.4em;
+      font-size: clamp(.78rem, 1.9vh, .95rem);
       font-weight: 700;
     }
 
-    .feedback.correct { color: var(--hub-success) !important; }
-    .feedback.wrong { color: var(--hub-accent-dark) !important; }
+    .feedback.correct { color: var(--success); }
+    .feedback.wrong { color: var(--accent-dark); }
 
-    .article-options {
+    .options {
+      flex: 0 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      width: min(100%, 520px);
-      margin: 22px auto 0;
+      gap: 8px;
+      width: 100%;
+      margin-top: clamp(10px, 2vh, 18px);
     }
 
     .article-option {
-      min-height: 66px;
-      color: #fff !important;
-      border: 0 !important;
-      font-size: 1.15rem !important;
+      height: clamp(42px, 7.2vh, 58px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 10px;
+      color: #fff;
+      font: 700 clamp(.95rem, 2.4vh, 1.15rem) inherit;
+      cursor: pointer;
+      transition: filter .15s, transform .1s;
     }
 
-    .article-option[data-article="der"] { background: var(--article-der) !important; }
-    .article-option[data-article="die"] { background: var(--article-die) !important; }
-    .article-option[data-article="das"] { background: var(--article-das) !important; }
-    .article-option:hover { filter: brightness(1.08); }
-    .article-option:disabled { color: #fff !important; filter: grayscale(.25); }
+    .article-option[data-article="der"] { background: var(--article-der); }
+    .article-option[data-article="die"] { background: var(--article-die); }
+    .article-option[data-article="das"] { background: var(--article-das); }
+    .article-option:hover:not(:disabled) { filter: brightness(1.08); }
+    .article-option:active:not(:disabled) { transform: translateY(1px); }
+    .article-option:disabled { opacity: .5; cursor: default; }
 
-    .actions {
+    .card-actions {
+      flex: 0 0 auto;
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-top: 18px;
+      gap: 8px;
+      margin-top: clamp(8px, 1.6vh, 14px);
     }
 
-    .secondary-action { padding: 11px 16px; }
+    .tip-example { background: #f1e6d8; }
+    .tip-item h3 { color: var(--ink); }
 
-    @media (max-width: 520px) {
-      body { padding: 12px 10px; }
-      .article-header { align-items: start; }
-      .article-header h1 { font-size: 1.55rem; }
-      .article-options { gap: 7px; }
+    @media (max-width: 480px) {
+      .site-navbar { gap: 10px; }
+      .topbar { flex-wrap: wrap; }
+      .category-select { flex-basis: 100%; }
     }
   </style>
 </head>
 <body>
-  <main class="article-app">
-    <header class="article-header">
-      <div>
-        <p class="eyebrow">Nomen</p>
-        <h1>Choose the article</h1>
-      </div>
-      <div>
-        <div class="score"><strong id="score">0 / 0</strong>correct</div>
-        <button class="tips-button" id="tipsButton" type="button">Tips &amp; examples</button>
-      </div>
-    </header>
+  <nav class="site-navbar" aria-label="Practice activities">
+    <a class="site-brand" href="../index.html">Deutsch <span>Uben</span></a>
+    <div class="site-links">
+      <a class="site-link" href="verbs.html">German Verbs</a>
+      <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
+      <a class="site-link" href="prep.html">Preposition Practice</a>
+      <a class="site-link active" href="articles.html">Article Practice</a>
+    </div>
+  </nav>
+  <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
 
-    <section class="filters" aria-label="Article practice filters">
-      <div>
-        <span class="filter-label">Level</span>
-        <div class="levels" id="levels"></div>
+  <main>
+    <div class="topbar">
+      <h1 class="page-title">Der, die oder das?<small>Article practice</small></h1>
+      <div class="topbar-right">
+        <span class="score"><strong id="score">0 / 0</strong>correct</span>
+        <button class="ghost-btn" id="tipsButton" type="button">Tips</button>
       </div>
-      <label>
-        <span class="filter-label">Category</span>
-        <select class="category-select" id="category"></select>
-      </label>
-    </section>
-
-    <div class="tips-overlay" id="tipsOverlay" role="dialog" aria-modal="true" aria-labelledby="tipsTitle">
-      <section class="tips-panel">
-        <div class="tips-heading">
-          <h2 id="tipsTitle">Remembering German articles</h2>
-          <button class="tips-close" id="tipsClose" type="button" aria-label="Close tips">Close</button>
-        </div>
-        <div id="tipsList"></div>
-      </section>
     </div>
 
-    <section class="practice-card" aria-live="polite">
-      <div>
-        <div class="word-label">Which article belongs to this word?</div>
-        <div class="word" id="word">Loading...</div>
-        <div class="meaning" id="meaning"></div>
-        <div class="feedback" id="feedback"></div>
-        <div class="article-options" id="options">
+    <div class="filters" aria-label="Article practice filters">
+      <span class="filter-label">Level</span>
+      <div class="levels" id="levels"></div>
+      <span class="filter-label">Category</span>
+      <select class="category-select" id="category" aria-label="Category"></select>
+    </div>
+
+    <div class="card-area">
+      <section class="practice-card" aria-live="polite">
+        <div class="word-zone">
+          <div class="word" id="word">Loading...</div>
+          <div class="meaning" id="meaning"></div>
+          <div class="feedback" id="feedback"></div>
+        </div>
+        <div class="options" id="options">
           <button class="article-option" data-article="der" type="button">der</button>
           <button class="article-option" data-article="die" type="button">die</button>
           <button class="article-option" data-article="das" type="button">das</button>
         </div>
-        <div class="actions">
-          <button class="secondary-action" id="next" type="button">Next word</button>
-          <button class="secondary-action" id="shuffle" type="button">Shuffle</button>
+        <div class="card-actions">
+          <button class="ghost-btn" id="next" type="button">Next word</button>
+          <button class="ghost-btn" id="shuffle" type="button">Shuffle</button>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
+  <div class="modal fade" id="tipsModal" tabindex="-1" aria-labelledby="tipsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="tipsTitle">Remembering German articles</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="tipsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function loadJson(path) {
       const request = new XMLHttpRequest();
@@ -311,7 +364,7 @@
     let activeCategory = "ALL";
     const levelsElement = document.getElementById("levels");
     const categoryElement = document.getElementById("category");
-    const tipsOverlay = document.getElementById("tipsOverlay");
+    const tipsModal = new bootstrap.Modal(document.getElementById("tipsModal"));
     const wordElement = document.getElementById("word");
     const meaningElement = document.getElementById("meaning");
     const feedbackElement = document.getElementById("feedback");
@@ -343,8 +396,8 @@
 
     function renderTips() {
       document.getElementById("tipsList").innerHTML = articleTips.map((item) =>
-        '<article class="tip-item"><h3>'+item.title+'</h3><p>'+item.tip+'</p><div class="tip-examples">'+
-        item.examples.map((example) => '<span class="tip-example">'+example+'</span>').join("")+"</div></article>"
+        '<article class="tip-item border-top pt-3 pb-3"><h3 class="h6">'+item.title+'</h3><p class="text-muted small">'+item.tip+'</p><div class="d-flex flex-wrap gap-2">'+
+        item.examples.map((example) => '<span class="tip-example badge rounded-pill text-dark fw-normal px-3 py-2">'+example+'</span>').join("")+"</div></article>"
       ).join("");
     }
 
@@ -363,7 +416,7 @@
       const card = deck[index];
       answered = false;
       wordElement.textContent = card.stem;
-      meaningElement.textContent = "";
+      meaningElement.textContent = card.en;
       feedbackElement.textContent = "";
       feedbackElement.className = "feedback";
       optionElements.forEach((button) => { button.disabled = false; });
@@ -428,11 +481,7 @@
     optionElements.forEach((button) => button.addEventListener("click", () => answer(button.dataset.article)));
     document.getElementById("next").addEventListener("click", nextWord);
     document.getElementById("shuffle").addEventListener("click", reshuffle);
-    document.getElementById("tipsButton").addEventListener("click", () => tipsOverlay.classList.add("open"));
-    document.getElementById("tipsClose").addEventListener("click", () => tipsOverlay.classList.remove("open"));
-    tipsOverlay.addEventListener("click", (event) => {
-      if (event.target === tipsOverlay) tipsOverlay.classList.remove("open");
-    });
+    document.getElementById("tipsButton").addEventListener("click", () => tipsModal.show());
     categoryElement.addEventListener("change", () => {
       activeCategory = categoryElement.value;
       reshuffle();

@@ -5,97 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#19324a">
   <title>Deutsch Uben | German Practice Hub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="shared/theme.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="shared/auth.js"></script>
   <style>
     :root {
-      --ink: #19324a;
-      --muted: #a8bac8;
-      --nav: #19324a;
-      --nav-deep: #10263a;
-      --line: rgba(255, 255, 255, .14);
-      --accent: #e28a58;
-      --bg: #edf1f0;
+      --ink: var(--du-ink);
+      --nav: var(--du-ink);
+      --accent: var(--du-accent);
+      --bg: var(--du-paper);
     }
 
-    * { box-sizing: border-box; }
-
-    html, body { width: 100%; height: 100%; margin: 0; }
+    html, body { height: 100%; }
 
     body {
       background: var(--bg);
-      color: var(--ink);
-      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
       overflow-x: hidden;
     }
 
-    #shell { width: 100%; min-width: 0; height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
+    #shell { height: 100vh; height: 100dvh; display: flex; flex-direction: column; }
 
-    #navbar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px max(16px, calc((100vw - 1180px) / 2));
-      background: var(--nav);
-      box-shadow: 0 5px 18px rgba(16, 38, 58, .16);
-      flex-wrap: wrap;
-    }
+    .navbar-hub { background: var(--nav) !important; box-shadow: 0 5px 18px rgba(16, 38, 58, .16); }
 
-    .brand {
-      flex: 0 0 auto;
-      margin-right: 12px;
-      color: #fffaf2;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: .02em;
-      white-space: nowrap;
-    }
-
-    .brand span { color: var(--accent); }
+    .navbar-brand { color: #fffaf2 !important; font-weight: 700; letter-spacing: .02em; }
+    .navbar-brand span { color: var(--accent); }
 
     .tab-btn {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      min-height: 42px;
-      padding: 9px 14px;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font: inherit;
-      font-size: .9rem;
+      color: rgba(255, 250, 242, .68) !important;
       font-weight: 700;
-      white-space: nowrap;
-      transition: background .18s ease, color .18s ease, border-color .18s ease;
+      border-radius: .5rem;
     }
 
-    .tab-btn:hover { background: rgba(255, 255, 255, .08); color: #fff; }
-    .tab-btn.active { background: #fffaf2; border-color: #fffaf2; color: var(--ink); }
+    .tab-btn:hover { color: #fff !important; background: rgba(255, 255, 255, .08); }
+    .tab-btn.active { background: #fffaf2 !important; color: var(--ink) !important; }
 
-    .account-area { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-    .account-email { max-width: 190px; overflow: hidden; color: var(--muted); font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
-    .account-btn { min-height: 36px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 9px; background: transparent; color: #fffaf2; cursor: pointer; font: inherit; font-size: .78rem; font-weight: 700; }
-    .account-btn:hover { background: rgba(255, 255, 255, .1); }
-
-    .auth-overlay { position: fixed; z-index: 10; inset: 0; display: none; place-items: center; padding: 16px; background: rgba(16, 38, 58, .58); }
-    .auth-overlay.open { display: grid; }
-    .auth-panel { width: min(100%, 390px); padding: 24px; border-radius: 14px; background: #fffaf2; box-shadow: 0 20px 60px rgba(16, 38, 58, .3); }
-    .auth-panel h2 { margin: 0 0 6px; color: var(--ink); font-size: 1.35rem; }
-    .auth-panel p { margin: 0 0 16px; color: #60758a; font-size: .88rem; }
-    .auth-panel label { display: block; margin: 10px 0 5px; color: var(--ink); font-size: .78rem; font-weight: 700; }
-    .auth-panel input { width: 100%; padding: 11px; border: 1px solid #d9e1e7; border-radius: 9px; font: inherit; }
-    .auth-actions { display: flex; gap: 8px; margin-top: 16px; }
-    .auth-actions button { flex: 1; padding: 10px; border: 0; border-radius: 9px; cursor: pointer; font: inherit; font-weight: 700; }
-    #authSubmit { background: var(--ink); color: #fff; }
-    #authCancel { background: #e7edf0; color: var(--ink); }
-    .auth-switch { margin-top: 12px !important; text-align: center; cursor: pointer; color: var(--accent) !important; }
-    .auth-status { min-height: 20px; margin-top: 10px !important; color: #8f4327 !important; }
-
-    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: 0 0 auto; }
     .tab-btn[data-tab="vocab"] .dot { background: #75a68c; }
     .tab-btn[data-tab="prep"] .dot { background: #80a8c6; }
+
+    .account-email {
+      max-width: 190px;
+      overflow: hidden;
+      color: rgba(255, 250, 242, .72);
+      font-size: .78rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .account-btn {
+      --bs-btn-color: #fffaf2;
+      --bs-btn-border-color: rgba(255, 255, 255, .3);
+      --bs-btn-hover-bg: rgba(255, 255, 255, .1);
+      --bs-btn-hover-color: #fffaf2;
+      --bs-btn-hover-border-color: rgba(255, 255, 255, .4);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .navbar-toggler {
+      --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 250, 242, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2.5' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      border-color: rgba(255, 250, 242, .45) !important;
+      padding: .4rem .6rem;
+    }
+
+    .navbar-toggler:focus { box-shadow: 0 0 0 .2rem rgba(226, 138, 88, .4); }
 
     #frames { position: relative; flex: 1; min-width: 0; min-height: 0; }
 
@@ -113,50 +90,72 @@
 
     .loading-msg {
       display: grid;
-      min-height: 0;
+      height: 100%;
       place-items: center;
-      color: var(--muted);
+      color: var(--ink);
     }
 
-    @media (max-width: 640px) {
-      #navbar { align-items: stretch; padding: 9px 10px; }
-      .brand { display: none; }
-      .tab-btn { min-width: 0; flex: 1 1 calc(50% - 4px); justify-content: center; padding: 8px 7px; font-size: .78rem; white-space: normal; }
-      .tab-label { min-width: 0; text-align: center; }
-      iframe { min-height: 0; }
-    }
+    #authModal .modal-title { color: var(--ink); }
+    #authSwitch { cursor: pointer; }
   </style>
 </head>
 <body>
   <main id="shell">
-    <nav id="navbar" aria-label="Practice activities">
-      <div class="brand">Deutsch <span>Uben</span></div>
-      <button class="tab-btn active" data-tab="verbs" type="button"><span class="dot"></span><span class="tab-label">German Verbs</span></button>
-      <button class="tab-btn" data-tab="vocab" type="button"><span class="dot"></span><span class="tab-label">Vocabulary Flashcards</span></button>
-      <button class="tab-btn" data-tab="prep" type="button"><span class="dot"></span><span class="tab-label">Preposition Practice</span></button>
-      <button class="tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Practice</span></button>
-      <div class="account-area">
-        <span class="account-email" id="accountEmail"></span>
-        <button class="account-btn" id="accountButton" type="button">Sign in</button>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-hub" aria-label="Practice activities">
+      <div class="container-fluid">
+        <span class="navbar-brand">Deutsch <span>Uben</span></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navContent">
+          <div class="navbar-nav flex-row flex-wrap gap-2 my-2 my-lg-0">
+            <button class="btn tab-btn active" data-tab="verbs" type="button"><span class="dot"></span><span class="tab-label">German Verbs</span></button>
+            <button class="btn tab-btn" data-tab="vocab" type="button"><span class="dot"></span><span class="tab-label">Vocabulary Flashcards</span></button>
+            <button class="btn tab-btn" data-tab="prep" type="button"><span class="dot"></span><span class="tab-label">Preposition Practice</span></button>
+            <button class="btn tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Practice</span></button>
+          </div>
+          <div class="d-flex align-items-center gap-2 ms-lg-auto mt-2 mt-lg-0">
+            <span class="account-email" id="accountEmail"></span>
+            <button class="btn btn-outline-light account-btn" id="accountButton" type="button">Sign in</button>
+          </div>
+        </div>
       </div>
     </nav>
     <section id="frames" aria-live="polite">
       <div class="loading-msg" id="loadingMsg">Loading practice...</div>
     </section>
   </main>
-  <div class="auth-overlay" id="authOverlay">
-    <form class="auth-panel" id="authForm">
-      <h2 id="authTitle">Sign in</h2>
-      <p id="authDescription">Use your verified email to keep your learning progress separate.</p>
-      <label for="authEmail">Email address</label>
-      <input id="authEmail" type="email" autocomplete="email" required>
-      <label for="authPassword">Password</label>
-      <input id="authPassword" type="password" minlength="6" autocomplete="current-password" required>
-      <p class="auth-status" id="authStatus"></p>
-      <div class="auth-actions"><button id="authCancel" type="button">Cancel</button><button id="authSubmit" type="submit">Sign in</button></div>
-      <p class="auth-switch" id="authSwitch">Create an account</p>
-    </form>
+
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="authForm">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="authTitle">Sign in</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-muted small" id="authDescription">Use your verified email to keep your learning progress separate.</p>
+            <div class="mb-3">
+              <label for="authEmail" class="form-label small fw-bold">Email address</label>
+              <input id="authEmail" type="email" class="form-control" autocomplete="email" required>
+            </div>
+            <div class="mb-2">
+              <label for="authPassword" class="form-label small fw-bold">Password</label>
+              <input id="authPassword" type="password" class="form-control" minlength="6" autocomplete="current-password" required>
+            </div>
+            <p class="small text-danger mb-0" id="authStatus"></p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <span class="link-primary small" id="authSwitch">Create an account</span>
+            <button type="submit" class="btn btn-primary" id="authSubmit">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     const LAST_TAB_KEY = "deutsch-hub-last-tab";
     const frames = {};
@@ -164,7 +163,8 @@
     const loadingMessage = document.getElementById("loadingMsg");
     const accountButton = document.getElementById("accountButton");
     const accountEmail = document.getElementById("accountEmail");
-    const authOverlay = document.getElementById("authOverlay");
+    const authModalEl = document.getElementById("authModal");
+    const authModal = new bootstrap.Modal(authModalEl);
     const authForm = document.getElementById("authForm");
     const authTitle = document.getElementById("authTitle");
     const authDescription = document.getElementById("authDescription");
@@ -181,7 +181,7 @@
       authSubmit.textContent = mode === "signin" ? "Sign in" : "Create account";
       authSwitch.textContent = mode === "signin" ? "Create an account" : "Already have an account? Sign in";
       authStatus.textContent = "";
-      authOverlay.classList.add("open");
+      authModal.show();
     }
 
     function refreshAccount(user) {
@@ -200,7 +200,6 @@
       if (currentUserId === "guest") openAuth("signin");
       else await DeutschAuth.signOut();
     });
-    document.getElementById("authCancel").addEventListener("click", () => authOverlay.classList.remove("open"));
     authSwitch.addEventListener("click", () => openAuth(authMode === "signin" ? "signup" : "signin"));
     authForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -213,7 +212,7 @@
         authStatus.textContent = "Check your email to verify your account.";
         return;
       }
-      authOverlay.classList.remove("open");
+      authModal.hide();
     });
 
     DeutschAuth.getSession().then(({ data }) => refreshAccount(data.session?.user || null));
@@ -237,6 +236,9 @@
         frames[tab] = frame;
         loadingMessage?.remove();
       }
+
+      const navCollapse = bootstrap.Collapse.getInstance(document.getElementById("navContent"));
+      if (navCollapse && document.getElementById("navContent").classList.contains("show")) navCollapse.hide();
 
       try { localStorage.setItem(LAST_TAB_KEY, tab); } catch (error) { /* storage is optional */ }
     }

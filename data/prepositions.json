@@ -1,12 +1,12 @@
-﻿[
+[
     {
         "id":  1,
         "category":  "akk",
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Das Geschenk ist "
@@ -14,7 +14,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -41,8 +41,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Die Blumen sind "
@@ -50,7 +50,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -77,8 +77,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Der Kuchen ist "
@@ -86,7 +86,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -113,8 +113,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Die E-Mail ist "
@@ -122,7 +122,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -149,8 +149,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Das Spielzeug ist "
@@ -158,7 +158,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -185,8 +185,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "unbestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Ich habe eine Idee "
@@ -194,7 +194,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -221,8 +221,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "unbestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Wir kaufen eine Karte "
@@ -230,7 +230,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -257,8 +257,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "unbestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Er sucht Geld "
@@ -266,7 +266,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -293,8 +293,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "unbestimmt",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Sie kauft ein Ticket "
@@ -302,7 +302,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -329,8 +329,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "possessiv",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Ich koche "
@@ -338,7 +338,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -365,8 +365,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "possessiv",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Das ist ein Brief "
@@ -374,7 +374,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -401,8 +401,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "possessiv",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Er zahlt "
@@ -410,7 +410,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -437,8 +437,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "possessiv",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Sie sorgt "
@@ -446,7 +446,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -473,8 +473,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "negativ",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Ich habe "
@@ -482,7 +482,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -509,8 +509,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "negativ",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Er hat "
@@ -518,7 +518,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -545,8 +545,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "negativ",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Wir haben "
@@ -554,7 +554,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -581,8 +581,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "negativ",
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Sie hat "
@@ -590,7 +590,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -617,8 +617,8 @@
         "mode":  "ohne",
         "case":  "Akkusativ",
         "articleType":  null,
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Das ist "
@@ -626,7 +626,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -647,8 +647,8 @@
         "mode":  "ohne",
         "case":  "Akkusativ",
         "articleType":  null,
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Ist das "
@@ -656,7 +656,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -677,8 +677,8 @@
         "mode":  "ohne",
         "case":  "Akkusativ",
         "articleType":  null,
-        "prep":  "fÃ¼r",
-        "refLabel":  "fÃ¼r",
+        "prep":  "für",
+        "refLabel":  "für",
         "segments":  [
                          {
                              "text":  "Die Nachricht ist "
@@ -686,7 +686,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -711,7 +711,7 @@
         "refLabel":  "ohne",
         "segments":  [
                          {
-                             "text":  "Das Meeting lÃ¤uft "
+                             "text":  "Das Meeting läuft "
                          },
                          {
                              "blank":  "prep",
@@ -999,7 +999,7 @@
         "refLabel":  "ohne",
         "segments":  [
                          {
-                             "text":  "Sie fÃ¤hrt "
+                             "text":  "Sie fährt "
                          },
                          {
                              "blank":  "prep",
@@ -1071,7 +1071,7 @@
         "refLabel":  "ohne",
         "segments":  [
                          {
-                             "text":  "Sie fÃ¤hrt nicht "
+                             "text":  "Sie fährt nicht "
                          },
                          {
                              "blank":  "prep",
@@ -1107,7 +1107,7 @@
         "refLabel":  "ohne",
         "segments":  [
                          {
-                             "text":  "Er fÃ¤hrt nicht "
+                             "text":  "Er fährt nicht "
                          },
                          {
                              "blank":  "prep",
@@ -1593,7 +1593,7 @@
         "refLabel":  "um",
         "segments":  [
                          {
-                             "text":  "Sie stellt StÃ¼hle "
+                             "text":  "Sie stellt Stühle "
                          },
                          {
                              "blank":  "prep",
@@ -1737,7 +1737,7 @@
         "refLabel":  "um",
         "segments":  [
                          {
-                             "text":  "Ein Weg fÃ¼hrt "
+                             "text":  "Ein Weg führt "
                          },
                          {
                              "blank":  "prep",
@@ -1845,7 +1845,7 @@
         "refLabel":  "um",
         "segments":  [
                          {
-                             "text":  "GÃ¤ste stehen "
+                             "text":  "Gäste stehen "
                          },
                          {
                              "blank":  "prep",
@@ -2007,7 +2007,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¤ume"
+                             "text":  " Bäume"
                          },
                          {
                              "text":  "."
@@ -2259,7 +2259,7 @@
         "refLabel":  "gegen",
         "segments":  [
                          {
-                             "text":  "Das verstÃ¶ÃŸt "
+                             "text":  "Das verstößt "
                          },
                          {
                              "blank":  "prep",
@@ -2547,7 +2547,7 @@
         "refLabel":  "gegen",
         "segments":  [
                          {
-                             "text":  "Er verstÃ¶ÃŸt "
+                             "text":  "Er verstößt "
                          },
                          {
                              "blank":  "prep",
@@ -2691,7 +2691,7 @@
         "refLabel":  "gegen",
         "segments":  [
                          {
-                             "text":  "Das verstÃ¶ÃŸt "
+                             "text":  "Das verstößt "
                          },
                          {
                              "blank":  "prep",
@@ -2757,7 +2757,7 @@
         "refLabel":  "gegen",
         "segments":  [
                          {
-                             "text":  "Sie kÃ¤mpfen "
+                             "text":  "Sie kämpfen "
                          },
                          {
                              "blank":  "prep",
@@ -2853,7 +2853,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Der Bus fÃ¤hrt "
+                             "text":  "Der Bus fährt "
                          },
                          {
                              "blank":  "prep",
@@ -2925,7 +2925,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Der Zug fÃ¤hrt "
+                             "text":  "Der Zug fährt "
                          },
                          {
                              "blank":  "prep",
@@ -2979,7 +2979,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸen"
+                             "text":  " Straßen"
                          },
                          {
                              "text":  "."
@@ -3051,7 +3051,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -3141,7 +3141,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Der Weg fÃ¼hrt "
+                             "text":  "Der Weg führt "
                          },
                          {
                              "blank":  "prep",
@@ -3195,7 +3195,7 @@
                                      ]
                          },
                          {
-                             "text":  " KÃ¼che"
+                             "text":  " Küche"
                          },
                          {
                              "text":  "."
@@ -3213,7 +3213,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Sie lÃ¤uft "
+                             "text":  "Sie läuft "
                          },
                          {
                              "blank":  "prep",
@@ -3231,7 +3231,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  "."
@@ -3267,7 +3267,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸen"
+                             "text":  " Straßen"
                          },
                          {
                              "text":  "."
@@ -3285,7 +3285,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Es fÃ¼hrt kein Weg "
+                             "text":  "Es führt kein Weg "
                          },
                          {
                              "blank":  "prep",
@@ -3321,7 +3321,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Der Zug fÃ¤hrt "
+                             "text":  "Der Zug fährt "
                          },
                          {
                              "blank":  "prep",
@@ -3393,7 +3393,7 @@
         "refLabel":  "durch",
         "segments":  [
                          {
-                             "text":  "Der Bus fÃ¤hrt "
+                             "text":  "Der Bus fährt "
                          },
                          {
                              "blank":  "prep",
@@ -3411,7 +3411,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸen"
+                             "text":  " Straßen"
                          },
                          {
                              "text":  "."
@@ -3555,7 +3555,7 @@
         "refLabel":  "bis",
         "segments":  [
                          {
-                             "text":  "Er lÃ¤uft "
+                             "text":  "Er läuft "
                          },
                          {
                              "blank":  "prep",
@@ -3951,7 +3951,7 @@
         "refLabel":  "bis",
         "segments":  [
                          {
-                             "text":  "Sie zÃ¤hlt "
+                             "text":  "Sie zählt "
                          },
                          {
                              "blank":  "prep",
@@ -4008,7 +4008,7 @@
                              "text":  " Punkt"
                          },
                          {
-                             "text":  " eine LÃ¶sung."
+                             "text":  " eine Lösung."
                          }
                      ],
         "tr":  "There is no solution up to any point."
@@ -4191,7 +4191,7 @@
         "refLabel":  "bis",
         "segments":  [
                          {
-                             "text":  "Der Zug fÃ¤hrt "
+                             "text":  "Der Zug fährt "
                          },
                          {
                              "blank":  "prep",
@@ -4266,7 +4266,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸe"
+                             "text":  " Straße"
                          },
                          {
                              "text":  " "
@@ -4329,7 +4329,7 @@
         "refLabel":  "entlang",
         "segments":  [
                          {
-                             "text":  "Der Zaun verlÃ¤uft "
+                             "text":  "Der Zaun verläuft "
                          },
                          {
                              "blank":  "artikel",
@@ -4365,7 +4365,7 @@
         "refLabel":  "entlang",
         "segments":  [
                          {
-                             "text":  "Die Wanderung fÃ¼hrt "
+                             "text":  "Die Wanderung führt "
                          },
                          {
                              "blank":  "artikel",
@@ -4374,7 +4374,7 @@
                                      ]
                          },
                          {
-                             "text":  " FlÃ¼sse"
+                             "text":  " Flüsse"
                          },
                          {
                              "text":  " "
@@ -4446,7 +4446,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸe"
+                             "text":  " Straße"
                          },
                          {
                              "text":  " "
@@ -4473,7 +4473,7 @@
         "refLabel":  "entlang",
         "segments":  [
                          {
-                             "text":  "Der Pfad fÃ¼hrt "
+                             "text":  "Der Pfad führt "
                          },
                          {
                              "blank":  "artikel",
@@ -4590,7 +4590,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸe"
+                             "text":  " Straße"
                          },
                          {
                              "text":  " "
@@ -4662,7 +4662,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸen"
+                             "text":  " Straßen"
                          },
                          {
                              "text":  " "
@@ -4734,7 +4734,7 @@
                                      ]
                          },
                          {
-                             "text":  " StraÃŸe"
+                             "text":  " Straße"
                          },
                          {
                              "text":  " "
@@ -4746,7 +4746,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¤ume."
+                             "text":  " Bäume."
                          }
                      ],
         "tr":  "There are no trees along any street."
@@ -4761,7 +4761,7 @@
         "refLabel":  "entlang",
         "segments":  [
                          {
-                             "text":  "Es fÃ¼hrt "
+                             "text":  "Es führt "
                          },
                          {
                              "blank":  "artikel",
@@ -4869,7 +4869,7 @@
         "refLabel":  "entlang",
         "segments":  [
                          {
-                             "text":  "Er lÃ¤uft "
+                             "text":  "Er läuft "
                          },
                          {
                              "blank":  "artikel",
@@ -4914,7 +4914,7 @@
                                      ]
                          },
                          {
-                             "text":  " FlÃ¼sse"
+                             "text":  " Flüsse"
                          },
                          {
                              "text":  " "
@@ -5013,7 +5013,7 @@
         "refLabel":  "aus",
         "segments":  [
                          {
-                             "text":  "Ein GerÃ¤usch kommt "
+                             "text":  "Ein Geräusch kommt "
                          },
                          {
                              "blank":  "prep",
@@ -5049,7 +5049,7 @@
         "refLabel":  "aus",
         "segments":  [
                          {
-                             "text":  "Er trÃ¤gt Kisten "
+                             "text":  "Er trägt Kisten "
                          },
                          {
                              "blank":  "prep",
@@ -5265,7 +5265,7 @@
         "refLabel":  "aus",
         "segments":  [
                          {
-                             "text":  "Er trÃ¤gt Blumen "
+                             "text":  "Er trägt Blumen "
                          },
                          {
                              "blank":  "prep",
@@ -5319,7 +5319,7 @@
                                      ]
                          },
                          {
-                             "text":  " KÃ¼che"
+                             "text":  " Küche"
                          },
                          {
                              "text":  "."
@@ -5355,7 +5355,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  " an."
@@ -5463,7 +5463,7 @@
                                      ]
                          },
                          {
-                             "text":  " KÃ¼che"
+                             "text":  " Küche"
                          },
                          {
                              "text":  "."
@@ -5931,7 +5931,7 @@
         "refLabel":  "bei",
         "segments":  [
                          {
-                             "text":  "Ich Ã¼bernachte "
+                             "text":  "Ich übernachte "
                          },
                          {
                              "blank":  "prep",
@@ -6219,7 +6219,7 @@
         "refLabel":  "bei",
         "segments":  [
                          {
-                             "text":  "Er Ã¼bernachtet "
+                             "text":  "Er übernachtet "
                          },
                          {
                              "blank":  "prep",
@@ -6327,7 +6327,7 @@
                              "text":  "Nacht"
                          },
                          {
-                             "text":  " ist die StraÃŸe ruhig."
+                             "text":  " ist die Straße ruhig."
                          }
                      ],
         "tr":  "At night the street is quiet."
@@ -6648,7 +6648,7 @@
                                      ]
                          },
                          {
-                             "text":  " LÃ¶ffel"
+                             "text":  " Löffel"
                          },
                          {
                              "text":  "."
@@ -6984,7 +6984,7 @@
         "refLabel":  "mit",
         "segments":  [
                          {
-                             "text":  "Wir Ã¼ben "
+                             "text":  "Wir üben "
                          },
                          {
                              "blank":  "prep",
@@ -7101,7 +7101,7 @@
                              "text":  " Pause"
                          },
                          {
-                             "text":  " zurÃ¼ck."
+                             "text":  " zurück."
                          }
                      ],
         "tr":  "She returns after the break."
@@ -7116,7 +7116,7 @@
         "refLabel":  "nach",
         "segments":  [
                          {
-                             "text":  "Wir rÃ¤umen "
+                             "text":  "Wir räumen "
                          },
                          {
                              "blank":  "prep",
@@ -7368,7 +7368,7 @@
         "refLabel":  "nach",
         "segments":  [
                          {
-                             "text":  "Ich fÃ¼hle mich gut "
+                             "text":  "Ich fühle mich gut "
                          },
                          {
                              "blank":  "prep",
@@ -7404,7 +7404,7 @@
         "refLabel":  "nach",
         "segments":  [
                          {
-                             "text":  "Sie ist mÃ¼de "
+                             "text":  "Sie ist müde "
                          },
                          {
                              "blank":  "prep",
@@ -7494,7 +7494,7 @@
                                      ]
                          },
                          {
-                             "text":  " PrÃ¼fungen"
+                             "text":  " Prüfungen"
                          },
                          {
                              "text":  "."
@@ -7641,7 +7641,7 @@
                              "text":  " Ferien"
                          },
                          {
-                             "text":  " zurÃ¼ck."
+                             "text":  " zurück."
                          }
                      ],
         "tr":  "He is not returning after any holidays."
@@ -7800,7 +7800,7 @@
                                      ]
                          },
                          {
-                             "text":  " PrÃ¼fung"
+                             "text":  " Prüfung"
                          },
                          {
                              "text":  "."
@@ -8070,7 +8070,7 @@
         "refLabel":  "seit",
         "segments":  [
                          {
-                             "text":  "Ich bin glÃ¼cklicher "
+                             "text":  "Ich bin glücklicher "
                          },
                          {
                              "blank":  "prep",
@@ -8106,7 +8106,7 @@
         "refLabel":  "seit",
         "segments":  [
                          {
-                             "text":  "Er lÃ¤chelt "
+                             "text":  "Er lächelt "
                          },
                          {
                              "blank":  "prep",
@@ -8592,7 +8592,7 @@
         "refLabel":  "von",
         "segments":  [
                          {
-                             "text":  "Wir hÃ¶rten es "
+                             "text":  "Wir hörten es "
                          },
                          {
                              "blank":  "prep",
@@ -8736,7 +8736,7 @@
         "refLabel":  "von",
         "segments":  [
                          {
-                             "text":  "Sie hÃ¶rte es "
+                             "text":  "Sie hörte es "
                          },
                          {
                              "blank":  "prep",
@@ -9024,7 +9024,7 @@
         "refLabel":  "von",
         "segments":  [
                          {
-                             "text":  "Wir hÃ¶rten "
+                             "text":  "Wir hörten "
                          },
                          {
                              "blank":  "prep",
@@ -9102,13 +9102,13 @@
                              "text":  " "
                          },
                          {
-                             "text":  "Herrn MÃ¼ller"
+                             "text":  "Herrn Müller"
                          },
                          {
                              "text":  "."
                          }
                      ],
-        "tr":  "The letter is from Mr. MÃ¼ller."
+        "tr":  "The letter is from Mr. Müller."
     },
     {
         "id":  260,
@@ -9186,7 +9186,7 @@
         "refLabel":  "zu",
         "segments":  [
                          {
-                             "text":  "Sie fÃ¤hrt "
+                             "text":  "Sie fährt "
                          },
                          {
                              "blank":  "prep",
@@ -9243,7 +9243,7 @@
                              "text":  " Meeting"
                          },
                          {
-                             "text":  " zu spÃ¤t."
+                             "text":  " zu spät."
                          }
                      ],
         "tr":  "We are late to the meeting."
@@ -9258,7 +9258,7 @@
         "refLabel":  "zu",
         "segments":  [
                          {
-                             "text":  "Er lÃ¤uft "
+                             "text":  "Er läuft "
                          },
                          {
                              "blank":  "prep",
@@ -9294,7 +9294,7 @@
         "refLabel":  "zu",
         "segments":  [
                          {
-                             "text":  "Sie fÃ¤hrt "
+                             "text":  "Sie fährt "
                          },
                          {
                              "blank":  "prep",
@@ -9531,7 +9531,7 @@
                              "text":  " Familie"
                          },
                          {
-                             "text":  " zurÃ¼ck."
+                             "text":  " zurück."
                          }
                      ],
         "tr":  "She returns to your family."
@@ -9564,10 +9564,10 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
-                             "text":  " zurÃ¼ck."
+                             "text":  " zurück."
                          }
                      ],
         "tr":  "He returns to his office."
@@ -9582,7 +9582,7 @@
         "refLabel":  "zu",
         "segments":  [
                          {
-                             "text":  "Sie fÃ¤hrt "
+                             "text":  "Sie fährt "
                          },
                          {
                              "blank":  "prep",
@@ -9834,7 +9834,7 @@
                              "text":  " "
                          },
                          {
-                             "text":  "FuÃŸ"
+                             "text":  "Fuß"
                          },
                          {
                              "text":  "."
@@ -9960,7 +9960,7 @@
         "refLabel":  "ab",
         "segments":  [
                          {
-                             "text":  "Der Zug fÃ¤hrt "
+                             "text":  "Der Zug fährt "
                          },
                          {
                              "blank":  "prep",
@@ -9996,7 +9996,7 @@
         "refLabel":  "ab",
         "segments":  [
                          {
-                             "text":  "Der Laden Ã¶ffnet "
+                             "text":  "Der Laden öffnet "
                          },
                          {
                              "blank":  "prep",
@@ -10176,7 +10176,7 @@
         "refLabel":  "ab",
         "segments":  [
                          {
-                             "text":  "Es zÃ¤hlt "
+                             "text":  "Es zählt "
                          },
                          {
                              "blank":  "prep",
@@ -10212,7 +10212,7 @@
         "refLabel":  "ab",
         "segments":  [
                          {
-                             "text":  "Die Frist lÃ¤uft "
+                             "text":  "Die Frist läuft "
                          },
                          {
                              "blank":  "prep",
@@ -10341,7 +10341,7 @@
                              "text":  " Sommer"
                          },
                          {
-                             "text":  " eine Ã„nderung."
+                             "text":  " eine Änderung."
                          }
                      ],
         "tr":  "There is no change from any summer."
@@ -10392,7 +10392,7 @@
         "refLabel":  "ab",
         "segments":  [
                          {
-                             "text":  "Es Ã¤ndert sich "
+                             "text":  "Es ändert sich "
                          },
                          {
                              "blank":  "prep",
@@ -10550,8 +10550,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle kamen "
@@ -10559,7 +10559,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10586,8 +10586,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle lachten "
@@ -10595,7 +10595,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10622,16 +10622,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
-                             "text":  "Alle aÃŸen "
+                             "text":  "Alle aßen "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10658,8 +10658,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle blieben "
@@ -10667,7 +10667,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10694,8 +10694,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle schliefen "
@@ -10703,7 +10703,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10730,8 +10730,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle stimmten zu, "
@@ -10739,7 +10739,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10766,8 +10766,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle blieben, "
@@ -10775,7 +10775,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10802,8 +10802,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle spielten, "
@@ -10811,7 +10811,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10838,8 +10838,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle kamen, "
@@ -10847,7 +10847,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10874,8 +10874,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle waren da, "
@@ -10883,7 +10883,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10910,8 +10910,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle sangen, "
@@ -10919,7 +10919,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10946,8 +10946,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle spielten mit, "
@@ -10955,7 +10955,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -10982,8 +10982,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle blieben, "
@@ -10991,7 +10991,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11018,8 +11018,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Es gibt "
@@ -11027,7 +11027,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11054,16 +11054,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
-                             "text":  "Es gilt fÃ¼r alle, "
+                             "text":  "Es gilt für alle, "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11090,8 +11090,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alles lief gut, "
@@ -11099,7 +11099,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11126,8 +11126,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alles war klar, "
@@ -11135,7 +11135,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11162,8 +11162,8 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle kamen "
@@ -11171,7 +11171,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11192,8 +11192,8 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alle wussten es "
@@ -11201,7 +11201,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11222,8 +11222,8 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "auÃŸer",
-        "refLabel":  "auÃŸer",
+        "prep":  "außer",
+        "refLabel":  "außer",
         "segments":  [
                          {
                              "text":  "Alles war "
@@ -11231,7 +11231,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸer"
+                                         "außer"
                                      ]
                          },
                          {
@@ -11252,16 +11252,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
-                             "text":  "Das CafÃ© liegt "
+                             "text":  "Das Café liegt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11280,7 +11280,7 @@
                              "text":  "."
                          }
                      ],
-        "tr":  "The cafÃ© is opposite the station."
+        "tr":  "The café is opposite the station."
     },
     {
         "id":  322,
@@ -11288,8 +11288,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Das Haus steht "
@@ -11297,7 +11297,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11324,8 +11324,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Der Park liegt "
@@ -11333,7 +11333,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11360,8 +11360,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Die Bank liegt "
@@ -11369,7 +11369,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11396,8 +11396,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Der Stand steht "
@@ -11405,7 +11405,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11418,7 +11418,7 @@
                                      ]
                          },
                          {
-                             "text":  " GeschÃ¤ften"
+                             "text":  " Geschäften"
                          },
                          {
                              "text":  "."
@@ -11432,8 +11432,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Sie wohnt "
@@ -11441,7 +11441,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11468,8 +11468,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Er wartet "
@@ -11477,7 +11477,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11504,16 +11504,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
-                             "text":  "Das CafÃ© liegt "
+                             "text":  "Das Café liegt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11526,13 +11526,13 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  "."
                          }
                      ],
-        "tr":  "The cafÃ© lies opposite an office."
+        "tr":  "The café lies opposite an office."
     },
     {
         "id":  329,
@@ -11540,8 +11540,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Es gibt eine Bank "
@@ -11549,7 +11549,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11576,8 +11576,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Das Haus liegt "
@@ -11585,7 +11585,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11612,8 +11612,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Er wohnt "
@@ -11621,7 +11621,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11648,8 +11648,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Sie parkt "
@@ -11657,7 +11657,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11670,7 +11670,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  "."
@@ -11684,8 +11684,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Der Stand liegt "
@@ -11693,7 +11693,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11706,7 +11706,7 @@
                                      ]
                          },
                          {
-                             "text":  " GeschÃ¤ften"
+                             "text":  " Geschäften"
                          },
                          {
                              "text":  "."
@@ -11720,8 +11720,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Es gibt "
@@ -11729,7 +11729,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11745,10 +11745,10 @@
                              "text":  " Bahnhof"
                          },
                          {
-                             "text":  " ein CafÃ©."
+                             "text":  " ein Café."
                          }
                      ],
-        "tr":  "There is no cafÃ© opposite any station."
+        "tr":  "There is no café opposite any station."
     },
     {
         "id":  335,
@@ -11756,8 +11756,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Es steht "
@@ -11765,7 +11765,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11792,8 +11792,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Es liegt "
@@ -11801,7 +11801,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11814,7 +11814,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  " ein Park."
@@ -11828,8 +11828,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Es steht "
@@ -11837,7 +11837,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11850,7 +11850,7 @@
                                      ]
                          },
                          {
-                             "text":  " GeschÃ¤ften"
+                             "text":  " Geschäften"
                          },
                          {
                              "text":  " ein Stand."
@@ -11864,11 +11864,11 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
-                             "text":  "Er saÃŸ "
+                             "text":  "Er saß "
                          },
                          {
                              "text":  "mir"
@@ -11879,7 +11879,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11894,8 +11894,8 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Sie steht "
@@ -11909,7 +11909,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11924,8 +11924,8 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "gegenÃ¼ber",
-        "refLabel":  "gegenÃ¼ber",
+        "prep":  "gegenüber",
+        "refLabel":  "gegenüber",
         "segments":  [
                          {
                              "text":  "Er ist offen "
@@ -11939,7 +11939,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "gegenÃ¼ber"
+                                         "gegenüber"
                                      ]
                          },
                          {
@@ -11994,7 +11994,7 @@
         "refLabel":  "an",
         "segments":  [
                          {
-                             "text":  "Ich hÃ¤nge das Bild "
+                             "text":  "Ich hänge das Bild "
                          },
                          {
                              "blank":  "prep",
@@ -12120,7 +12120,7 @@
                                      ]
                          },
                          {
-                             "text":  " KÃ¼ste"
+                             "text":  " Küste"
                          },
                          {
                              "text":  "."
@@ -12174,7 +12174,7 @@
         "refLabel":  "an",
         "segments":  [
                          {
-                             "text":  "Sie hÃ¤ngt Fotos "
+                             "text":  "Sie hängt Fotos "
                          },
                          {
                              "blank":  "prep",
@@ -12192,7 +12192,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤nde"
+                             "text":  " Wände"
                          },
                          {
                              "text":  "."
@@ -12246,7 +12246,7 @@
         "refLabel":  "an",
         "segments":  [
                          {
-                             "text":  "Sie hÃ¤ngt nichts "
+                             "text":  "Sie hängt nichts "
                          },
                          {
                              "blank":  "prep",
@@ -12264,7 +12264,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤nde"
+                             "text":  " Wände"
                          },
                          {
                              "text":  "."
@@ -12348,7 +12348,7 @@
         "refLabel":  "an",
         "segments":  [
                          {
-                             "text":  "Das Bild hÃ¤ngt "
+                             "text":  "Das Bild hängt "
                          },
                          {
                              "blank":  "prep",
@@ -12474,7 +12474,7 @@
                                      ]
                          },
                          {
-                             "text":  " KÃ¼ste"
+                             "text":  " Küste"
                          },
                          {
                              "text":  "."
@@ -12528,7 +12528,7 @@
         "refLabel":  "an",
         "segments":  [
                          {
-                             "text":  "Fotos hÃ¤ngen "
+                             "text":  "Fotos hängen "
                          },
                          {
                              "blank":  "prep",
@@ -12546,7 +12546,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤nden"
+                             "text":  " Wänden"
                          },
                          {
                              "text":  "."
@@ -12600,7 +12600,7 @@
         "refLabel":  "an",
         "segments":  [
                          {
-                             "text":  "Es hÃ¤ngt nichts "
+                             "text":  "Es hängt nichts "
                          },
                          {
                              "blank":  "prep",
@@ -12618,7 +12618,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤nden"
+                             "text":  " Wänden"
                          },
                          {
                              "text":  "."
@@ -12882,7 +12882,7 @@
         "refLabel":  "auf",
         "segments":  [
                          {
-                             "text":  "Sie stellt BÃ¼cher "
+                             "text":  "Sie stellt Bücher "
                          },
                          {
                              "blank":  "prep",
@@ -13089,7 +13089,7 @@
         "refLabel":  "auf",
         "segments":  [
                          {
-                             "text":  "Die Katze schlÃ¤ft "
+                             "text":  "Die Katze schläft "
                          },
                          {
                              "blank":  "prep",
@@ -13125,7 +13125,7 @@
         "refLabel":  "auf",
         "segments":  [
                          {
-                             "text":  "Die HÃ¼tte steht "
+                             "text":  "Die Hütte steht "
                          },
                          {
                              "blank":  "prep",
@@ -13233,7 +13233,7 @@
         "refLabel":  "auf",
         "segments":  [
                          {
-                             "text":  "BÃ¼cher stehen "
+                             "text":  "Bücher stehen "
                          },
                          {
                              "blank":  "prep",
@@ -13305,7 +13305,7 @@
         "refLabel":  "auf",
         "segments":  [
                          {
-                             "text":  "Es stehen keine BÃ¼cher "
+                             "text":  "Es stehen keine Bücher "
                          },
                          {
                              "blank":  "prep",
@@ -13533,7 +13533,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -13605,7 +13605,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -13677,7 +13677,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -13887,7 +13887,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -13959,7 +13959,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -14031,7 +14031,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -14169,7 +14169,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  "."
@@ -14187,7 +14187,7 @@
         "refLabel":  "in",
         "segments":  [
                          {
-                             "text":  "Sie lÃ¤uft "
+                             "text":  "Sie läuft "
                          },
                          {
                              "blank":  "prep",
@@ -14277,10 +14277,10 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
-                             "text":  " zurÃ¼ck."
+                             "text":  " zurück."
                          }
                      ],
         "tr":  "He goes back into his office."
@@ -14313,7 +14313,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤lder"
+                             "text":  " Wälder"
                          },
                          {
                              "text":  "."
@@ -14385,7 +14385,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤lder"
+                             "text":  " Wälder"
                          },
                          {
                              "text":  "."
@@ -14523,7 +14523,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  "."
@@ -14631,7 +14631,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ro"
+                             "text":  " Büro"
                          },
                          {
                              "text":  "."
@@ -14667,7 +14667,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤ldern"
+                             "text":  " Wäldern"
                          },
                          {
                              "text":  "."
@@ -14739,7 +14739,7 @@
                                      ]
                          },
                          {
-                             "text":  " WÃ¤ldern"
+                             "text":  " Wäldern"
                          },
                          {
                              "text":  "."
@@ -14841,7 +14841,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -15021,7 +15021,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -15093,7 +15093,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -15195,7 +15195,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -15375,7 +15375,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -15447,7 +15447,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -15491,8 +15491,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Die Katze springt "
@@ -15500,7 +15500,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15527,8 +15527,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Wir fahren "
@@ -15536,7 +15536,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15549,7 +15549,7 @@
                                      ]
                          },
                          {
-                             "text":  " BrÃ¼cke"
+                             "text":  " Brücke"
                          },
                          {
                              "text":  "."
@@ -15563,8 +15563,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Ball fliegt "
@@ -15572,7 +15572,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15599,8 +15599,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "unbestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Hund springt "
@@ -15608,7 +15608,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15635,8 +15635,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "unbestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Sie fliegen "
@@ -15644,7 +15644,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15671,8 +15671,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "possessiv",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Vogel fliegt "
@@ -15680,7 +15680,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15707,8 +15707,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "possessiv",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Die Fahrt geht "
@@ -15716,7 +15716,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15729,7 +15729,7 @@
                                      ]
                          },
                          {
-                             "text":  " BrÃ¼cken"
+                             "text":  " Brücken"
                          },
                          {
                              "text":  "."
@@ -15743,8 +15743,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "negativ",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Hund springt "
@@ -15752,7 +15752,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15779,8 +15779,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "negativ",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Wir fahren "
@@ -15788,7 +15788,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15801,7 +15801,7 @@
                                      ]
                          },
                          {
-                             "text":  " BrÃ¼cken"
+                             "text":  " Brücken"
                          },
                          {
                              "text":  "."
@@ -15815,8 +15815,8 @@
         "mode":  "ohne",
         "case":  "Akkusativ",
         "articleType":  null,
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Flug geht "
@@ -15824,7 +15824,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15845,16 +15845,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Die Lampe hÃ¤ngt "
+                             "text":  "Die Lampe hängt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15881,8 +15881,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Nebel liegt "
@@ -15890,7 +15890,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15903,7 +15903,7 @@
                                      ]
                          },
                          {
-                             "text":  " BrÃ¼cke"
+                             "text":  " Brücke"
                          },
                          {
                              "text":  "."
@@ -15917,8 +15917,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Die Sonne steht "
@@ -15926,7 +15926,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15953,16 +15953,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Ein Netz hÃ¤ngt "
+                             "text":  "Ein Netz hängt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -15989,16 +15989,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Der Rauch hÃ¤ngt "
+                             "text":  "Der Rauch hängt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -16025,8 +16025,8 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
                              "text":  "Der Mond steht "
@@ -16034,7 +16034,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -16061,16 +16061,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "possessiv",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Wolken hÃ¤ngen "
+                             "text":  "Wolken hängen "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -16097,16 +16097,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Es hÃ¤ngt nichts "
+                             "text":  "Es hängt nichts "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -16133,16 +16133,16 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "negativ",
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Es hÃ¤ngen keine Wolken "
+                             "text":  "Es hängen keine Wolken "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -16169,16 +16169,16 @@
         "mode":  "ohne",
         "case":  "Dativ",
         "articleType":  null,
-        "prep":  "Ã¼ber",
-        "refLabel":  "Ã¼ber",
+        "prep":  "über",
+        "refLabel":  "über",
         "segments":  [
                          {
-                             "text":  "Die Lampe hÃ¤ngt "
+                             "text":  "Die Lampe hängt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -16239,7 +16239,7 @@
         "refLabel":  "unter",
         "segments":  [
                          {
-                             "text":  "Das Boot fÃ¤hrt "
+                             "text":  "Das Boot fährt "
                          },
                          {
                              "blank":  "prep",
@@ -16257,7 +16257,7 @@
                                      ]
                          },
                          {
-                             "text":  " BrÃ¼cke"
+                             "text":  " Brücke"
                          },
                          {
                              "text":  "."
@@ -16275,7 +16275,7 @@
         "refLabel":  "unter",
         "segments":  [
                          {
-                             "text":  "Die Katze schlÃ¼pft "
+                             "text":  "Die Katze schlüpft "
                          },
                          {
                              "blank":  "prep",
@@ -16557,7 +16557,7 @@
         "refLabel":  "unter",
         "segments":  [
                          {
-                             "text":  "Die Katze schlÃ¤ft "
+                             "text":  "Die Katze schläft "
                          },
                          {
                              "blank":  "prep",
@@ -16611,7 +16611,7 @@
                                      ]
                          },
                          {
-                             "text":  " BrÃ¼cke"
+                             "text":  " Brücke"
                          },
                          {
                              "text":  "."
@@ -16773,7 +16773,7 @@
         "refLabel":  "unter",
         "segments":  [
                          {
-                             "text":  "Er fÃ¼hlt sich wohl "
+                             "text":  "Er fühlt sich wohl "
                          },
                          {
                              "blank":  "prep",
@@ -16845,7 +16845,7 @@
         "refLabel":  "unter",
         "segments":  [
                          {
-                             "text":  "Er fÃ¼hlt sich wohl, "
+                             "text":  "Er fühlt sich wohl, "
                          },
                          {
                              "blank":  "prep",
@@ -16965,7 +16965,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -17145,7 +17145,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -17217,7 +17217,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -17319,7 +17319,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼r"
+                             "text":  " Tür"
                          },
                          {
                              "text":  "."
@@ -17499,7 +17499,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -17571,7 +17571,7 @@
                                      ]
                          },
                          {
-                             "text":  " TÃ¼ren"
+                             "text":  " Türen"
                          },
                          {
                              "text":  "."
@@ -17784,7 +17784,7 @@
                              "text":  " Lampe"
                          },
                          {
-                             "text":  " und der TÃ¼r."
+                             "text":  " und der Tür."
                          }
                      ],
         "tr":  "He puts it between a lamp and the door."
@@ -18138,7 +18138,7 @@
                              "text":  " Lampe"
                          },
                          {
-                             "text":  " und der TÃ¼r."
+                             "text":  " und der Tür."
                          }
                      ],
         "tr":  "It lies between a lamp and the door."
@@ -18381,7 +18381,7 @@
                                      ]
                          },
                          {
-                             "text":  " VerspÃ¤tung"
+                             "text":  " Verspätung"
                          },
                          {
                              "text":  "."
@@ -18399,7 +18399,7 @@
         "refLabel":  "wegen",
         "segments":  [
                          {
-                             "text":  "Der Flug fÃ¤llt aus, "
+                             "text":  "Der Flug fällt aus, "
                          },
                          {
                              "blank":  "prep",
@@ -18435,7 +18435,7 @@
         "refLabel":  "wegen",
         "segments":  [
                          {
-                             "text":  "Sie kam zu spÃ¤t, "
+                             "text":  "Sie kam zu spät, "
                          },
                          {
                              "blank":  "prep",
@@ -18507,7 +18507,7 @@
         "refLabel":  "wegen",
         "segments":  [
                          {
-                             "text":  "Der Zug fÃ¤llt aus, "
+                             "text":  "Der Zug fällt aus, "
                          },
                          {
                              "blank":  "prep",
@@ -18579,7 +18579,7 @@
         "refLabel":  "wegen",
         "segments":  [
                          {
-                             "text":  "Sie kam spÃ¤t, "
+                             "text":  "Sie kam spät, "
                          },
                          {
                              "blank":  "prep",
@@ -18759,7 +18759,7 @@
         "refLabel":  "wegen",
         "segments":  [
                          {
-                             "text":  "Die Sitzung dauerte lÃ¤nger, "
+                             "text":  "Die Sitzung dauerte länger, "
                          },
                          {
                              "blank":  "prep",
@@ -18999,7 +18999,7 @@
         "refLabel":  "wegen",
         "segments":  [
                          {
-                             "text":  "Sie kam spÃ¤t "
+                             "text":  "Sie kam spät "
                          },
                          {
                              "blank":  "prep",
@@ -19083,7 +19083,7 @@
                                      ]
                          },
                          {
-                             "text":  " VerspÃ¤tung"
+                             "text":  " Verspätung"
                          },
                          {
                              "text":  "."
@@ -19137,7 +19137,7 @@
         "refLabel":  "trotz",
         "segments":  [
                          {
-                             "text":  "Er kam pÃ¼nktlich, "
+                             "text":  "Er kam pünktlich, "
                          },
                          {
                              "blank":  "prep",
@@ -19727,13 +19727,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19760,13 +19760,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19779,7 +19779,7 @@
                                      ]
                          },
                          {
-                             "text":  " PrÃ¼fung"
+                             "text":  " Prüfung"
                          },
                          {
                              "text":  " bleibt es still."
@@ -19793,13 +19793,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19826,13 +19826,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19859,13 +19859,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19892,13 +19892,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19925,13 +19925,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19958,13 +19958,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -19991,13 +19991,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20024,13 +20024,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20057,13 +20057,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20090,13 +20090,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20123,13 +20123,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20156,13 +20156,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20189,13 +20189,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20222,13 +20222,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20255,13 +20255,13 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20288,13 +20288,13 @@
         "mode":  "ohne",
         "case":  "Genitiv",
         "articleType":  null,
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20315,13 +20315,13 @@
         "mode":  "ohne",
         "case":  "Genitiv",
         "articleType":  null,
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20342,13 +20342,13 @@
         "mode":  "ohne",
         "case":  "Genitiv",
         "articleType":  null,
-        "prep":  "wÃ¤hrend",
-        "refLabel":  "wÃ¤hrend",
+        "prep":  "während",
+        "refLabel":  "während",
         "segments":  [
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "WÃ¤hrend"
+                                         "Während"
                                      ]
                          },
                          {
@@ -20697,7 +20697,7 @@
         "refLabel":  "statt / anstatt",
         "segments":  [
                          {
-                             "text":  "Sie wÃ¤hlt einen anderen Weg "
+                             "text":  "Sie wählt einen anderen Weg "
                          },
                          {
                              "blank":  "prep",
@@ -21773,8 +21773,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Das Haus liegt "
@@ -21782,7 +21782,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -21809,8 +21809,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie wohnt "
@@ -21818,7 +21818,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -21845,8 +21845,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Der Hof liegt "
@@ -21854,7 +21854,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -21881,8 +21881,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Das Feld liegt "
@@ -21890,7 +21890,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -21917,8 +21917,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "bestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie arbeiten "
@@ -21926,7 +21926,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -21939,7 +21939,7 @@
                                      ]
                          },
                          {
-                             "text":  " StÃ¤dte"
+                             "text":  " Städte"
                          },
                          {
                              "text":  "."
@@ -21953,8 +21953,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Es liegt "
@@ -21962,7 +21962,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -21989,8 +21989,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Das Boot ankert "
@@ -21998,7 +21998,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22025,8 +22025,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Es liegt "
@@ -22034,7 +22034,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22061,16 +22061,16 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "unbestimmt",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
-                             "text":  "Das fÃ¤llt "
+                             "text":  "Das fällt "
                          },
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22097,8 +22097,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Es liegt "
@@ -22106,7 +22106,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22133,8 +22133,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie wohnt "
@@ -22142,7 +22142,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22169,8 +22169,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Es liegt "
@@ -22178,7 +22178,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22205,8 +22205,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "possessiv",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie leben "
@@ -22214,7 +22214,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22227,7 +22227,7 @@
                                      ]
                          },
                          {
-                             "text":  " StÃ¤dte"
+                             "text":  " Städte"
                          },
                          {
                              "text":  "."
@@ -22241,8 +22241,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Das liegt "
@@ -22250,7 +22250,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22277,8 +22277,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie wohnt "
@@ -22286,7 +22286,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22313,8 +22313,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Es liegt "
@@ -22322,7 +22322,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22349,8 +22349,8 @@
         "mode":  "mit",
         "case":  "Genitiv",
         "articleType":  "negativ",
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie leben "
@@ -22358,7 +22358,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22371,7 +22371,7 @@
                                      ]
                          },
                          {
-                             "text":  " StÃ¤dte"
+                             "text":  " Städte"
                          },
                          {
                              "text":  "."
@@ -22385,8 +22385,8 @@
         "mode":  "ohne",
         "case":  "Genitiv",
         "articleType":  null,
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Das Haus liegt "
@@ -22394,7 +22394,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22415,8 +22415,8 @@
         "mode":  "ohne",
         "case":  "Genitiv",
         "articleType":  null,
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Sie wohnt "
@@ -22424,14 +22424,14 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
                              "text":  " "
                          },
                          {
-                             "text":  "MÃ¼nchens"
+                             "text":  "Münchens"
                          },
                          {
                              "text":  "."
@@ -22445,8 +22445,8 @@
         "mode":  "ohne",
         "case":  "Genitiv",
         "articleType":  null,
-        "prep":  "auÃŸerhalb",
-        "refLabel":  "auÃŸerhalb",
+        "prep":  "außerhalb",
+        "refLabel":  "außerhalb",
         "segments":  [
                          {
                              "text":  "Der Hof liegt "
@@ -22454,7 +22454,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "auÃŸerhalb"
+                                         "außerhalb"
                                      ]
                          },
                          {
@@ -22479,7 +22479,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die HÃ¼tte liegt "
+                             "text":  "Die Hütte liegt "
                          },
                          {
                              "blank":  "prep",
@@ -22515,7 +22515,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Der Weg fÃ¼hrt "
+                             "text":  "Der Weg führt "
                          },
                          {
                              "blank":  "prep",
@@ -22551,7 +22551,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die StraÃŸe verlÃ¤uft "
+                             "text":  "Die Straße verläuft "
                          },
                          {
                              "blank":  "prep",
@@ -22659,7 +22659,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die BrÃ¼cke liegt "
+                             "text":  "Die Brücke liegt "
                          },
                          {
                              "blank":  "prep",
@@ -22695,7 +22695,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Der Steg hÃ¤ngt "
+                             "text":  "Der Steg hängt "
                          },
                          {
                              "blank":  "prep",
@@ -22731,7 +22731,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die HÃ¼tte steht "
+                             "text":  "Die Hütte steht "
                          },
                          {
                              "blank":  "prep",
@@ -22767,7 +22767,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Der Pfad fÃ¼hrt "
+                             "text":  "Der Pfad führt "
                          },
                          {
                              "blank":  "prep",
@@ -22893,7 +22893,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ros"
+                             "text":  " Büros"
                          },
                          {
                              "text":  "."
@@ -22947,7 +22947,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die BrÃ¼cke liegt "
+                             "text":  "Die Brücke liegt "
                          },
                          {
                              "blank":  "prep",
@@ -22983,7 +22983,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Der Steg hÃ¤ngt "
+                             "text":  "Der Steg hängt "
                          },
                          {
                              "blank":  "prep",
@@ -23019,7 +23019,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die HÃ¼tte steht "
+                             "text":  "Die Hütte steht "
                          },
                          {
                              "blank":  "prep",
@@ -23091,7 +23091,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die HÃ¼tte liegt "
+                             "text":  "Die Hütte liegt "
                          },
                          {
                              "blank":  "prep",
@@ -23121,7 +23121,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Der Weg fÃ¼hrt "
+                             "text":  "Der Weg führt "
                          },
                          {
                              "blank":  "prep",
@@ -23133,7 +23133,7 @@
                              "text":  " "
                          },
                          {
-                             "text":  "MÃ¼nchens"
+                             "text":  "Münchens"
                          },
                          {
                              "text":  "."
@@ -23151,7 +23151,7 @@
         "refLabel":  "oberhalb",
         "segments":  [
                          {
-                             "text":  "Die Wolke hÃ¤ngt "
+                             "text":  "Die Wolke hängt "
                          },
                          {
                              "blank":  "prep",
@@ -23217,7 +23217,7 @@
         "refLabel":  "unterhalb",
         "segments":  [
                          {
-                             "text":  "Der Tunnel verlÃ¤uft "
+                             "text":  "Der Tunnel verläuft "
                          },
                          {
                              "blank":  "prep",
@@ -23289,7 +23289,7 @@
         "refLabel":  "unterhalb",
         "segments":  [
                          {
-                             "text":  "Der Bach flieÃŸt "
+                             "text":  "Der Bach fließt "
                          },
                          {
                              "blank":  "prep",
@@ -23469,7 +23469,7 @@
         "refLabel":  "unterhalb",
         "segments":  [
                          {
-                             "text":  "Der Preis fÃ¤llt "
+                             "text":  "Der Preis fällt "
                          },
                          {
                              "blank":  "prep",
@@ -23595,7 +23595,7 @@
                                      ]
                          },
                          {
-                             "text":  " BÃ¼ros"
+                             "text":  " Büros"
                          },
                          {
                              "text":  "."
@@ -23823,7 +23823,7 @@
         "refLabel":  "unterhalb",
         "segments":  [
                          {
-                             "text":  "Der Tunnel verlÃ¤uft "
+                             "text":  "Der Tunnel verläuft "
                          },
                          {
                              "blank":  "prep",
@@ -23835,7 +23835,7 @@
                              "text":  " "
                          },
                          {
-                             "text":  "MÃ¼nchens"
+                             "text":  "Münchens"
                          },
                          {
                              "text":  "."
@@ -23902,7 +23902,7 @@
                          }
                      ],
         "tr":  "I\u0027m waiting for the bus.",
-        "note":  "warten auf + Akkusativ. der Bus â†’ den Bus."
+        "note":  "warten auf + Akkusativ. der Bus → den Bus."
     },
     {
         "id":  701,
@@ -23941,8 +23941,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich freuen Ã¼ber",
-        "refLabel":  "sich freuen Ã¼ber",
+        "prep":  "sich freuen über",
+        "refLabel":  "sich freuen über",
         "segments":  [
                          {
                              "text":  "Er freut sich "
@@ -23950,7 +23950,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "Ã¼ber"
+                                         "über"
                                      ]
                          },
                          {
@@ -23964,7 +23964,7 @@
                          }
                      ],
         "tr":  "He\u0027s happy about the present.",
-        "note":  "sich freuen Ã¼ber (something already happened) + Akkusativ."
+        "note":  "sich freuen über (something already happened) + Akkusativ."
     },
     {
         "id":  703,
@@ -24084,11 +24084,11 @@
                                      ]
                          },
                          {
-                             "text":  " PrÃ¼fung."
+                             "text":  " Prüfung."
                          }
                      ],
         "tr":  "She\u0027s afraid of the exam.",
-        "note":  "Angst haben vor + Dativ. die PrÃ¼fung â†’ der PrÃ¼fung."
+        "note":  "Angst haben vor + Dativ. die Prüfung → der Prüfung."
     },
     {
         "id":  707,
@@ -24096,8 +24096,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich interessieren fÃ¼r",
-        "refLabel":  "sich interessieren fÃ¼r",
+        "prep":  "sich interessieren für",
+        "refLabel":  "sich interessieren für",
         "segments":  [
                          {
                              "text":  "Ich interessiere mich "
@@ -24105,7 +24105,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -24119,7 +24119,7 @@
                          }
                      ],
         "tr":  "I\u0027m interested in art.",
-        "note":  "sich interessieren fÃ¼r + Akkusativ."
+        "note":  "sich interessieren für + Akkusativ."
     },
     {
         "id":  708,
@@ -24127,8 +24127,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich bedanken fÃ¼r",
-        "refLabel":  "sich bedanken fÃ¼r",
+        "prep":  "sich bedanken für",
+        "refLabel":  "sich bedanken für",
         "segments":  [
                          {
                              "text":  "Ich bedanke mich "
@@ -24136,7 +24136,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -24150,7 +24150,7 @@
                          }
                      ],
         "tr":  "I thank you for the present.",
-        "note":  "sich bedanken fÃ¼r + Akkusativ."
+        "note":  "sich bedanken für + Akkusativ."
     },
     {
         "id":  709,
@@ -24158,11 +24158,11 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "sich beschÃ¤ftigen mit",
-        "refLabel":  "sich beschÃ¤ftigen mit",
+        "prep":  "sich beschäftigen mit",
+        "refLabel":  "sich beschäftigen mit",
         "segments":  [
                          {
-                             "text":  "Er beschÃ¤ftigt sich "
+                             "text":  "Er beschäftigt sich "
                          },
                          {
                              "blank":  "prep",
@@ -24181,7 +24181,7 @@
                          }
                      ],
         "tr":  "He\u0027s dealing with the topic.",
-        "note":  "sich beschÃ¤ftigen mit + Dativ."
+        "note":  "sich beschäftigen mit + Dativ."
     },
     {
         "id":  710,
@@ -24189,8 +24189,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich entscheiden fÃ¼r",
-        "refLabel":  "sich entscheiden fÃ¼r",
+        "prep":  "sich entscheiden für",
+        "refLabel":  "sich entscheiden für",
         "segments":  [
                          {
                              "text":  "Wir entscheiden uns "
@@ -24198,7 +24198,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -24212,7 +24212,7 @@
                          }
                      ],
         "tr":  "We\u0027re deciding on the plan.",
-        "note":  "sich entscheiden fÃ¼r + Akkusativ."
+        "note":  "sich entscheiden für + Akkusativ."
     },
     {
         "id":  711,
@@ -24220,11 +24220,11 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "bestimmt",
-        "prep":  "abhÃ¤ngen von",
-        "refLabel":  "abhÃ¤ngen von",
+        "prep":  "abhängen von",
+        "refLabel":  "abhängen von",
         "segments":  [
                          {
-                             "text":  "Der Erfolg hÃ¤ngt "
+                             "text":  "Der Erfolg hängt "
                          },
                          {
                              "blank":  "prep",
@@ -24243,7 +24243,7 @@
                          }
                      ],
         "tr":  "The success depends on the preparation.",
-        "note":  "abhÃ¤ngen von + Dativ. die Vorbereitung â†’ der Vorbereitung."
+        "note":  "abhängen von + Dativ. die Vorbereitung → der Vorbereitung."
     },
     {
         "id":  712,
@@ -24274,7 +24274,7 @@
                          }
                      ],
         "tr":  "He insists on his right.",
-        "note":  "bestehen auf (to insist) + Dativ. sein Recht â†’ seinem Recht."
+        "note":  "bestehen auf (to insist) + Dativ. sein Recht → seinem Recht."
     },
     {
         "id":  713,
@@ -24282,8 +24282,8 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich engagieren fÃ¼r",
-        "refLabel":  "sich engagieren fÃ¼r",
+        "prep":  "sich engagieren für",
+        "refLabel":  "sich engagieren für",
         "segments":  [
                          {
                              "text":  "Sie engagiert sich "
@@ -24291,7 +24291,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -24305,7 +24305,7 @@
                          }
                      ],
         "tr":  "She\u0027s committed to environmental protection.",
-        "note":  "sich engagieren fÃ¼r + Akkusativ."
+        "note":  "sich engagieren für + Akkusativ."
     },
     {
         "id":  714,
@@ -24398,7 +24398,7 @@
                          }
                      ],
         "tr":  "The decision is based on an analysis.",
-        "note":  "beruhen auf + Dativ. eine Analyse â†’ einer Analyse."
+        "note":  "beruhen auf + Dativ. eine Analyse → einer Analyse."
     },
     {
         "id":  717,
@@ -24425,7 +24425,7 @@
                                      ]
                          },
                          {
-                             "text":  " LÃ¤rm."
+                             "text":  " Lärm."
                          }
                      ],
         "tr":  "He suffers from the noise.",
@@ -24437,11 +24437,11 @@
         "mode":  "mit",
         "case":  "Dativ",
         "articleType":  "unbestimmt",
-        "prep":  "trÃ¤umen von",
-        "refLabel":  "trÃ¤umen von",
+        "prep":  "träumen von",
+        "refLabel":  "träumen von",
         "segments":  [
                          {
-                             "text":  "Sie trÃ¤umt "
+                             "text":  "Sie träumt "
                          },
                          {
                              "blank":  "prep",
@@ -24460,7 +24460,7 @@
                          }
                      ],
         "tr":  "She dreams of a trip.",
-        "note":  "trÃ¤umen von + Dativ."
+        "note":  "träumen von + Dativ."
     },
     {
         "id":  719,
@@ -24468,11 +24468,11 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich kÃ¼mmern um",
-        "refLabel":  "sich kÃ¼mmern um",
+        "prep":  "sich kümmern um",
+        "refLabel":  "sich kümmern um",
         "segments":  [
                          {
-                             "text":  "Ich kÃ¼mmere mich "
+                             "text":  "Ich kümmere mich "
                          },
                          {
                              "blank":  "prep",
@@ -24491,7 +24491,7 @@
                          }
                      ],
         "tr":  "I take care of the dog.",
-        "note":  "sich kÃ¼mmern um + Akkusativ."
+        "note":  "sich kümmern um + Akkusativ."
     },
     {
         "id":  720,
@@ -24499,11 +24499,11 @@
         "mode":  "mit",
         "case":  "Akkusativ",
         "articleType":  "bestimmt",
-        "prep":  "sich gewÃ¶hnen an",
-        "refLabel":  "sich gewÃ¶hnen an",
+        "prep":  "sich gewöhnen an",
+        "refLabel":  "sich gewöhnen an",
         "segments":  [
                          {
-                             "text":  "Er gewÃ¶hnt sich "
+                             "text":  "Er gewöhnt sich "
                          },
                          {
                              "blank":  "prep",
@@ -24522,7 +24522,7 @@
                          }
                      ],
         "tr":  "He\u0027s getting used to the climate.",
-        "note":  "sich gewÃ¶hnen an + Akkusativ. an das often contracts to ans."
+        "note":  "sich gewöhnen an + Akkusativ. an das often contracts to ans."
     },
     {
         "id":  721,
@@ -24553,7 +24553,7 @@
                          }
                      ],
         "tr":  "I doubt his statement.",
-        "note":  "zweifeln an + Dativ. seine Aussage â†’ seiner Aussage."
+        "note":  "zweifeln an + Dativ. seine Aussage → seiner Aussage."
     },
     {
         "id":  722,
@@ -24646,7 +24646,7 @@
                          }
                      ],
         "tr":  "I\u0027m counting on success.",
-        "note":  "rechnen mit + Dativ. ein Erfolg â†’ einem Erfolg."
+        "note":  "rechnen mit + Dativ. ein Erfolg → einem Erfolg."
     },
     {
         "id":  725,
@@ -24785,7 +24785,7 @@
                                      ]
                          },
                          {
-                             "text":  " fÃ¼nf Spielern."
+                             "text":  " fünf Spielern."
                          }
                      ],
         "tr":  "The team consists of five players.",
@@ -24922,8 +24922,8 @@
         "mode":  "ohne",
         "case":  "Akkusativ",
         "articleType":  null,
-        "prep":  "sich interessieren fÃ¼r",
-        "refLabel":  "sich interessieren fÃ¼r",
+        "prep":  "sich interessieren für",
+        "refLabel":  "sich interessieren für",
         "segments":  [
                          {
                              "text":  "Ich interessiere mich "
@@ -24931,7 +24931,7 @@
                          {
                              "blank":  "prep",
                              "ans":  [
-                                         "fÃ¼r"
+                                         "für"
                                      ]
                          },
                          {
@@ -24939,6 +24939,6 @@
                          }
                      ],
         "tr":  "I\u0027m interested in music.",
-        "note":  "sich interessieren fÃ¼r + Akkusativ; the mass noun Musik takes no article."
+        "note":  "sich interessieren für + Akkusativ; the mass noun Musik takes no article."
     }
 ]
