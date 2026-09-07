@@ -13,14 +13,19 @@
     }
 
     body {
+      height: 100%;
       min-height: 100vh;
       min-height: 100dvh;
+      overflow: hidden;
       padding: 24px 16px;
     }
 
     .article-app {
       width: min(100%, 720px);
+      height: 100%;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
     }
 
     .article-header {
@@ -133,24 +138,21 @@
       color: #fff !important;
     }
 
-    .category-select,
-    .search-input { width: 100%; padding: 10px 11px; }
-
-    .search-row { grid-column: 1 / -1; }
-
-    .search-modes { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 7px; }
-    .search-mode { padding: 7px 10px; font-size: .78rem !important; }
-    .search-mode.active { background: var(--hub-ink) !important; border-color: var(--hub-ink) !important; color: #fff !important; }
+    .category-select { width: 100%; padding: 10px 11px; }
 
     @media (max-width: 520px) {
       .filters { grid-template-columns: 1fr; }
-      .search-row { grid-column: auto; }
+      body { padding: 12px 10px; }
+      .article-header { margin-bottom: 10px; }
+      .filters { gap: 8px; margin-bottom: 8px; padding: 10px; }
+      .filter-label { margin-bottom: 5px; }
     }
 
     .practice-card {
       display: grid;
-      min-height: 390px;
-      padding: clamp(28px, 7vw, 56px) 20px 28px;
+      flex: 1;
+      min-height: 0;
+      padding: clamp(18px, 4vw, 40px) 20px 20px;
       place-items: center;
       border: 1px solid var(--hub-line);
       border-radius: var(--hub-radius);
@@ -217,10 +219,9 @@
     .secondary-action { padding: 11px 16px; }
 
     @media (max-width: 520px) {
-      body { padding: 16px 10px; }
+      body { padding: 12px 10px; }
       .article-header { align-items: start; }
       .article-header h1 { font-size: 1.55rem; }
-      .practice-card { min-height: 360px; }
       .article-options { gap: 7px; }
     }
   </style>
@@ -246,16 +247,6 @@
       <label>
         <span class="filter-label">Category</span>
         <select class="category-select" id="category"></select>
-      </label>
-      <label class="search-row">
-        <span class="filter-label">Search</span>
-        <input class="search-input" id="search" type="search" placeholder="Search a German word or meaning..." autocomplete="off">
-        <span class="search-modes" id="searchModes">
-          <button class="search-mode active" data-mode="starts" type="button">Starts</button>
-          <button class="search-mode" data-mode="contains" type="button">Contains</button>
-          <button class="search-mode" data-mode="ends" type="button">Ends</button>
-          <button class="search-mode" data-mode="meaning" type="button">Meaning</button>
-        </span>
       </label>
     </section>
 
@@ -318,11 +309,8 @@
     );
     let activeLevels = levels.slice();
     let activeCategory = "ALL";
-    let searchTerm = "";
-    let searchMode = "starts";
     const levelsElement = document.getElementById("levels");
     const categoryElement = document.getElementById("category");
-    const searchElement = document.getElementById("search");
     const tipsOverlay = document.getElementById("tipsOverlay");
     const wordElement = document.getElementById("word");
     const meaningElement = document.getElementById("meaning");
@@ -336,19 +324,11 @@
     let answered = false;
 
     function filteredNouns() {
-      const query = searchTerm.trim().toLowerCase();
       return nouns.filter((card) => {
         if (!activeLevels.includes(card.level)) return false;
         if (activeCategory === "COGNATE" && !card.cognate) return false;
         if (activeCategory === "OPPOSITE" && !card.opposite) return false;
         if (! ["ALL", "COGNATE", "OPPOSITE"].includes(activeCategory) && card.category !== activeCategory) return false;
-        if (query) {
-          const value = searchMode === "meaning" ? card.en.toLowerCase() : card.stem.toLowerCase();
-          if (searchMode === "starts" && !value.startsWith(query)) return false;
-          if (searchMode === "contains" && !value.includes(query)) return false;
-          if (searchMode === "ends" && !value.endsWith(query)) return false;
-          if (searchMode === "meaning" && !value.includes(query)) return false;
-        }
         return true;
       });
     }
@@ -375,7 +355,7 @@
     function renderCard() {
       if (!deck.length) {
         wordElement.textContent = "No words found";
-        meaningElement.textContent = "Try another level, category, or search.";
+        meaningElement.textContent = "Try another level or category.";
         feedbackElement.textContent = "";
         optionElements.forEach((button) => { button.disabled = true; });
         return;
@@ -457,15 +437,6 @@
       activeCategory = categoryElement.value;
       reshuffle();
     });
-    searchElement.addEventListener("input", () => {
-      searchTerm = searchElement.value;
-      reshuffle();
-    });
-    document.querySelectorAll(".search-mode").forEach((button) => button.addEventListener("click", () => {
-      searchMode = button.dataset.mode;
-      document.querySelectorAll(".search-mode").forEach((item) => item.classList.toggle("active", item === button));
-      reshuffle();
-    }));
     renderFilters();
     renderTips();
     reshuffle();

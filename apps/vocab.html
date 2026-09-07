@@ -624,6 +624,21 @@ function speak(text){
   }catch(e){}
 }
 
+function exampleFor(card){
+  if(card.example && card.example.de && card.example.en) return card.example;
+  if(card.type === 'noun'){
+    const article = card.article ? card.article.split('/')[0] + ' ' : '';
+    return { de:'Das ist '+article+card.stem+'.', en:'This is a '+card.en+'.' };
+  }
+  if(card.type === 'adj'){
+    return { de:'Das ist '+card.stem+'.', en:'That is '+card.en+'.' };
+  }
+  if(card.type === 'adverb'){
+    return { de:'Er kommt '+card.stem+'.', en:'He comes '+card.en+'.' };
+  }
+  return { de:'Ich möchte '+card.stem+'.', en:'I would like to '+card.en+'.' };
+}
+
 // --- Auto-play mode ---
 const AUTOPLAY_KEY = 'wortschatz-autoplay-interval-v1';
 let autoPlayOn = false;
@@ -708,6 +723,7 @@ function renderCard(){
   posTip.textContent = 'Tap card to flip · card ' + (st.index+1) + ' of ' + st.deck.length;
 
   const artColor = card.article ? (ARTICLE_COLORS[card.article.split('/')[0]] || 'var(--ink-soft)') : null;
+  const example = exampleFor(card);
   const frontInner = card.article
     ? '<div class="word-de">'+card.article+' '+card.stem+'</div>'
     : '<div class="word-de">'+card.stem+'</div>';
@@ -728,7 +744,7 @@ function renderCard(){
       '<div class="face back">' +
         '<div class="type-chip">'+TYPE_LABELS[card.type]+'</div>' +
         '<div class="chip-row"><div class="level-chip '+card.level+'">'+card.level+'</div>'+(card.cognate?'<div class="cognate-chip">≈ EN</div>':'')+'</div>' +
-        '<div class="face-inner"><div class="word-en">'+card.en+'</div><div class="hint">'+ (card.article ? card.article+' '+card.stem : card.de) +'</div>'+(card.example?'<div class="example-box"><span class="example-de">'+card.example.de+'</span><span class="example-en">'+card.example.en+'</span></div>':'')+(card.mnemonic?'<div class="mnemonic-box"><span class="mnemonic-label">💡 Memory tip</span><span class="mnemonic-text">'+card.mnemonic+'</span></div>':'')+(card.opposite?'<div class="opposite-box"><span class="opposite-icon">↔</span><div class="opposite-text"><span class="opposite-label">Opposite</span><span class="opposite-word">'+card.opposite+'</span>'+(oppMeaning?'<span class="opposite-meaning">'+oppMeaning+'</span>':'')+'</div><button class="opposite-speak" id="oppSpeakBtn" title="Hear opposite">🔊</button></div>':'')+'</div>' +
+        '<div class="face-inner"><div class="word-en">'+card.en+'</div><div class="hint">'+ (card.article ? card.article+' '+card.stem : card.de) +'</div><div class="example-box"><span class="example-de">'+example.de+'</span><span class="example-en">'+example.en+'</span></div>'+(card.mnemonic?'<div class="mnemonic-box"><span class="mnemonic-label">💡 Memory tip</span><span class="mnemonic-text">'+card.mnemonic+'</span></div>':'')+(card.opposite?'<div class="opposite-box"><span class="opposite-icon">↔</span><div class="opposite-text"><span class="opposite-label">Opposite</span><span class="opposite-word">'+card.opposite+'</span>'+(oppMeaning?'<span class="opposite-meaning">'+oppMeaning+'</span>':'')+'</div><button class="opposite-speak" id="oppSpeakBtn" title="Hear opposite">🔊</button></div>':'')+'</div>' +
       '</div>' +
     '</div>';
 
