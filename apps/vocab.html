@@ -276,18 +276,6 @@ button:active{transform:translateY(1px);}
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="header-titles">
-      <h1>Wortschatz-Karteikarten</h1>
-    </div>
-    <div class="fontsize-row">
-      <span class="fontsize-label">Text</span>
-      <button type="button" class="fs-btn" id="fsDown" title="Smaller text">A-</button>
-      <button type="button" class="fs-btn" id="fsReset" title="Reset text size">Reset</button>
-      <button type="button" class="fs-btn" id="fsUp" title="Larger text">A+</button>
-    </div>
-  </header>
-
   <div class="filter-block">
     <div class="filter-row">
       <div class="filter-col">
@@ -1127,9 +1115,6 @@ function setFontScale(val){
   applyFontScale();
   saveJSON(FONTSIZE_KEY, fontScale);
 }
-document.getElementById('fsDown').addEventListener('click', ()=>setFontScale(fontScale - 0.1));
-document.getElementById('fsUp').addEventListener('click', ()=>setFontScale(fontScale + 0.1));
-document.getElementById('fsReset').addEventListener('click', ()=>setFontScale(1));
 
 const autoplayIntervalEl = document.getElementById('autoplayInterval');
 [2,3,4,5,7,8,10,15,20,30].forEach(sec=>{
