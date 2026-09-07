@@ -14777,7 +14777,7 @@
         "mnemonic":  "TAG (day) + -LICH (-ly) = \u0027day-ly\u0027 → DAILY."
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "zwischen",
         "stem":  "zwischen",
         "article":  null,
@@ -20852,7 +20852,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "zu",
         "stem":  "zu",
         "article":  null,
@@ -25686,7 +25686,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "außer",
         "stem":  "außer",
         "article":  null,
@@ -26929,7 +26929,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "gegen",
         "stem":  "gegen",
         "article":  null,
@@ -29153,7 +29153,7 @@
                     }
     },
     {
-        "type":  "adverb",
+        "type":  "preposition",
         "de":  "gegenüber",
         "stem":  "gegenüber",
         "article":  null,
@@ -32247,7 +32247,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "auf",
         "stem":  "auf",
         "article":  null,
@@ -37154,7 +37154,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "unter",
         "stem":  "unter",
         "article":  null,
@@ -37338,7 +37338,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "aus",
         "stem":  "aus",
         "article":  null,
@@ -37438,7 +37438,7 @@
         "mnemonic":  "WO (what) + AUF (on) = \u0027on what\u0027 — what are you waiting ON?"
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "statt",
         "stem":  "statt",
         "article":  null,
@@ -38580,7 +38580,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "um",
         "stem":  "um",
         "article":  null,
@@ -41336,7 +41336,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "trotz",
         "stem":  "trotz",
         "article":  null,
@@ -41350,7 +41350,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "wegen",
         "stem":  "wegen",
         "article":  null,
@@ -42673,7 +42673,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "unterhalb",
         "stem":  "unterhalb",
         "article":  null,
@@ -43248,7 +43248,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "während",
         "stem":  "während",
         "article":  null,
@@ -50130,7 +50130,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "bis",
         "stem":  "bis",
         "article":  null,
@@ -56190,7 +56190,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "preposition",
         "de":  "über",
         "stem":  "über",
         "article":  null,
@@ -57440,7 +57440,7 @@
                     }
     },
     {
-        "type":  "adverb",
+        "type":  "preposition",
         "de":  "außerhalb",
         "stem":  "außerhalb",
         "article":  null,
@@ -57569,7 +57569,7 @@
                     }
     },
     {
-        "type":  "adverb",
+        "type":  "preposition",
         "de":  "innerhalb",
         "stem":  "innerhalb",
         "article":  null,
@@ -72224,7 +72224,7 @@
                     }
     },
     {
-        "type":  "adverb",
+        "type":  "preposition",
         "de":  "hinter",
         "stem":  "hinter",
         "article":  null,

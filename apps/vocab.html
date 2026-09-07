@@ -19,6 +19,7 @@
   --accent-das:var(--du-das);
   --accent-verb:#8a5a2b;
   --accent-adj:#6a4c8c;
+  --accent-prep:#2f7a78;
   --good:var(--du-success);
   --bad:var(--du-danger);
   --level-a1:var(--du-a1);
@@ -126,6 +127,7 @@ h1{
 .tab[data-type="noun"].active{border-color:var(--accent-der);}
 .tab[data-type="adj"].active{border-color:var(--accent-adj);}
 .tab[data-type="verb"].active{border-color:var(--accent-verb);}
+.tab[data-type="preposition"].active{border-color:var(--accent-prep);}
 .tab.learned-tab.active{border-color:var(--good);}
 .tab .count{display:block;font-size:calc(9px * var(--fs));opacity:.75;font-weight:400;margin-top:1px;}
 
@@ -412,12 +414,13 @@ const CARDS =
 loadJson("../data/vocabulary.json");
 
 const ARTICLE_COLORS = { der: 'var(--accent-der)', die: 'var(--accent-die)', das: 'var(--accent-das)' };
-const TYPE_LABELS = { noun: 'Nomen · Noun', adj: 'Adjektiv', adverb: 'Adverb', verb: 'Verb' };
+const TYPE_LABELS = { noun: 'Nomen · Noun', adj: 'Adjektiv', adverb: 'Adverb', verb: 'Verb', preposition: 'Präposition' };
 const TYPE_TABS = [
   { key: 'noun', label: 'Nomen' },
   { key: 'adj', label: 'Adjektive' },
   { key: 'adverb', label: 'Adverbien' },
   { key: 'verb', label: 'Verben' },
+  { key: 'preposition', label: 'Präpositionen' },
 ];
 const LEVELS = ['A1','A2','B1'];
 const CATEGORY_LABELS = {

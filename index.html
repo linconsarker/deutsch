@@ -244,7 +244,7 @@
       if (!frames[tab]) {
         const frame = document.createElement("iframe");
         frame.title = document.querySelector(`[data-tab="${tab}"] .tab-label`).textContent.trim();
-        frame.src = `apps/${tab}.html?v=20260908`;
+        frame.src = `apps/${tab}.html?v=20260911`;
         frame.className = "active";
         framesElement.appendChild(frame);
         frames[tab] = frame;
