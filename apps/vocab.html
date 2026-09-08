@@ -340,6 +340,8 @@ button:active{transform:translateY(1px);}
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../shared/auth.js"></script>
 </head>
 <body>
 <nav class="site-navbar" aria-label="Practice activities">
@@ -526,6 +528,69 @@ function loadJSON(key, fallback){
   try{ const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : fallback; }catch(e){ return fallback; }
 }
 function saveJSON(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+let cloudUserId = null;
+let cloudSaveTimer = null;
+let cloudSyncInFlight = Promise.resolve();
+
+function queueCloudProgressSave(){
+  if(!cloudUserId) return;
+  clearTimeout(cloudSaveTimer);
+  cloudSaveTimer = setTimeout(()=>{
+    cloudSyncInFlight = cloudSyncInFlight.then(async()=>{
+      const client = DeutschAuth.getClient();
+      if(!client || !cloudUserId) return;
+      const { error } = await client.from('user_progress').upsert({
+        user_id: cloudUserId,
+        vocabulary: progress,
+        updated_at: new Date().toISOString()
+      });
+      if(error) console.warn('Could not save vocabulary progress:', error.message);
+    }).catch(error=>console.warn('Could not save vocabulary progress:', error));
+  }, 250);
+}
+
+async function syncCloudProgress(session){
+  const user = session && session.user;
+  if(!user){
+    cloudUserId = null;
+    return;
+  }
+  const client = DeutschAuth.getClient();
+  if(!client) return;
+  cloudUserId = user.id;
+  DeutschAuth.setScope(user);
+  const { data, error } = await client.from('user_progress').select('vocabulary').eq('user_id', user.id).maybeSingle();
+  if(error){
+    console.warn('Could not load vocabulary progress:', error.message);
+    return;
+  }
+  const cloudProgress = data && data.vocabulary && typeof data.vocabulary === 'object' ? data.vocabulary : {};
+  progress = Object.assign({}, cloudProgress, progress);
+  saveJSON(STORAGE_KEY, progress);
+  queueCloudProgressSave();
+}
+
+async function initializeCloudProgress(){
+  if(!window.DeutschAuth) return;
+  const { data, error } = await DeutschAuth.getSession();
+  if(error){
+    console.warn('Could not read authentication session:', error.message);
+    return;
+  }
+  await syncCloudProgress(data && data.session);
+  DeutschAuth.onAuthStateChange((_event, session)=>{
+    syncCloudProgress(session).then(()=>{
+      renderTabs();
+      renderMain();
+    });
+  });
+}
+
+function saveProgress(){
+  saveJSON(STORAGE_KEY, progress);
+  queueCloudProgressSave();
+}
 
 let fontScale = loadJSON(FONTSIZE_KEY, 1);
 if(typeof fontScale !== 'number' || fontScale < 0.75 || fontScale > 1.6) fontScale = 1;
@@ -967,7 +1032,7 @@ function renderLearnedView(){
     btn.addEventListener('click', ()=>{
       const key = btn.dataset.key;
       delete progress[key];
-      saveJSON(STORAGE_KEY, progress);
+      saveProgress();
       const card = CARDS.find(c=>cardKey(c)===key);
       if(card && state[card.type]){
         state[card.type].deck.splice(state[card.type].index, 0, card);
@@ -1016,7 +1081,7 @@ function markAndAdvance(result){
   const card = currentCard();
   if(!card) return;
   progress[cardKey(card)] = result;
-  saveJSON(STORAGE_KEY, progress);
+  saveProgress();
   const st = state[currentType];
   st.index++;
   flipped = false;
@@ -1068,7 +1133,7 @@ document.getElementById('btnReset').addEventListener('click', ()=>{
   if(!confirm('Reset progress for all decks (all levels/categories)?')) return;
   stopAutoPlay();
   progress = {};
-  saveJSON(STORAGE_KEY, progress);
+  saveProgress();
   recentKeys = [];
   saveJSON(RECENT_KEY, recentKeys);
   TYPE_TABS.forEach(t=>rebuildDeck(t.key));
@@ -1166,7 +1231,7 @@ document.getElementById('importFileInput').addEventListener('change', (e)=>{
       }
       progress = Object.assign({}, data.progress);
     }
-    saveJSON(STORAGE_KEY, progress);
+    saveProgress();
     if(Array.isArray(data.activeLevels) && data.activeLevels.length){
       activeLevels = data.activeLevels.filter(l=>LEVELS.includes(l));
       if(activeLevels.length===0) activeLevels = ['A1','A2','B1'];
@@ -1199,12 +1264,14 @@ document.addEventListener('keydown', (e)=>{
   if(e.key==='d' || e.key==='D') markAndAdvance('bad');
 });
 
-renderLevelRow();
-renderCatRow();
-TYPE_TABS.forEach(t=>rebuildDeck(t.key));
-renderTabs();
-renderMain();
-renderRecent();
+initializeCloudProgress().then(()=>{
+  renderLevelRow();
+  renderCatRow();
+  TYPE_TABS.forEach(t=>rebuildDeck(t.key));
+  renderTabs();
+  renderMain();
+  renderRecent();
+});
 
 document.getElementById('btnClearRecent').addEventListener('click', ()=>{
   recentKeys = [];

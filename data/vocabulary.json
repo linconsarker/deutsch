@@ -14979,115 +14979,115 @@
                     }
     },
     {
-        "type":  "adj",
-        "de":  "blau",
-        "stem":  "blau",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Blau",
+        "stem":  "Blau",
+        "article":  "das",
         "en":  "blue",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Der Himmel ist heute blau.",
-                        "en":  "The sky is blue today."
+                        "de":  "Das Blau des Himmels ist heute besonders schön.",
+                        "en":  "The blue of the sky is especially beautiful today."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "gelb",
-        "stem":  "gelb",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Gelb",
+        "stem":  "Gelb",
+        "article":  "das",
         "en":  "yellow",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Meine Lieblingsfarbe ist gelb.",
-                        "en":  "My favorite color is yellow."
+                        "de":  "Das Gelb dieser Blume gefällt mir.",
+                        "en":  "I like the yellow of this flower."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "grau",
-        "stem":  "grau",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Grau",
+        "stem":  "Grau",
+        "article":  "das",
         "en":  "grey",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Meine Großmutter hat graue Haare.",
-                        "en":  "My grandmother has grey hair."
+                        "de":  "Das Grau des Himmels passt zum Wetter.",
+                        "en":  "The grey of the sky matches the weather."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "lila",
-        "stem":  "lila",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Lila",
+        "stem":  "Lila",
+        "article":  "das",
         "en":  "purple",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Ich möchte den lila Schal kaufen.",
-                        "en":  "I would like to buy the purple scarf."
+                        "de":  "Das Lila des Schals gefällt mir.",
+                        "en":  "I like the purple of the scarf."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "orange",
-        "stem":  "orange",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Orange",
+        "stem":  "Orange",
+        "article":  "das",
         "en":  "orange (color)",
         "level":  "A1",
         "category":  "colors",
         "cognate":  true,
         "example":  {
-                        "de":  "Die Karotten sind orange.",
-                        "en":  "The carrots are orange."
+                        "de":  "Das Orange der Karotten ist kräftig.",
+                        "en":  "The orange of the carrots is vivid."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "rot",
-        "stem":  "rot",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Rot",
+        "stem":  "Rot",
+        "article":  "das",
         "en":  "red",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Die Tomaten sind schon rot.",
-                        "en":  "The tomatoes are already red."
+                        "de":  "Das Rot der Tomaten ist leuchtend.",
+                        "en":  "The red of the tomatoes is vivid."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "schwarz",
-        "stem":  "schwarz",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Schwarz",
+        "stem":  "Schwarz",
+        "article":  "das",
         "en":  "black",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Ich trinke meinen Kaffee schwarz.",
-                        "en":  "I drink my coffee black."
+                        "de":  "Das Schwarz der Tinte ist sehr dunkel.",
+                        "en":  "The black of the ink is very dark."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "weiß",
-        "stem":  "weiß",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Weiß",
+        "stem":  "Weiß",
+        "article":  "das",
         "en":  "white",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Im Winter ist alles weiß.",
-                        "en":  "In winter everything is white."
+                        "de":  "Das Weiß des Schnees leuchtet in der Sonne.",
+                        "en":  "The white of the snow shines in the sun."
                     }
     },
     {
@@ -15381,17 +15381,17 @@
                     }
     },
     {
-        "type":  "adj",
-        "de":  "grün",
-        "stem":  "grün",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Grün",
+        "stem":  "Grün",
+        "article":  "das",
         "en":  "green",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Die Ampel ist endlich grün.",
-                        "en":  "The traffic light is finally green."
+                        "de":  "Das Grün der Ampel bedeutet freie Fahrt.",
+                        "en":  "The green of the traffic light means it is safe to go."
                     }
     },
     {
@@ -15527,17 +15527,17 @@
                     }
     },
     {
-        "type":  "adj",
-        "de":  "braun",
-        "stem":  "braun",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Braun",
+        "stem":  "Braun",
+        "article":  "das",
         "en":  "brown",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Im Herbst werden die Blätter braun.",
-                        "en":  "In autumn the leaves turn brown."
+                        "de":  "Das Braun der Blätter passt zum Herbst.",
+                        "en":  "The brown of the leaves suits autumn."
                     }
     },
     {
@@ -76142,73 +76142,73 @@
                     }
     },
     {
-        "type":  "adj",
-        "de":  "rosa",
-        "stem":  "rosa",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Rosa",
+        "stem":  "Rosa",
+        "article":  "das",
         "en":  "pink",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Sie hat ein rosa Kleid an.",
-                        "en":  "She is wearing a pink dress."
+                        "de":  "Das Rosa des Kleides ist sehr zart.",
+                        "en":  "The pink of the dress is very delicate."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "türkis",
-        "stem":  "türkis",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Türkis",
+        "stem":  "Türkis",
+        "article":  "das",
         "en":  "turquoise",
         "level":  "A1",
         "category":  "colors",
         "cognate":  true,
         "example":  {
-                        "de":  "Das Meer ist hier türkis.",
-                        "en":  "The sea is turquoise here."
+                        "de":  "Das Türkis des Meeres ist wunderschön.",
+                        "en":  "The turquoise of the sea is beautiful."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "violett",
-        "stem":  "violett",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Violett",
+        "stem":  "Violett",
+        "article":  "das",
         "en":  "violet/purple",
         "level":  "A1",
         "category":  "colors",
         "cognate":  true,
         "example":  {
-                        "de":  "Die Blume hat violette Blüten.",
-                        "en":  "The flower has violet blossoms."
+                        "de":  "Das Violett der Blüten ist intensiv.",
+                        "en":  "The violet of the blossoms is intense."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "beige",
-        "stem":  "beige",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Beige",
+        "stem":  "Beige",
+        "article":  "das",
         "en":  "beige",
         "level":  "A1",
         "category":  "colors",
         "cognate":  true,
         "example":  {
-                        "de":  "Sie trägt einen beigen Mantel.",
-                        "en":  "She is wearing a beige coat."
+                        "de":  "Das Beige des Mantels ist dezent.",
+                        "en":  "The beige of the coat is understated."
                     }
     },
     {
-        "type":  "adj",
-        "de":  "silber",
-        "stem":  "silber",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Silber",
+        "stem":  "Silber",
+        "article":  "das",
         "en":  "silver",
         "level":  "A1",
         "category":  "colors",
         "cognate":  false,
         "example":  {
-                        "de":  "Das neue Auto ist silber.",
-                        "en":  "The new car is silver."
+                        "de":  "Das Silber des neuen Autos glänzt.",
+                        "en":  "The silver of the new car shines."
                     }
     },
     {
@@ -76268,17 +76268,17 @@
                     }
     },
     {
-        "type":  "adj",
-        "de":  "pink",
-        "stem":  "pink",
-        "article":  null,
+        "type":  "noun",
+        "de":  "das Pink",
+        "stem":  "Pink",
+        "article":  "das",
         "en":  "hot pink",
         "level":  "A1",
         "category":  "colors",
         "cognate":  true,
         "example":  {
-                        "de":  "Ihr Fahrrad ist pink.",
-                        "en":  "Her bicycle is hot pink."
+                        "de":  "Das Pink des Fahrrads fällt sofort auf.",
+                        "en":  "The hot pink of the bicycle stands out immediately."
                     }
     },
     {
