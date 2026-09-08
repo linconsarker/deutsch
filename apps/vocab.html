@@ -803,7 +803,7 @@ function renderLevelProgress(){
   if(!container || !modalContainer) return;
   const levels = ['A1','A2','B1'];
   const markup = levels.map(level=>{
-    const list = CARDS.filter(c=>c.type===currentType && c.level===level && catMatches(c));
+    const list = CARDS.filter(c=>c.level===level);
     const known = list.filter(c=>progress[cardKey(c)]==='good').length;
     const percent = list.length ? Math.round(known/list.length*100) : 0;
     return '<div class="level-progress-item"><div class="level-progress-head"><span class="level-progress-name">'+level+'</span><span>'+known+' / '+list.length+'</span></div><div class="level-progress-track"><div class="level-progress-fill" style="width:'+percent+'%"></div></div></div>';
