@@ -587,6 +587,22 @@ async function initializeCloudProgress(){
   });
 }
 
+window.addEventListener('message', async event=>{
+  if(!event.data || event.data.type !== 'deutsch-auth-session') return;
+  const client = DeutschAuth.getClient();
+  if(!client) return;
+  if(event.data.session){
+    const { error } = await client.auth.setSession(event.data.session);
+    if(error){
+      console.warn('Could not apply the shared authentication session:', error.message);
+      return;
+    }
+  }
+  await syncCloudProgress(event.data.session);
+  renderTabs();
+  renderMain();
+});
+
 function saveProgress(){
   saveJSON(STORAGE_KEY, progress);
   queueCloudProgressSave();

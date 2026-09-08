@@ -187,6 +187,14 @@
     const authStatus = document.getElementById("authStatus");
     let authMode = "signin";
     let currentUserId = DeutschAuth.getScope();
+    let currentSession = null;
+
+    function broadcastSession(session) {
+      currentSession = session || null;
+      Object.values(frames).forEach((frame) => {
+        frame.contentWindow?.postMessage({ type: "deutsch-auth-session", session: currentSession }, "*");
+      });
+    }
 
     function openAuth(mode) {
       authMode = mode;
@@ -230,7 +238,11 @@
     });
 
     DeutschAuth.getSession().then(({ data }) => refreshAccount(data.session?.user || null));
-    DeutschAuth.onAuthStateChange((_event, session) => refreshAccount(session?.user || null));
+    DeutschAuth.getSession().then(({ data }) => broadcastSession(data.session || null));
+    DeutschAuth.onAuthStateChange((_event, session) => {
+      refreshAccount(session?.user || null);
+      broadcastSession(session || null);
+    });
 
     function activateTab(tab) {
       document.querySelectorAll(".tab-btn").forEach((button) => {
@@ -246,6 +258,7 @@
         frame.title = document.querySelector(`[data-tab="${tab}"] .tab-label`).textContent.trim();
         frame.src = `apps/${tab}.html?v=20260912`;
         frame.className = "active";
+        frame.addEventListener("load", () => broadcastSession(currentSession), { once: true });
         framesElement.appendChild(frame);
         frames[tab] = frame;
         loadingMessage?.remove();
