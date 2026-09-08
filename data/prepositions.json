@@ -24940,5 +24940,104 @@
                      ],
         "tr":  "I\u0027m interested in music.",
         "note":  "sich interessieren für + Akkusativ; the mass noun Musik takes no article."
+    },
+    {
+        "id":  736,
+        "category":  "akk",
+        "mode":  "mit",
+        "case":  "Akkusativ",
+        "articleType":  "bestimmt",
+        "prep":  "wider",
+        "refLabel":  "wider",
+        "segments":  [
+                         {
+                             "text":  "Er handelt "
+                         },
+                         {
+                             "blank":  "prep",
+                             "ans":  [
+                                         "wider"
+                                     ]
+                         },
+                         {
+                             "text":  " "
+                         },
+                         {
+                             "blank":  "artikel",
+                             "ans":  [
+                                         "das"
+                                     ]
+                         },
+                         {
+                             "text":  " Gesetz."
+                         }
+                     ],
+        "tr":  "He acts against the law."
+    },
+    {
+        "id":  737,
+        "category":  "gen",
+        "mode":  "mit",
+        "case":  "Genitiv",
+        "articleType":  "bestimmt",
+        "prep":  "aufgrund",
+        "refLabel":  "aufgrund",
+        "segments":  [
+                         {
+                             "text":  ""
+                         },
+                         {
+                             "blank":  "prep",
+                             "ans":  [
+                                         "aufgrund"
+                                     ]
+                         },
+                         {
+                             "text":  " "
+                         },
+                         {
+                             "blank":  "artikel",
+                             "ans":  [
+                                         "des"
+                                     ]
+                         },
+                         {
+                             "text":  " Regens fällt das Spiel aus."
+                         }
+                     ],
+        "tr":  "Because of the rain, the game is cancelled."
+    },
+    {
+        "id":  738,
+        "category":  "gen",
+        "mode":  "mit",
+        "case":  "Genitiv",
+        "articleType":  "bestimmt",
+        "prep":  "infolge",
+        "refLabel":  "infolge",
+        "segments":  [
+                         {
+                             "text":  ""
+                         },
+                         {
+                             "blank":  "prep",
+                             "ans":  [
+                                         "infolge"
+                                     ]
+                         },
+                         {
+                             "text":  " "
+                         },
+                         {
+                             "blank":  "artikel",
+                             "ans":  [
+                                         "des"
+                                     ]
+                         },
+                         {
+                             "text":  " Unfalls ist die Straße gesperrt."
+                         }
+                     ],
+        "tr":  "As a result of the accident, the road is closed."
     }
 ]

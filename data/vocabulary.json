@@ -19421,7 +19421,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "aber",
         "stem":  "aber",
         "article":  null,
@@ -20214,7 +20214,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "weil",
         "stem":  "weil",
         "article":  null,
@@ -23121,7 +23121,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "dass",
         "stem":  "dass",
         "article":  null,
@@ -24737,7 +24737,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "wenn",
         "stem":  "wenn",
         "article":  null,
@@ -27764,7 +27764,7 @@
         "mnemonic":  "DA (that) + DURCH (through) = \u0027through that\u0027 — THROUGH THAT action, as a result."
     },
     {
-        "type":  "adverb",
+        "type":  "conjunction",
         "de":  "damit",
         "stem":  "damit",
         "article":  null,
@@ -28741,7 +28741,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "ob",
         "stem":  "ob",
         "article":  null,
@@ -30530,7 +30530,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "denn",
         "stem":  "denn",
         "article":  null,
@@ -34252,7 +34252,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "als",
         "stem":  "als",
         "article":  null,
@@ -36557,7 +36557,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "sondern",
         "stem":  "sondern",
         "article":  null,
@@ -40199,7 +40199,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "falls",
         "stem":  "falls",
         "article":  null,
@@ -40592,7 +40592,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "seitdem",
         "stem":  "seitdem",
         "article":  null,
@@ -43164,7 +43164,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "bevor",
         "stem":  "bevor",
         "article":  null,
@@ -50088,7 +50088,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "nachdem",
         "stem":  "nachdem",
         "article":  null,
@@ -52746,7 +52746,7 @@
                     }
     },
     {
-        "type":  "adj",
+        "type":  "conjunction",
         "de":  "sobald",
         "stem":  "sobald",
         "article":  null,
@@ -77245,6 +77245,384 @@
         "example":  {
                         "de":  "Zu den Pommes esse ich lieber Mayonnaise.",
                         "en":  "With the fries I prefer mayonnaise."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "durch",
+        "stem":  "durch",
+        "article":  null,
+        "en":  "through, by",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Wir gehen durch den Park.",
+                        "en":  "We are walking through the park."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "für",
+        "stem":  "für",
+        "article":  null,
+        "en":  "for",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Das Geschenk ist für meine Schwester.",
+                        "en":  "The present is for my sister."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "ohne",
+        "stem":  "ohne",
+        "article":  null,
+        "en":  "without",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Ich trinke Kaffee ohne Zucker.",
+                        "en":  "I drink coffee without sugar."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "wider",
+        "stem":  "wider",
+        "article":  null,
+        "en":  "against",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Er handelt wider das Gesetz.",
+                        "en":  "He acts against the law."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "bei",
+        "stem":  "bei",
+        "article":  null,
+        "en":  "at, near, with",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Ich wohne bei meinen Eltern.",
+                        "en":  "I live with my parents."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "mit",
+        "stem":  "mit",
+        "article":  null,
+        "en":  "with, by",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Wir fahren mit dem Zug.",
+                        "en":  "We are travelling by train."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "nach",
+        "stem":  "nach",
+        "article":  null,
+        "en":  "after, to",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Nach dem Essen trinken wir Kaffee.",
+                        "en":  "After the meal, we drink coffee."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "seit",
+        "stem":  "seit",
+        "article":  null,
+        "en":  "since, for",
+        "level":  "A2",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Ich lerne seit einem Jahr Deutsch.",
+                        "en":  "I have been learning German for a year."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "von",
+        "stem":  "von",
+        "article":  null,
+        "en":  "from, of, by",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Der Brief ist von meiner Mutter.",
+                        "en":  "The letter is from my mother."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "an",
+        "stem":  "an",
+        "article":  null,
+        "en":  "at, on",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Das Bild hängt an der Wand.",
+                        "en":  "The picture is hanging on the wall."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "in",
+        "stem":  "in",
+        "article":  null,
+        "en":  "in, into",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Die Kinder spielen im Garten.",
+                        "en":  "The children are playing in the garden."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "neben",
+        "stem":  "neben",
+        "article":  null,
+        "en":  "next to, beside",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Das Fahrrad steht neben dem Auto.",
+                        "en":  "The bicycle is next to the car."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "vor",
+        "stem":  "vor",
+        "article":  null,
+        "en":  "in front of, before",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Wir treffen uns vor dem Kino.",
+                        "en":  "We are meeting in front of the cinema."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "aufgrund",
+        "stem":  "aufgrund",
+        "article":  null,
+        "en":  "on account of",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Aufgrund des Regens fällt das Spiel aus.",
+                        "en":  "Because of the rain, the game is cancelled."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "infolge",
+        "stem":  "infolge",
+        "article":  null,
+        "en":  "as a result of",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Infolge des Unfalls ist die Straße gesperrt.",
+                        "en":  "As a result of the accident, the road is closed."
+                    }
+    },
+    {
+        "type":  "preposition",
+        "de":  "anstatt",
+        "stem":  "anstatt",
+        "article":  null,
+        "en":  "instead of",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Anstatt des Autos nehmen wir den Zug.",
+                        "en":  "Instead of the car, we are taking the train."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "und",
+        "stem":  "und",
+        "article":  null,
+        "en":  "and",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Anna und Paul lernen Deutsch.",
+                        "en":  "Anna and Paul are learning German."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "oder",
+        "stem":  "oder",
+        "article":  null,
+        "en":  "or",
+        "level":  "A1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Möchtest du Tee oder Kaffee?",
+                        "en":  "Would you like tea or coffee?"
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "doch",
+        "stem":  "doch",
+        "article":  null,
+        "en":  "but, however",
+        "level":  "A2",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Ich bin müde, doch ich arbeite weiter.",
+                        "en":  "I am tired, but I keep working."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "sowie",
+        "stem":  "sowie",
+        "article":  null,
+        "en":  "as well as",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Wir verkaufen Brot sowie frisches Obst.",
+                        "en":  "We sell bread as well as fresh fruit."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "beziehungsweise",
+        "stem":  "beziehungsweise",
+        "article":  null,
+        "en":  "or rather, respectively",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Wir treffen uns am Samstag beziehungsweise Sonntag.",
+                        "en":  "We will meet on Saturday or Sunday, respectively."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "da",
+        "stem":  "da",
+        "article":  null,
+        "en":  "since, because",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Da es regnet, bleiben wir zu Hause.",
+                        "en":  "Since it is raining, we are staying home."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "obwohl",
+        "stem":  "obwohl",
+        "article":  null,
+        "en":  "although",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Obwohl es regnet, gehen wir spazieren.",
+                        "en":  "Although it is raining, we are going for a walk."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "solange",
+        "stem":  "solange",
+        "article":  null,
+        "en":  "as long as, while",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Solange du übst, wirst du besser.",
+                        "en":  "As long as you practise, you will improve."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "indem",
+        "stem":  "indem",
+        "article":  null,
+        "en":  "by, while",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Du lernst, indem du jeden Tag übst.",
+                        "en":  "You learn by practising every day."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "bis",
+        "stem":  "bis",
+        "article":  null,
+        "en":  "until",
+        "level":  "A2",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Warte, bis ich zurückkomme.",
+                        "en":  "Wait until I come back."
+                    }
+    },
+    {
+        "type":  "conjunction",
+        "de":  "während",
+        "stem":  "während",
+        "article":  null,
+        "en":  "while, whereas",
+        "level":  "B1",
+        "category":  "general",
+        "cognate":  false,
+        "example":  {
+                        "de":  "Während ich koche, deckt er den Tisch.",
+                        "en":  "While I cook, he sets the table."
                     }
     }
 ]
