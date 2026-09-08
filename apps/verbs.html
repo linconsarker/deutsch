@@ -343,8 +343,10 @@ main { padding: 24px 28px 32px; }
   display: grid;
   grid-template-columns: 30px 150px 50px minmax(160px, 1fr) 66px 120px 66px 148px 178px 20px;
   align-items: center;
-  column-gap: 14px;
-  padding: 14px 20px;
+  align-content: center;
+  column-gap: 8px;
+  padding: 14px 14px;
+  height: 106px;
   cursor: pointer;
   user-select: none;
 }
@@ -446,7 +448,7 @@ main { padding: 24px 28px 32px; }
 }
 .inf {
   font-family: var(--du-mono);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -468,25 +470,25 @@ main { padding: 24px 28px 32px; }
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
   min-width: 0;
-  overflow: hidden;
+  height: 42px;
+  align-content: center;
+  overflow: visible;
 }
 .en-meaning {
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   color: #bbb;
   background: rgba(255,255,255,0.05);
   padding: 2px 10px;
   border-radius: 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 16px;
+  overflow-wrap: anywhere;
   max-width: 100%;
 }
 .bn-meaning {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   color: var(--muted);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 16px;
+  overflow-wrap: anywhere;
   max-width: 100%;
 }
 .expand-btn {
@@ -845,7 +847,12 @@ main { padding: 24px 28px 32px; }
     align-items: center;
   }
   .inf { flex: 0 0 auto; }
-  .meanings { flex: 1 1 100%; order: 4; overflow: visible; }
+  .meanings {
+    flex: 1 1 100%;
+    order: 4;
+    gap: 6px;
+    width: 100%;
+  }
   .conj-col { flex: 0 0 auto; }
   .expand-btn { margin-left: auto; }
 }

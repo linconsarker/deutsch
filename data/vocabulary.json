@@ -66060,20 +66060,6 @@
                     }
     },
     {
-        "type":  "noun",
-        "de":  "das Einkaufszentrum",
-        "stem":  "Einkaufszentrum2",
-        "article":  "das",
-        "en":  "shopping center",
-        "level":  "A2",
-        "category":  "shopping_clothing",
-        "cognate":  false,
-        "example":  {
-                        "de":  "Vor dem Einkaufszentrum ist ein großer Parkplatz.",
-                        "en":  "In front of the shopping center there is a big parking lot."
-                    }
-    },
-    {
         "type":  "verb",
         "de":  "einverstanden sein",
         "stem":  "einverstanden sein",
