@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Translation Practice</title>
+  <link rel="stylesheet" href="../shared/theme.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+    main { width: min(860px, 100%); flex: 1; min-height: 0; margin: 0 auto; padding: clamp(12px, 3vh, 28px) 16px; display: flex; flex-direction: column; }
+    .top { display:flex; justify-content:space-between; gap:16px; align-items:start; margin-bottom:18px; }
+    h1 { margin:0; font-size:clamp(1.45rem, 4vw, 2rem); }
+    .subtitle { margin:5px 0 0; color:var(--du-muted); }
+    .score { padding:7px 12px; border:1px solid var(--du-line); border-radius:999px; background:var(--du-surface); color:var(--du-muted); font-size:.78rem; white-space:nowrap; }
+    .score strong { color:var(--du-ink); font-size:1rem; }
+    .filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+    .filters label { display:grid; gap:4px; color:var(--du-muted); font-size:.7rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .filters .du-field { min-width:145px; }
+    .card { padding:clamp(20px, 5vw, 38px); border:1px solid var(--du-line); border-radius:var(--du-r-lg); background:var(--du-surface); box-shadow:var(--du-shadow); }
+    .eyebrow { color:var(--du-action-dark); font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+    .sentence { margin:10px 0 18px; font-size:clamp(1.15rem, 3.6vw, 1.85rem); font-weight:700; line-height:1.35; }
+    textarea { width:100%; height:76px; min-height:76px; resize:none; padding:10px 12px; border:1px solid var(--du-line); border-radius:var(--du-r-sm); background:#fff; color:var(--du-ink); font:1rem var(--du-font); line-height:1.5; outline:none; }
+    textarea:focus { border-color:var(--du-action); box-shadow:0 0 0 3px rgba(200,107,60,.12); }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+    .feedback { min-height:54px; margin-top:18px; padding:12px 14px; border-radius:var(--du-r-sm); line-height:1.45; }
+    .feedback:empty { display:none; }
+    .feedback.correct { background:#e7f4ed; color:#226147; }
+    .feedback.incorrect { background:#fbebe6; color:#823b2c; }
+    .feedback.hint { background:#f5f0e5; color:var(--du-ink-soft); }
+    .correction { display:block; margin-top:7px; color:var(--du-ink); font-weight:700; }
+    .meta { margin:12px 0 0; color:var(--du-muted); font-size:.78rem; text-align:center; }
+    kbd { padding:2px 5px; border:1px solid var(--du-line-strong); border-radius:4px; background:var(--du-surface-2); font:inherit; }
+    @media (max-width:560px) { main { padding:10px 12px; } .top { align-items:center; flex-direction:row; margin-bottom:10px; } h1 { font-size:1.25rem; } .subtitle { font-size:.8rem; } .filters { margin-bottom:10px; } .filters label { flex:1; } .filters .du-field { width:100%; min-width:0; } .card { padding:18px; } }
+  </style>
+</head>
+<body>
+  <nav class="site-navbar" aria-label="Practice activities">
+    <div class="site-links">
+      <a class="site-link" href="verbs.html">German Verbs</a>
+      <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
+      <a class="site-link" href="prep.html">Preposition Practice</a>
+      <a class="site-link" href="articles.html">Article Practice</a>
+      <a class="site-link active" href="translation.html">Translation Practice</a>
+    </div>
+  </nav>
+  <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = 'none';</script>
+  <main>
+    <div class="top">
+      <div><h1>Translation Practice</h1><p class="subtitle">Translate each English example sentence into German.</p></div>
+      <div class="score"><strong id="score">0 / 0</strong> correct</div>
+    </div>
+    <div class="filters">
+      <label>Level <select id="level" class="du-field"><option value="ALL">All levels</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option></select></label>
+      <label>Category <select id="category" class="du-field"></select></label>
+    </div>
+    <section class="card" aria-live="polite">
+      <div class="eyebrow">Translate into German</div>
+      <div class="sentence" id="englishSentence">Loading sentence…</div>
+      <label class="eyebrow" for="answer">Your German translation</label>
+      <textarea id="answer" lang="de" spellcheck="true" placeholder="Type the German sentence here…" autocomplete="off"></textarea>
+      <div class="actions">
+        <button class="du-btn is-accent" id="check" type="button">Check translation</button>
+        <button class="du-btn" id="hint" type="button">Show correction</button>
+        <button class="du-btn" id="skip" type="button">Skip sentence</button>
+        <button class="du-btn" id="next" type="button">Next sentence</button>
+      </div>
+      <div class="feedback" id="feedback" role="status"></div>
+    </section>
+    <p class="meta"><span id="available">0</span> sentence examples available. Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to check.</p>
+  </main>
+  <script>
+    function loadJson(path) {
+      const request = new XMLHttpRequest(); request.open('GET', path, false); request.send(null);
+      if (request.status !== 200 && request.status !== 0) throw new Error('Could not load ' + path);
+      return JSON.parse(request.responseText);
+    }
+    const labels = { general:'General', food:'Food & Drink', health:'Health', travel_transport:'Travel & Transport', home_living:'Home & Living', work_office:'Work & Profession', tech_media:'Tech & Media', people_relationships:'People & Family', school_education:'School & Education', sports_leisure:'Sports & Leisure', emotions_personality:'Emotions', events_celebrations:'Events & Celebrations', shopping_clothing:'Shopping & Clothing', communication:'Communication', colors:'Colors', body_parts:'Body Parts', fruits_vegetables:'Fruits & Vegetables', time_seasons:'Time & Seasons', numbers:'Numbers', countries:'Countries', nationality:'Nationality', language:'Language', nature_animals:'Nature & Animals' };
+    const rawCards = loadJson('../data/vocabulary.json');
+    const seen = new Set();
+    const sentences = rawCards.filter(card => {
+      const pair = card.example;
+      if (!pair || !pair.en || !pair.de) return false;
+      const key = pair.en + '\u0000' + pair.de;
+      if (seen.has(key)) return false;
+      seen.add(key); return true;
+    });
+    const level = document.getElementById('level'), category = document.getElementById('category'), answer = document.getElementById('answer');
+    const englishSentence = document.getElementById('englishSentence'), feedback = document.getElementById('feedback');
+    let current, correct = 0, attempts = 0;
+    const categories = [...new Set(sentences.map(card => card.category))].sort((a,b) => (labels[a] || a).localeCompare(labels[b] || b));
+    category.innerHTML = '<option value="ALL">All categories</option>' + categories.map(key => `<option value="${key}">${labels[key] || key}</option>`).join('');
+    function candidates() { return sentences.filter(card => (level.value === 'ALL' || card.level === level.value) && (category.value === 'ALL' || card.category === category.value)); }
+    function normalize(text) { return text.trim().toLocaleLowerCase('de').replace(/[„“”]/g, '"').replace(/[’‘]/g, "'").replace(/\s+/g, ' ').replace(/[.!?]+$/g, ''); }
+    function updateAvailable() { document.getElementById('available').textContent = candidates().length; }
+    function setFeedback(type, html) { feedback.className = 'feedback ' + type; feedback.innerHTML = html; }
+    function nextSentence() {
+      const pool = candidates();
+      if (!pool.length) { current = null; englishSentence.textContent = 'No sentence examples match these filters.'; answer.value = ''; answer.disabled = true; document.getElementById('check').disabled = true; document.getElementById('hint').disabled = true; feedback.textContent = ''; return; }
+      let next = pool[Math.floor(Math.random() * pool.length)];
+      if (pool.length > 1) while (next === current) next = pool[Math.floor(Math.random() * pool.length)];
+      current = next; englishSentence.textContent = current.example.en; answer.value = ''; answer.disabled = false; document.getElementById('check').disabled = false; document.getElementById('hint').disabled = false; feedback.textContent = ''; feedback.className = 'feedback'; answer.focus();
+    }
+    function showCorrection(prefix, type) { setFeedback(type, `${prefix}<span class="correction" lang="de">${current.example.de}</span>`); }
+    function checkAnswer() {
+      if (!current || !answer.value.trim()) { setFeedback('hint', 'Write your German translation first.'); return; }
+      attempts++;
+      if (normalize(answer.value) === normalize(current.example.de)) { correct++; setFeedback('correct', 'Correct — well done!'); }
+      else showCorrection('Not quite. Compare your answer with this suggested correction:', 'incorrect');
+      document.getElementById('score').textContent = `${correct} / ${attempts}`;
+    }
+    document.getElementById('check').addEventListener('click', checkAnswer);
+    document.getElementById('hint').addEventListener('click', () => current && showCorrection('Suggested correction:', 'hint'));
+    document.getElementById('skip').addEventListener('click', nextSentence);
+    document.getElementById('next').addEventListener('click', nextSentence);
+    answer.addEventListener('keydown', event => { if (event.key === 'Enter' && event.ctrlKey) { event.preventDefault(); checkAnswer(); } });
+    level.addEventListener('change', () => { updateAvailable(); nextSentence(); });
+    category.addEventListener('change', () => { updateAvailable(); nextSentence(); });
+    updateAvailable(); nextSentence();
+  </script>
+</body>
+</html>

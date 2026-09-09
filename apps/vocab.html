@@ -350,6 +350,7 @@ button:active{transform:translateY(1px);}
     <a class="site-link active" href="vocab.html">Vocabulary Flashcards</a>
     <a class="site-link" href="prep.html">Preposition Practice</a>
     <a class="site-link" href="articles.html">Article Practice</a>
+    <a class="site-link" href="translation.html">Translation Practice</a>
   </div>
 </nav>
 <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
@@ -507,15 +508,33 @@ const TYPE_TABS = [
 const LEVELS = ['A1','A2','B1'];
 const CATEGORY_LABELS = {
   general: 'General', food: 'Food & Drink', health: 'Health', travel_transport: 'Travel & Transport',
-  home_living: 'Home & Living', work_office: 'Work & Office', tech_media: 'Tech & Media',
+  home_living: 'Home & Living', work_office: 'Work & Profession', tech_media: 'Tech & Media',
   people_relationships: 'People & Family', school_education: 'School & Education', sports_leisure: 'Sports & Leisure',
-  emotions_personality: 'Emotions', events_celebrations: 'Events & Celebrations', nature_animals: 'Nature & Animals',
+  emotions_personality: 'Emotions', events_celebrations: 'Events & Celebrations',
   shopping_clothing: 'Shopping & Clothing', communication: 'Communication',
-  language: 'Language', countries: 'Countries', nationality: 'Nationality', colors: 'Colors',
+  animals_birds: 'Animals and Birds', countries_language: 'Countries and Language', weather_nature_climate: 'Weather, Nature and Climate', colors: 'Colors',
   body_parts: 'Body Parts', fruits_vegetables: 'Fruits & Vegetables', time_seasons: 'Time & Seasons',
   numbers: 'Numbers'
 };
-const PRIMARY_CATS = ['food','travel_transport','shopping_clothing','home_living','work_office','tech_media','school_education','sports_leisure','colors','body_parts','fruits_vegetables','time_seasons','countries','language'];
+const ANIMALS_AND_BIRDS = new Set([
+  'der Fisch', 'der Hund', 'der Tiertrainer', 'der Elefant', 'reiten', 'das Pferd', 'das Tier', 'die Katze',
+  'das Meerschweinchen', 'die Schildkröte', 'das Tierheim', 'der Bär', 'das Bärchen', 'der Hase', 'das Schwein',
+  'der Tiername', 'das Futter', 'der Vogel', 'das Lieblingstier', 'die Ente', 'der Schwan', 'das Schweinchen',
+  'die Tiergeschichte', 'der Tiger', 'die Kuh', 'der Feldhase', 'das Tierbild', 'die Tiermalerei', 'das Schaf',
+  'die Ziege', 'der Affe', 'der Löwe', 'das Häslein', 'der Hamster', 'die Taube', 'das Vieh', 'fischen'
+]);
+const WEATHER_NATURE_CLIMATE = new Set([
+  'der Fluss', 'das Meer', 'der See', 'der Berg', 'der Schnee', 'der Regen', 'das Wetter', 'die Palme', 'die Sonne',
+  'das Wattenmeer', 'die Nordsee', 'die Regenjacke', 'die Ostseeküste', 'die Ostsee', 'regnen', 'schneien', 'die Blume',
+  'der Wald', 'der Baum', 'die Natur', 'die Pflanze', 'die Seehöhe', 'die Wolke', 'der Harz', 'der Sonnenaufgang',
+  'der Zitronenbaum', 'die Pflanzenfaser', 'der Pflanzenstiel', 'regnerisch', 'sonnig', 'das Regenrisiko', 'die Blumenzwiebel',
+  'pflanzen', 'der Himmel', 'das Feld', 'die Grünanlage', 'die Eishöhle', 'das Glatteis', 'die Hallig', 'der Nationalpark',
+  'der Nebel', 'das Tal', 'die Berge', 'die Hitze', 'das Mistwetter', 'der Wetterbericht', 'windig', 'die Tulpe',
+  'die Sonnenblume', 'das Gänseblümchen', 'die Lilie', 'das Veilchen', 'der Kaktus', 'die Orchidee', 'die Margerite',
+  'die Eiche', 'die Buche', 'die Birke', 'die Tanne', 'die Fichte', 'der Ahorn', 'die Kastanie', 'der Apfelbaum',
+  'der Nadelbaum', 'der Laubbaum'
+]);
+const SPECIAL_CATEGORIES = ['animals_birds', 'countries_language', 'weather_nature_climate'];
 
 const USER_SCOPE = (()=>{ try{ return localStorage.getItem('deutsch-auth-user-id') || 'guest'; }catch(e){ return 'guest'; } })();
 const STORAGE_KEY = 'wortschatz-progress-v1:' + USER_SCOPE;
@@ -618,15 +637,13 @@ applyFontScale();
 let progress = loadJSON(STORAGE_KEY, {});
 let activeLevels = loadJSON(LEVEL_KEY, ['A1','A2','B1']).filter(l=>LEVELS.includes(l));
 if(activeLevels.length===0) activeLevels = ['A1','A2','B1'];
-const ALL_CATEGORIES = Array.from(new Set(CARDS.map(c=>c.category))).sort((a,b)=>{
-  const ai = PRIMARY_CATS.indexOf(a), bi = PRIMARY_CATS.indexOf(b);
-  if(a==='general') return 1; if(b==='general') return -1;
-  if(ai===-1 && bi===-1) return (CATEGORY_LABELS[a]||a).localeCompare(CATEGORY_LABELS[b]||b);
-  if(ai===-1) return 1; if(bi===-1) return -1;
-  return ai-bi;
-});
+const REPLACED_CATEGORIES = new Set(['nature_animals', 'countries', 'nationality', 'language']);
+const ALL_CATEGORIES = Array.from(new Set(
+  CARDS.map(c=>c.category).filter(cat=>!REPLACED_CATEGORIES.has(cat)).concat(SPECIAL_CATEGORIES)
+)).sort((a,b)=>(CATEGORY_LABELS[a]||a).localeCompare(CATEGORY_LABELS[b]||b));
 let activeCat = loadJSON(CAT_KEY, 'ALL');
 if(typeof activeCat !== 'string') activeCat = 'ALL';
+if(!['ALL', 'COGNATE', 'OPPOSITE'].concat(ALL_CATEGORIES).includes(activeCat)) activeCat = 'ALL';
 
 function cardKey(c){ return c.type + '::' + c.de; }
 const CARD_BY_KEY = new Map(CARDS.map(c=>[cardKey(c), c]));
@@ -677,6 +694,9 @@ function catMatches(c){
   if(activeCat === 'ALL') return true;
   if(activeCat === 'COGNATE') return c.cognate;
   if(activeCat === 'OPPOSITE') return !!c.opposite;
+  if(activeCat === 'animals_birds') return ANIMALS_AND_BIRDS.has(c.de);
+  if(activeCat === 'weather_nature_climate') return WEATHER_NATURE_CLIMATE.has(c.de);
+  if(activeCat === 'countries_language') return ['countries','nationality','language'].includes(c.category);
   return c.category === activeCat;
 }
 

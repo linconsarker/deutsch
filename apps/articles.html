@@ -219,6 +219,7 @@
       min-height: 1.4em;
       font-size: clamp(.78rem, 1.9vh, .95rem);
       font-weight: 700;
+      white-space: pre-line;
     }
 
     .feedback.correct { color: var(--success); }
@@ -278,6 +279,7 @@
       <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
       <a class="site-link" href="prep.html">Preposition Practice</a>
       <a class="site-link active" href="articles.html">Article Practice</a>
+      <a class="site-link" href="translation.html">Translation Practice</a>
     </div>
   </nav>
   <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
@@ -404,6 +406,20 @@
       scoreElement.textContent = correct + " / " + attempts;
     }
 
+    function articleReason(card) {
+      const word = card.stem.toLocaleLowerCase("de");
+      const endings = {
+        der: [["ling", "Words ending in -ling are masculine."], ["ismus", "Words ending in -ismus are masculine."], ["or", "Words ending in -or are masculine."], ["er", "Many person and occupation nouns ending in -er are masculine."]],
+        die: [["ung", "Words ending in -ung are feminine."], ["heit", "Words ending in -heit are feminine."], ["keit", "Words ending in -keit are feminine."], ["schaft", "Words ending in -schaft are feminine."], ["tät", "Words ending in -tät are feminine."], ["ion", "Words ending in -ion are feminine."], ["ik", "Words ending in -ik are feminine."], ["ei", "Words ending in -ei are feminine."], ["e", "Many non-compound nouns ending in -e are feminine."]],
+        das: [["chen", "Diminutives ending in -chen are neuter."], ["lein", "Diminutives ending in -lein are neuter."], ["tum", "Words ending in -tum are neuter."], ["ment", "Words ending in -ment are neuter."], ["um", "Many words ending in -um are neuter."]]
+      };
+      const match = endings[card.article].find(([ending]) => word.endsWith(ending));
+      if (match) return match[1];
+      if (card.article === "der" && card.category === "time_seasons") return "Days, months, seasons, and many time words are masculine.";
+      if (card.article === "das" && word.endsWith("en")) return "Infinitives used as nouns are neuter.";
+      return "There is no reliable ending rule here, so learn “" + card.article + " " + card.stem + "” as one vocabulary item.";
+    }
+
     function renderCard() {
       if (!deck.length) {
         wordElement.textContent = "No words found";
@@ -429,10 +445,10 @@
       optionElements.forEach((button) => { button.disabled = true; });
       if (article === card.article) {
         correct += 1;
-        feedbackElement.textContent = "Correct";
+        feedbackElement.textContent = "Correct\nReason: " + articleReason(card);
         feedbackElement.className = "feedback correct";
       } else {
-        feedbackElement.textContent = "The answer is " + card.article;
+        feedbackElement.textContent = "Incorrect — the answer is " + card.article + "\nReason: " + articleReason(card);
         feedbackElement.className = "feedback wrong";
       }
       meaningElement.textContent = card.en;

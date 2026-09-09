@@ -94,7 +94,10 @@
   .cat-tag{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);}
   .remaining{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);white-space:nowrap;}
 
-  .sentence{font-size:clamp(17px,4vw,21px);line-height:1.5;font-weight:500;margin:4px 0 12px;color:var(--text);}
+  .sentence-row{display:flex;align-items:flex-start;gap:8px;margin:4px 0 12px;}
+  .sentence{flex:1;font-size:clamp(17px,4vw,21px);line-height:1.5;font-weight:500;color:var(--text);}
+  .pronunciation-btn{width:30px;height:30px;min-width:30px;padding:0;border-radius:50%;font-size:14px;line-height:1;}
+  .pronunciation-btn:disabled{opacity:.38;cursor:not-allowed;}
   .blank-input{
     font-family:var(--du-mono);font-size:0.92em;font-weight:600;
     margin:0 1px;
@@ -208,6 +211,7 @@
     <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
     <a class="site-link active" href="prep.html">Preposition Practice</a>
     <a class="site-link" href="articles.html">Article Practice</a>
+    <a class="site-link" href="translation.html">Translation Practice</a>
   </div>
 </nav>
 <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
@@ -479,12 +483,38 @@ let currentIndex = 0;
 let current = null;
 let answered = false;
 let activeInput = null;
+let pronunciationAudio = null;
 
 /* ============================================================
    HELPERS
    ============================================================ */
 function normalize(s){
   return s.trim().toLowerCase().replace(/\s+/g," ");
+}
+function fullGermanSentence(item){
+  return item.segments.map(segment => segment.blank ? segment.ans[0] : segment.text).join("").replace(/\s+/g, " ").trim();
+}
+function playPronunciation(){
+  if(!current) return;
+  if(pronunciationAudio){ pronunciationAudio.pause(); pronunciationAudio = null; }
+  const button = document.getElementById("pronunciationBtn");
+  if(!button || button.disabled) return;
+  const sentence = fullGermanSentence(current);
+  const source = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=de&q=" + encodeURIComponent(sentence);
+  const audio = new Audio(source);
+  pronunciationAudio = audio;
+  button.setAttribute("aria-label", "German pronunciation is playing");
+  button.title = "German pronunciation is playing";
+  const resetButton = ()=>{
+    if(pronunciationAudio === audio) pronunciationAudio = null;
+    if(document.body.contains(button)) {
+      button.setAttribute("aria-label", "Play German pronunciation");
+      button.title = "Play German pronunciation";
+    }
+  };
+  audio.addEventListener("ended", resetButton, {once:true});
+  audio.addEventListener("error", resetButton, {once:true});
+  audio.play().catch(resetButton);
 }
 function itemStat(id){
   if(!store.items[id]) store.items[id] = {correct:0, attempts:0, known:false, lastCorrect:null};
@@ -668,6 +698,7 @@ function updateStats(){
    RENDER: CARD
    ============================================================ */
 function renderCard(){
+  if(pronunciationAudio){ pronunciationAudio.pause(); pronunciationAudio = null; }
   const card = document.getElementById("card");
   if(pool.length === 0){
     card.innerHTML = `
@@ -700,7 +731,10 @@ function renderCard(){
         <button class="btn btn-sm btn-link text-decoration-none text-muted" id="knownBtn">${t("knownBtn")}</button>
       </div>
     </div>
-    <div class="sentence" id="sentenceLine"></div>
+    <div class="sentence-row">
+      <div class="sentence" id="sentenceLine"></div>
+      <button class="btn btn-sm btn-outline-secondary pronunciation-btn" id="pronunciationBtn" type="button" aria-label="Play German pronunciation" title="Play German pronunciation" disabled>🔊</button>
+    </div>
     <div class="translation">${current.tr}</div>
     <div class="umlaut-bar" id="umlautBar">
       ${["ä","ö","ü","ß","Ä","Ö","Ü"].map(c=>`<button type="button" class="btn btn-sm btn-outline-secondary umlaut-btn" data-ch="${c}">${c}</button>`).join("")}
@@ -736,6 +770,7 @@ function renderCard(){
   document.getElementById("checkBtn").onclick = ()=>checkAnswer(inputs);
   document.getElementById("skipBtn").onclick = nextCard;
   document.getElementById("knownBtn").onclick = toggleKnown;
+  document.getElementById("pronunciationBtn").onclick = playPronunciation;
   document.querySelectorAll(".umlaut-btn").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       const target = activeInput || inputs[0].el;
@@ -804,7 +839,7 @@ function checkAnswer(inputs){
   }
   saveStore();
 
-  const fullSentence = current.segments.map(s => s.blank ? s.ans[0] : s.text).join("").replace(/\s+/g," ").trim();
+  const fullSentence = fullGermanSentence(current);
   const explanation = explainItem(current);
 
   const fb = document.getElementById("feedback");
@@ -821,6 +856,9 @@ function checkAnswer(inputs){
   const checkBtn = document.getElementById("checkBtn");
   checkBtn.textContent = t("nextBtn");
   checkBtn.onclick = nextCard;
+  const pronunciationBtn = document.getElementById("pronunciationBtn");
+  pronunciationBtn.disabled = false;
+  playPronunciation();
 
   updateStats();
 }
