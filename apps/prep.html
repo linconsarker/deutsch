@@ -19,6 +19,7 @@
     --akk-dim:#f7e9db;
     --dat:var(--du-der);
     --dat-dim:#e4eef6;
+    --wechsel:#75652f;
     --gen:#7A4FA0;
     --gen-dim:#F0E6F7;
     --success:var(--du-success);
@@ -142,6 +143,12 @@
   .ref-note{font-size:12px;color:var(--text-dim);line-height:1.5;margin-bottom:9px;}
   .ref-note b{color:var(--text-muted);}
   .ref-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .ref-tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .ref-tab{
+    border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-muted);
+    font-family:var(--du-font);font-size:12px;font-weight:700;padding:5px 10px;line-height:1.2;
+  }
+  .ref-tab[aria-selected="true"]{background:var(--text);border-color:var(--text);color:var(--surface);}
   .ref-tag{
     font-family:var(--du-mono);font-size:12px;font-weight:600;
     padding:5px 10px;cursor:default;
@@ -175,6 +182,25 @@
   .dot.akk{background:var(--akk);}
   .dot.dat{background:var(--dat);}
   .dot.gen{background:var(--gen);}
+
+  /* PREPOSITION + ARTICLE CONTRACTIONS */
+  .contraction-note{font-size:12px;color:var(--text-dim);line-height:1.45;margin-bottom:9px;}
+  .contraction-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:9px;}
+  .contraction-table{width:100%;min-width:570px;border-collapse:collapse;font-size:12px;}
+  .contraction-table th,.contraction-table td{padding:8px 9px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);vertical-align:middle;text-align:center;}
+  .contraction-table th:last-child,.contraction-table td:last-child{border-right:none;}
+  .contraction-table tr:last-child td{border-bottom:none;}
+  .contraction-table th{background:var(--surface-2);font-family:var(--du-mono);font-size:10px;letter-spacing:.03em;color:var(--text-muted);}
+  .contraction-table td:first-child{font-weight:700;text-align:left;background:color-mix(in srgb,var(--surface-2) 55%,transparent);}
+  .contraction-table em{font-size:11px;color:var(--text-dim);}
+  .contraction{font-family:var(--du-mono);font-weight:700;color:var(--dat);white-space:nowrap;}
+  .contraction.akk{color:var(--akk);}
+  .contraction-group-title{display:block;margin:8px 0 3px;font-family:var(--du-font);font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;}
+  .contraction-group-title:first-child{margin-top:0;}
+  .contraction-group-title.akk{color:var(--akk);}
+  .contraction-group-title.dat{color:var(--dat);}
+  .contraction-group-title.wechsel{color:var(--wechsel);}
+  .contraction-wechsel{display:block;font-family:var(--du-mono);font-size:10.5px;font-weight:700;font-style:normal;line-height:1.4;color:var(--wechsel);}
 
   /* UMLAUT TOOLBAR */
   .umlaut-bar{display:flex;gap:5px;flex-wrap:wrap;margin:0 0 10px;flex-shrink:0;}
@@ -275,8 +301,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalBody">
+        <div class="ref-tab-nav" role="tablist" aria-label="Reference topics">
+          <button class="ref-tab" id="prepositionsTab" type="button" role="tab" aria-selected="true" aria-controls="prepositionsReference" data-ref-tab="prepositions">Präpositionen</button>
+          <button class="ref-tab" id="contractionsTab" type="button" role="tab" aria-selected="false" aria-controls="contractionsReference" data-ref-tab="contractions">Präposition-Artikel-Verschmelzungen</button>
+        </div>
 
-        <section class="ref-section">
+        <section class="ref-section" id="prepositionsReference" data-ref-panel="prepositions" role="tabpanel" aria-labelledby="prepositionsTab">
           <div class="ref-section-head"><span class="dot akk"></span><span id="sectionAkkTitle">Akkusativ</span></div>
           <div class="ref-note" id="noteAkkText">Immer Akkusativ. Merkhilfe: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.</div>
           <div class="ref-tags">
@@ -291,7 +321,7 @@
           </div>
         </section>
 
-        <section class="ref-section">
+        <section class="ref-section" data-ref-panel="prepositions">
           <div class="ref-section-head"><span class="dot dat"></span><span id="sectionDatTitle">Dativ</span></div>
           <div class="ref-note" id="noteDatText">Immer Dativ. Merkhilfe: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.</div>
           <div class="ref-tags">
@@ -308,7 +338,7 @@
           </div>
         </section>
 
-        <section class="ref-section">
+        <section class="ref-section" data-ref-panel="prepositions">
           <div class="ref-section-head" id="sectionWechselTitle">Wechselpräpositionen</div>
           <div class="ref-wohin-wo">
             <div class="akkl"><span class="lbl" id="wohinLabel">Wohin? → Akkusativ</span><span id="wohinDesc">Bewegung zu einem Ziel</span></div>
@@ -327,7 +357,43 @@
           </div>
         </section>
 
-        <section class="ref-section">
+        <section class="ref-section" id="contractionsReference" data-ref-panel="contractions" role="tabpanel" aria-labelledby="contractionsTab" hidden>
+          <div class="ref-section-head" id="sectionContractionsTitle">Präposition-Artikel-Verschmelzungen</div>
+          <div class="contraction-note" id="noteContractionsText">Häufige Kurzformen von Präposition + bestimmtem Artikel. Nach rechts scrollen, um die ganze Tabelle zu sehen.</div>
+          <div class="contraction-table-wrap">
+            <table class="contraction-table" aria-describedby="noteContractionsText">
+              <thead>
+                <tr>
+                  <th id="contractionGenderHead">Genus</th>
+                  <th id="contractionNomHead">Nominativ</th>
+                  <th id="contractionAccHead">Akkusativ</th>
+                  <th id="contractionDatHead">Dativ</th>
+                  <th id="contractionGenHead">Genitiv</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="contractionMasc">Maskulin</td><td>der</td><td>den</td>
+                  <td><span class="contraction-group-title dat" data-contraction-label="dative">Dativpräpositionen</span><span class="contraction">bei dem → beim</span><br><span class="contraction">von dem → vom</span><br><span class="contraction">zu dem → zum</span><span class="contraction-group-title wechsel" data-contraction-label="twoWay">Wechselpräpositionen</span><span class="contraction-wechsel">an dem → am</span><span class="contraction-wechsel">in dem → im</span></td><td>des</td>
+                </tr>
+                <tr>
+                  <td id="contractionFem">Feminin</td><td>die</td><td>die</td>
+                  <td><span class="contraction">zu der → zur</span></td><td>der</td>
+                </tr>
+                <tr>
+                  <td id="contractionNeut">Neutrum</td><td>das</td>
+                  <td><span class="contraction-group-title akk" data-contraction-label="accusative">Akkusativpräpositionen</span><span class="contraction akk">durch das → durchs</span><br><span class="contraction akk">für das → fürs</span><br><span class="contraction akk">um das → ums</span><span class="contraction-group-title wechsel" data-contraction-label="twoWay">Wechselpräpositionen</span><span class="contraction-wechsel">an das → ans</span><span class="contraction-wechsel">auf das → aufs</span><span class="contraction-wechsel">in das → ins</span><span class="contraction-wechsel">über das → übers</span><span class="contraction-wechsel">unter das → unters</span><span class="contraction-wechsel">vor das → vors</span></td>
+                  <td><span class="contraction-group-title dat" data-contraction-label="dative">Dativpräpositionen</span><span class="contraction">bei dem → beim</span><br><span class="contraction">von dem → vom</span><br><span class="contraction">zu dem → zum</span><span class="contraction-group-title wechsel" data-contraction-label="twoWay">Wechselpräpositionen</span><span class="contraction-wechsel">an dem → am</span><span class="contraction-wechsel">in dem → im</span></td><td>des</td>
+                </tr>
+                <tr>
+                  <td id="contractionPlural">Plural</td><td>die</td><td>die</td><td>den</td><td>der</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="ref-section" data-ref-panel="prepositions">
           <div class="ref-section-head"><span class="dot gen"></span><span id="sectionGenTitle">Genitiv</span></div>
           <div class="ref-note" id="noteGenText">Formell Genitiv — in der Umgangssprache oft mit Dativ.</div>
           <div class="ref-tags">
@@ -391,9 +457,13 @@ const STRINGS = {
     knownBtn:"✓ Kenne ich", skipBtn:"Überspringen", checkBtn:"Prüfen", nextBtn:"Weiter →",
     correctLabel:"✓ Richtig", incorrectLabel:"✕ Nicht ganz", correctPrefix:"Richtig:",
     emptyTitle:"Nichts zu üben", emptyBody:"Alle Sätze in dieser Auswahl sind als bekannt markiert, oder kein Satz passt zu den Filtern.",
-    modalTitleText:"Alle Präpositionen", meaningToggleLabel:"Bedeutungen",
+    modalTitleText:"Übersicht", meaningToggleLabel:"Bedeutungen", tabPrepositions:"Präpositionen", tabContractions:"Präposition-Artikel-Verschmelzungen",
     resetConfirm:"Gesamten Fortschritt zurücksetzen? Dies kann nicht rückgängig gemacht werden.",
-    sectionAkkTitle:"Akkusativ", sectionDatTitle:"Dativ", sectionWechselTitle:"Wechselpräpositionen", sectionGenTitle:"Genitiv",
+    sectionAkkTitle:"Akkusativ", sectionDatTitle:"Dativ", sectionWechselTitle:"Wechselpräpositionen", sectionContractionsTitle:"Präposition-Artikel-Verschmelzungen", sectionGenTitle:"Genitiv",
+    noteContractionsText:"Häufige Kurzformen von Präposition + bestimmtem Artikel. Nach rechts scrollen, um die ganze Tabelle zu sehen.",
+    contractionGenderHead:"Genus", contractionNomHead:"Nominativ", contractionAccHead:"Akkusativ", contractionDatHead:"Dativ", contractionGenHead:"Genitiv",
+    contractionMasc:"Maskulin", contractionFem:"Feminin", contractionNeut:"Neutrum", contractionPlural:"Plural",
+    contractionAccusativePrepsTitle:"Akkusativpräpositionen", contractionDativePrepsTitle:"Dativpräpositionen", contractionTwoWayPrepsTitle:"Wechselpräpositionen",
     noteAkkText:'Immer Akkusativ. Merkhilfe: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.',
     noteDatText:'Immer Dativ. Merkhilfe: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.',
     noteGenText:"Formell Genitiv — in der Umgangssprache oft mit Dativ.",
@@ -415,9 +485,13 @@ const STRINGS = {
     knownBtn:"✓ I know this", skipBtn:"Skip", checkBtn:"Check", nextBtn:"Next →",
     correctLabel:"✓ Correct", incorrectLabel:"✕ Not quite", correctPrefix:"Correct:",
     emptyTitle:"Nothing to practice", emptyBody:"All sentences in this selection are marked known, or none match the current filters.",
-    modalTitleText:"All Prepositions", meaningToggleLabel:"Meanings",
+    modalTitleText:"Overview", meaningToggleLabel:"Meanings", tabPrepositions:"Prepositions", tabContractions:"Preposition–article contractions",
     resetConfirm:"Reset all progress? This cannot be undone.",
-    sectionAkkTitle:"Accusative", sectionDatTitle:"Dative", sectionWechselTitle:"Two-way prepositions", sectionGenTitle:"Genitive",
+    sectionAkkTitle:"Accusative", sectionDatTitle:"Dative", sectionWechselTitle:"Two-way prepositions", sectionContractionsTitle:"Preposition–article contractions", sectionGenTitle:"Genitive",
+    noteContractionsText:"Common short forms of a preposition + definite article. Scroll right to see the full table.",
+    contractionGenderHead:"Gender", contractionNomHead:"Nominative", contractionAccHead:"Accusative", contractionDatHead:"Dative", contractionGenHead:"Genitive",
+    contractionMasc:"Masculine", contractionFem:"Feminine", contractionNeut:"Neuter", contractionPlural:"Plural",
+    contractionAccusativePrepsTitle:"Accusative prepositions", contractionDativePrepsTitle:"Dative prepositions", contractionTwoWayPrepsTitle:"Two-way prepositions",
     noteAkkText:'Always accusative. Mnemonic: <b>D·O·G·F·U·B</b> — Durch, Ohne, Gegen, Für, Um, Bis.',
     noteDatText:'Always dative. Mnemonic: <b>aus, bei, mit, nach, seit, von, zu, gegenüber</b>.',
     noteGenText:"Formally genitive — often replaced by dative in everyday speech.",
@@ -612,6 +686,18 @@ const modalBody = document.getElementById("modalBody");
 refToggle.onclick = ()=> refModal.show();
 meaningToggle.addEventListener("change", ()=>{
   modalBody.classList.toggle("show-meanings", meaningToggle.checked);
+});
+function setReferenceTab(tab){
+  document.querySelectorAll("[data-ref-panel]").forEach(panel=>{
+    panel.hidden = panel.dataset.refPanel !== tab;
+  });
+  document.querySelectorAll("[data-ref-tab]").forEach(button=>{
+    button.setAttribute("aria-selected", String(button.dataset.refTab === tab));
+  });
+  meaningToggle.closest(".form-check").hidden = tab === "contractions";
+}
+document.querySelectorAll("[data-ref-tab]").forEach(button=>{
+  button.addEventListener("click", ()=>setReferenceTab(button.dataset.refTab));
 });
 
 /* ============================================================
@@ -917,6 +1003,8 @@ function applyLanguage(){
   document.getElementById("labelStatStreak").textContent = t("labelStatStreak");
   document.getElementById("modalTitleText").textContent = t("modalTitleText");
   document.getElementById("meaningToggleLabel").textContent = t("meaningToggleLabel");
+  document.getElementById("prepositionsTab").textContent = t("tabPrepositions");
+  document.getElementById("contractionsTab").textContent = t("tabContractions");
   document.getElementById("sectionAkkTitle").textContent = t("sectionAkkTitle");
   document.getElementById("noteAkkText").innerHTML = t("noteAkkText");
   document.getElementById("sectionDatTitle").textContent = t("sectionDatTitle");
@@ -926,6 +1014,15 @@ function applyLanguage(){
   document.getElementById("wohinDesc").textContent = t("wohinDesc");
   document.getElementById("woLabel").textContent = t("woLabel");
   document.getElementById("woDesc").textContent = t("woDesc");
+  document.getElementById("sectionContractionsTitle").textContent = t("sectionContractionsTitle");
+  document.getElementById("noteContractionsText").textContent = t("noteContractionsText");
+  ["contractionGenderHead", "contractionNomHead", "contractionAccHead", "contractionDatHead", "contractionGenHead", "contractionMasc", "contractionFem", "contractionNeut", "contractionPlural"].forEach(id=>{
+    document.getElementById(id).textContent = t(id);
+  });
+  const contractionLabels = {accusative:"contractionAccusativePrepsTitle", dative:"contractionDativePrepsTitle", twoWay:"contractionTwoWayPrepsTitle"};
+  document.querySelectorAll("[data-contraction-label]").forEach(el=>{
+    el.textContent = t(contractionLabels[el.dataset.contractionLabel]);
+  });
   document.getElementById("sectionGenTitle").textContent = t("sectionGenTitle");
   document.getElementById("noteGenText").textContent = t("noteGenText");
   document.getElementById("langToggle").textContent = t("langToggleLabel");
