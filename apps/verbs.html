@@ -122,6 +122,46 @@ h1 {
   align-items: center;
   flex-wrap: wrap;
 }
+.filter-panel > .subtype-tabs + .subtype-tabs { margin-top: 8px; }
+.filter-panel {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+.filter-panel > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 34px;
+  padding: 0 11px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--du-surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font-family: var(--du-font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  list-style: none;
+}
+.filter-panel > summary::-webkit-details-marker { display: none; }
+.filter-panel > summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 0.15s ease;
+}
+.filter-panel[open] > summary::after { transform: rotate(225deg) translate(-1px, -1px); }
+.filter-panel > summary:hover { border-color: var(--du-line-strong); background: var(--surface); }
+.filter-panel > summary:focus-visible {
+  outline: 2px solid var(--du-action);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
 .subtype-label {
   flex: 0 0 auto;
   width: 92px;
@@ -893,11 +933,11 @@ main { padding: 24px 28px 32px; }
 <body>
 <nav class="site-navbar" aria-label="Practice activities">
   <div class="site-links">
+    <a class="site-link" href="vocab.html">Dictionary</a>
+    <a class="site-link" href="articles.html">Article Trainer</a>
     <a class="site-link active" href="verbs.html">German Verbs</a>
-    <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
-    <a class="site-link" href="prep.html">Preposition Practice</a>
-    <a class="site-link" href="articles.html">Article Practice</a>
     <a class="site-link" href="pronouns.html">Pronoun Practice</a>
+    <a class="site-link" href="prep.html">Preposition Practice</a>
     <a class="site-link" href="translation.html">Translation Practice</a>
   </div>
 </nav>
@@ -909,6 +949,8 @@ main { padding: 24px 28px 32px; }
     <button class="root-words-btn" id="root-words-btn" onclick="openRootWords()">Root Words (0)</button>
     <button class="btn btn-dark btn-sm add-word-btn" onclick="openWordModal('add')">+ Add Word</button>
   </div>
+  <details class="filter-panel">
+    <summary>Filters</summary>
   <div class="subtype-tabs">
     <span class="subtype-label">Type</span>
     <div class="filter-tabs">
@@ -936,6 +978,7 @@ main { padding: 24px 28px 32px; }
     <button class="btn btn-sm lvl-tab" id="lvl-B1" data-lvl="B1" onclick="setLevel('B1', this)">B1</button>
     <button class="btn btn-sm lvl-tab" id="lvl-B2" data-lvl="B2" onclick="setLevel('B2', this)">B2</button>
   </div>
+  </details>
 </header>
 
 <main id="main"></main>

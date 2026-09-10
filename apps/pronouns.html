@@ -264,11 +264,11 @@
 <body>
 <nav class="site-navbar" aria-label="Practice activities">
   <div class="site-links">
+    <a class="site-link" href="vocab.html">Dictionary</a>
+    <a class="site-link" href="articles.html">Article Trainer</a>
     <a class="site-link" href="verbs.html">German Verbs</a>
-    <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
-    <a class="site-link" href="prep.html">Preposition Practice</a>
-    <a class="site-link" href="articles.html">Article Practice</a>
     <a class="site-link active" href="pronouns.html">Pronoun Practice</a>
+    <a class="site-link" href="prep.html">Preposition Practice</a>
     <a class="site-link" href="translation.html">Translation Practice</a>
   </div>
 </nav>
@@ -339,7 +339,8 @@
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="reflexiv" data-i18n="typeReflexiv">Reflexiv</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="relativ" data-i18n="typeRelativ">Relativ</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="demonstrativ" data-i18n="typeDemonstrativ">Demonstrativ</button>
-          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="frageindef" data-i18n="tabFrageIndef">Frage &amp; Indefinit</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="interrogativ" data-i18n="typeInterrogativ">Frage</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="indefinit" data-i18n="typeIndefinit">Indefinit</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="wortstellung" data-i18n="tabWordOrder">Wortstellung</button>
         </div>
 
@@ -508,8 +509,8 @@
           <div class="ref-note" data-i18n-html="refDemSameNote">Beide werden <b>zusammengeschrieben</b>, und nur der vordere Teil dekliniert: <i>denselben Lehrer</i>, <i>demselben Bus</i>, <i>diejenigen, die …</i></div>
         </section>
 
-        <!-- ===== FRAGE & INDEFINIT ===== -->
-        <section class="ref-section" data-ref-panel="frageindef" role="tabpanel" hidden>
+        <!-- ===== FRAGE ===== -->
+        <section class="ref-section" data-ref-panel="interrogativ" role="tabpanel" hidden>
           <div class="ref-section-head" data-i18n="refIntHead">Fragepronomen</div>
           <div class="tbl-wrap">
             <table class="gt">
@@ -527,6 +528,10 @@
           </div>
           <div class="ref-note" data-i18n-html="refIntPrepNote">Bei <b>Sachen</b> steht statt Präposition + was die Form <b>wo(r)-</b>: <i>womit, worüber, wofür, worauf, wovon</i>. Bei <b>Personen</b> bleibt die Präposition: <i>mit wem, für wen, an wen</i>.</div>
           <div class="ref-note" data-i18n-html="refIntWasFuer">In <b>was für ein</b> ist <i>für</i> keine Präposition — <i>ein</i> richtet sich nach der Rolle im Satz: <i>Was für <b>ein</b> Mensch …</i> (Nom.), <i>Was für <b>einen</b> Wagen fährst du?</i> (Akk.)</div>
+        </section>
+
+        <!-- ===== INDEFINIT ===== -->
+        <section class="ref-section" data-ref-panel="indefinit" role="tabpanel" hidden>
           <div class="ref-section-head" data-i18n="refIndefHead">Indefinitpronomen</div>
           <div class="tbl-wrap">
             <table class="gt">
@@ -626,7 +631,7 @@ const STRINGS = {
     emptyTitle:"Nichts zu üben",
     emptyBody:"Alle Sätze in dieser Auswahl sind als bekannt markiert, oder kein Satz passt zu den Filtern.",
     modalTitleText:"Übersicht", progressTitleText:"Fortschritt",
-    tabFrageIndef:"Frage & Indefinit", tabWordOrder:"Wortstellung",
+    tabWordOrder:"Wortstellung",
     resetConfirm:"Gesamten Fortschritt zurücksetzen? Dies kann nicht rückgängig gemacht werden.",
     progTotal:"gesamt", progCorrect:"richtig", progWrong:"falsch", progUnsolved:"offen",
     progByType:"Nach Pronomenart", progByPerson:"Nach Person",
@@ -694,7 +699,7 @@ const STRINGS = {
     emptyTitle:"Nothing to practise",
     emptyBody:"All sentences in this selection are marked known, or none match the current filters.",
     modalTitleText:"Overview", progressTitleText:"Progress",
-    tabFrageIndef:"Question & Indefinite", tabWordOrder:"Word order",
+    tabWordOrder:"Word order",
     resetConfirm:"Reset all progress? This cannot be undone.",
     progTotal:"total", progCorrect:"correct", progWrong:"wrong", progUnsolved:"unsolved",
     progByType:"By pronoun family", progByPerson:"By person",

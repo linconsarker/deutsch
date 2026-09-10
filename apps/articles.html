@@ -8,14 +8,20 @@
 <link rel="stylesheet" href="../shared/theme.css">
   <style>
     :root {
+      --paper: var(--du-paper);
       --ink: var(--du-ink);
       --ink-soft: var(--du-ink-soft);
       --muted: var(--du-muted);
       --line: var(--du-line);
       --card: var(--du-surface);
+      --rule: var(--du-line);
       --accent: var(--du-action);
       --accent-dark: var(--du-action-dark);
       --success: var(--du-success);
+      --bad: var(--du-danger);
+      --level-a1: var(--du-a1);
+      --level-a2: var(--du-a2);
+      --level-b1: var(--du-b1);
       --article-der: var(--du-der);
       --article-die: var(--du-die);
       --article-das: var(--du-das);
@@ -28,6 +34,8 @@
 
     body {
       margin: 0;
+      background: var(--paper);
+      color: var(--ink);
       height: 100dvh;
       overflow: hidden;
       display: flex;
@@ -39,13 +47,13 @@
       flex: 1;
       min-height: 0;
       width: 100%;
-      max-width: 680px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: clamp(10px, 2.2vh, 20px) 16px clamp(12px, 2.4vh, 22px);
+      padding: 10px 14px 12px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: clamp(8px, 1.6vh, 14px);
+      gap: 10px;
       overflow: hidden;
     }
 
@@ -60,44 +68,33 @@
 
     .page-title {
       margin: 0;
-      font-size: clamp(1rem, 2.6vh, 1.3rem);
+      font-size: 19px;
       font-weight: 700;
       letter-spacing: -.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .article-mark { display: inline-flex; width: 22px; height: 22px; flex-shrink: 0; color: var(--article-der); }
 
     .page-title small {
       display: block;
       color: var(--muted);
-      font-size: .72rem;
+      font-size: 11px;
       font-weight: 400;
-      letter-spacing: .1em;
-      text-transform: uppercase;
+      letter-spacing: 0;
     }
 
     .topbar-right { display: flex; align-items: center; gap: 10px; }
-
-    .score {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      padding: 5px 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--card);
-      color: var(--muted);
-      font-size: .72rem;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .score strong { color: var(--ink); font-size: 1rem; letter-spacing: 0; }
 
     .ghost-btn {
       height: 32px;
       padding: 0 14px;
       display: inline-flex;
       align-items: center;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
       border-radius: 8px;
       background: var(--card);
       color: var(--ink-soft);
@@ -107,64 +104,96 @@
       transition: border-color .15s, color .15s;
     }
 
-    .ghost-btn:hover { border-color: var(--accent); color: var(--accent-dark); }
+    .ghost-btn:hover { border-color: var(--ink-soft); color: var(--ink); }
 
-    /* ---- filters ---- */
+    /* ---- filters (mirrors the Dictionary page's filter-col layout) ---- */
     .filters {
       flex: 0 0 auto;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 8px;
       flex-wrap: wrap;
     }
 
+    .filter-col { flex: 1 1 0; min-width: 0; }
+    .filter-col.col-level { flex: 0 0 auto; }
+
     .filter-label {
+      display: block;
       color: var(--muted);
-      font-size: .68rem;
-      font-weight: 700;
-      letter-spacing: .1em;
+      font-size: .625rem;
+      letter-spacing: .08em;
       text-transform: uppercase;
+      margin-bottom: 4px;
     }
 
-    .levels { display: flex; gap: 6px; }
+    .levels { display: flex; gap: 6px; flex-wrap: wrap; }
 
     .level-button {
-      height: 30px;
+      height: 32px;
       padding: 0 12px;
       display: inline-flex;
       align-items: center;
-      border: 1px solid var(--line);
+      border: 1.5px solid var(--line);
       border-radius: 999px;
       background: var(--card);
       color: var(--muted);
-      font: 600 .74rem inherit;
+      font: 600 .76rem inherit;
       white-space: nowrap;
       cursor: pointer;
       transition: all .15s;
     }
 
     .level-button:hover { border-color: var(--ink-soft); color: var(--ink); }
-    .level-button.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+    .level-button[data-level="A1"].active { background: var(--level-a1); border-color: var(--level-a1); color: #fff; }
+    .level-button[data-level="A2"].active { background: var(--level-a2); border-color: var(--level-a2); color: #fff; }
+    .level-button[data-level="B1"].active { background: var(--level-b1); border-color: var(--level-b1); color: #fff; }
 
     .category-select {
-      flex: 1 1 180px;
-      min-width: 150px;
-      height: 30px;
-      padding: 0 30px 0 12px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
+      width: 100%;
+      height: 32px;
+      padding: 0 30px 0 10px;
+      border: 1.5px solid var(--line);
+      border-radius: 6px;
       background-color: var(--card);
       color: var(--ink);
-      font: 600 .74rem inherit;
+      font: 400 .76rem inherit;
+      letter-spacing: .02em;
       cursor: pointer;
       appearance: none;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2361798f'><path d='M5.5 7.5l4.5 5 4.5-5z'/></svg>");
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364798d'><path d='M5.5 7.5l4.5 5 4.5-5z'/></svg>");
       background-repeat: no-repeat;
       background-position: right 10px center;
       background-size: 13px;
     }
 
     .category-select:focus { outline: none; border-color: var(--accent); }
+
+    /* ---- progress row (mirrors the Dictionary page's good/bad bar) ---- */
+    .progress-row {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+      font-size: .72rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .progress-row strong { color: var(--ink); }
+
+    .progress-track {
+      flex: 1;
+      height: 5px;
+      background: var(--line);
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .progress-fill-good { height: 100%; background: var(--success); }
+    .progress-fill-bad { height: 100%; background: var(--bad); opacity: .55; }
 
     /* ---- the card ---- */
     .card-area {
@@ -177,19 +206,46 @@
     }
 
     .practice-card {
+      position: relative;
       flex: 0 1 auto;
       width: 100%;
       max-width: 480px;
       max-height: 100%;
       display: flex;
       flex-direction: column;
-      padding: clamp(14px, 2.6vh, 26px) clamp(16px, 3vw, 26px);
-      border: 1px solid var(--line);
+      padding: 32px 22px 18px;
+      border: 1px solid var(--rule);
       border-radius: 16px;
       background: var(--card);
       box-shadow: var(--shadow);
       text-align: center;
     }
+
+    /* corner badges, mirroring the Dictionary flashcard's type-chip / level-chip */
+    .type-chip {
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      font-size: .66rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .chip-row { position: absolute; top: 8px; right: 12px; display: flex; gap: 5px; align-items: center; }
+
+    .level-chip {
+      font-size: .62rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .level-chip.A1 { background: var(--level-a1); }
+    .level-chip.A2 { background: var(--level-a2); }
+    .level-chip.B1 { background: var(--level-b1); }
 
     .word-zone {
       flex: 1 1 auto;
@@ -219,11 +275,44 @@
       min-height: 1.4em;
       font-size: clamp(.78rem, 1.9vh, .95rem);
       font-weight: 700;
-      white-space: pre-line;
     }
 
     .feedback.correct { color: var(--success); }
-    .feedback.wrong { color: var(--accent-dark); }
+    .feedback.wrong { color: var(--bad); }
+
+    /* article reveal pill, mirroring the Dictionary flashcard's article-pill */
+    .article-pill {
+      display: inline-block;
+      font-size: .78rem;
+      letter-spacing: .03em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-right: 4px;
+      color: #fff;
+      text-transform: lowercase;
+      vertical-align: middle;
+    }
+
+    .article-pill.der { background: var(--article-der); }
+    .article-pill.die { background: var(--article-die); }
+    .article-pill.das { background: var(--article-das); }
+
+    /* reason box, mirroring the Dictionary flashcard's example-box */
+    .reason-box {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-left: 3px solid var(--success);
+      background: rgba(0, 0, 0, .025);
+      border-radius: 4px;
+      text-align: left;
+      font-size: .78rem;
+      font-weight: 400;
+      color: var(--ink-soft);
+      line-height: 1.4;
+      width: 100%;
+    }
+
+    .reason-box.wrong { border-left-color: var(--bad); }
 
     .options {
       flex: 0 0 auto;
@@ -262,24 +351,28 @@
       margin-top: clamp(8px, 1.6vh, 14px);
     }
 
-    .tip-example { background: #f1e6d8; }
+    .tip-example { background: rgba(185, 138, 47, .14); color: #8a6a1f; }
     .tip-item h3 { color: var(--ink); }
+
+    #tipsModal .modal-content { border-radius: 10px; background: var(--card); }
+    #tipsModal .modal-title { font-family: var(--du-font); }
 
     @media (max-width: 480px) {
       .site-navbar { gap: 10px; }
       .topbar { flex-wrap: wrap; }
-      .category-select { flex-basis: 100%; }
+      .filters { gap: 6px; }
+      .filter-col.col-level { flex: 1 0 100%; }
     }
   </style>
 </head>
 <body>
   <nav class="site-navbar" aria-label="Practice activities">
     <div class="site-links">
+      <a class="site-link" href="vocab.html">Dictionary</a>
+      <a class="site-link active" href="articles.html">Article Trainer</a>
       <a class="site-link" href="verbs.html">German Verbs</a>
-      <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
-      <a class="site-link" href="prep.html">Preposition Practice</a>
-      <a class="site-link active" href="articles.html">Article Practice</a>
       <a class="site-link" href="pronouns.html">Pronoun Practice</a>
+      <a class="site-link" href="prep.html">Preposition Practice</a>
       <a class="site-link" href="translation.html">Translation Practice</a>
     </div>
   </nav>
@@ -287,22 +380,42 @@
 
   <main>
     <div class="topbar">
-      <h1 class="page-title">Der, die oder das?<small>Article practice</small></h1>
+      <div class="brand">
+        <svg class="article-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 4.5h6.5a3 3 0 0 1 3 3v12H8a3 3 0 0 0-3 3V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M19 4.5h-4.5a3 3 0 0 0-3 3v12H16a3 3 0 0 1 3 3V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M8 8h3M8 11h3M16 8h1M16 11h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <h1 class="page-title">Der, die oder das?<small>Article practice</small></h1>
+      </div>
       <div class="topbar-right">
-        <span class="score"><strong id="score">0 / 0</strong>correct</span>
         <button class="ghost-btn" id="tipsButton" type="button">Tips</button>
       </div>
     </div>
 
     <div class="filters" aria-label="Article practice filters">
-      <span class="filter-label">Level</span>
-      <div class="levels" id="levels"></div>
-      <span class="filter-label">Category</span>
-      <select class="category-select" id="category" aria-label="Category"></select>
+      <div class="filter-col col-level">
+        <span class="filter-label">Level</span>
+        <div class="levels" id="levels"></div>
+      </div>
+      <div class="filter-col">
+        <span class="filter-label">Category</span>
+        <select class="category-select" id="category" aria-label="Category"></select>
+      </div>
+    </div>
+
+    <div class="progress-row">
+      <span id="score">0 / 0</span>
+      <div class="progress-track">
+        <div class="progress-fill-good" id="fillGood" style="width:0%"></div>
+        <div class="progress-fill-bad" id="fillBad" style="width:0%"></div>
+      </div>
     </div>
 
     <div class="card-area">
       <section class="practice-card" aria-live="polite">
+        <span class="type-chip" id="typeChip"></span>
+        <div class="chip-row"><span class="level-chip" id="levelChip"></span></div>
         <div class="word-zone">
           <div class="word" id="word">Loading...</div>
           <div class="meaning" id="meaning"></div>
@@ -405,6 +518,9 @@
 
     function updateScore() {
       scoreElement.textContent = correct + " / " + attempts;
+      const wrong = attempts - correct;
+      document.getElementById("fillGood").style.width = (attempts ? (correct / attempts * 100) : 0) + "%";
+      document.getElementById("fillBad").style.width = (attempts ? (wrong / attempts * 100) : 0) + "%";
     }
 
     function articleReason(card) {
@@ -421,11 +537,17 @@
       return "There is no reliable ending rule here, so learn “" + card.article + " " + card.stem + "” as one vocabulary item.";
     }
 
+    const typeChipElement = document.getElementById("typeChip");
+    const levelChipElement = document.getElementById("levelChip");
+
     function renderCard() {
       if (!deck.length) {
         wordElement.textContent = "No words found";
         meaningElement.textContent = "Try another level or category.";
         feedbackElement.textContent = "";
+        typeChipElement.textContent = "";
+        levelChipElement.textContent = "";
+        levelChipElement.className = "level-chip";
         optionElements.forEach((button) => { button.disabled = true; });
         return;
       }
@@ -435,6 +557,9 @@
       meaningElement.textContent = card.en;
       feedbackElement.textContent = "";
       feedbackElement.className = "feedback";
+      typeChipElement.textContent = categoryLabels[card.category] || card.category;
+      levelChipElement.textContent = card.level;
+      levelChipElement.className = "level-chip " + card.level;
       optionElements.forEach((button) => { button.disabled = false; });
     }
 
@@ -444,14 +569,13 @@
       const card = deck[index];
       attempts += 1;
       optionElements.forEach((button) => { button.disabled = true; });
-      if (article === card.article) {
-        correct += 1;
-        feedbackElement.textContent = "Correct\nReason: " + articleReason(card);
-        feedbackElement.className = "feedback correct";
-      } else {
-        feedbackElement.textContent = "Incorrect — the answer is " + card.article + "\nReason: " + articleReason(card);
-        feedbackElement.className = "feedback wrong";
-      }
+      const isCorrect = article === card.article;
+      if (isCorrect) correct += 1;
+      feedbackElement.className = "feedback " + (isCorrect ? "correct" : "wrong");
+      feedbackElement.innerHTML =
+        '<span class="article-pill ' + card.article + '">' + card.article + "</span>" +
+        (isCorrect ? "Correct!" : "Incorrect — it's " + card.article + " " + card.stem) +
+        '<div class="reason-box' + (isCorrect ? "" : " wrong") + '">' + articleReason(card) + "</div>";
       meaningElement.textContent = card.en;
       updateScore();
     }
@@ -473,6 +597,7 @@
         const button = document.createElement("button");
         button.className = "level-button" + (activeLevels.includes(level) ? " active" : "");
         button.type = "button";
+        button.dataset.level = level;
         button.textContent = level + " (" + nouns.filter((card) => card.level === level).length + ")";
         button.addEventListener("click", () => {
           if (activeLevels.includes(level)) {

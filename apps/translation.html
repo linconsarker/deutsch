@@ -9,9 +9,10 @@
     * { box-sizing: border-box; }
     body { margin: 0; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
     main { width: min(860px, 100%); flex: 1; min-height: 0; margin: 0 auto; padding: clamp(12px, 3vh, 28px) 16px; display: flex; flex-direction: column; }
-    .top { display:flex; justify-content:space-between; gap:16px; align-items:start; margin-bottom:18px; }
-    h1 { margin:0; font-size:clamp(1.45rem, 4vw, 2rem); }
-    .subtitle { margin:5px 0 0; color:var(--du-muted); }
+    .top { display:flex; justify-content:space-between; gap:16px; align-items:center; margin-bottom:18px; }
+    .brand { display:flex; align-items:center; gap:8px; min-width:0; }
+    .translate-mark { display:inline-flex; width:22px; height:22px; flex-shrink:0; color:var(--du-action); }
+    h1 { margin:0; font-size:19px; font-weight:700; letter-spacing:-0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .score { padding:7px 12px; border:1px solid var(--du-line); border-radius:999px; background:var(--du-surface); color:var(--du-muted); font-size:.78rem; white-space:nowrap; }
     .score strong { color:var(--du-ink); font-size:1rem; }
     .filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
@@ -31,29 +32,34 @@
     .correction { display:block; margin-top:7px; color:var(--du-ink); font-weight:700; }
     .meta { margin:12px 0 0; color:var(--du-muted); font-size:.78rem; text-align:center; }
     kbd { padding:2px 5px; border:1px solid var(--du-line-strong); border-radius:4px; background:var(--du-surface-2); font:inherit; }
-    @media (max-width:560px) { main { padding:10px 12px; } .top { align-items:center; flex-direction:row; margin-bottom:10px; } h1 { font-size:1.25rem; } .subtitle { font-size:.8rem; } .filters { margin-bottom:10px; } .filters label { flex:1; } .filters .du-field { width:100%; min-width:0; } .card { padding:18px; } }
+    @media (max-width:560px) { main { padding:10px 12px; } .top { align-items:center; flex-direction:row; margin-bottom:10px; } h1 { font-size:17px; } .filters { margin-bottom:10px; } .filters label { flex:1; } .filters .du-field { width:100%; min-width:0; } .card { padding:18px; } }
   </style>
 </head>
 <body>
   <nav class="site-navbar" aria-label="Practice activities">
     <div class="site-links">
+      <a class="site-link" href="vocab.html">Dictionary</a>
+      <a class="site-link" href="articles.html">Article Trainer</a>
       <a class="site-link" href="verbs.html">German Verbs</a>
-      <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
-      <a class="site-link" href="prep.html">Preposition Practice</a>
-      <a class="site-link" href="articles.html">Article Practice</a>
       <a class="site-link" href="pronouns.html">Pronoun Practice</a>
+      <a class="site-link" href="prep.html">Preposition Practice</a>
       <a class="site-link active" href="translation.html">Translation Practice</a>
     </div>
   </nav>
   <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = 'none';</script>
   <main>
     <div class="top">
-      <div><h1>Translation Practice</h1><p class="subtitle">Translate each English example sentence into German.</p></div>
+      <div class="brand">
+        <svg class="translate-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 5.5h8M8 3.5v2M5.5 5.5c.7 3.2 2.2 5.5 4.6 7.3M10.5 5.5c-.6 2.2-1.5 4-3.1 5.5M4.5 14h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M14 14.5h6M17 12.5v2M13.5 20l3.5-8 3.5 8M15 17h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>Translation Practice</h1>
+      </div>
       <div class="score"><strong id="score">0 / 0</strong> correct</div>
     </div>
     <div class="filters">
       <label>Level <select id="level" class="du-field"><option value="ALL">All levels</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option></select></label>
-      <label>Category <select id="category" class="du-field"></select></label>
     </div>
     <section class="card" aria-live="polite">
       <div class="eyebrow">Translate into German</div>
@@ -76,7 +82,6 @@
       if (request.status !== 200 && request.status !== 0) throw new Error('Could not load ' + path);
       return JSON.parse(request.responseText);
     }
-    const labels = { general:'General', food:'Food & Drink', health:'Health', travel_transport:'Travel & Transport', home_living:'Home & Living', work_office:'Work & Profession', tech_media:'Tech & Media', people_relationships:'People & Family', school_education:'School & Education', sports_leisure:'Sports & Leisure', emotions_personality:'Emotions', events_celebrations:'Events & Celebrations', shopping_clothing:'Shopping & Clothing', communication:'Communication', colors:'Colors', body_parts:'Body Parts', fruits_vegetables:'Fruits & Vegetables', time_seasons:'Time & Seasons', numbers:'Numbers', countries:'Countries', nationality:'Nationality', language:'Language', nature_animals:'Nature & Animals' };
     const rawCards = loadJson('../data/vocabulary.json');
     const seen = new Set();
     const sentences = rawCards.filter(card => {
@@ -86,12 +91,10 @@
       if (seen.has(key)) return false;
       seen.add(key); return true;
     });
-    const level = document.getElementById('level'), category = document.getElementById('category'), answer = document.getElementById('answer');
+    const level = document.getElementById('level'), answer = document.getElementById('answer');
     const englishSentence = document.getElementById('englishSentence'), feedback = document.getElementById('feedback');
     let current, correct = 0, attempts = 0;
-    const categories = [...new Set(sentences.map(card => card.category))].sort((a,b) => (labels[a] || a).localeCompare(labels[b] || b));
-    category.innerHTML = '<option value="ALL">All categories</option>' + categories.map(key => `<option value="${key}">${labels[key] || key}</option>`).join('');
-    function candidates() { return sentences.filter(card => (level.value === 'ALL' || card.level === level.value) && (category.value === 'ALL' || card.category === category.value)); }
+    function candidates() { return sentences.filter(card => level.value === 'ALL' || card.level === level.value); }
     function normalize(text) { return text.trim().toLocaleLowerCase('de').replace(/[„“”]/g, '"').replace(/[’‘]/g, "'").replace(/\s+/g, ' ').replace(/[.!?]+$/g, ''); }
     function updateAvailable() { document.getElementById('available').textContent = candidates().length; }
     function setFeedback(type, html) { feedback.className = 'feedback ' + type; feedback.innerHTML = html; }
@@ -116,7 +119,6 @@
     document.getElementById('next').addEventListener('click', nextSentence);
     answer.addEventListener('keydown', event => { if (event.key === 'Enter' && event.ctrlKey) { event.preventDefault(); checkAnswer(); } });
     level.addEventListener('change', () => { updateAvailable(); nextSentence(); });
-    category.addEventListener('change', () => { updateAvailable(); nextSentence(); });
     updateAvailable(); nextSentence();
   </script>
 </body>
