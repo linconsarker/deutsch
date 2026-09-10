@@ -259,7 +259,7 @@
       if (!frames[tab]) {
         const frame = document.createElement("iframe");
         frame.title = document.querySelector(`[data-tab="${tab}"] .tab-label`).textContent.trim();
-        frame.src = `apps/${tab}.html?v=20260913`;
+        frame.src = `apps/${tab}.html?v=20260914`;
         frame.className = "active";
         frame.addEventListener("load", () => broadcastSession(currentSession), { once: true });
         framesElement.appendChild(frame);
