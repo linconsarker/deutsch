@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Pronomen Trainer</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../shared/theme.css">
+<style>
+  :root{
+    --bg:var(--du-paper);
+    --surface:var(--du-surface);
+    --surface-2:var(--du-surface-2);
+    --border:var(--du-line);
+    --text:var(--du-ink);
+    --text-muted:var(--du-ink-soft);
+    --text-dim:var(--du-muted);
+    --nom:var(--du-success);
+    --nom-dim:#e4f1ea;
+    --akk:#a8632a;
+    --akk-dim:#f7e9db;
+    --dat:var(--du-der);
+    --dat-dim:#e4eef6;
+    --gen:#7A4FA0;
+    --gen-dim:#F0E6F7;
+    --success:var(--du-success);
+    --success-dim:#e4f1ea;
+    --error:var(--du-danger);
+    --error-dim:#f8e8e5;
+  }
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--du-font);
+    -webkit-font-smoothing:antialiased;
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .app{
+    max-width:760px;width:100%;margin:0 auto;
+    flex:1;
+    padding:12px 16px;
+    display:flex;flex-direction:column;
+    gap:10px;
+    min-height:0;
+  }
+
+  /* BRAND */
+  .brand{display:flex;align-items:center;gap:8px;min-width:0;flex:1 1 auto;}
+  .brand > div{min-width:0;}
+  .mark{display:inline-flex;width:22px;height:22px;flex-shrink:0;color:var(--gen);}
+  .brand h1{
+    font-family:var(--du-font);font-weight:700;font-size:19px;margin:0;
+    letter-spacing:-0.01em;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .brand .sub{font-size:11px;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+  /* FILTERS */
+  .filter-label{
+    font-family:var(--du-mono);font-size:9.5px;letter-spacing:0.08em;
+    width:52px;flex-shrink:0;
+  }
+  .chips{
+    display:flex;gap:5px;overflow-x:auto;flex:1;min-width:0;
+    scrollbar-width:none;padding:2px 0;
+  }
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{
+    font-family:var(--du-font);font-size:12px;font-weight:600;
+    white-space:nowrap;flex-shrink:0;
+  }
+  .chip.active{background:var(--text);color:var(--surface);border-color:var(--text);}
+  .person-row.is-off{opacity:.4;}
+  .person-row.is-off .chip{pointer-events:none;}
+  .person-note{
+    display:none;font-size:10.5px;color:var(--text-dim);font-style:italic;
+    padding-left:60px;margin-top:-2px;
+  }
+  .person-row.is-off + .person-note{display:block;}
+  .select-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .select-row .du-field{
+    height:30px;font-size:12px;font-weight:600;flex:1 1 0;min-width:104px;padding:0 26px 0 9px;
+    background-size:11px;
+  }
+
+  /* STATS BAR */
+  .stat-num{font-family:var(--du-font);font-weight:700;font-size:17px;line-height:1.1;color:var(--text);}
+  .stat-label{font-size:9px;font-family:var(--du-mono);letter-spacing:0.06em;color:var(--text-dim);margin-top:1px;}
+
+  /* CARD */
+  #card{background:var(--surface);border:1px solid var(--border);flex:0 1 auto;min-height:0;overflow-y:auto;}
+  .tag-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+  .type-tag{
+    font-family:var(--du-mono);font-size:10.5px;font-weight:600;
+    padding:3px 7px;border-radius:6px;
+  }
+  .type-tag.personal{background:var(--dat-dim);color:var(--dat);}
+  .type-tag.possessiv{background:var(--success-dim);color:var(--success);}
+  .type-tag.reflexiv{background:var(--akk-dim);color:var(--akk);}
+  .type-tag.relativ{background:var(--gen-dim);color:var(--gen);}
+  .type-tag.demonstrativ{background:var(--surface-2);color:var(--text-muted);}
+  .type-tag.interrogativ{background:var(--error-dim);color:var(--error);}
+  .type-tag.indefinit{background:#eee9dc;color:#7a6a45;}
+  .meta-tag{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);}
+  .mode-tag{
+    font-family:var(--du-mono);font-size:10px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:3px 7px;border-radius:6px;
+    background:var(--surface-2);color:var(--text-muted);
+  }
+  .remaining{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);white-space:nowrap;}
+
+  /* ERSETZEN source line */
+  .orig-block{
+    background:var(--surface-2);border-radius:9px;padding:9px 12px;margin:6px 0 4px;
+    font-size:clamp(14px,3.2vw,16px);line-height:1.5;color:var(--text-muted);
+  }
+  .orig-mark{
+    background:#fff;border-bottom:2px solid var(--gen);border-radius:4px 4px 0 0;
+    padding:1px 4px;font-weight:700;color:var(--gen);
+  }
+  .orig-arrow{
+    display:block;font-family:var(--du-mono);font-size:11px;color:var(--text-dim);
+    margin:6px 0 2px;
+  }
+
+  .sentence-row{display:flex;align-items:flex-start;gap:8px;margin:4px 0 8px;}
+  .sentence{flex:1;font-size:clamp(17px,4vw,21px);line-height:1.55;font-weight:500;color:var(--text);}
+  .pronunciation-btn{width:30px;height:30px;min-width:30px;padding:0;border-radius:50%;font-size:14px;line-height:1;}
+  .pronunciation-btn:disabled{opacity:.38;cursor:not-allowed;}
+  .blank-input{
+    font-family:var(--du-mono);font-size:0.92em;font-weight:600;
+    margin:0 1px;
+    background:var(--surface-2);border:none;border-bottom:2.5px solid var(--text-dim);
+    color:var(--text);padding:2px 6px;width:auto;min-width:96px;max-width:220px;
+    text-align:center;outline:none;border-radius:5px 5px 0 0;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .blank-input:focus{border-color:var(--gen);background:#fff;}
+  .blank-input.correct{border-color:var(--success);background:var(--success-dim);color:var(--success);}
+  .blank-input.incorrect{border-color:var(--error);background:var(--error-dim);color:var(--error);}
+  .blank-input:disabled{opacity:1;}
+
+  .cue-chip{
+    display:inline-flex;align-items:center;gap:5px;
+    background:var(--surface-2);border:1px dashed var(--border);border-radius:999px;
+    padding:3px 11px;font-size:12px;color:var(--text-muted);margin-bottom:6px;
+  }
+  .cue-chip b{font-weight:700;color:var(--text);}
+  .cue-chip .cue-key{font-family:var(--du-mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-dim);}
+
+  .translation{font-size:12.5px;color:var(--text-dim);font-style:italic;margin-bottom:2px;}
+
+  .feedback{display:none;margin-top:10px;padding:11px 14px;border-radius:10px;border:1px solid var(--border);flex-shrink:0;}
+  .feedback.show{display:block;}
+  .feedback.correct{background:var(--success-dim);border-color:var(--success);}
+  .feedback.incorrect{background:var(--error-dim);border-color:var(--error);}
+  .feedback-head{display:flex;align-items:center;gap:7px;font-family:var(--du-font);font-weight:700;font-size:14px;margin-bottom:5px;flex-wrap:wrap;}
+  .feedback.correct .feedback-head{color:var(--success);}
+  .feedback.incorrect .feedback-head{color:var(--error);}
+  .case-badge{font-family:var(--du-mono);font-size:10.5px;font-weight:600;padding:3px 9px;letter-spacing:0.02em;}
+  .case-badge.Nominativ{background:var(--nom-dim);color:var(--nom);}
+  .case-badge.Akkusativ{background:var(--akk-dim);color:var(--akk);}
+  .case-badge.Dativ{background:var(--dat-dim);color:var(--dat);}
+  .case-badge.Genitiv{background:var(--gen-dim);color:var(--gen);}
+  .person-badge{font-family:var(--du-mono);font-size:10.5px;font-weight:600;padding:3px 9px;background:var(--surface-2);color:var(--text-muted);}
+  .answer-line{font-size:13px;color:var(--text-muted);margin-bottom:5px;}
+  .answer-line b{color:var(--text);font-family:var(--du-mono);}
+  .explanation{font-size:12.5px;color:var(--text-muted);line-height:1.45;}
+
+  .empty-state{text-align:center;padding:30px 20px;color:var(--text-muted);margin:auto;}
+  .empty-state .mark{width:28px;height:28px;margin-bottom:12px;opacity:0.5;}
+  .empty-title{font-weight:700;font-size:18px;color:var(--text);margin-bottom:6px;}
+
+  /* REFERENCE / PROGRESS MODALS */
+  .ref-section{padding:12px 0;border-top:1px solid var(--border);}
+  .ref-section:first-of-type{border-top:none;}
+  .ref-section-head{
+    display:flex;align-items:center;gap:7px;
+    font-family:var(--du-font);font-weight:700;font-size:14.5px;
+    margin-bottom:5px;color:var(--text);
+  }
+  .ref-note{font-size:12px;color:var(--text-dim);line-height:1.5;margin-bottom:9px;}
+  .ref-note b{color:var(--text-muted);}
+  .ref-tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .ref-tab{
+    border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-muted);
+    font-family:var(--du-font);font-size:12px;font-weight:700;padding:5px 10px;line-height:1.2;
+  }
+  .ref-tab[aria-selected="true"]{background:var(--text);border-color:var(--text);color:var(--surface);}
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:9px;margin-bottom:10px;}
+  table.gt{width:100%;border-collapse:collapse;font-size:12.5px;min-width:380px;}
+  table.gt th,table.gt td{padding:7px 9px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;}
+  table.gt th:last-child,table.gt td:last-child{border-right:none;}
+  table.gt tr:last-child td{border-bottom:none;}
+  table.gt th{background:var(--surface-2);font-family:var(--du-mono);font-size:10px;letter-spacing:.03em;color:var(--text-muted);font-weight:600;}
+  table.gt td:first-child,table.gt th:first-child{text-align:left;}
+  table.gt td:first-child{font-weight:700;background:color-mix(in srgb,var(--surface-2) 55%,transparent);white-space:nowrap;}
+  table.gt td b{font-family:var(--du-mono);color:var(--text);}
+  table.gt .hl{background:var(--gen-dim);color:var(--gen);font-weight:700;}
+  table.gt .muted{color:var(--text-dim);font-weight:400;}
+  .col-nom{color:var(--nom);}
+  .col-akk{color:var(--akk);}
+  .col-dat{color:var(--dat);}
+  .col-gen{color:var(--gen);}
+
+  .ex-list{font-size:12.5px;line-height:1.7;color:var(--text-muted);margin:0 0 8px;padding-left:0;list-style:none;}
+  .ex-list li{padding:4px 0;border-top:1px dashed var(--border);}
+  .ex-list li:first-child{border-top:none;}
+  .ex-list .de{font-weight:600;color:var(--text);}
+  .ex-list .en{color:var(--text-dim);font-style:italic;}
+  .ex-list .good{color:var(--success);font-family:var(--du-mono);font-weight:700;}
+  .ex-list .bad{color:var(--error);font-family:var(--du-mono);font-weight:700;text-decoration:line-through;}
+  .verb-tags{display:flex;flex-wrap:wrap;gap:5px;}
+  .verb-tag{font-family:var(--du-mono);font-size:11.5px;padding:4px 9px;border-radius:999px;}
+  .verb-tag.akk{background:var(--akk-dim);color:var(--akk);}
+  .verb-tag.dat{background:var(--dat-dim);color:var(--dat);}
+  .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;}
+  .dot.nom{background:var(--nom);}
+  .dot.akk{background:var(--akk);}
+  .dot.dat{background:var(--dat);}
+  .dot.gen{background:var(--gen);}
+
+  .prog-row{padding:11px 0;border-top:1px solid var(--border);cursor:pointer;}
+  .prog-row:first-of-type{border-top:none;}
+  .prog-row:hover .prog-name{text-decoration:underline;}
+  .prog-name{font-family:var(--du-font);font-weight:700;font-size:14.5px;color:var(--text);}
+  .prog-count{font-family:var(--du-mono);font-size:11.5px;color:var(--text-dim);}
+  .prog-detail{
+    font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);margin-top:5px;
+    display:flex;gap:10px;
+  }
+  .prog-detail span.c{color:var(--success);}
+  .prog-detail span.w{color:var(--error);}
+  .prog-head{
+    font-family:var(--du-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--text-dim);margin:16px 0 2px;padding-top:12px;border-top:2px solid var(--border);
+  }
+
+  @media (max-width:560px){
+    .app-header{flex-wrap:wrap;}
+    .brand{flex:1 1 100%;}
+    .app-header > .d-flex{flex:1 1 100%;justify-content:flex-end;}
+  }
+  @media (max-width:480px){
+    .app{padding:10px 12px;gap:8px;}
+    .brand h1{font-size:17px;}
+    .brand .sub{display:none;}
+    .filter-label{width:44px;}
+    .person-note{padding-left:52px;}
+    .stat-num{font-size:16px;}
+    .select-row .du-field{min-width:0;}
+  }
+  @media (max-height:640px){
+    .brand .sub{display:none;}
+    .translation{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+<nav class="site-navbar" aria-label="Practice activities">
+  <div class="site-links">
+    <a class="site-link" href="verbs.html">German Verbs</a>
+    <a class="site-link" href="vocab.html">Vocabulary Flashcards</a>
+    <a class="site-link" href="prep.html">Preposition Practice</a>
+    <a class="site-link" href="articles.html">Article Practice</a>
+    <a class="site-link active" href="pronouns.html">Pronoun Practice</a>
+    <a class="site-link" href="translation.html">Translation Practice</a>
+  </div>
+</nav>
+<script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
+<div class="app">
+
+  <div class="app-header d-flex justify-content-between align-items-center flex-shrink-0 gap-2">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="8.5" cy="7" r="3.4" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M2.8 19.2c0-3.1 2.6-5.2 5.7-5.2s5.7 2.1 5.7 5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M16.4 9.2a2.6 2.6 0 1 1 3.1 3.4c-.8.3-1.2 1-1.2 1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="18.3" cy="17.6" r="1" fill="currentColor"/>
+      </svg>
+      <div>
+        <h1 data-i18n="appTitle">Pronomen</h1>
+        <div class="sub" data-i18n="appSubtitle">ich · mich · mir — wer, wen, wem?</div>
+      </div>
+    </div>
+    <div class="d-flex gap-1 flex-shrink-0">
+      <button class="btn btn-sm btn-outline-secondary" id="langToggle" title="Switch language">EN</button>
+      <button class="btn btn-sm btn-outline-secondary" id="progressToggle">📊 <span data-i18n="progressBtnLabel">Fortschritt</span></button>
+      <button class="btn btn-sm btn-outline-secondary" id="refToggle">📖 <span data-i18n="refBtnLabel">Übersicht</span></button>
+      <button class="btn btn-sm btn-outline-secondary" id="resetProgress" title="Fortschritt zurücksetzen">↺</button>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column gap-1 flex-shrink-0">
+    <div class="d-flex align-items-center gap-2">
+      <div class="filter-label text-uppercase text-muted" data-i18n="labelType">Art</div>
+      <div class="chips" id="typeChips"></div>
+    </div>
+    <div class="d-flex align-items-center gap-2 person-row" id="personRow">
+      <div class="filter-label text-uppercase text-muted" data-i18n="labelPerson">Person</div>
+      <div class="chips" id="personChips"></div>
+    </div>
+    <div class="person-note" data-i18n="personNote">Diese Pronomenart richtet sich nicht nach der Person.</div>
+    <div class="select-row">
+      <select class="du-field" id="caseSelect" aria-label="Kasus"></select>
+      <select class="du-field" id="levelSelect" aria-label="Niveau"></select>
+      <select class="du-field" id="statusSelect" aria-label="Status"></select>
+    </div>
+  </div>
+
+  <div class="row row-cols-4 g-0 text-center bg-white border rounded-3 shadow-sm py-2 flex-shrink-0">
+    <div class="col"><div class="stat-num" id="statCorrect">0</div><div class="stat-label" data-i18n="labelStatCorrect">Richtig</div></div>
+    <div class="col border-start"><div class="stat-num" id="statTotal">0</div><div class="stat-label" data-i18n="labelStatTotal">Versuche</div></div>
+    <div class="col border-start"><div class="stat-num" id="statAcc">–</div><div class="stat-label" data-i18n="labelStatAcc">Genauigkeit</div></div>
+    <div class="col border-start"><div class="stat-num" id="statStreak">0</div><div class="stat-label" data-i18n="labelStatStreak">Serie</div></div>
+  </div>
+
+  <div class="rounded-4 shadow-sm p-3 p-md-4 d-flex flex-column" id="card"></div>
+
+</div>
+
+<!-- REFERENCE MODAL -->
+<div class="modal fade" id="refModal" tabindex="-1" aria-labelledby="modalTitleText" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="modalTitleText" data-i18n="modalTitleText">Übersicht</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <div class="ref-tab-nav" role="tablist" aria-label="Reference topics">
+          <button class="ref-tab" type="button" role="tab" aria-selected="true" data-ref-tab="personal" data-i18n="typePersonal">Personal</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="possessiv" data-i18n="typePossessiv">Possessiv</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="reflexiv" data-i18n="typeReflexiv">Reflexiv</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="relativ" data-i18n="typeRelativ">Relativ</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="demonstrativ" data-i18n="typeDemonstrativ">Demonstrativ</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="frageindef" data-i18n="tabFrageIndef">Frage &amp; Indefinit</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="wortstellung" data-i18n="tabWordOrder">Wortstellung</button>
+        </div>
+
+        <!-- ===== PERSONAL ===== -->
+        <section class="ref-section" data-ref-panel="personal" role="tabpanel">
+          <div class="ref-section-head" data-i18n="refPersonalHead">Personalpronomen</div>
+          <div class="ref-note" data-i18n-html="refPersonalNote">Nur <b>er</b> ändert im Akkusativ seine Form. Im Dativ ändert sich fast alles — das ist die Tabelle, die man wirklich auswendig können muss.</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thPerson">Person</th>
+                <th class="col-nom" data-i18n="caseNominativ">Nominativ</th>
+                <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
+                <th class="col-dat" data-i18n="caseDativ">Dativ</th>
+              </tr></thead>
+              <tbody>
+                <tr><td data-i18n="p1sg">1. Sg.</td><td><b>ich</b></td><td><b>mich</b></td><td class="hl">mir</td></tr>
+                <tr><td data-i18n="p2sg">2. Sg.</td><td><b>du</b></td><td><b>dich</b></td><td class="hl">dir</td></tr>
+                <tr><td data-i18n="p3sgm">3. Sg. m.</td><td><b>er</b></td><td class="hl">ihn</td><td class="hl">ihm</td></tr>
+                <tr><td data-i18n="p3sgf">3. Sg. f.</td><td><b>sie</b></td><td><b>sie</b></td><td class="hl">ihr</td></tr>
+                <tr><td data-i18n="p3sgn">3. Sg. n.</td><td><b>es</b></td><td><b>es</b></td><td class="hl">ihm</td></tr>
+                <tr><td data-i18n="p1pl">1. Pl.</td><td><b>wir</b></td><td><b>uns</b></td><td><b>uns</b></td></tr>
+                <tr><td data-i18n="p2pl">2. Pl.</td><td><b>ihr</b></td><td><b>euch</b></td><td><b>euch</b></td></tr>
+                <tr><td data-i18n="p3pl">3. Pl.</td><td><b>sie</b></td><td><b>sie</b></td><td class="hl">ihnen</td></tr>
+                <tr><td data-i18n="pformal">Höflich</td><td><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refPersonalGen">Der <b>Genitiv</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) ist heute praktisch ausgestorben und kommt nur in festen Wendungen vor: <i>Ich erinnere mich seiner.</i></div>
+          <div class="ref-note" data-i18n-html="refPersonalGender">Deutsche Pronomen folgen dem <b>grammatischen</b> Geschlecht, nicht dem natürlichen: <i>Der Schlüssel? <b>Er</b> liegt dort.</i> — nicht <i>es</i>.</div>
+        </section>
+
+        <!-- ===== POSSESSIV ===== -->
+        <section class="ref-section" data-ref-panel="possessiv" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refPossStemHead">1. Stamm nach dem Besitzer wählen</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr><th data-i18n="thOwner">Besitzer</th><th data-i18n="thStem">Stamm</th><th data-i18n="thOwner2">Besitzer</th><th data-i18n="thStem2">Stamm</th></tr></thead>
+              <tbody>
+                <tr><td>ich</td><td><b>mein-</b></td><td>wir</td><td><b>unser-</b></td></tr>
+                <tr><td>du</td><td><b>dein-</b></td><td>ihr</td><td><b>euer- / eur-</b></td></tr>
+                <tr><td>er / es</td><td><b>sein-</b></td><td>sie (Pl.)</td><td><b>ihr-</b></td></tr>
+                <tr><td>sie (Sg.)</td><td><b>ihr-</b></td><td>Sie</td><td><b>Ihr-</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-section-head" data-i18n="refPossEndHead">2. Endung nach dem folgenden Nomen wählen</div>
+          <div class="ref-note" data-i18n-html="refPossEndNote">Die Endungen sind die <b>ein-Endungen</b>: kein/e in Nominativ m. und Nominativ/Akkusativ n.</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thCase">Kasus</th>
+                <th data-i18n="thMasc">maskulin</th><th data-i18n="thFem">feminin</th>
+                <th data-i18n="thNeut">neutrum</th><th data-i18n="thPlural">Plural</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="col-nom" data-i18n="caseNominativ">Nominativ</td><td class="hl">mein</td><td>meine</td><td class="hl">mein</td><td>meine</td></tr>
+                <tr><td class="col-akk" data-i18n="caseAkkusativ">Akkusativ</td><td>meinen</td><td>meine</td><td class="hl">mein</td><td>meine</td></tr>
+                <tr><td class="col-dat" data-i18n="caseDativ">Dativ</td><td>meinem</td><td>meiner</td><td>meinem</td><td>meinen</td></tr>
+                <tr><td class="col-gen" data-i18n="caseGenitiv">Genitiv</td><td>meines</td><td>meiner</td><td>meines</td><td>meiner</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refPossEuer"><b>euer</b> verliert sein zweites e, sobald eine Endung dazukommt: <i>euer Garten</i>, aber <i>eure Wohnung</i>, <i>euren Brief</i>, <i>eurem Sohn</i>.</div>
+          <div class="ref-section-head" data-i18n="refPossAloneHead">Ohne Nomen: die vollen Endungen</div>
+          <div class="ref-note" data-i18n-html="refPossAloneNote">Steht das Possessivpronomen <b>allein</b>, bekommt es die Endung des bestimmten Artikels: <i>Dein Mantel ist schwarz, <b>meiner</b> ist blau.</i> — <i>Ist das dein Auto? Nein, das ist <b>meins</b>.</i></div>
+        </section>
+
+        <!-- ===== REFLEXIV ===== -->
+        <section class="ref-section" data-ref-panel="reflexiv" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refReflHead">Reflexivpronomen</div>
+          <div class="ref-note" data-i18n-html="refReflNote">Gute Nachricht: Akkusativ und Dativ sind <b>überall gleich</b> — außer in der 1. und 2. Person Singular.</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thPerson">Person</th>
+                <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
+                <th class="col-dat" data-i18n="caseDativ">Dativ</th>
+              </tr></thead>
+              <tbody>
+                <tr><td data-i18n="p1sg">1. Sg.</td><td class="hl">mich</td><td class="hl">mir</td></tr>
+                <tr><td data-i18n="p2sg">2. Sg.</td><td class="hl">dich</td><td class="hl">dir</td></tr>
+                <tr><td data-i18n="p3sg">3. Sg.</td><td><b>sich</b></td><td><b>sich</b></td></tr>
+                <tr><td data-i18n="p1pl">1. Pl.</td><td><b>uns</b></td><td><b>uns</b></td></tr>
+                <tr><td data-i18n="p2pl">2. Pl.</td><td><b>euch</b></td><td><b>euch</b></td></tr>
+                <tr><td data-i18n="p3pl">3. Pl.</td><td><b>sich</b></td><td><b>sich</b></td></tr>
+                <tr><td data-i18n="pformal">Höflich</td><td><b>sich</b></td><td><b>sich</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refReflWhen"><b>Wann Dativ?</b> Sobald der Satz schon ein Akkusativobjekt hat, rutscht das Reflexivpronomen in den Dativ: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i></div>
+          <div class="ref-section-head" data-i18n="refReflVerbsAkk">Häufige Verben mit Akkusativ</div>
+          <div class="verb-tags" style="margin-bottom:10px;">
+            <span class="verb-tag akk">sich freuen auf</span><span class="verb-tag akk">sich beeilen</span>
+            <span class="verb-tag akk">sich erinnern an</span><span class="verb-tag akk">sich interessieren für</span>
+            <span class="verb-tag akk">sich setzen</span><span class="verb-tag akk">sich fühlen</span>
+            <span class="verb-tag akk">sich entschuldigen</span><span class="verb-tag akk">sich ärgern über</span>
+            <span class="verb-tag akk">sich kümmern um</span><span class="verb-tag akk">sich vorbereiten auf</span>
+            <span class="verb-tag akk">sich gewöhnen an</span><span class="verb-tag akk">sich verlieben in</span>
+          </div>
+          <div class="ref-section-head" data-i18n="refReflVerbsDat">Häufige Verben mit Dativ</div>
+          <div class="verb-tags">
+            <span class="verb-tag dat">sich die Hände waschen</span><span class="verb-tag dat">sich die Zähne putzen</span>
+            <span class="verb-tag dat">sich etwas vorstellen</span><span class="verb-tag dat">sich etwas ansehen</span>
+            <span class="verb-tag dat">sich etwas kaufen</span><span class="verb-tag dat">sich etwas merken</span>
+            <span class="verb-tag dat">sich etwas überlegen</span><span class="verb-tag dat">sich etwas wünschen</span>
+            <span class="verb-tag dat">sich Sorgen machen</span><span class="verb-tag dat">sich etwas leisten</span>
+          </div>
+        </section>
+
+        <!-- ===== RELATIV ===== -->
+        <section class="ref-section" data-ref-panel="relativ" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refRelHead">Relativpronomen</div>
+          <div class="ref-note" data-i18n-html="refRelNote"><b>Genus und Numerus</b> kommen vom Bezugswort davor — der <b>Kasus</b> von der Rolle im Relativsatz. Die Formen sind die des bestimmten Artikels, nur <span class="col-dat">denen</span> und der Genitiv weichen ab.</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thCase">Kasus</th>
+                <th data-i18n="thMasc">maskulin</th><th data-i18n="thFem">feminin</th>
+                <th data-i18n="thNeut">neutrum</th><th data-i18n="thPlural">Plural</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="col-nom" data-i18n="caseNominativ">Nominativ</td><td>der</td><td>die</td><td>das</td><td>die</td></tr>
+                <tr><td class="col-akk" data-i18n="caseAkkusativ">Akkusativ</td><td>den</td><td>die</td><td>das</td><td>die</td></tr>
+                <tr><td class="col-dat" data-i18n="caseDativ">Dativ</td><td>dem</td><td class="hl">der</td><td>dem</td><td class="hl">denen</td></tr>
+                <tr><td class="col-gen" data-i18n="caseGenitiv">Genitiv</td><td class="hl">dessen</td><td class="hl">deren</td><td class="hl">dessen</td><td class="hl">deren</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul class="ex-list">
+            <li><span class="de">Die Frau, <b>der</b> ich das Buch gab, …</span> <span class="en">— feminine dative is <b>der</b>, not die</span></li>
+            <li><span class="de">Die Gäste, <b>denen</b> es nicht schmeckte, …</span> <span class="en">— dative plural adds -en</span></li>
+            <li><span class="de">Der Mann, <b>dessen</b> Auto kaputt ist, …</span> <span class="en">— after dessen/deren the noun drops its article</span></li>
+          </ul>
+          <div class="ref-section-head" data-i18n="refRelWasHead">was statt das</div>
+          <div class="ref-note" data-i18n-html="refRelWasNote">Nach <b>alles, nichts, etwas, vieles, das</b> und nach Superlativen heißt es <b>was</b>: <i>Alles, <b>was</b> du sagst …</i> Bezieht sich der Relativsatz mit Präposition auf eine ganze Aussage, wird daraus <b>wo(r)-</b>: <i>das Problem, <b>worüber</b> wir sprachen</i>.</div>
+        </section>
+
+        <!-- ===== DEMONSTRATIV ===== -->
+        <section class="ref-section" data-ref-panel="demonstrativ" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refDemHead">dieser — wie der bestimmte Artikel</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thCase">Kasus</th>
+                <th data-i18n="thMasc">maskulin</th><th data-i18n="thFem">feminin</th>
+                <th data-i18n="thNeut">neutrum</th><th data-i18n="thPlural">Plural</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="col-nom" data-i18n="caseNominativ">Nominativ</td><td>dieser</td><td>diese</td><td>dieses</td><td>diese</td></tr>
+                <tr><td class="col-akk" data-i18n="caseAkkusativ">Akkusativ</td><td>diesen</td><td>diese</td><td>dieses</td><td>diese</td></tr>
+                <tr><td class="col-dat" data-i18n="caseDativ">Dativ</td><td>diesem</td><td>dieser</td><td>diesem</td><td>diesen</td></tr>
+                <tr><td class="col-gen" data-i18n="caseGenitiv">Genitiv</td><td>dieses</td><td>dieser</td><td>dieses</td><td>dieser</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refDemJener"><b>jener</b> und <b>solcher</b> folgen genau demselben Muster; <b>welcher</b> als Frageartikel ebenfalls.</div>
+          <div class="ref-section-head" data-i18n="refDemDerHead">der / die / das als Demonstrativpronomen</div>
+          <div class="ref-note" data-i18n-html="refDemDerNote">Betont und meist am Satzanfang ersetzt <b>der/die/das</b> ein ganzes Nomen — sehr häufig in der gesprochenen Sprache. Dativ Plural ist <b>denen</b>, Genitiv <b>dessen/deren</b>.</div>
+          <ul class="ex-list">
+            <li><span class="de">Kennst du den neuen Kollegen? — <b>Den</b> kenne ich noch nicht.</span></li>
+            <li><span class="de">Traust du den Leuten? — <b>Denen</b> traue ich überhaupt nicht.</span></li>
+            <li><span class="de">Mein Bruder und <b>dessen</b> Frau kommen morgen.</span> <span class="en">— dessen points back clearly; seine would be ambiguous</span></li>
+          </ul>
+          <div class="ref-section-head" data-i18n="refDemSameHead">derselbe · derjenige</div>
+          <div class="ref-note" data-i18n-html="refDemSameNote">Beide werden <b>zusammengeschrieben</b>, und nur der vordere Teil dekliniert: <i>denselben Lehrer</i>, <i>demselben Bus</i>, <i>diejenigen, die …</i></div>
+        </section>
+
+        <!-- ===== FRAGE & INDEFINIT ===== -->
+        <section class="ref-section" data-ref-panel="frageindef" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refIntHead">Fragepronomen</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thCase">Kasus</th>
+                <th data-i18n="thPeople">Personen</th><th data-i18n="thThings">Sachen</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="col-nom" data-i18n="caseNominativ">Nominativ</td><td><b>wer</b></td><td><b>was</b></td></tr>
+                <tr><td class="col-akk" data-i18n="caseAkkusativ">Akkusativ</td><td><b>wen</b></td><td><b>was</b></td></tr>
+                <tr><td class="col-dat" data-i18n="caseDativ">Dativ</td><td><b>wem</b></td><td class="muted" data-i18n="refIntNoDat">— (wo(r)- + Präp.)</td></tr>
+                <tr><td class="col-gen" data-i18n="caseGenitiv">Genitiv</td><td><b>wessen</b></td><td class="muted">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refIntPrepNote">Bei <b>Sachen</b> steht statt Präposition + was die Form <b>wo(r)-</b>: <i>womit, worüber, wofür, worauf, wovon</i>. Bei <b>Personen</b> bleibt die Präposition: <i>mit wem, für wen, an wen</i>.</div>
+          <div class="ref-note" data-i18n-html="refIntWasFuer">In <b>was für ein</b> ist <i>für</i> keine Präposition — <i>ein</i> richtet sich nach der Rolle im Satz: <i>Was für <b>ein</b> Mensch …</i> (Nom.), <i>Was für <b>einen</b> Wagen fährst du?</i> (Akk.)</div>
+          <div class="ref-section-head" data-i18n="refIndefHead">Indefinitpronomen</div>
+          <div class="tbl-wrap">
+            <table class="gt">
+              <thead><tr>
+                <th data-i18n="thCase">Kasus</th><th>man</th><th>jemand</th><th>niemand</th>
+              </tr></thead>
+              <tbody>
+                <tr><td class="col-nom" data-i18n="caseNominativ">Nominativ</td><td><b>man</b></td><td>jemand</td><td>niemand</td></tr>
+                <tr><td class="col-akk" data-i18n="caseAkkusativ">Akkusativ</td><td class="hl">einen</td><td>jemanden</td><td>niemanden</td></tr>
+                <tr><td class="col-dat" data-i18n="caseDativ">Dativ</td><td class="hl">einem</td><td>jemandem</td><td>niemandem</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refIndefManNote"><b>man</b> gibt es nur im Nominativ — im Akkusativ und Dativ springt es auf <b>einen / einem</b> um: <i>Solche Nachrichten machen <b>einen</b> traurig.</i></div>
+          <div class="ref-note" data-i18n-html="refIndefRest"><b>etwas</b> und <b>nichts</b> bleiben immer unverändert. <b>einer, keiner, jeder</b> dekliniert man allein stehend wie <i>dieser</i>: <i>keiner, keinen, keinem</i>; das Neutrum heißt <b>eins / keins</b>.</div>
+        </section>
+
+        <!-- ===== WORTSTELLUNG ===== -->
+        <section class="ref-section" data-ref-panel="wortstellung" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refWoHead1">1. Pronomen stehen vor Nomen</div>
+          <div class="ref-note" data-i18n-html="refWoNote1">Sobald ein Objekt ein Pronomen ist, rückt es <b>vor</b> das Nomen — egal welcher Kasus.</div>
+          <ul class="ex-list">
+            <li><span class="good">✓</span> <span class="de">Ich gebe <b>es</b> dem Mann.</span></li>
+            <li><span class="bad">✗</span> <span class="de">Ich gebe dem Mann es.</span></li>
+            <li><span class="good">✓</span> <span class="de">Ich gebe <b>ihm</b> das Buch.</span></li>
+          </ul>
+          <div class="ref-section-head" data-i18n="refWoHead2">2. Zwei Nomen: Dativ vor Akkusativ</div>
+          <ul class="ex-list">
+            <li><span class="good">✓</span> <span class="de">Ich gebe <span class="col-dat">dem Mann</span> <span class="col-akk">das Buch</span>.</span></li>
+          </ul>
+          <div class="ref-section-head" data-i18n="refWoHead3">3. Zwei Pronomen: Akkusativ vor Dativ</div>
+          <div class="ref-note" data-i18n-html="refWoNote3">Hier <b>dreht sich die Reihenfolge um</b>. Das ist die Regel, die am häufigsten schiefgeht.</div>
+          <ul class="ex-list">
+            <li><span class="good">✓</span> <span class="de">Ich gebe <span class="col-akk">es</span> <span class="col-dat">ihm</span>.</span></li>
+            <li><span class="bad">✗</span> <span class="de">Ich gebe ihm es.</span></li>
+            <li><span class="good">✓</span> <span class="de">Er schenkt <span class="col-akk">sie</span> <span class="col-dat">ihr</span>.</span></li>
+            <li><span class="good">✓</span> <span class="de">Kannst du <span class="col-akk">es</span> <span class="col-dat">mir</span> geben?</span></li>
+          </ul>
+          <div class="ref-note" data-i18n-html="refWoMnemonic"><b>Merkhilfe:</b> kurze Wörter zuerst. Zwei Pronomen → <i>es ihm</i>, <i>sie ihr</i>, <i>ihn dir</i> — der Akkusativ führt.</div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS MODAL -->
+<div class="modal fade" id="progressModal" tabindex="-1" aria-labelledby="progressTitleText" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="progressTitleText" data-i18n="progressTitleText">Fortschritt</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="progressBody"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>function loadJson(path){var request=new XMLHttpRequest();request.open("GET",path,false);request.send(null);if(request.status!==200 && request.status!==0){throw new Error("Could not load " + path);}return JSON.parse(request.responseText);}</script><script>
+/* ============================================================
+   DATA
+   Each item: id, type (personal/possessiv/reflexiv/relativ/
+   demonstrativ/interrogativ/indefinit), person (1sg..formal or
+   null for the families with no person axis), case, mode
+   ("luecke" = fill the blank, "ersetzen" = replace the marked
+   noun phrase), level (A1-B2), cue (short English gloss shown
+   with luecke items), segments (text / blank+ans), orig
+   (ersetzen only: the source sentence as text / mark segments),
+   tr (English translation), ex (explanation).
+   ============================================================ */
+const DATA = loadJson("../data/pronouns.json");
+
+/* ============================================================
+   UI STRINGS (bilingual interface)
+   ============================================================ */
+const STRINGS = {
+  de: {
+    appTitle:"Pronomen", appSubtitle:"ich · mich · mir — wer, wen, wem?",
+    refBtnLabel:"Übersicht", progressBtnLabel:"Fortschritt", resetTitle:"Fortschritt zurücksetzen",
+    labelType:"Art", labelPerson:"Person",
+    personNote:"Diese Pronomenart richtet sich nicht nach der Person.",
+    typeAll:"Alle", typePersonal:"Personal", typePossessiv:"Possessiv", typeReflexiv:"Reflexiv",
+    typeRelativ:"Relativ", typeDemonstrativ:"Demonstrativ", typeInterrogativ:"Frage", typeIndefinit:"Indefinit",
+    personAll:"Alle",
+    caseAll:"Alle Kasus", caseNominativ:"Nominativ", caseAkkusativ:"Akkusativ", caseDativ:"Dativ", caseGenitiv:"Genitiv",
+    levelAll:"Alle Niveaus",
+    statusAll:"Alle", statusUnsolved:"Ungelöst", statusWrong:"Falsch",
+    labelStatCorrect:"Richtig", labelStatTotal:"Versuche", labelStatAcc:"Genauigkeit", labelStatStreak:"Serie",
+    remaining:n=>`${n} übrig`,
+    knownBtn:"✓ Kenne ich", skipBtn:"Überspringen", checkBtn:"Prüfen", nextBtn:"Weiter →",
+    correctLabel:"✓ Richtig", incorrectLabel:"✕ Nicht ganz", correctPrefix:"Richtig:",
+    modeLuecke:"Lücke", modeErsetzen:"Ersetzen",
+    ersetzenHint:"Ersetze das markierte Wort durch ein Pronomen:",
+    cueKey:"Gemeint ist",
+    emptyTitle:"Nichts zu üben",
+    emptyBody:"Alle Sätze in dieser Auswahl sind als bekannt markiert, oder kein Satz passt zu den Filtern.",
+    modalTitleText:"Übersicht", progressTitleText:"Fortschritt",
+    tabFrageIndef:"Frage & Indefinit", tabWordOrder:"Wortstellung",
+    resetConfirm:"Gesamten Fortschritt zurücksetzen? Dies kann nicht rückgängig gemacht werden.",
+    progTotal:"gesamt", progCorrect:"richtig", progWrong:"falsch", progUnsolved:"offen",
+    progByType:"Nach Pronomenart", progByPerson:"Nach Person",
+    langToggleLabel:"EN",
+    thPerson:"Person", thCase:"Kasus", thMasc:"maskulin", thFem:"feminin", thNeut:"neutrum", thPlural:"Plural",
+    thOwner:"Besitzer", thStem:"Stamm", thOwner2:"Besitzer", thStem2:"Stamm",
+    thPeople:"Personen", thThings:"Sachen",
+    p1sg:"1. Sg.", p2sg:"2. Sg.", p3sg:"3. Sg.", p3sgm:"3. Sg. m.", p3sgf:"3. Sg. f.", p3sgn:"3. Sg. n.",
+    p1pl:"1. Pl.", p2pl:"2. Pl.", p3pl:"3. Pl.", pformal:"Höflich",
+    refPersonalHead:"Personalpronomen",
+    refPersonalNote:"Nur <b>er</b> ändert im Akkusativ seine Form. Im Dativ ändert sich fast alles — das ist die Tabelle, die man wirklich auswendig können muss.",
+    refPersonalGen:"Der <b>Genitiv</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) ist heute praktisch ausgestorben und kommt nur in festen Wendungen vor: <i>Ich erinnere mich seiner.</i>",
+    refPersonalGender:"Deutsche Pronomen folgen dem <b>grammatischen</b> Geschlecht, nicht dem natürlichen: <i>Der Schlüssel? <b>Er</b> liegt dort.</i> — nicht <i>es</i>.",
+    refPossStemHead:"1. Stamm nach dem Besitzer wählen",
+    refPossEndHead:"2. Endung nach dem folgenden Nomen wählen",
+    refPossEndNote:"Die Endungen sind die <b>ein-Endungen</b>: keine Endung in Nominativ m. und Nominativ/Akkusativ n.",
+    refPossEuer:"<b>euer</b> verliert sein zweites e, sobald eine Endung dazukommt: <i>euer Garten</i>, aber <i>eure Wohnung</i>, <i>euren Brief</i>, <i>eurem Sohn</i>.",
+    refPossAloneHead:"Ohne Nomen: die vollen Endungen",
+    refPossAloneNote:"Steht das Possessivpronomen <b>allein</b>, bekommt es die Endung des bestimmten Artikels: <i>Dein Mantel ist schwarz, <b>meiner</b> ist blau.</i> — <i>Ist das dein Auto? Nein, das ist <b>meins</b>.</i>",
+    refReflHead:"Reflexivpronomen",
+    refReflNote:"Gute Nachricht: Akkusativ und Dativ sind <b>überall gleich</b> — außer in der 1. und 2. Person Singular.",
+    refReflWhen:"<b>Wann Dativ?</b> Sobald der Satz schon ein Akkusativobjekt hat, rutscht das Reflexivpronomen in den Dativ: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i>",
+    refReflVerbsAkk:"Häufige Verben mit Akkusativ", refReflVerbsDat:"Häufige Verben mit Dativ",
+    refRelHead:"Relativpronomen",
+    refRelNote:"<b>Genus und Numerus</b> kommen vom Bezugswort davor — der <b>Kasus</b> von der Rolle im Relativsatz. Die Formen sind die des bestimmten Artikels, nur <span class=\"col-dat\">denen</span> und der Genitiv weichen ab.",
+    refRelWasHead:"was statt das",
+    refRelWasNote:"Nach <b>alles, nichts, etwas, vieles, das</b> und nach Superlativen heißt es <b>was</b>: <i>Alles, <b>was</b> du sagst …</i> Bezieht sich der Relativsatz mit Präposition auf eine ganze Aussage, wird daraus <b>wo(r)-</b>: <i>das Problem, <b>worüber</b> wir sprachen</i>.",
+    refDemHead:"dieser — wie der bestimmte Artikel",
+    refDemJener:"<b>jener</b> und <b>solcher</b> folgen genau demselben Muster; <b>welcher</b> als Frageartikel ebenfalls.",
+    refDemDerHead:"der / die / das als Demonstrativpronomen",
+    refDemDerNote:"Betont und meist am Satzanfang ersetzt <b>der/die/das</b> ein ganzes Nomen — sehr häufig in der gesprochenen Sprache. Dativ Plural ist <b>denen</b>, Genitiv <b>dessen/deren</b>.",
+    refDemSameHead:"derselbe · derjenige",
+    refDemSameNote:"Beide werden <b>zusammengeschrieben</b>, und nur der vordere Teil dekliniert: <i>denselben Lehrer</i>, <i>demselben Bus</i>, <i>diejenigen, die …</i>",
+    refIntHead:"Fragepronomen", refIntNoDat:"— (wo(r)- + Präp.)",
+    refIntPrepNote:"Bei <b>Sachen</b> steht statt Präposition + was die Form <b>wo(r)-</b>: <i>womit, worüber, wofür, worauf, wovon</i>. Bei <b>Personen</b> bleibt die Präposition: <i>mit wem, für wen, an wen</i>.",
+    refIntWasFuer:"In <b>was für ein</b> ist <i>für</i> keine Präposition — <i>ein</i> richtet sich nach der Rolle im Satz: <i>Was für <b>ein</b> Mensch …</i> (Nom.), <i>Was für <b>einen</b> Wagen fährst du?</i> (Akk.)",
+    refIndefHead:"Indefinitpronomen",
+    refIndefManNote:"<b>man</b> gibt es nur im Nominativ — im Akkusativ und Dativ springt es auf <b>einen / einem</b> um: <i>Solche Nachrichten machen <b>einen</b> traurig.</i>",
+    refIndefRest:"<b>etwas</b> und <b>nichts</b> bleiben immer unverändert. <b>einer, keiner, jeder</b> dekliniert man allein stehend wie <i>dieser</i>: <i>keiner, keinen, keinem</i>; das Neutrum heißt <b>eins / keins</b>.",
+    refWoHead1:"1. Pronomen stehen vor Nomen",
+    refWoNote1:"Sobald ein Objekt ein Pronomen ist, rückt es <b>vor</b> das Nomen — egal welcher Kasus.",
+    refWoHead2:"2. Zwei Nomen: Dativ vor Akkusativ",
+    refWoHead3:"3. Zwei Pronomen: Akkusativ vor Dativ",
+    refWoNote3:"Hier <b>dreht sich die Reihenfolge um</b>. Das ist die Regel, die am häufigsten schiefgeht.",
+    refWoMnemonic:"<b>Merkhilfe:</b> kurze Wörter zuerst. Zwei Pronomen → <i>es ihm</i>, <i>sie ihr</i>, <i>ihn dir</i> — der Akkusativ führt.",
+  },
+  en: {
+    appTitle:"Pronouns", appSubtitle:"ich · mich · mir — who, whom, to whom?",
+    refBtnLabel:"Overview", progressBtnLabel:"Progress", resetTitle:"Reset progress",
+    labelType:"Type", labelPerson:"Person",
+    personNote:"This pronoun family does not change by person.",
+    typeAll:"All", typePersonal:"Personal", typePossessiv:"Possessive", typeReflexiv:"Reflexive",
+    typeRelativ:"Relative", typeDemonstrativ:"Demonstrative", typeInterrogativ:"Question", typeIndefinit:"Indefinite",
+    personAll:"All",
+    caseAll:"All cases", caseNominativ:"Nominative", caseAkkusativ:"Accusative", caseDativ:"Dative", caseGenitiv:"Genitive",
+    levelAll:"All levels",
+    statusAll:"All", statusUnsolved:"Unsolved", statusWrong:"Mistaken",
+    labelStatCorrect:"Correct", labelStatTotal:"Attempts", labelStatAcc:"Accuracy", labelStatStreak:"Streak",
+    remaining:n=>`${n} left`,
+    knownBtn:"✓ I know this", skipBtn:"Skip", checkBtn:"Check", nextBtn:"Next →",
+    correctLabel:"✓ Correct", incorrectLabel:"✕ Not quite", correctPrefix:"Correct:",
+    modeLuecke:"Gap fill", modeErsetzen:"Replace",
+    ersetzenHint:"Replace the highlighted phrase with a pronoun:",
+    cueKey:"Meaning",
+    emptyTitle:"Nothing to practise",
+    emptyBody:"All sentences in this selection are marked known, or none match the current filters.",
+    modalTitleText:"Overview", progressTitleText:"Progress",
+    tabFrageIndef:"Question & Indefinite", tabWordOrder:"Word order",
+    resetConfirm:"Reset all progress? This cannot be undone.",
+    progTotal:"total", progCorrect:"correct", progWrong:"wrong", progUnsolved:"unsolved",
+    progByType:"By pronoun family", progByPerson:"By person",
+    langToggleLabel:"DE",
+    thPerson:"Person", thCase:"Case", thMasc:"masculine", thFem:"feminine", thNeut:"neuter", thPlural:"plural",
+    thOwner:"Owner", thStem:"Stem", thOwner2:"Owner", thStem2:"Stem",
+    thPeople:"People", thThings:"Things",
+    p1sg:"1st sg.", p2sg:"2nd sg.", p3sg:"3rd sg.", p3sgm:"3rd sg. m.", p3sgf:"3rd sg. f.", p3sgn:"3rd sg. n.",
+    p1pl:"1st pl.", p2pl:"2nd pl.", p3pl:"3rd pl.", pformal:"Polite",
+    refPersonalHead:"Personal pronouns",
+    refPersonalNote:"Only <b>er</b> changes shape in the accusative. The dative changes almost everything — this is the table worth knowing by heart.",
+    refPersonalGen:"The <b>genitive</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) is practically extinct today and survives only in fixed phrases: <i>Ich erinnere mich seiner.</i>",
+    refPersonalGender:"German pronouns follow <b>grammatical</b> gender, not natural gender: <i>Der Schlüssel? <b>Er</b> liegt dort.</i> — never <i>es</i>.",
+    refPossStemHead:"1. Pick the stem from the owner",
+    refPossEndHead:"2. Pick the ending from the noun that follows",
+    refPossEndNote:"The endings are the <b>ein- endings</b>: no ending in the masculine nominative and the neuter nominative/accusative.",
+    refPossEuer:"<b>euer</b> loses its second e as soon as an ending is added: <i>euer Garten</i>, but <i>eure Wohnung</i>, <i>euren Brief</i>, <i>eurem Sohn</i>.",
+    refPossAloneHead:"Without a noun: the full endings",
+    refPossAloneNote:"Standing <b>alone</b>, the possessive takes the definite article's ending: <i>Dein Mantel ist schwarz, <b>meiner</b> ist blau.</i> — <i>Ist das dein Auto? Nein, das ist <b>meins</b>.</i>",
+    refReflHead:"Reflexive pronouns",
+    refReflNote:"Good news: accusative and dative are <b>identical everywhere</b> — except in the 1st and 2nd person singular.",
+    refReflWhen:"<b>When dative?</b> As soon as the sentence already has a direct object, the reflexive moves to the dative: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i>",
+    refReflVerbsAkk:"Common verbs taking the accusative", refReflVerbsDat:"Common verbs taking the dative",
+    refRelHead:"Relative pronouns",
+    refRelNote:"<b>Gender and number</b> come from the noun in front — the <b>case</b> comes from the role inside the relative clause. The forms are the definite article's, except <span class=\"col-dat\">denen</span> and the genitive.",
+    refRelWasHead:"was instead of das",
+    refRelWasNote:"After <b>alles, nichts, etwas, vieles, das</b> and after superlatives the pronoun is <b>was</b>: <i>Alles, <b>was</b> du sagst …</i> When a prepositional relative clause refers to a whole idea it becomes <b>wo(r)-</b>: <i>das Problem, <b>worüber</b> wir sprachen</i>.",
+    refDemHead:"dieser — declines like the definite article",
+    refDemJener:"<b>jener</b> and <b>solcher</b> follow exactly the same pattern, and so does <b>welcher</b> as a question word.",
+    refDemDerHead:"der / die / das as a demonstrative",
+    refDemDerNote:"Stressed and usually at the front of the clause, <b>der/die/das</b> replaces a whole noun — very common in speech. The dative plural is <b>denen</b>, the genitive <b>dessen/deren</b>.",
+    refDemSameHead:"derselbe · derjenige",
+    refDemSameNote:"Both are written as <b>one word</b>, and only the front part declines: <i>denselben Lehrer</i>, <i>demselben Bus</i>, <i>diejenigen, die …</i>",
+    refIntHead:"Question pronouns", refIntNoDat:"— (wo(r)- + prep.)",
+    refIntPrepNote:"For <b>things</b>, preposition + was becomes <b>wo(r)-</b>: <i>womit, worüber, wofür, worauf, wovon</i>. For <b>people</b> the preposition stays: <i>mit wem, für wen, an wen</i>.",
+    refIntWasFuer:"In <b>was für ein</b>, <i>für</i> is not a preposition — <i>ein</i> follows its role in the sentence: <i>Was für <b>ein</b> Mensch …</i> (nom.), <i>Was für <b>einen</b> Wagen fährst du?</i> (acc.)",
+    refIndefHead:"Indefinite pronouns",
+    refIndefManNote:"<b>man</b> exists only in the nominative — in the accusative and dative it switches to <b>einen / einem</b>: <i>Solche Nachrichten machen <b>einen</b> traurig.</i>",
+    refIndefRest:"<b>etwas</b> and <b>nichts</b> never change. Standing alone, <b>einer, keiner, jeder</b> decline like <i>dieser</i>: <i>keiner, keinen, keinem</i>; the neuter is <b>eins / keins</b>.",
+    refWoHead1:"1. Pronouns come before nouns",
+    refWoNote1:"As soon as an object is a pronoun it moves <b>in front of</b> the noun, whatever the case.",
+    refWoHead2:"2. Two nouns: dative before accusative",
+    refWoHead3:"3. Two pronouns: accusative before dative",
+    refWoNote3:"Here the order <b>flips round</b>. This is the rule that goes wrong most often.",
+    refWoMnemonic:"<b>Memory aid:</b> short words first. Two pronouns → <i>es ihm</i>, <i>sie ihr</i>, <i>ihn dir</i> — the accusative leads.",
+  },
+};
+function t(key){ return STRINGS[uiLang][key]; }
+
+const TYPES = [
+  {id:"all",key:"typeAll"},
+  {id:"personal",key:"typePersonal"},
+  {id:"possessiv",key:"typePossessiv"},
+  {id:"reflexiv",key:"typeReflexiv"},
+  {id:"relativ",key:"typeRelativ"},
+  {id:"demonstrativ",key:"typeDemonstrativ"},
+  {id:"interrogativ",key:"typeInterrogativ"},
+  {id:"indefinit",key:"typeIndefinit"},
+];
+/* Only these three decline by person; the other four have person === null. */
+const PERSON_TYPES = ["personal","possessiv","reflexiv"];
+/* Chip labels are the German pronouns themselves, so they need no translation. */
+const PERSONS = [
+  {id:"all",key:"personAll"},
+  {id:"1sg",label:"ich"},
+  {id:"2sg",label:"du"},
+  {id:"3sg_m",label:"er"},
+  {id:"3sg_f",label:"sie (Sg.)"},
+  {id:"3sg_n",label:"es"},
+  {id:"1pl",label:"wir"},
+  {id:"2pl",label:"ihr"},
+  {id:"3pl",label:"sie (Pl.)"},
+  {id:"formal",label:"Sie"},
+];
+const PERSON_LONG = {
+  "1sg":"p1sg", "2sg":"p2sg", "3sg_m":"p3sgm", "3sg_f":"p3sgf", "3sg_n":"p3sgn",
+  "1pl":"p1pl", "2pl":"p2pl", "3pl":"p3pl", "formal":"pformal",
+};
+const CASES = [
+  {id:"all",key:"caseAll"},
+  {id:"Nominativ",key:"caseNominativ"},
+  {id:"Akkusativ",key:"caseAkkusativ"},
+  {id:"Dativ",key:"caseDativ"},
+  {id:"Genitiv",key:"caseGenitiv"},
+];
+const LEVELS = [
+  {id:"all",key:"levelAll"},
+  {id:"A1",label:"A1"},{id:"A2",label:"A2"},{id:"B1",label:"B1"},{id:"B2",label:"B2"},
+];
+const STATUSES = [
+  {id:"all",key:"statusAll"},
+  {id:"unsolved",key:"statusUnsolved"},
+  {id:"wrong",key:"statusWrong"},
+];
+
+/* ============================================================
+   STATE / STORAGE
+   ============================================================ */
+const USER_SCOPE = (()=>{ try{ return localStorage.getItem("deutsch-auth-user-id") || "guest"; }catch(e){ return "guest"; } })();
+const STORE_KEY = "pronomen_trainer_v1:" + USER_SCOPE;
+function defaultStore(lang){
+  return {items:{}, streak:0, activeType:"all", activePerson:"all", activeCase:"all",
+          activeLevel:"all", activeStatus:"all", lang:lang || "de"};
+}
+function loadStore(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return defaultStore();
+}
+function saveStore(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){} }
+
+let store = Object.assign(defaultStore(), loadStore());
+if(!store.items) store.items = {};
+if(typeof store.streak !== "number") store.streak = 0;
+let uiLang = store.lang === "en" ? "en" : "de";
+/* A stored combination like relativ + 2sg can never be produced by the UI,
+   but a stale store should not leave the learner with an empty deck. */
+if(!personActiveAllowed()) store.activePerson = "all";
+
+let pool = [];
+let currentIndex = 0;
+let current = null;
+let answered = false;
+let pronunciationAudio = null;
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function normalize(s){
+  return s.trim().toLowerCase().replace(/\s+/g," ");
+}
+function fullGermanSentence(item){
+  return item.segments.map(seg => seg.blank ? seg.ans[0] : seg.text).join("").replace(/\s+/g," ").trim();
+}
+function hasPersonAxis(typeId){ return PERSON_TYPES.indexOf(typeId) !== -1; }
+function personActiveAllowed(){
+  return store.activeType === "all" || hasPersonAxis(store.activeType);
+}
+function playPronunciation(){
+  if(!current) return;
+  if(pronunciationAudio){ pronunciationAudio.pause(); pronunciationAudio = null; }
+  const button = document.getElementById("pronunciationBtn");
+  if(!button || button.disabled) return;
+  const sentence = fullGermanSentence(current);
+  const source = "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=de&q=" + encodeURIComponent(sentence);
+  const audio = new Audio(source);
+  pronunciationAudio = audio;
+  button.setAttribute("aria-label", "German pronunciation is playing");
+  button.title = "German pronunciation is playing";
+  const resetButton = ()=>{
+    if(pronunciationAudio === audio) pronunciationAudio = null;
+    if(document.body.contains(button)){
+      button.setAttribute("aria-label", "Play German pronunciation");
+      button.title = "Play German pronunciation";
+    }
+  };
+  audio.addEventListener("ended", resetButton, {once:true});
+  audio.addEventListener("error", resetButton, {once:true});
+  audio.play().catch(resetButton);
+}
+function itemStat(id){
+  if(!store.items[id]) store.items[id] = {correct:0, attempts:0, known:false, lastCorrect:null};
+  return store.items[id];
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+function buildPool(){
+  pool = DATA.filter(d=>{
+    const typeOk   = store.activeType === "all" || store.activeType === d.type;
+    const personOk = store.activePerson === "all" || d.person === store.activePerson;
+    const caseOk   = store.activeCase === "all" || d.case === store.activeCase;
+    const levelOk  = store.activeLevel === "all" || d.level === store.activeLevel;
+    const stat = itemStat(d.id);
+    let statusOk;
+    if(store.activeStatus === "all") statusOk = true;
+    else if(store.activeStatus === "unsolved") statusOk = stat.attempts === 0;
+    else statusOk = stat.attempts > 0 && stat.lastCorrect === false;
+    return typeOk && personOk && caseOk && levelOk && statusOk && !stat.known;
+  });
+  for(let i=pool.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [pool[i],pool[j]] = [pool[j],pool[i]];
+  }
+  currentIndex = 0;
+}
+function refresh(){
+  buildPool();
+  renderCard();
+  updateStats();
+}
+
+/* ============================================================
+   RENDER: FILTERS
+   ============================================================ */
+function renderTypeChips(){
+  const el = document.getElementById("typeChips");
+  el.innerHTML = "";
+  TYPES.forEach(c=>{
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "btn btn-sm rounded-pill chip" + (store.activeType === c.id ? " active" : "");
+    chip.textContent = t(c.key);
+    chip.onclick = ()=>{
+      store.activeType = c.id;
+      /* Picking a family with no person axis would otherwise leave an empty
+         deck, so drop the person filter along with it. */
+      if(!personActiveAllowed()) store.activePerson = "all";
+      saveStore();
+      renderTypeChips();
+      renderPersonChips();
+      refresh();
+    };
+    el.appendChild(chip);
+  });
+}
+function renderPersonChips(){
+  const el = document.getElementById("personChips");
+  const row = document.getElementById("personRow");
+  const enabled = personActiveAllowed();
+  row.classList.toggle("is-off", !enabled);
+  el.innerHTML = "";
+  PERSONS.forEach(p=>{
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "btn btn-sm rounded-pill chip" + (store.activePerson === p.id ? " active" : "");
+    chip.textContent = p.key ? t(p.key) : p.label;
+    chip.disabled = !enabled;
+    chip.onclick = ()=>{
+      store.activePerson = p.id;
+      saveStore();
+      renderPersonChips();
+      refresh();
+    };
+    el.appendChild(chip);
+  });
+}
+function fillSelect(id, options, activeValue, onChange){
+  const el = document.getElementById(id);
+  el.innerHTML = options.map(o =>
+    `<option value="${o.id}"${o.id === activeValue ? " selected" : ""}>${escapeHtml(o.key ? t(o.key) : o.label)}</option>`
+  ).join("");
+  el.onchange = ()=>{ onChange(el.value); saveStore(); refresh(); };
+}
+function renderSelects(){
+  fillSelect("caseSelect",   CASES,    store.activeCase,   v=>{ store.activeCase = v; });
+  fillSelect("levelSelect",  LEVELS,   store.activeLevel,  v=>{ store.activeLevel = v; });
+  fillSelect("statusSelect", STATUSES, store.activeStatus, v=>{ store.activeStatus = v; });
+}
+
+/* ============================================================
+   REFERENCE MODAL
+   ============================================================ */
+const refModal = new bootstrap.Modal(document.getElementById("refModal"));
+document.getElementById("refToggle").onclick = ()=> refModal.show();
+function setReferenceTab(tab){
+  document.querySelectorAll("[data-ref-panel]").forEach(panel=>{
+    panel.hidden = panel.dataset.refPanel !== tab;
+  });
+  document.querySelectorAll("[data-ref-tab]").forEach(button=>{
+    button.setAttribute("aria-selected", String(button.dataset.refTab === tab));
+  });
+}
+document.querySelectorAll("[data-ref-tab]").forEach(button=>{
+  button.addEventListener("click", ()=>setReferenceTab(button.dataset.refTab));
+});
+
+/* ============================================================
+   PROGRESS MODAL
+   ============================================================ */
+const progressModal = new bootstrap.Modal(document.getElementById("progressModal"));
+const progressBody = document.getElementById("progressBody");
+document.getElementById("progressToggle").onclick = ()=>{ renderProgress(); progressModal.show(); };
+
+function statsFor(items){
+  let correct=0, wrong=0, unsolved=0;
+  items.forEach(d=>{
+    const s = itemStat(d.id);
+    if(s.attempts === 0) unsolved++;
+    else if(s.lastCorrect === true) correct++;
+    else wrong++;
+  });
+  return { total: items.length, correct, wrong, unsolved };
+}
+function progRow(name, s, dataset){
+  const cPct = s.total ? (s.correct/s.total*100) : 0;
+  const wPct = s.total ? (s.wrong/s.total*100) : 0;
+  return `
+    <div class="prog-row" ${dataset}>
+      <div class="d-flex justify-content-between align-items-baseline mb-2">
+        <span class="prog-name">${escapeHtml(name)}</span>
+        <span class="prog-count">${s.correct + s.wrong}/${s.total}</span>
+      </div>
+      <div class="progress" style="height:8px;">
+        <div class="progress-bar" style="width:${cPct}%;background:var(--success);"></div>
+        <div class="progress-bar" style="width:${wPct}%;background:var(--error);"></div>
+      </div>
+      <div class="prog-detail">
+        <span class="c">${s.correct} ${t("progCorrect")}</span>
+        <span class="w">${s.wrong} ${t("progWrong")}</span>
+        <span>${s.unsolved} ${t("progUnsolved")}</span>
+      </div>
+    </div>`;
+}
+function renderProgress(){
+  const overall = statsFor(DATA);
+  let html = `
+    <div class="row row-cols-4 g-0 text-center bg-light rounded-3 py-2 mb-2">
+      <div class="col"><div class="stat-num">${overall.total}</div><div class="stat-label">${t("progTotal")}</div></div>
+      <div class="col"><div class="stat-num" style="color:var(--success)">${overall.correct}</div><div class="stat-label">${t("progCorrect")}</div></div>
+      <div class="col"><div class="stat-num" style="color:var(--error)">${overall.wrong}</div><div class="stat-label">${t("progWrong")}</div></div>
+      <div class="col"><div class="stat-num">${overall.unsolved}</div><div class="stat-label">${t("progUnsolved")}</div></div>
+    </div>
+    <div class="prog-head" style="border-top:none;padding-top:4px;margin-top:8px;">${t("progByType")}</div>`;
+
+  TYPES.filter(c=>c.id!=="all").forEach(c=>{
+    html += progRow(t(c.key), statsFor(DATA.filter(d=>d.type===c.id)), `data-type="${c.id}"`);
+  });
+
+  html += `<div class="prog-head">${t("progByPerson")}</div>`;
+  PERSONS.filter(p=>p.id!=="all").forEach(p=>{
+    const items = DATA.filter(d=>d.person===p.id);
+    if(!items.length) return;
+    html += progRow(p.label + " · " + t(PERSON_LONG[p.id]), statsFor(items), `data-person="${p.id}"`);
+  });
+
+  progressBody.innerHTML = html;
+  progressBody.querySelectorAll(".prog-row").forEach(row=>{
+    row.addEventListener("click", ()=>{
+      if(row.dataset.type){
+        store.activeType = row.dataset.type;
+        if(!personActiveAllowed()) store.activePerson = "all";
+      } else if(row.dataset.person){
+        store.activePerson = row.dataset.person;
+        if(!personActiveAllowed()) store.activeType = "all";
+      }
+      saveStore();
+      renderTypeChips();
+      renderPersonChips();
+      refresh();
+      progressModal.hide();
+    });
+  });
+}
+
+/* ============================================================
+   RENDER: STATS
+   ============================================================ */
+function updateStats(){
+  let correct=0, total=0;
+  Object.values(store.items).forEach(s=>{ correct+=s.correct; total+=s.attempts; });
+  document.getElementById("statCorrect").textContent = correct;
+  document.getElementById("statTotal").textContent = total;
+  document.getElementById("statAcc").textContent = total ? Math.round(correct/total*100)+"%" : "–";
+  document.getElementById("statStreak").textContent = store.streak;
+  const remEl = document.getElementById("remainingLabel");
+  if(remEl) remEl.textContent = t("remaining")(pool.length);
+}
+
+/* ============================================================
+   RENDER: CARD
+   ============================================================ */
+function typeLabel(id){ return t(TYPES.find(c=>c.id===id).key); }
+function caseLabel(id){ return t(CASES.find(c=>c.id===id).key); }
+
+function renderCard(){
+  if(pronunciationAudio){ pronunciationAudio.pause(); pronunciationAudio = null; }
+  const card = document.getElementById("card");
+  if(pool.length === 0){
+    card.innerHTML = `
+      <div class="empty-state">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="8.5" cy="7" r="3.4" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M2.8 19.2c0-3.1 2.6-5.2 5.7-5.2s5.7 2.1 5.7 5.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <div class="empty-title">${t("emptyTitle")}</div>
+        <div>${t("emptyBody")}</div>
+      </div>`;
+    return;
+  }
+  if(currentIndex >= pool.length) currentIndex = 0;
+  current = pool[currentIndex];
+  answered = false;
+
+  const isErsetzen = current.mode === "ersetzen";
+  /* For a substitution item the person and the case ARE the answer, so they
+     stay hidden until the learner has committed to an answer. */
+  const metaTags = isErsetzen ? "" : `
+      ${current.person ? `<span class="meta-tag">${t(PERSON_LONG[current.person])}</span><span class="meta-tag">·</span>` : ""}
+      <span class="meta-tag">${caseLabel(current.case)}</span>`;
+
+  const origHtml = isErsetzen ? `
+    <div class="orig-arrow">${t("ersetzenHint")}</div>
+    <div class="orig-block">${current.orig.map(seg =>
+        seg.mark ? `<span class="orig-mark">${escapeHtml(seg.mark)}</span>` : escapeHtml(seg.text)
+      ).join("")}</div>` : "";
+
+  const cueHtml = (!isErsetzen && current.cue) ? `
+    <div><span class="cue-chip"><span class="cue-key">${t("cueKey")}</span><b>${escapeHtml(current.cue)}</b></span></div>` : "";
+
+  card.innerHTML = `
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
+      <div class="tag-row">
+        <span class="type-tag ${current.type}">${typeLabel(current.type)}</span>
+        <span class="du-level ${current.level}">${current.level}</span>
+        ${isErsetzen ? `<span class="mode-tag">${t("modeErsetzen")}</span>` : metaTags}
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="remaining" id="remainingLabel">${t("remaining")(pool.length)}</span>
+        <button class="btn btn-sm btn-link text-decoration-none text-muted" id="knownBtn">${t("knownBtn")}</button>
+      </div>
+    </div>
+    ${origHtml}
+    <div class="sentence-row">
+      <div class="sentence" id="sentenceLine"></div>
+      <button class="btn btn-sm btn-outline-secondary pronunciation-btn" id="pronunciationBtn" type="button" aria-label="Play German pronunciation" title="Play German pronunciation" disabled>🔊</button>
+    </div>
+    ${cueHtml}
+    <div class="translation">${escapeHtml(current.tr)}</div>
+    <div class="feedback" id="feedback"></div>
+    <div class="d-flex gap-2 mt-3">
+      <button class="btn btn-outline-secondary flex-fill" id="skipBtn">${t("skipBtn")}</button>
+      <button class="btn btn-dark flex-fill" id="checkBtn">${t("checkBtn")}</button>
+    </div>
+  `;
+
+  const line = document.getElementById("sentenceLine");
+  const inputs = [];
+  current.segments.forEach(seg=>{
+    if(seg.blank){
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "blank-input";
+      input.autocomplete = "off";
+      input.autocapitalize = "off";
+      input.spellcheck = false;
+      input.setAttribute("aria-label", "Pronoun");
+      line.appendChild(input);
+      inputs.push({el:input, ans:seg.ans});
+    } else if(seg.text){
+      line.appendChild(document.createTextNode(seg.text));
+    }
+  });
+
+  document.getElementById("checkBtn").onclick = ()=>checkAnswer(inputs);
+  document.getElementById("skipBtn").onclick = nextCard;
+  document.getElementById("knownBtn").onclick = toggleKnown;
+  document.getElementById("pronunciationBtn").onclick = playPronunciation;
+  inputs.forEach((inp, i)=>{
+    inp.el.addEventListener("keydown", (e)=>{
+      if(e.key === "Enter"){
+        e.preventDefault();
+        if(answered) nextCard();
+        else if(i < inputs.length - 1) inputs[i+1].el.focus();
+        else checkAnswer(inputs);
+      }
+    });
+  });
+  inputs[0].el.focus();
+}
+
+function checkAnswer(inputs){
+  if(answered) return;
+  let allCorrect = true;
+  inputs.forEach(inp=>{
+    const val = normalize(inp.el.value);
+    const ok = val.length > 0 && inp.ans.some(a => normalize(a) === val);
+    inp.el.disabled = true;
+    inp.el.classList.add(ok ? "correct" : "incorrect");
+    if(!ok) allCorrect = false;
+  });
+  answered = true;
+
+  const stat = itemStat(current.id);
+  stat.attempts += 1;
+  stat.lastCorrect = allCorrect;
+  if(allCorrect){
+    stat.correct += 1;
+    store.streak += 1;
+  } else {
+    store.streak = 0;
+  }
+  saveStore();
+
+  const fb = document.getElementById("feedback");
+  fb.classList.add("show", allCorrect ? "correct" : "incorrect");
+  fb.innerHTML = `
+    <div class="feedback-head">
+      <span>${allCorrect ? t("correctLabel") : t("incorrectLabel")}</span>
+      ${current.person ? `<span class="person-badge badge rounded-pill">${t(PERSON_LONG[current.person])}</span>` : ""}
+      <span class="case-badge badge rounded-pill ${current.case}">${caseLabel(current.case)}</span>
+    </div>
+    ${allCorrect ? "" : `<div class="answer-line">${t("correctPrefix")} <b>${escapeHtml(fullGermanSentence(current))}</b></div>`}
+    ${current.ex ? `<div class="explanation">${escapeHtml(current.ex)}</div>` : ""}
+  `;
+
+  const checkBtn = document.getElementById("checkBtn");
+  checkBtn.textContent = t("nextBtn");
+  checkBtn.onclick = nextCard;
+  const pronunciationBtn = document.getElementById("pronunciationBtn");
+  pronunciationBtn.disabled = false;
+  playPronunciation();
+
+  updateStats();
+}
+
+function nextCard(){
+  currentIndex += 1;
+  if(currentIndex >= pool.length) buildPool();
+  renderCard();
+  updateStats();
+}
+
+function toggleKnown(){
+  itemStat(current.id).known = true;
+  saveStore();
+  pool = pool.filter(d=>d.id !== current.id);
+  if(currentIndex >= pool.length) currentIndex = 0;
+  renderCard();
+  updateStats();
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+document.getElementById("resetProgress").onclick = ()=>{
+  if(confirm(t("resetConfirm"))){
+    store = defaultStore(uiLang);
+    saveStore();
+    renderTypeChips();
+    renderPersonChips();
+    renderSelects();
+    refresh();
+  }
+};
+
+/* ============================================================
+   LANGUAGE TOGGLE
+   Every translatable string carries data-i18n (text) or
+   data-i18n-html (markup), so nothing has to be listed twice.
+   ============================================================ */
+function applyLanguage(){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const value = STRINGS[uiLang][el.dataset.i18n];
+    if(typeof value === "string") el.textContent = value;
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const value = STRINGS[uiLang][el.dataset.i18nHtml];
+    if(typeof value === "string") el.innerHTML = value;
+  });
+  document.getElementById("resetProgress").title = t("resetTitle");
+  document.getElementById("langToggle").textContent = t("langToggleLabel");
+  document.documentElement.lang = uiLang;
+}
+document.getElementById("langToggle").onclick = ()=>{
+  uiLang = uiLang === "de" ? "en" : "de";
+  store.lang = uiLang;
+  saveStore();
+  applyLanguage();
+  renderTypeChips();
+  renderPersonChips();
+  renderSelects();
+  renderCard();
+  updateStats();
+  if(document.getElementById("progressModal").classList.contains("show")) renderProgress();
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+applyLanguage();
+setReferenceTab("personal");
+renderTypeChips();
+renderPersonChips();
+renderSelects();
+refresh();
+</script>
+</body>
+</html>

@@ -47,6 +47,7 @@
     .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); flex: 0 0 auto; }
     .tab-btn[data-tab="vocab"] .dot { background: #75a68c; }
     .tab-btn[data-tab="prep"] .dot { background: #80a8c6; }
+    .tab-btn[data-tab="pronouns"] .dot { background: #a98cc0; }
 
     .account-email {
       max-width: 190px;
@@ -127,6 +128,7 @@
             <button class="btn tab-btn" data-tab="vocab" type="button"><span class="dot"></span><span class="tab-label">Vocabulary Flashcards</span></button>
             <button class="btn tab-btn" data-tab="prep" type="button"><span class="dot"></span><span class="tab-label">Preposition Practice</span></button>
             <button class="btn tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Practice</span></button>
+            <button class="btn tab-btn" data-tab="pronouns" type="button"><span class="dot"></span><span class="tab-label">Pronoun Practice</span></button>
             <button class="btn tab-btn" data-tab="translation" type="button"><span class="dot"></span><span class="tab-label">Translation Practice</span></button>
           </div>
           <div class="account-area d-flex align-items-center gap-2 ms-lg-auto mt-2 mt-lg-0">
@@ -257,7 +259,7 @@
       if (!frames[tab]) {
         const frame = document.createElement("iframe");
         frame.title = document.querySelector(`[data-tab="${tab}"] .tab-label`).textContent.trim();
-        frame.src = `apps/${tab}.html?v=20260912`;
+        frame.src = `apps/${tab}.html?v=20260913`;
         frame.className = "active";
         frame.addEventListener("load", () => broadcastSession(currentSession), { once: true });
         framesElement.appendChild(frame);
