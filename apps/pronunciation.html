@@ -48,6 +48,10 @@
   .pair-title { margin: 16px 0 8px; font-size: .82rem; font-weight: 800; color: var(--du-ink-soft); text-transform: uppercase; letter-spacing: .04em; }
   .pair-title:first-of-type { margin-top: 4px; }
   .pair-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 10px; }
+  .pair-grid[hidden] { display: none; }
+  .pair-tab-block { margin-top: 4px; }
+  .pair-tabs { margin-bottom: 12px; }
+  .pair-tabs .du-pill { height: 28px; padding: 0 11px; font-size: .72rem; }
   .pair-card { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid var(--du-line); border-radius: var(--du-r-sm); background: var(--du-surface); box-shadow: var(--du-shadow-sm); }
   .pair-side { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 1 1 0; }
   .pair-word-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
@@ -108,6 +112,7 @@
   <div class="site-links">
     <a class="site-link active" href="pronunciation.html">Pronunciation Practice</a>
     <a class="site-link" href="vocab.html">Dictionary</a>
+    <a class="site-link" href="particles.html">Modal Particles &amp; Fillers</a>
     <a class="site-link" href="articles.html">Article Trainer</a>
     <a class="site-link" href="verbs.html">German Verbs</a>
     <a class="site-link" href="pronouns.html">Pronoun Practice</a>
@@ -556,8 +561,8 @@
     </div>`;
   }
 
-  function pairGroupHtml(title, pairs) {
-    const rows = pairs.map(p => `
+  function pairCardsHtml(pairs) {
+    return pairs.map(p => `
       <div class="pair-card">
         <div class="pair-side">
           <button class="example-speak" data-de="${esc(p.base)}" title="Hear '${esc(p.base)}'">🔊</button>
@@ -569,15 +574,27 @@
           <span class="pair-word-text"><span class="pair-de is-umlaut" lang="de">${esc(p.umlaut)}</span><span class="pair-en">${esc(p.umlautEn)}</span></span>
         </div>
       </div>`).join('');
-    return `<h3 class="pair-title">${esc(title)}</h3><div class="pair-grid">${rows}</div>`;
+  }
+
+  function pairGroupHtml(title, pairs) {
+    return `<h3 class="pair-title">${esc(title)}</h3><div class="pair-grid">${pairCardsHtml(pairs)}</div>`;
+  }
+
+  // Renders each group as a tab, showing only the active group's pair-grid
+  // at a time — used where flipping between groups (rather than scrolling
+  // past all of them) is the more useful way to browse.
+  function pairTabsHtml(groups) {
+    const titles = Object.keys(groups);
+    const tabs = titles.map((title, i) => `<button class="du-pill${i === 0 ? ' is-active' : ''}" data-pair-tab-group="${esc(title)}" type="button">${esc(title)}</button>`).join('');
+    const panels = titles.map((title, i) => `<div class="pair-grid pair-tab-panel" data-pair-tab-panel="${esc(title)}"${i === 0 ? '' : ' hidden'}>${pairCardsHtml(groups[title])}</div>`).join('');
+    return `<div class="pair-tab-block"><div class="cat-tabs pair-tabs">${tabs}</div>${panels}</div>`;
   }
 
   function compareHtml() {
-    const groups = Object.entries(VOWEL_PAIRS).map(([title, pairs]) => pairGroupHtml(title, pairs)).join('');
     return `<div class="compare-block">
       <h2 class="section-title">Compare: Plain Vowel vs Umlaut</h2>
       <p class="section-desc">The same word, one letter apart — say each pair back to back and listen for how much just the umlaut changes the vowel (and often the meaning too).</p>
-      ${groups}
+      ${pairTabsHtml(VOWEL_PAIRS)}
     </div>`;
   }
 
@@ -647,7 +664,14 @@
     const playBtn = e.target.closest('.phoneme-play-btn');
     if (playBtn) { speak(playBtn.dataset.speak); return; }
     const exBtn = e.target.closest('.example-speak');
-    if (exBtn) speak(exBtn.dataset.de);
+    if (exBtn) { speak(exBtn.dataset.de); return; }
+    const tabBtn = e.target.closest('[data-pair-tab-group]');
+    if (tabBtn) {
+      const block = tabBtn.closest('.pair-tab-block');
+      const group = tabBtn.dataset.pairTabGroup;
+      block.querySelectorAll('[data-pair-tab-group]').forEach(b => b.classList.toggle('is-active', b === tabBtn));
+      block.querySelectorAll('[data-pair-tab-panel]').forEach(p => { p.hidden = p.dataset.pairTabPanel !== group; });
+    }
   });
 
   // ---- compare (minimal-pair ear training) --------------------------

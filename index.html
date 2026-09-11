@@ -126,6 +126,7 @@
           <div class="navbar-nav flex-row flex-wrap gap-2 my-2 my-lg-0">
             <button class="btn tab-btn" data-tab="pronunciation" type="button"><span class="dot"></span><span class="tab-label">Pronunciation Practice</span></button>
             <button class="btn tab-btn" data-tab="vocab" type="button"><span class="dot"></span><span class="tab-label">Dictionary</span></button>
+            <button class="btn tab-btn" data-tab="particles" type="button"><span class="dot"></span><span class="tab-label">Modal Particles &amp; Fillers</span></button>
             <button class="btn tab-btn" data-tab="articles" type="button"><span class="dot"></span><span class="tab-label">Article Trainer</span></button>
             <button class="btn tab-btn active" data-tab="verbs" type="button"><span class="dot"></span><span class="tab-label">German Verbs</span></button>
             <button class="btn tab-btn" data-tab="pronouns" type="button"><span class="dot"></span><span class="tab-label">Pronoun Practice</span></button>
@@ -260,7 +261,7 @@
       if (!frames[tab]) {
         const frame = document.createElement("iframe");
         frame.title = document.querySelector(`[data-tab="${tab}"] .tab-label`).textContent.trim();
-        frame.src = `apps/${tab}.html?v=20260915`;
+        frame.src = `apps/${tab}.html?v=20260916`;
         frame.className = "active";
         frame.addEventListener("load", () => broadcastSession(currentSession), { once: true });
         framesElement.appendChild(frame);

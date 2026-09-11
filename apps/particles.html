@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modal Particles &amp; Fillers</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; display: flex; flex-direction: column; align-items: center; }
+  .wrap { width: 100%; max-width: 640px; padding: clamp(10px, 2.2vh, 20px) 16px 28px; display: flex; flex-direction: column; gap: 10px; }
+
+  .top { display: flex; justify-content: space-between; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .brand-mark { display: inline-flex; width: 22px; height: 22px; flex-shrink: 0; color: var(--du-action); }
+  h1 { margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+  .score { padding: 7px 12px; border: 1px solid var(--du-line); border-radius: 999px; background: var(--du-surface); color: var(--du-muted); font-size: .78rem; white-space: nowrap; }
+  .score strong { color: var(--du-ink); font-size: 1rem; }
+  .intro { margin: 0; color: var(--du-muted); font-size: .82rem; line-height: 1.5; }
+
+  .cat-tabs { display: flex; gap: 7px; flex-wrap: wrap; }
+  .cat-tabs .du-pill { height: 30px; padding: 0 12px; font-size: .74rem; }
+
+  .progress-row { display: flex; align-items: center; gap: 8px; font-size: .78rem; color: var(--du-muted); letter-spacing: .3px; }
+  .progress-track { flex: 1; height: 6px; background: var(--du-line); border-radius: 3px; overflow: hidden; display: flex; }
+  .progress-fill-good { height: 100%; background: var(--du-success); }
+  .progress-fill-bad { height: 100%; background: var(--du-danger); opacity: .55; }
+
+  .stage-row { display: flex; align-items: stretch; gap: 8px; width: 100%; }
+  .btn-side { flex: 0 0 auto; align-self: center; width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--du-line); background: var(--du-surface); color: var(--du-muted); font-size: 19px; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--du-shadow-sm); }
+  .btn-side:hover { border-color: var(--du-muted); color: var(--du-ink); }
+  .btn-side:disabled { opacity: .35; cursor: default; }
+  .btn-side:active:not(:disabled) { transform: translateY(1px); }
+  .stage { position: relative; perspective: 1400px; flex: 1; min-width: 0; }
+
+  .flashcard { position: relative; width: 100%; height: min(58vh, 400px); min-height: 300px; cursor: pointer; transform-style: preserve-3d; transition: transform .45s cubic-bezier(.2, .8, .3, 1); }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; backface-visibility: hidden; background: var(--du-surface); border-radius: var(--du-r-lg); box-shadow: var(--du-shadow); border: 1px solid var(--du-line); display: flex; flex-direction: column; overflow: hidden; }
+  .face.back { transform: rotateY(180deg); }
+  .face-inner { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 22px; text-align: center; overflow-y: auto; gap: 4px; }
+  .cat-chip { position: absolute; top: 10px; left: 14px; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; color: var(--du-muted); font-weight: 700; }
+
+  .word-de { font-family: var(--du-font); font-size: clamp(1.7rem, 7vw, 2.3rem); font-weight: 800; line-height: 1.15; }
+  .speak-btn { margin-top: 8px; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--du-line); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px; color: var(--du-ink-soft); }
+  .speak-btn:hover { border-color: var(--du-action); color: var(--du-action); }
+  .speak-btn:active { transform: scale(.94); }
+  .hint { margin-top: 8px; font-size: .7rem; color: var(--du-muted); letter-spacing: .08em; text-transform: uppercase; }
+
+  .word-en { font-family: var(--du-font); font-size: clamp(1.15rem, 5vw, 1.5rem); font-weight: 700; }
+  .note-box { margin-top: 8px; padding: 9px 13px; border-radius: 8px; background: var(--du-surface-2); border: 1px dashed var(--du-line-strong); text-align: left; max-width: 100%; }
+  .note-label { display: block; font-size: .64rem; letter-spacing: .08em; text-transform: uppercase; color: var(--du-action-dark); margin-bottom: 2px; font-weight: 700; }
+  .note-text { display: block; font-size: .82rem; color: var(--du-ink-soft); line-height: 1.4; }
+  .example-box { margin-top: 8px; padding: 9px 13px; border-left: 3px solid var(--du-action); background: rgba(200, 107, 60, .06); border-radius: 4px; text-align: left; max-width: 100%; }
+  .example-de { display: block; font-family: var(--du-font); font-size: .88rem; color: var(--du-ink); line-height: 1.35; }
+  .example-en { display: block; font-size: .78rem; color: var(--du-muted); font-style: italic; margin-top: 2px; line-height: 1.3; }
+
+  .controls { display: flex; gap: 8px; }
+  .du-btn-wide { flex: 1; height: 40px; border-radius: var(--du-r-sm); font: 700 .85rem var(--du-font); color: #fff; border: none; cursor: pointer; transition: transform .1s; }
+  .du-btn-wide:active { transform: translateY(1px); }
+  .btn-know { background: var(--du-success); }
+  .btn-know:hover { background: #256750; }
+  .btn-dontknow { background: var(--du-danger); }
+  .btn-dontknow:hover { background: #983c33; }
+
+  .footer-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pos-tip { flex: 1 1 auto; min-width: 0; color: var(--du-muted); font-size: .76rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .btn-shuffle { flex: 0 0 auto; background: transparent; border: 1.5px solid var(--du-line); color: var(--du-muted); padding: 6px 12px; min-height: 30px; font: 700 .74rem var(--du-font); border-radius: var(--du-r-sm); cursor: pointer; }
+  .btn-shuffle:hover { border-color: var(--du-muted); color: var(--du-ink); }
+
+  .done-panel { text-align: center; padding: 24px 20px; }
+  .done-panel h2 { font-family: var(--du-font); font-size: 1.2rem; margin: 0 0 6px; }
+  .done-stats { font-size: .85rem; color: var(--du-muted); margin-bottom: 16px; }
+  .done-panel .btn-shuffle { padding: 10px 22px; min-height: auto; }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 8px 10px 20px; }
+    .btn-side { width: 30px; height: 30px; font-size: 16px; }
+    .face-inner { padding: 14px 14px; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-navbar" aria-label="Practice activities">
+  <div class="site-links">
+    <a class="site-link" href="pronunciation.html">Pronunciation Practice</a>
+    <a class="site-link" href="vocab.html">Dictionary</a>
+    <a class="site-link active" href="particles.html">Modal Particles &amp; Fillers</a>
+    <a class="site-link" href="articles.html">Article Trainer</a>
+    <a class="site-link" href="verbs.html">German Verbs</a>
+    <a class="site-link" href="pronouns.html">Pronoun Practice</a>
+    <a class="site-link" href="prep.html">Preposition Practice</a>
+    <a class="site-link" href="translation.html">Translation Practice</a>
+  </div>
+</nav>
+<script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 5.5h16v10H9l-4 4v-4H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M8 9.5h8M8 12.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <h1>Modal Particles &amp; Fillers</h1>
+    </div>
+    <div class="score"><strong id="knownCount">0</strong> known</div>
+  </div>
+  <p class="intro">The little words that make German sound native — <em>ja, doch, halt, na ja, echt?</em> — flip each card to see what it actually does in a sentence, not just a dictionary gloss.</p>
+  <div class="cat-tabs" id="catTabs"></div>
+  <div class="progress-row">
+    <span id="progressLabel">0 / 0</span>
+    <div class="progress-track"><div class="progress-fill-good" id="fillGood" style="width:0%"></div><div class="progress-fill-bad" id="fillBad" style="width:0%"></div></div>
+  </div>
+  <div class="stage-row">
+    <button class="btn-side" id="btnPrev" title="Previous card">&lsaquo;</button>
+    <div class="stage" id="stage"></div>
+    <button class="btn-side" id="btnNext" title="Next card">&rsaquo;</button>
+  </div>
+  <div class="controls" id="controls">
+    <button class="du-btn-wide btn-dontknow" id="btnDontKnow">&#10007; Still learning</button>
+    <button class="du-btn-wide btn-know" id="btnKnow">&#10003; I know this</button>
+  </div>
+  <div class="footer-meta">
+    <span class="pos-tip" id="posTip"></span>
+    <button class="btn-shuffle" id="btnShuffle">&#8635; Shuffle</button>
+  </div>
+</div>
+<script>
+  // ---- data -----------------------------------------------------------
+  const CATEGORIES = [
+    { id: 'modal', label: 'Modal Particles', desc: 'The flavoring words — ja, doch, mal, halt — that add tone and attitude without changing the literal meaning of a sentence.' },
+    { id: 'agree', label: 'Agreement', desc: 'How Germans say "yes, exactly" in conversation, from a plain nod to enthusiastic confirmation.' },
+    { id: 'surprise', label: 'Surprise & Disbelief', desc: 'Reacting to news, gossip, or something unexpected — from a mild "really?" to a full "no way!"' },
+    { id: 'disagree', label: 'Disagreement & Refusal', desc: 'Pushing back, refusing, or calling something nonsense.' },
+    { id: 'hesitate', label: 'Hesitation & Thinking', desc: 'The sounds and words that buy you time to think — what natives say instead of silence.' },
+    { id: 'transition', label: 'Discourse Transitions', desc: 'Words that steer a conversation — changing topic, wrapping up, or adding an aside.' },
+    { id: 'exclaim', label: 'Casual Exclamations', desc: 'Everyday outbursts of frustration or annoyance, mild enough for polite company.' },
+    { id: 'polite', label: 'Polite Fillers', desc: 'The small phrases that smooth over apologies, thanks, and reassurance.' }
+  ];
+
+  const CARDS = [
+    // ---- Modal Particles (Modalpartikeln) ----
+    { de: 'ja', cat: 'modal', en: 'signals "as you know" / "of course"', note: 'Tells the listener this fact should already be obvious or known — it is not really asking anything, just underlining a shared assumption.', example: { de: 'Das war ja klar!', en: 'Well, that was obvious!' } },
+    { de: 'doch', cat: 'modal', en: 'insists, reassures, or contradicts', note: 'Contradicts a negative statement or question, or adds warm insistence to encouragement and reminders.', example: { de: 'Komm doch mit!', en: 'Oh, come along (won’t you)!' } },
+    { de: 'mal', cat: 'modal', en: 'softens a request; "just"', note: 'Takes the edge off a command or question, making it sound casual and low-stakes rather than a demand.', example: { de: 'Kannst du mal helfen?', en: 'Can you help (real quick)?' } },
+    { de: 'eben', cat: 'modal', en: 'resigned acceptance; "just is"', note: 'Marks a fact as unchangeable — there is nothing more to discuss about it.', example: { de: 'Das ist eben so.', en: 'That’s just how it is.' } },
+    { de: 'halt', cat: 'modal', en: 'same as eben; "simply"', note: 'The more southern-German equivalent of eben — same resigned "that’s just the way it is" flavor.', example: { de: 'Ich hab halt keine Zeit.', en: 'I just don’t have time.' } },
+    { de: 'wohl', cat: 'modal', en: 'probably; assumption', note: 'Signals the speaker is guessing or assuming rather than stating a certain fact.', example: { de: 'Er ist wohl krank.', en: 'He’s probably sick.' } },
+    { de: 'denn', cat: 'modal', en: 'softens a question; genuine interest', note: 'Turns a plain question into a more conversational, curious one — common in follow-up questions.', example: { de: 'Wie geht’s dir denn?', en: 'So, how are you doing?' } },
+    { de: 'eigentlich', cat: 'modal', en: 'actually; by the way', note: 'Softly shifts or reframes a topic, or hints that reality does not quite match expectations.', example: { de: 'Was machst du eigentlich beruflich?', en: 'So what do you actually do for work?' } },
+    { de: 'schon', cat: 'modal', en: 'reassurance; "don’t worry"', note: 'Adds confidence or reassurance that something will happen, despite doubt.', example: { de: 'Das wird schon klappen.', en: 'It’ll work out, don’t worry.' } },
+    { de: 'vielleicht', cat: 'modal', en: 'emphatic, not "maybe"', note: 'In exclamations this drops its literal "maybe" meaning and instead intensifies surprise or exasperation.', example: { de: 'Das ist vielleicht ein Chaos!', en: 'What an absolute mess this is!' } },
+    { de: 'bloß', cat: 'modal', en: 'urgent warning; "whatever you do"', note: 'Raises the stakes of a warning or a worried question.', example: { de: 'Sei bloß vorsichtig!', en: 'Be careful, whatever you do!' } },
+    { de: 'nur', cat: 'modal', en: 'similar to bloß; "just"', note: 'Softens an invitation or, in questions, adds a worried "whatever could it be" tone.', example: { de: 'Komm nur rein!', en: 'Go ahead and come in!' } },
+    { de: 'ruhig', cat: 'modal', en: 'permission; "feel free to"', note: 'Gives encouragement or permission — there is no need to hesitate.', example: { de: 'Du kannst ruhig fragen.', en: 'Feel free to ask.' } },
+    { de: 'aber', cat: 'modal', en: 'admiration/surprise, not "but"', note: 'Used mid-sentence (not as "but"), it expresses genuine surprise or admiration.', example: { de: 'Du kannst aber gut kochen!', en: 'Wow, you can really cook well!' } },
+    { de: 'nun', cat: 'modal', en: 'impatience; "now, well"', note: 'Adds a note of impatience or a sense of "so, what now" to a question.', example: { de: 'Was machen wir nun?', en: 'So what do we do now?' } },
+    { de: 'gar', cat: 'modal', en: 'intensifies "not at all"', note: 'Strengthens a negation to mean "not even a little" rather than a plain "not."', example: { de: 'Ich habe gar keine Ahnung.', en: 'I have absolutely no idea.' } },
+    { de: 'sowieso', cat: 'modal', en: 'anyway, regardless', note: 'Points out that something is true or was going to happen no matter what else was said.', example: { de: 'Ich wollte sowieso gehen.', en: 'I wanted to leave anyway.' } },
+    { de: 'überhaupt', cat: 'modal', en: 'at all; general emphasis', note: 'Questions whether something is true in any sense whatsoever — often a little pointed.', example: { de: 'Hast du das überhaupt gelesen?', en: 'Did you even read that?' } },
+    { de: 'auch', cat: 'modal', en: 'seeking reassurance; "really"', note: 'In a question, checks that something is really, definitely true.', example: { de: 'Bist du auch sicher?', en: 'Are you really sure?' } },
+    { de: 'etwa', cat: 'modal', en: 'expects "no"; "by any chance"', note: 'Frames a question so it sounds like the speaker hopes (or fears) the answer is no.', example: { de: 'Hast du das etwa vergessen?', en: 'You haven’t forgotten that, have you?' } },
+
+    // ---- Agreement & Confirmation ----
+    { de: 'Genau', cat: 'agree', en: 'Exactly', note: 'A strong, simple confirmation that what was just said is correct.', example: { de: 'Genau, so war das!', en: 'Exactly, that’s how it was!' } },
+    { de: 'Stimmt', cat: 'agree', en: 'That’s right / True', note: 'Confirms a fact, often with a little surprise at realizing it.', example: { de: 'Stimmt, daran hab ich nicht gedacht.', en: 'True, I hadn’t thought of that.' } },
+    { de: 'Klar', cat: 'agree', en: 'Sure / Of course', note: 'A quick, casual "of course" — very common in everyday replies.', example: { de: 'Klar, kein Problem!', en: 'Sure, no problem!' } },
+    { de: 'Na klar', cat: 'agree', en: 'Of course (emphatic)', note: 'A warmer, more emphatic version of klar, as if the answer was obviously yes.', example: { de: 'Na klar helfe ich dir!', en: 'Of course I’ll help you!' } },
+    { de: 'Alles klar', cat: 'agree', en: 'All good / Understood', note: 'Confirms understanding or that everything is settled — also used as a casual goodbye.', example: { de: 'Alles klar, bis morgen!', en: 'Got it, see you tomorrow!' } },
+    { de: 'Richtig', cat: 'agree', en: 'Right / Correct', note: 'A plain confirmation, slightly more formal-sounding than genau.', example: { de: 'Richtig, das war meine Idee.', en: 'Right, that was my idea.' } },
+    { de: 'Abgemacht', cat: 'agree', en: 'Deal / It’s settled', note: 'Seals an agreement or plan, like shaking hands on it verbally.', example: { de: 'Wir treffen uns um acht. Abgemacht!', en: 'We’ll meet at eight. Deal!' } },
+    { de: 'In Ordnung', cat: 'agree', en: 'Alright / Fine', note: 'A calm, neutral way to agree to a plan or accept a situation.', example: { de: 'In Ordnung, machen wir das so.', en: 'Alright, let’s do it that way.' } },
+
+    // ---- Surprise & Disbelief ----
+    { de: 'Echt?', cat: 'surprise', en: 'Really?', note: 'The most common casual way to react to unexpected news.', example: { de: 'Echt? Das wusste ich nicht!', en: 'Really? I didn’t know that!' } },
+    { de: 'Ehrlich?', cat: 'surprise', en: 'Honestly? / Really?', note: 'Checks that someone is being truthful about something surprising.', example: { de: 'Ehrlich, du hast das allein gemacht?', en: 'Honestly, you did that on your own?' } },
+    { de: 'Wirklich?', cat: 'surprise', en: 'Really? (a touch more formal)', note: 'Similar to echt? but works a little better in more neutral or formal settings.', example: { de: 'Wirklich? Das kann ich kaum glauben.', en: 'Really? I can hardly believe that.' } },
+    { de: 'Im Ernst?', cat: 'surprise', en: 'Seriously?', note: 'Questions whether someone is joking about surprising news.', example: { de: 'Im Ernst? Er hat gekündigt?', en: 'Seriously? He quit?' } },
+    { de: 'Krass!', cat: 'surprise', en: 'Wow! / Intense! / No way!', note: 'An all-purpose informal reaction to anything shocking, impressive, or extreme — good or bad.', example: { de: 'Krass, das ist ja riesig!', en: 'Whoa, that’s huge!' } },
+    { de: 'Boah!', cat: 'surprise', en: 'Whoa! / Wow!', note: 'A pure exclamation of amazement, very informal and common among younger speakers.', example: { de: 'Boah, ist das laut!', en: 'Whoa, that’s loud!' } },
+    { de: 'Wahnsinn!', cat: 'surprise', en: 'Incredible! (literally "madness")', note: 'Expresses that something is amazing or overwhelming, in a positive or awestruck way.', example: { de: 'Wahnsinn, wie schnell die Zeit vergeht!', en: 'Incredible how fast time flies!' } },
+    { de: 'Unglaublich!', cat: 'surprise', en: 'Unbelievable!', note: 'A more standard, slightly less slangy way to say something is hard to believe.', example: { de: 'Unglaublich, dass er das geschafft hat.', en: 'Unbelievable that he managed that.' } },
+    { de: 'Ach du meine Güte!', cat: 'surprise', en: 'Oh my goodness!', note: 'A mild, family-friendly exclamation of surprise or mild alarm.', example: { de: 'Ach du meine Güte, ist das spät!', en: 'Oh my goodness, it’s so late!' } },
+    { de: 'Kaum zu glauben', cat: 'surprise', en: 'Hard to believe', note: 'A calmer, more reflective way of expressing disbelief than echt or krass.', example: { de: 'Kaum zu glauben, dass ein Jahr vergangen ist.', en: 'Hard to believe a year has passed.' } },
+    { de: 'Was?!', cat: 'surprise', en: 'What?!', note: 'A sharp, immediate reaction to shocking or unwelcome news.', example: { de: 'Was?! Das darf nicht wahr sein!', en: 'What?! That can’t be true!' } },
+
+    // ---- Disagreement & Refusal ----
+    { de: 'Auf keinen Fall', cat: 'disagree', en: 'No way / Absolutely not', note: 'A firm, unambiguous refusal — there is no scenario where this happens.', example: { de: 'Auf keinen Fall gehe ich da hin!', en: 'No way am I going there!' } },
+    { de: 'Quatsch!', cat: 'disagree', en: 'Nonsense!', note: 'Dismisses something as untrue or ridiculous, fairly casually.', example: { de: 'Quatsch, das stimmt doch gar nicht!', en: 'Nonsense, that’s not true at all!' } },
+    { de: 'Ach was', cat: 'disagree', en: 'Oh come on / Nonsense', note: 'A dismissive, slightly softer way to wave off an exaggeration.', example: { de: 'Ach was, das ist doch übertrieben.', en: 'Oh come on, that’s exaggerated.' } },
+    { de: 'Von wegen!', cat: 'disagree', en: 'No way! / As if!', note: 'Flatly rejects a claim as false, often with a hint of irony.', example: { de: 'Von wegen billig, das war teuer!', en: 'As if it was cheap — it was expensive!' } },
+    { de: 'Kommt nicht in Frage', cat: 'disagree', en: 'Out of the question', note: 'Shuts down a suggestion completely and formally.', example: { de: 'Das kommt nicht in Frage!', en: 'That’s out of the question!' } },
+    { de: 'Nee', cat: 'disagree', en: 'Nope', note: 'A casual, relaxed version of nein used constantly in speech.', example: { de: 'Nee, lieber nicht.', en: 'Nah, better not.' } },
+
+    // ---- Hesitation & Thinking Fillers ----
+    { de: 'Äh', cat: 'hesitate', en: 'Uh / Er', note: 'The default pause sound while searching for the next word — completely normal in speech.', example: { de: 'Äh, wie war noch mal dein Name?', en: 'Uh, what was your name again?' } },
+    { de: 'Ähm', cat: 'hesitate', en: 'Um / Umm', note: 'A slightly longer pause sound than äh, used the same way.', example: { de: 'Ähm, ich muss kurz nachdenken.', en: 'Umm, let me think for a second.' } },
+    { de: 'Also', cat: 'hesitate', en: 'So / Well', note: 'A flexible filler used to start a thought, buy a moment, or continue after a pause.', example: { de: 'Also, ich würde sagen, wir fangen an.', en: 'So, I’d say let’s get started.' } },
+    { de: 'Na ja', cat: 'hesitate', en: 'Well... / Meh', note: 'The single most common hedge word in spoken German — signals mixed feelings or a lukewarm answer.', example: { de: 'Na ja, es geht so.', en: 'Well... it’s okay, I guess.' } },
+    { de: 'Tja', cat: 'hesitate', en: 'Well then (resigned)', note: 'A resigned, shrugging filler used before accepting a situation you cannot change.', example: { de: 'Tja, was soll man machen.', en: 'Well, what can you do.' } },
+    { de: 'Hm', cat: 'hesitate', en: 'Hmm', note: 'The universal thinking sound, identical in feel to English "hmm."', example: { de: 'Hm, das muss ich mir überlegen.', en: 'Hmm, I need to think about that.' } },
+    { de: 'Sagen wir mal', cat: 'hesitate', en: 'Let’s say / Say', note: 'Introduces a rough estimate or a diplomatic way of putting something.', example: { de: 'Sagen wir mal, es ist kompliziert.', en: 'Let’s just say it’s complicated.' } },
+    { de: 'Keine Ahnung', cat: 'hesitate', en: 'No idea', note: 'A blunt, very common way to admit you don’t know something.', example: { de: 'Keine Ahnung, frag mal jemand anderen.', en: 'No idea, ask someone else.' } },
+    { de: 'Sozusagen', cat: 'hesitate', en: 'So to speak', note: 'Softens a word choice, admitting it is not quite literally accurate.', example: { de: 'Er ist sozusagen mein bester Freund.', en: 'He’s, so to speak, my best friend.' } },
+    { de: 'Irgendwie', cat: 'hesitate', en: 'Somehow / Kind of', note: 'Adds vagueness to a feeling or description that is hard to pin down exactly.', example: { de: 'Irgendwie fühlt sich das komisch an.', en: 'It kind of feels weird, somehow.' } },
+
+    // ---- Discourse Transitions & Starters ----
+    { de: 'Übrigens', cat: 'transition', en: 'By the way', note: 'Introduces an aside or a topic that is only loosely related to what was just said.', example: { de: 'Übrigens, hast du das Buch gelesen?', en: 'By the way, have you read the book?' } },
+    { de: 'Apropos', cat: 'transition', en: 'Speaking of', note: 'Pivots the conversation to a related topic that something just reminded you of.', example: { de: 'Apropos Urlaub, wohin fährst du?', en: 'Speaking of vacation, where are you going?' } },
+    { de: 'Jedenfalls', cat: 'transition', en: 'Anyway / In any case', note: 'Wraps up a digression and steers the conversation back on track.', example: { de: 'Jedenfalls, wir sollten los.', en: 'Anyway, we should get going.' } },
+    { de: 'Wie auch immer', cat: 'transition', en: 'Whatever / However that may be', note: 'Moves past a detail that does not matter enough to keep discussing.', example: { de: 'Wie auch immer, machen wir weiter.', en: 'Whatever — let’s keep going.' } },
+    { de: 'Nun ja', cat: 'transition', en: 'Well, then', note: 'A soft, thoughtful transition into a slightly resigned or philosophical statement.', example: { de: 'Nun ja, so ist das Leben.', en: 'Well, that’s life.' } },
+    { de: 'Ehrlich gesagt', cat: 'transition', en: 'Honestly / To be honest', note: 'Signals that a candid, possibly blunt opinion is coming next.', example: { de: 'Ehrlich gesagt, ich habe keine Lust.', en: 'Honestly, I don’t feel like it.' } },
+
+    // ---- Casual Exclamations & Mild Frustration ----
+    { de: 'Mist!', cat: 'exclaim', en: 'Darn! / Shoot!', note: 'A mild, everyday swear substitute for small annoyances.', example: { de: 'Mist, ich hab den Bus verpasst!', en: 'Darn, I missed the bus!' } },
+    { de: 'Menno', cat: 'exclaim', en: 'Aw, man (whiny)', note: 'A childish, pouty complaint — often used half-jokingly between adults too.', example: { de: 'Menno, das ist unfair!', en: 'Aw man, that’s unfair!' } },
+    { de: 'Mensch!', cat: 'exclaim', en: 'Man! / Come on!', note: 'An exclamation of mild exasperation, surprise, or urging someone on.', example: { de: 'Mensch, pass doch auf!', en: 'Man, watch out!' } },
+    { de: 'Oh je', cat: 'exclaim', en: 'Oh dear', note: 'A gentle, sympathetic reaction to bad or awkward news.', example: { de: 'Oh je, das sieht nicht gut aus.', en: 'Oh dear, that doesn’t look good.' } },
+    { de: 'Na toll', cat: 'exclaim', en: 'Oh great (sarcastic)', note: 'Sarcastically calls something "great" when it is actually bad news.', example: { de: 'Na toll, jetzt regnet es auch noch.', en: 'Oh great, now it’s raining too.' } },
+    { de: 'Verflixt!', cat: 'exclaim', en: 'Darn it!', note: 'An old-fashioned but still common, family-friendly mild curse.', example: { de: 'Verflixt, ich hab meinen Schlüssel vergessen!', en: 'Darn it, I forgot my key!' } },
+
+    // ---- Polite Social Fillers ----
+    { de: 'Kein Problem', cat: 'polite', en: 'No problem', note: 'A warm, easy way to accept a request or brush off a minor inconvenience.', example: { de: 'Kein Problem, das mache ich gerne.', en: 'No problem, I’m happy to do that.' } },
+    { de: 'Macht nichts', cat: 'polite', en: 'Never mind / No worries', note: 'Reassures someone after a small mistake that it really does not matter.', example: { de: 'Macht nichts, kann jedem passieren.', en: 'Never mind, it can happen to anyone.' } },
+    { de: 'Gern geschehen', cat: 'polite', en: 'You’re welcome', note: 'The standard polite reply to being thanked.', example: { de: 'Danke! – Gern geschehen!', en: 'Thanks! – You’re welcome!' } },
+    { de: 'Passt schon', cat: 'polite', en: 'It’s fine / Close enough', note: 'A relaxed way to say something is good enough, no need to fuss over it.', example: { de: 'Passt schon, keine Sorge.', en: 'It’s fine, don’t worry.' } },
+    { de: 'Alles gut', cat: 'polite', en: 'All good / It’s okay', note: 'Reassures someone that there are no hard feelings.', example: { de: 'Alles gut, das war nicht deine Schuld.', en: 'It’s all good, that wasn’t your fault.' } },
+    { de: 'Kein Ding', cat: 'polite', en: 'No big deal', note: 'A very casual way to say something was easy or not worth thanking someone for.', example: { de: 'Kein Ding, das schaffst du schon.', en: 'No big deal, you’ll manage.' } }
+  ];
+
+  const CAT_META = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
+
+  // ---- speech -----------------------------------------------------------
+  // Primary voice: Google Translate's own "listen" audio, fetched from its
+  // public, no-key endpoint — far more reliable than the OS voice picked by
+  // the browser's built-in speech synthesis. Falls back to the browser's own
+  // synthesis (preferring a German "Google" network voice) if that request
+  // ever fails, so the speaker button never goes completely silent.
+  let pendingSpeechTimer = null;
+  let currentAudio = null;
+  let germanVoice = null;
+  function pickGermanVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    return voices.find(v => v.lang === 'de-DE' && /google/i.test(v.name))
+      || voices.find(v => /^de/i.test(v.lang) && /google/i.test(v.name))
+      || voices.find(v => v.lang === 'de-DE')
+      || voices.find(v => /^de/i.test(v.lang))
+      || null;
+  }
+  if ('speechSynthesis' in window) {
+    germanVoice = pickGermanVoice();
+    window.speechSynthesis.onvoiceschanged = () => { germanVoice = pickGermanVoice(); };
+  }
+  function speakWithBrowserVoice(text) {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'de-DE';
+      u.rate = 0.9;
+      if (germanVoice) u.voice = germanVoice;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function speak(text) {
+    if (pendingSpeechTimer) { clearTimeout(pendingSpeechTimer); pendingSpeechTimer = null; }
+    if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
+    try { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); } catch (e) {}
+    pendingSpeechTimer = setTimeout(() => {
+      pendingSpeechTimer = null;
+      const url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=de&client=tw-ob&q=' + encodeURIComponent(text);
+      const audio = new Audio(url);
+      currentAudio = audio;
+      const fallback = () => { if (currentAudio === audio) { currentAudio = null; speakWithBrowserVoice(text); } };
+      audio.addEventListener('error', fallback);
+      audio.play().catch(fallback);
+    }, 120);
+  }
+
+  // ---- helpers -----------------------------------------------------------
+  function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+  function cardKey(c) { return c.cat + '::' + c.de; }
+
+  const PROGRESS_KEY = 'deutsch-particles-progress-v1';
+  function loadProgress() { try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch (e) { return {}; } }
+  function saveProgress() { try { localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress)); } catch (e) {} }
+  let progress = loadProgress();
+
+  let activeCategory = 'all';
+  let deck = [];
+  let index = 0;
+  let flipped = false;
+
+  function filteredCards() {
+    return activeCategory === 'all' ? CARDS : CARDS.filter(c => c.cat === activeCategory);
+  }
+
+  function rebuildDeck() {
+    const list = filteredCards();
+    const unseen = list.filter(c => !progress[cardKey(c)]);
+    const stillLearning = list.filter(c => progress[cardKey(c)] === 'bad');
+    deck = shuffle(unseen.slice()).concat(shuffle(stillLearning.slice()));
+    index = 0;
+  }
+
+  function counts() {
+    const list = filteredCards();
+    let good = 0, bad = 0;
+    list.forEach(c => { const s = progress[cardKey(c)]; if (s === 'good') good++; else if (s === 'bad') bad++; });
+    return { total: list.length, good, bad };
+  }
+
+  function totalKnownCount() {
+    return CARDS.filter(c => progress[cardKey(c)] === 'good').length;
+  }
+
+  function renderCatTabs() {
+    const el = document.getElementById('catTabs');
+    const items = [{ id: 'all', label: 'All' }, ...CATEGORIES];
+    el.innerHTML = items.map(c => `<button class="du-pill${c.id === activeCategory ? ' is-active' : ''}" data-cat="${c.id}" type="button">${esc(c.label)}</button>`).join('');
+  }
+
+  function renderProgress() {
+    const c = counts();
+    document.getElementById('progressLabel').textContent = `${index} / ${deck.length}`;
+    document.getElementById('fillGood').style.width = (c.total ? c.good / c.total * 100 : 0) + '%';
+    document.getElementById('fillBad').style.width = (c.total ? c.bad / c.total * 100 : 0) + '%';
+    document.getElementById('knownCount').textContent = totalKnownCount();
+  }
+
+  function setPosTip(text) { document.getElementById('posTip').textContent = text; }
+
+  function currentCard() { return deck[index]; }
+
+  function renderCard() {
+    const stage = document.getElementById('stage');
+    const controls = document.getElementById('controls');
+    const card = currentCard();
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+
+    if (!card) {
+      controls.style.display = 'none';
+      const c = counts();
+      btnPrev.style.display = 'flex'; btnPrev.disabled = index <= 0;
+      btnNext.style.display = 'flex'; btnNext.disabled = true;
+      stage.innerHTML = `<div class="done-panel">
+        <h2>${c.total === 0 ? 'No phrases in this filter' : 'Deck complete'}</h2>
+        <div class="done-stats">${c.total === 0 ? 'Try selecting another category above.' : c.good + ' known &middot; ' + c.bad + ' still learning'}</div>
+        ${c.total > 0 ? '<button class="btn-shuffle" id="btnRestart" style="padding:12px 24px;">Go through again</button>' : ''}
+      </div>`;
+      setPosTip('');
+      if (c.total > 0) document.getElementById('btnRestart').addEventListener('click', () => { rebuildDeck(); flipped = false; renderCard(); renderProgress(); });
+      return;
+    }
+    controls.style.display = 'flex';
+    btnPrev.style.display = 'flex'; btnPrev.disabled = index <= 0;
+    btnNext.style.display = 'flex'; btnNext.disabled = index >= deck.length;
+    setPosTip('Card ' + (index + 1) + ' of ' + deck.length);
+
+    const catLabel = CAT_META[card.cat].label;
+    stage.innerHTML = `<div class="flashcard${flipped ? ' flipped' : ''}" id="flipCard">
+      <div class="face front">
+        <div class="cat-chip">${esc(catLabel)}</div>
+        <div class="face-inner">
+          <div class="word-de" lang="de">${esc(card.de)}</div>
+          <button class="speak-btn" id="speakBtn" title="Hear pronunciation">🔊</button>
+          <div class="hint">Tap card to see meaning</div>
+        </div>
+      </div>
+      <div class="face back">
+        <div class="cat-chip">${esc(catLabel)}</div>
+        <div class="face-inner">
+          <div class="word-en">${esc(card.en)}</div>
+          <div class="note-box"><span class="note-label">Nuance</span><span class="note-text">${esc(card.note)}</span></div>
+          <div class="example-box"><span class="example-de" lang="de">${esc(card.example.de)}</span><span class="example-en">${esc(card.example.en)}</span></div>
+        </div>
+      </div>
+    </div>`;
+
+    document.getElementById('flipCard').addEventListener('click', e => {
+      if (e.target.closest('#speakBtn')) return;
+      flipped = !flipped;
+      document.getElementById('flipCard').classList.toggle('flipped', flipped);
+    });
+    document.getElementById('speakBtn').addEventListener('click', e => { e.stopPropagation(); speak(card.de); });
+  }
+
+  function markAndAdvance(result) {
+    const card = currentCard();
+    if (!card) return;
+    progress[cardKey(card)] = result;
+    saveProgress();
+    index++;
+    flipped = false;
+    renderProgress();
+    renderCard();
+  }
+
+  function goPrev() { if (index <= 0) return; index--; flipped = false; renderProgress(); renderCard(); }
+  function goNext() { if (index >= deck.length) return; index++; flipped = false; renderProgress(); renderCard(); }
+
+  document.getElementById('btnKnow').addEventListener('click', () => markAndAdvance('good'));
+  document.getElementById('btnDontKnow').addEventListener('click', () => markAndAdvance('bad'));
+  document.getElementById('btnPrev').addEventListener('click', goPrev);
+  document.getElementById('btnNext').addEventListener('click', goNext);
+  document.getElementById('btnShuffle').addEventListener('click', () => { rebuildDeck(); flipped = false; renderCard(); renderProgress(); });
+
+  document.getElementById('catTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.du-pill');
+    if (!btn) return;
+    activeCategory = btn.dataset.cat;
+    renderCatTabs();
+    rebuildDeck();
+    flipped = false;
+    renderCard();
+    renderProgress();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') goPrev();
+    else if (e.key === 'ArrowRight') goNext();
+    else if (e.key === ' ') { e.preventDefault(); const el = document.getElementById('flipCard'); if (el) { flipped = !flipped; el.classList.toggle('flipped', flipped); } }
+  });
+
+  renderCatTabs();
+  rebuildDeck();
+  renderCard();
+  renderProgress();
+</script>
+</body>
+</html>
