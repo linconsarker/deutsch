@@ -94,10 +94,19 @@ body {
 .site-brand span { color: var(--du-accent); }
 .site-brand:hover { color: #fff; }
 
-.site-links { display: flex; gap: 4px; flex-wrap: wrap; }
+.site-links {
+  display: none;
+  width: 100%;
+  flex-basis: 100%;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+
+.site-links.is-open { display: flex; }
 
 .site-link {
-  padding: 7px 12px;
+  padding: 10px 12px;
   border-radius: var(--du-r-sm);
   color: rgba(255, 250, 242, .74);
   font: 600 .76rem var(--du-font);
@@ -109,8 +118,10 @@ body {
 .site-link:hover { background: rgba(255, 255, 255, .1); color: #fffaf2; }
 .site-link.active { background: #fffaf2; color: var(--du-ink); }
 
+.site-navbar { flex-wrap: nowrap; }
+
 .site-nav-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -140,21 +151,6 @@ body {
 .site-nav-toggle.is-active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .site-nav-toggle.is-active span:nth-child(2) { opacity: 0; }
 .site-nav-toggle.is-active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-
-@media (max-width: 860px) {
-  .site-navbar { flex-wrap: nowrap; }
-  .site-nav-toggle { display: flex; }
-  .site-links {
-    display: none;
-    width: 100%;
-    flex-basis: 100%;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: 8px;
-  }
-  .site-links.is-open { display: flex; }
-  .site-link { padding: 10px 12px; }
-}
 
 /* ============================================================
    Micro label - the small uppercase caption before a control row
@@ -361,5 +357,4 @@ select.du-field {
 
 @media (max-width: 640px) {
   .site-navbar { gap: 10px; padding: 7px 14px; }
-  .site-link { padding: 6px 10px; font-size: .78rem; }
 }
