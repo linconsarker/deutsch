@@ -887,15 +887,28 @@ function currentCard(){
   return st.deck[st.index];
 }
 
+// Chrome/Edge (esp. with Windows SAPI voices) can silently drop or hang
+// speak() when it's called in the same tick right after cancel() -- a
+// long-documented browser bug. Debounce rapid calls and give cancel() a
+// beat to actually finish before queuing the next utterance. We also keep
+// a reference to the utterance so it isn't garbage-collected mid-speech,
+// which can cut audio off before it starts.
+let pendingSpeechTimer = null;
+let activeUtterance = null;
 function speak(text){
-  try{
-    if(!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'de-DE';
-    u.rate = 0.9;
-    window.speechSynthesis.speak(u);
-  }catch(e){}
+  if(!('speechSynthesis' in window)) return;
+  if(pendingSpeechTimer){ clearTimeout(pendingSpeechTimer); pendingSpeechTimer = null; }
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  pendingSpeechTimer = setTimeout(()=>{
+    pendingSpeechTimer = null;
+    try{
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'de-DE';
+      u.rate = 0.9;
+      activeUtterance = u;
+      window.speechSynthesis.speak(u);
+    }catch(e){}
+  }, 120);
 }
 
 // Every card in data/vocabulary.json carries its own hand-written example.
@@ -1025,9 +1038,8 @@ function renderCard(){
     '</div>';
 
   document.getElementById('flipCard').addEventListener('click', (e)=>{
-    if(e.target && e.target.id === 'speakBtn') return;
-    flipped = !flipped;
-    document.getElementById('flipCard').classList.toggle('flipped');
+    if(e.target && e.target.closest && e.target.closest('#speakBtn, #oppSpeakBtn')) return;
+    flipCardTo(!flipped);
   });
   const speakBtn = document.getElementById('speakBtn');
   if(speakBtn){
@@ -1294,7 +1306,7 @@ document.getElementById('importFileInput').addEventListener('change', (e)=>{
 
 document.addEventListener('keydown', (e)=>{
   if(showLearned || showAllList) return;
-  if(e.code==='Space'){ e.preventDefault(); const el=document.getElementById('flipCard'); if(el){flipped=!flipped; el.classList.toggle('flipped');} }
+  if(e.code==='Space'){ e.preventDefault(); if(document.getElementById('flipCard')) flipCardTo(!flipped); }
   if(e.key==='ArrowRight') goNext();
   if(e.key==='ArrowLeft') goPrev();
   if(e.key==='k' || e.key==='K') markAndAdvance('good');
