@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin | Deutsch Üben</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../shared/theme.css">
+<style>
+  body{min-height:100vh;}
+  .admin-wrap{max-width:1000px;margin:0 auto;padding:22px 20px 40px;}
+  .admin-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+  .admin-title{font-size:1.3rem;font-weight:700;color:var(--du-ink);margin:0;}
+  .back-link{font:600 .8rem var(--du-font);color:var(--du-muted);text-decoration:none;}
+  .back-link:hover{color:var(--du-ink);}
+  .state-card{padding:26px;text-align:center;color:var(--du-muted);}
+  .filter-row{margin-bottom:14px;max-width:320px;}
+  table.admin-table{margin:0;}
+  table.admin-table th{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--du-muted);border-bottom-width:1px;white-space:nowrap;}
+  table.admin-table td{vertical-align:middle;}
+  .email-cell{font-weight:600;color:var(--du-ink);word-break:break-all;}
+  .status-select{min-width:110px;}
+  .renews-input{min-width:150px;}
+  .notes-input{min-width:180px;}
+  .updated-cell{font-size:.76rem;color:var(--du-muted);white-space:nowrap;}
+  .save-cell{white-space:nowrap;}
+  .row-msg{font-size:.72rem;margin-left:8px;}
+  .row-msg.ok{color:var(--du-success);}
+  .row-msg.err{color:var(--du-danger);}
+  .empty-row td{text-align:center;color:var(--du-muted);padding:24px;}
+</style>
+</head>
+<body>
+<nav class="site-navbar" aria-label="Admin">
+  <span class="site-brand">Deutsch <span>Üben</span> · Admin</span>
+</nav>
+<script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
+
+<div class="admin-wrap">
+  <div class="admin-head">
+    <h1 class="admin-title">Subscriptions</h1>
+    <a class="back-link" href="../index.html">← Back to app</a>
+  </div>
+
+  <div id="adminLoading" class="du-card state-card">Checking access…</div>
+
+  <div id="adminUnauth" class="du-card state-card" hidden>
+    <strong>Not authorized.</strong><br>
+    Sign in with the admin account via the main app, then reload this page.
+  </div>
+
+  <div id="adminPanel" hidden>
+    <input id="filterInput" class="form-control form-control-sm filter-row" placeholder="Filter by email…">
+    <div class="du-card" style="overflow-x:auto;">
+      <table class="table table-hover admin-table">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Renews / Expires</th>
+            <th>Notes</th>
+            <th>Last updated</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="subsList"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../shared/auth.js"></script>
+<script>
+const ADMIN_EMAIL = "linconbond007@gmail.com";
+const STATUS_OPTIONS = ["free", "trial", "active", "expired", "cancelled"];
+
+const loadingEl = document.getElementById("adminLoading");
+const unauthEl = document.getElementById("adminUnauth");
+const panelEl = document.getElementById("adminPanel");
+const listEl = document.getElementById("subsList");
+const filterInput = document.getElementById("filterInput");
+
+let allRows = [];
+
+function isAdmin(session){
+  const email = session && session.user && session.user.email;
+  return !!email && email.trim().toLowerCase() === ADMIN_EMAIL;
+}
+
+function escapeHtml(s){
+  return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[c]));
+}
+
+function formatUpdated(iso){
+  if(!iso) return "—";
+  try{ return new Date(iso).toLocaleString(); }catch(e){ return iso; }
+}
+
+function statusOptionsHtml(current){
+  return STATUS_OPTIONS.map(s =>
+    '<option value="'+s+'"'+(s===current?' selected':'')+'>'+s+'</option>'
+  ).join('');
+}
+
+function renderRows(rows){
+  if(!rows.length){
+    listEl.innerHTML = '<tr class="empty-row"><td colspan="6">No matching users.</td></tr>';
+    return;
+  }
+  listEl.innerHTML = rows.map(r => {
+    const uid = escapeHtml(r.user_id);
+    return (
+      '<tr data-user-id="'+uid+'">' +
+        '<td class="email-cell">'+escapeHtml(r.email)+'</td>' +
+        '<td><select class="form-select form-select-sm status-select">'+statusOptionsHtml(r.status)+'</select></td>' +
+        '<td><input type="date" class="form-control form-control-sm renews-input" value="'+escapeHtml(r.renews_at || '')+'"></td>' +
+        '<td><input type="text" class="form-control form-control-sm notes-input" value="'+escapeHtml(r.notes || '')+'"></td>' +
+        '<td class="updated-cell">'+formatUpdated(r.updated_at)+'</td>' +
+        '<td class="save-cell"><button type="button" class="btn btn-outline-secondary btn-sm save-btn">Save</button><span class="row-msg"></span></td>' +
+      '</tr>'
+    );
+  }).join('');
+
+  listEl.querySelectorAll('.save-btn').forEach(btn => {
+    btn.addEventListener('click', () => saveRow(btn.closest('tr')));
+  });
+}
+
+async function saveRow(tr){
+  const userId = tr.getAttribute('data-user-id');
+  const status = tr.querySelector('.status-select').value;
+  const renewsRaw = tr.querySelector('.renews-input').value;
+  const notes = tr.querySelector('.notes-input').value;
+  const msgEl = tr.querySelector('.row-msg');
+  const btn = tr.querySelector('.save-btn');
+
+  msgEl.textContent = '';
+  msgEl.className = 'row-msg';
+  btn.disabled = true;
+
+  const updatedAt = new Date().toISOString();
+  const client = DeutschAuth.getClient();
+  const { error } = await client
+    .from('user_subscriptions')
+    .update({ status, renews_at: renewsRaw || null, notes, updated_at: updatedAt })
+    .eq('user_id', userId);
+
+  btn.disabled = false;
+  if(error){
+    msgEl.textContent = 'Error';
+    msgEl.classList.add('err');
+    return;
+  }
+  msgEl.textContent = 'Saved';
+  msgEl.classList.add('ok');
+  tr.querySelector('.updated-cell').textContent = formatUpdated(updatedAt);
+  const row = allRows.find(r => r.user_id === userId);
+  if(row){ row.status = status; row.renews_at = renewsRaw || null; row.notes = notes; row.updated_at = updatedAt; }
+}
+
+async function loadSubscriptions(){
+  listEl.innerHTML = '<tr class="empty-row"><td colspan="6">Loading…</td></tr>';
+  const client = DeutschAuth.getClient();
+  const { data, error } = await client.from('user_subscriptions').select('*').order('email');
+  if(error){
+    listEl.innerHTML = '<tr class="empty-row"><td colspan="6">Could not load subscriptions: '+escapeHtml(error.message)+'</td></tr>';
+    return;
+  }
+  allRows = data || [];
+  applyFilter();
+}
+
+function applyFilter(){
+  const q = filterInput.value.trim().toLowerCase();
+  const rows = q ? allRows.filter(r => r.email.toLowerCase().includes(q)) : allRows;
+  renderRows(rows);
+}
+
+filterInput.addEventListener('input', applyFilter);
+
+async function checkAccess(){
+  const { data } = await DeutschAuth.getSession();
+  const authed = isAdmin(data && data.session);
+  loadingEl.hidden = true;
+  unauthEl.hidden = authed;
+  panelEl.hidden = !authed;
+  if(authed) loadSubscriptions();
+}
+
+checkAccess();
+DeutschAuth.onAuthStateChange(() => checkAccess());
+
+window.addEventListener('message', async event => {
+  if(!event.data || event.data.type !== 'deutsch-auth-session') return;
+  const client = DeutschAuth.getClient();
+  if(!client) return;
+  if(event.data.session){
+    const { error } = await client.auth.setSession(event.data.session);
+    if(error) console.warn('Could not apply the shared authentication session:', error.message);
+  }
+  checkAccess();
+});
+</script>
+</body>
+</html>
