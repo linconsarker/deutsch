@@ -256,14 +256,14 @@
   }
   @media (max-height:640px){
     .brand .sub{display:none;}
-    .translation{display:none;}
   }
   @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
 </style>
 </head>
 <body>
 <nav class="site-navbar" aria-label="Practice activities">
-  <div class="site-links">
+  <button class="site-nav-toggle" id="siteNavToggle" type="button" aria-expanded="false" aria-controls="siteNavLinks" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+  <div class="site-links" id="siteNavLinks">
     <a class="site-link" href="pronunciation.html">Pronunciation Practice</a>
     <a class="site-link" href="vocab.html">Dictionary</a>
     <a class="site-link" href="particles.html">Modal Particles &amp; Fillers</a>
@@ -275,6 +275,7 @@
   </div>
 </nav>
 <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
+<script>(function () { var t = document.getElementById('siteNavToggle'), l = document.getElementById('siteNavLinks'); if (!t || !l) return; t.addEventListener('click', function () { var open = l.classList.toggle('is-open'); t.classList.toggle('is-active', open); t.setAttribute('aria-expanded', open ? 'true' : 'false'); }); })();</script>
 <div class="app">
 
   <div class="app-header d-flex justify-content-between align-items-center flex-shrink-0 gap-2">
@@ -303,11 +304,6 @@
       <div class="filter-label text-uppercase text-muted" data-i18n="labelType">Art</div>
       <div class="chips" id="typeChips"></div>
     </div>
-    <div class="d-flex align-items-center gap-2 person-row" id="personRow">
-      <div class="filter-label text-uppercase text-muted" data-i18n="labelPerson">Person</div>
-      <div class="chips" id="personChips"></div>
-    </div>
-    <div class="person-note" data-i18n="personNote">Diese Pronomenart richtet sich nicht nach der Person.</div>
     <div class="select-row">
       <select class="du-field" id="caseSelect" aria-label="Kasus"></select>
       <select class="du-field" id="levelSelect" aria-label="Niveau"></select>
@@ -871,19 +867,34 @@ function itemStat(id){
 function escapeHtml(s){
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 }
+/* Shared by buildPool() and the option-count helpers below so the numbers
+   shown next to each level/status always match what picking it would
+   actually give you, given the other filters currently active. */
+function matchesFilters(d, overrides){
+  overrides = overrides || {};
+  const level  = overrides.level  !== undefined ? overrides.level  : store.activeLevel;
+  const status = overrides.status !== undefined ? overrides.status : store.activeStatus;
+  /* The "replace the highlighted phrase with a pronoun" substitution
+     exercises (mode "ersetzen") are excluded — only plain fill-in-the-
+     blank ("luecke") items are practiced. */
+  if(d.mode === "ersetzen") return false;
+  if(store.activeType !== "all" && d.type !== store.activeType) return false;
+  if(store.activePerson !== "all" && d.person !== store.activePerson) return false;
+  if(store.activeCase !== "all" && d.case !== store.activeCase) return false;
+  if(level !== "all" && d.level !== level) return false;
+  const stat = itemStat(d.id);
+  if(stat.known) return false;
+  if(status === "unsolved") return stat.attempts === 0;
+  if(status === "wrong") return stat.attempts > 0 && stat.lastCorrect === false;
+  return true;
+}
+function countFor(overrides){
+  let n = 0;
+  for(let i=0;i<DATA.length;i++) if(matchesFilters(DATA[i], overrides)) n++;
+  return n;
+}
 function buildPool(){
-  pool = DATA.filter(d=>{
-    const typeOk   = store.activeType === "all" || store.activeType === d.type;
-    const personOk = store.activePerson === "all" || d.person === store.activePerson;
-    const caseOk   = store.activeCase === "all" || d.case === store.activeCase;
-    const levelOk  = store.activeLevel === "all" || d.level === store.activeLevel;
-    const stat = itemStat(d.id);
-    let statusOk;
-    if(store.activeStatus === "all") statusOk = true;
-    else if(store.activeStatus === "unsolved") statusOk = stat.attempts === 0;
-    else statusOk = stat.attempts > 0 && stat.lastCorrect === false;
-    return typeOk && personOk && caseOk && levelOk && statusOk && !stat.known;
-  });
+  pool = DATA.filter(d=>matchesFilters(d));
   for(let i=pool.length-1;i>0;i--){
     const j = Math.floor(Math.random()*(i+1));
     [pool[i],pool[j]] = [pool[j],pool[i]];
@@ -894,6 +905,7 @@ function refresh(){
   buildPool();
   renderCard();
   updateStats();
+  renderSelects();
 }
 
 /* ============================================================
@@ -921,37 +933,24 @@ function renderTypeChips(){
   });
 }
 function renderPersonChips(){
-  const el = document.getElementById("personChips");
-  const row = document.getElementById("personRow");
-  const enabled = personActiveAllowed();
-  row.classList.toggle("is-off", !enabled);
-  el.innerHTML = "";
-  PERSONS.forEach(p=>{
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "btn btn-sm rounded-pill chip" + (store.activePerson === p.id ? " active" : "");
-    chip.textContent = p.key ? t(p.key) : p.label;
-    chip.disabled = !enabled;
-    chip.onclick = ()=>{
-      store.activePerson = p.id;
-      saveStore();
-      renderPersonChips();
-      refresh();
-    };
-    el.appendChild(chip);
-  });
+  /* The person filter picker was removed from the UI; store.activePerson
+     stays "all" permanently, so every person is always included. */
 }
-function fillSelect(id, options, activeValue, onChange){
+function fillSelect(id, options, activeValue, onChange, countKey){
   const el = document.getElementById(id);
-  el.innerHTML = options.map(o =>
-    `<option value="${o.id}"${o.id === activeValue ? " selected" : ""}>${escapeHtml(o.key ? t(o.key) : o.label)}</option>`
-  ).join("");
+  el.innerHTML = options.map(o => {
+    const label = escapeHtml(o.key ? t(o.key) : o.label);
+    /* Show how many sentences each level / solved-status choice actually
+       has available, given the other filters currently active. */
+    const count = countKey ? countFor({[countKey]: o.id}) : null;
+    return `<option value="${o.id}"${o.id === activeValue ? " selected" : ""}>${label}${count === null ? "" : " (" + count + ")"}</option>`;
+  }).join("");
   el.onchange = ()=>{ onChange(el.value); saveStore(); refresh(); };
 }
 function renderSelects(){
   fillSelect("caseSelect",   CASES,    store.activeCase,   v=>{ store.activeCase = v; });
-  fillSelect("levelSelect",  LEVELS,   store.activeLevel,  v=>{ store.activeLevel = v; });
-  fillSelect("statusSelect", STATUSES, store.activeStatus, v=>{ store.activeStatus = v; });
+  fillSelect("levelSelect",  LEVELS,   store.activeLevel,  v=>{ store.activeLevel = v; }, "level");
+  fillSelect("statusSelect", STATUSES, store.activeStatus, v=>{ store.activeStatus = v; }, "status");
 }
 
 /* ============================================================
@@ -1089,11 +1088,9 @@ function renderCard(){
   answered = false;
 
   const isErsetzen = current.mode === "ersetzen";
-  /* For a substitution item the person and the case ARE the answer, so they
-     stay hidden until the learner has committed to an answer. */
-  const metaTags = isErsetzen ? "" : `
-      ${current.person ? `<span class="meta-tag">${t(PERSON_LONG[current.person])}</span><span class="meta-tag">·</span>` : ""}
-      <span class="meta-tag">${caseLabel(current.case)}</span>`;
+  /* Person and case together almost give away the answer, so they stay
+     hidden until the learner has committed to an answer (see the feedback
+     block below, which reveals them as person-badge / case-badge). */
 
   const origHtml = isErsetzen ? `
     <div class="orig-arrow">${t("ersetzenHint")}</div>
@@ -1101,15 +1098,11 @@ function renderCard(){
         seg.mark ? `<span class="orig-mark">${escapeHtml(seg.mark)}</span>` : escapeHtml(seg.text)
       ).join("")}</div>` : "";
 
-  const cueHtml = (!isErsetzen && current.cue) ? `
-    <div><span class="cue-chip"><span class="cue-key">${t("cueKey")}</span><b>${escapeHtml(current.cue)}</b></span></div>` : "";
-
   card.innerHTML = `
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2">
       <div class="tag-row">
         <span class="type-tag ${current.type}">${typeLabel(current.type)}</span>
         <span class="du-level ${current.level}">${current.level}</span>
-        ${isErsetzen ? `<span class="mode-tag">${t("modeErsetzen")}</span>` : metaTags}
       </div>
       <div class="d-flex align-items-center gap-2">
         <span class="remaining" id="remainingLabel">${t("remaining")(pool.length)}</span>
@@ -1121,7 +1114,6 @@ function renderCard(){
       <div class="sentence" id="sentenceLine"></div>
       <button class="btn btn-sm btn-outline-secondary pronunciation-btn" id="pronunciationBtn" type="button" aria-label="Play German pronunciation" title="Play German pronunciation" disabled>🔊</button>
     </div>
-    ${cueHtml}
     <div class="translation">${escapeHtml(current.tr)}</div>
     <div class="feedback" id="feedback"></div>
     <div class="d-flex gap-2 mt-3">

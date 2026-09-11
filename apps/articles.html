@@ -352,7 +352,21 @@
     }
 
     .tip-example { background: rgba(185, 138, 47, .14); color: #8a6a1f; }
-    .tip-item h3 { color: var(--ink); }
+
+    .tip-group { padding: 14px 16px; border-radius: 10px; margin-bottom: 14px; border: 1px solid var(--rule); border-left-width: 4px; background: var(--card); }
+    .tip-group:last-child { margin-bottom: 0; }
+    .tip-group-der { border-left-color: var(--article-der); }
+    .tip-group-die { border-left-color: var(--article-die); }
+    .tip-group-das { border-left-color: var(--article-das); }
+    .tip-group-strategy { border-left-color: var(--ink-soft); }
+    .tip-group-title { font-family: var(--du-font); font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
+    .tip-group-der .tip-group-title { color: var(--article-der); }
+    .tip-group-die .tip-group-title { color: var(--article-die); }
+    .tip-group-das .tip-group-title { color: var(--article-das); }
+    .tip-group-strategy .tip-group-title { color: var(--ink-soft); }
+    .tip-mnemonic { font-size: .85rem; font-weight: 600; color: var(--ink); background: rgba(0, 0, 0, .035); padding: 8px 12px; border-radius: 8px; margin: 0 0 12px; line-height: 1.4; }
+    .tip-rule { margin-bottom: 12px; }
+    .tip-rule:last-child { margin-bottom: 0; }
 
     #tipsModal .modal-content { border-radius: 10px; background: var(--card); }
     #tipsModal .modal-title { font-family: var(--du-font); }
@@ -367,7 +381,8 @@
 </head>
 <body>
   <nav class="site-navbar" aria-label="Practice activities">
-    <div class="site-links">
+    <button class="site-nav-toggle" id="siteNavToggle" type="button" aria-expanded="false" aria-controls="siteNavLinks" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    <div class="site-links" id="siteNavLinks">
       <a class="site-link" href="pronunciation.html">Pronunciation Practice</a>
       <a class="site-link" href="vocab.html">Dictionary</a>
       <a class="site-link" href="particles.html">Modal Particles &amp; Fillers</a>
@@ -379,6 +394,7 @@
     </div>
   </nav>
   <script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
+  <script>(function () { var t = document.getElementById('siteNavToggle'), l = document.getElementById('siteNavLinks'); if (!t || !l) return; t.addEventListener('click', function () { var open = l.classList.toggle('is-open'); t.classList.toggle('is-active', open); t.setAttribute('aria-expanded', open ? 'true' : 'false'); }); })();</script>
 
   <main>
     <div class="topbar">
@@ -511,11 +527,32 @@
       return items;
     }
 
+    function exampleChips(examples) {
+      return '<div class="d-flex flex-wrap gap-2">' +
+        examples.map((example) => '<span class="tip-example badge rounded-pill text-dark fw-normal px-3 py-2">' + example + '</span>').join("") +
+        '</div>';
+    }
+
     function renderTips() {
-      document.getElementById("tipsList").innerHTML = articleTips.map((item) =>
-        '<article class="tip-item border-top pt-3 pb-3"><h3 class="h6">'+item.title+'</h3><p class="text-muted small">'+item.tip+'</p><div class="d-flex flex-wrap gap-2">'+
-        item.examples.map((example) => '<span class="tip-example badge rounded-pill text-dark fw-normal px-3 py-2">'+example+'</span>').join("")+"</div></article>"
+      const groupsHtml = articleTips.articleGroups.map((group) =>
+        '<section class="tip-group tip-group-' + group.article + '">' +
+          '<h3 class="tip-group-title">' + group.label + '</h3>' +
+          '<p class="tip-mnemonic">💡 ' + group.mnemonic + '</p>' +
+          group.rules.map((rule) =>
+            '<div class="tip-rule"><p class="text-muted small mb-2">' + rule.tip + '</p>' + exampleChips(rule.examples) + '</div>'
+          ).join("") +
+        '</section>'
       ).join("");
+
+      const strategiesHtml =
+        '<section class="tip-group tip-group-strategy">' +
+          '<h3 class="tip-group-title">General strategies</h3>' +
+          articleTips.strategies.map((item) =>
+            '<div class="tip-rule"><p class="fw-semibold mb-1 small">' + item.title + '</p><p class="text-muted small mb-2">' + item.tip + '</p>' + exampleChips(item.examples) + '</div>'
+          ).join("") +
+        '</section>';
+
+      document.getElementById("tipsList").innerHTML = groupsHtml + strategiesHtml;
     }
 
     function updateScore() {

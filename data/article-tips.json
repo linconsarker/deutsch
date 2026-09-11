@@ -1,42 +1,61 @@
-[
-  {
-    "title": "Der: masculine endings",
-    "tip": "Nouns ending in -ling, -ismus, and -or are masculine. Nouns ending in -er are also usually masculine when they name a person or occupation.",
-    "examples": ["der Lehrling", "der Schmetterling", "der Optimismus", "der Tourismus", "der Motor", "der Reaktor", "der Fahrer", "der Lehrer"]
-  },
-  {
-    "title": "Die: feminine endings",
-    "tip": "Nouns ending in -ung, -heit, -keit, -schaft, -tät, -ion, -ik, and -ei are feminine. About 90% of non-compound nouns ending in -e are feminine too.",
-    "examples": ["die Wohnung", "die Zeitung", "die Freiheit", "die Möglichkeit", "die Mannschaft", "die Freundschaft", "die Universität", "die Qualität", "die Blume", "die Katze", "die Station", "die Musik", "die Bäckerei"]
-  },
-  {
-    "title": "Das: neuter endings",
-    "tip": "Diminutives ending in -chen and -lein are always neuter. So are many nouns ending in -tum, -ment, and -um, plus verbs used as nouns.",
-    "examples": ["das Mädchen", "das Brötchen", "das Eigentum", "das Datum", "das Dokument", "das Instrument", "das Museum", "das Zentrum", "das Essen", "das Schwimmen"]
-  },
-  {
-    "title": "Der: masculine categories",
-    "tip": "Days, months, seasons, compass points, male humans and animals, car brands, and alcoholic drinks are usually masculine. Das Bier is the common exception for drinks.",
-    "examples": ["der Montag", "der Sommer", "der Norden", "der VW", "der Wein"]
-  },
-  {
-    "title": "Die: feminine categories",
-    "tip": "Female humans and animals, cardinal numbers, names of trees and flowers, ships, and aircraft are usually feminine.",
-    "examples": ["die Frau", "die Eins", "die Eiche", "die Titanic"]
-  },
-  {
-    "title": "Das: neuter categories",
-    "tip": "Colours used as nouns, chemical elements, metals, letters of the alphabet, and most continents, countries, and cities are neuter when used with an article.",
-    "examples": ["das Blau", "das Gold", "das Silber", "das Deutschland", "das A"]
-  },
-  {
-    "title": "Learn the article with the noun",
-    "tip": "Treat the article and noun as one vocabulary item: learn der Tisch, not just Tisch. Colour-code your notes or flashcards: blue for der, red for die, and green for das.",
-    "examples": ["der Tisch", "die Tür", "das Fenster"]
-  },
-  {
-    "title": "Use the final word in compounds",
-    "tip": "In a compound noun, the final element determines the gender of the whole word.",
-    "examples": ["die Hand + das Tuch = das Handtuch", "die Fahrt + die Karte = die Fahrkarte"]
-  }
-]
+{
+  "articleGroups": [
+    {
+      "article": "der",
+      "label": "der — masculine",
+      "mnemonic": "Male beings, days, months, seasons, and compass points are almost always der.",
+      "rules": [
+        {
+          "tip": "Endings -ling, -ismus, -or, and -er (for people or jobs) are almost always masculine.",
+          "examples": ["der Lehrling", "der Schmetterling", "der Optimismus", "der Tourismus", "der Motor", "der Reaktor", "der Fahrer", "der Lehrer"]
+        },
+        {
+          "tip": "Days, months, seasons, compass points, male humans and animals, car brands, and alcoholic drinks are usually masculine. Das Bier is the classic exception for drinks.",
+          "examples": ["der Montag", "der Januar", "der Sommer", "der Norden", "der VW", "der Wein"]
+        }
+      ]
+    },
+    {
+      "article": "die",
+      "label": "die — feminine",
+      "mnemonic": "Ends in -ung, -heit, -keit, -schaft, -tät, or -ion? Bet on die — and so does most plain -e.",
+      "rules": [
+        {
+          "tip": "Endings -ung, -heit, -keit, -schaft, -tät, -ion, -ik, and -ei are feminine. About 90% of non-compound nouns ending in -e are feminine too.",
+          "examples": ["die Wohnung", "die Zeitung", "die Freiheit", "die Möglichkeit", "die Mannschaft", "die Freundschaft", "die Universität", "die Qualität", "die Station", "die Musik", "die Bäckerei", "die Blume", "die Katze"]
+        },
+        {
+          "tip": "Female humans and animals, cardinal numbers, names of trees and flowers, ships, and aircraft are usually feminine.",
+          "examples": ["die Frau", "die Eins", "die Eiche", "die Rose", "die Titanic"]
+        }
+      ]
+    },
+    {
+      "article": "das",
+      "label": "das — neuter",
+      "mnemonic": "-chen and -lein are always das, no exceptions — the single safest rule in German gender.",
+      "rules": [
+        {
+          "tip": "Diminutives ending in -chen and -lein are always neuter. So are many nouns ending in -tum, -ment, and -um, plus verbs used as nouns.",
+          "examples": ["das Mädchen", "das Brötchen", "das Eigentum", "das Datum", "das Dokument", "das Instrument", "das Museum", "das Zentrum", "das Essen", "das Schwimmen"]
+        },
+        {
+          "tip": "Colours used as nouns, chemical elements, metals, letters of the alphabet, and most continents, countries, and cities are neuter when used with an article.",
+          "examples": ["das Blau", "das Gold", "das Silber", "das Deutschland", "das A"]
+        }
+      ]
+    }
+  ],
+  "strategies": [
+    {
+      "title": "Learn the article with the noun",
+      "tip": "Treat the article and noun as one vocabulary item: learn der Tisch, not just Tisch. Colour-code your notes or flashcards to match this page: blue for der, pink for die, amber for das.",
+      "examples": ["der Tisch", "die Tür", "das Fenster"]
+    },
+    {
+      "title": "In compounds, only the last word counts",
+      "tip": "In a compound noun, the final element alone determines the gender of the whole word — ignore everything before it.",
+      "examples": ["die Hand + das Tuch = das Handtuch", "die Fahrt + die Karte = die Fahrkarte"]
+    }
+  ]
+}

@@ -69558,16 +69558,16 @@
     },
     {
         "type":  "noun",
-        "de":  "das Stadtzentrum",
-        "stem":  "Stadtzentrumzentren",
-        "article":  "das",
-        "en":  "city center",
+        "de":  "die Stadtzentren",
+        "stem":  "Stadtzentren",
+        "article":  "die",
+        "en":  "city centers",
         "level":  "A2",
         "category":  "general",
         "cognate":  false,
         "example":  {
-                        "de":  "Vom Hotel ins Stadtzentrum sind es zehn Minuten.",
-                        "en":  "From the hotel to the city center it is ten minutes."
+                        "de":  "In den Stadtzentren gibt es viele Geschäfte.",
+                        "en":  "There are many shops in the city centers."
                     }
     },
     {
