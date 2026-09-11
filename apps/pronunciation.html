@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pronunciation Practice</title>
+<link rel="stylesheet" href="../shared/theme.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+  main { width: min(1080px, 100%); flex: 1; min-height: 0; margin: 0 auto; padding: clamp(10px, 2.2vh, 20px) 16px; display: flex; flex-direction: column; gap: 10px; }
+
+  .top { display: flex; justify-content: space-between; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .sound-mark { display: inline-flex; width: 22px; height: 22px; flex-shrink: 0; color: var(--du-action); }
+  h1 { margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .top-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .score { padding: 7px 12px; border: 1px solid var(--du-line); border-radius: 999px; background: var(--du-surface); color: var(--du-muted); font-size: .78rem; white-space: nowrap; }
+  .score strong { color: var(--du-ink); font-size: 1rem; }
+
+  .intro { margin: 0; color: var(--du-muted); font-size: .82rem; line-height: 1.5; max-width: 76ch; }
+  .cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .cat-tabs[hidden] { display: none; }
+
+  #scrollArea { flex: 1; min-height: 0; overflow-y: auto; padding: 2px 2px 10px; }
+
+  .phoneme-section + .phoneme-section { margin-top: 26px; }
+  .section-title { margin: 0 0 2px; font-size: 1rem; font-weight: 800; }
+  .section-desc { margin: 0 0 12px; color: var(--du-muted); font-size: .8rem; }
+  .phoneme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+
+  .phoneme-card { background: var(--du-surface); border: 1px solid var(--du-line); border-radius: var(--du-r-lg); box-shadow: var(--du-shadow-sm); padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .phoneme-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .phoneme-glyph { font-size: 1.3rem; font-weight: 800; line-height: 1.25; }
+  .phoneme-play-btn { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--du-line); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: .85rem; color: var(--du-ink-soft); }
+  .phoneme-play-btn:hover { border-color: var(--du-action); color: var(--du-action); }
+  .phoneme-play-btn:active { transform: scale(.92); }
+  .phoneme-hint { margin: 0; color: var(--du-ink-soft); font-size: .78rem; line-height: 1.45; }
+  .example-list { display: flex; flex-direction: column; gap: 5px; }
+  .example-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; background: var(--du-surface-2); }
+  .example-speak { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; border: none; background: transparent; cursor: pointer; font-size: .78rem; color: var(--du-muted); display: flex; align-items: center; justify-content: center; }
+  .example-speak:hover { color: var(--du-action); }
+  .example-de { font-weight: 700; font-size: .88rem; }
+  .example-level { flex: 0 0 auto; padding: 1px 6px; font-size: .6rem; }
+  .example-en { flex: 0 1 auto; min-width: 0; margin-left: auto; color: var(--du-muted); font-size: .76rem; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .compare-block, .multi-umlaut-block { margin-top: 26px; }
+  .pair-title { margin: 16px 0 8px; font-size: .82rem; font-weight: 800; color: var(--du-ink-soft); text-transform: uppercase; letter-spacing: .04em; }
+  .pair-title:first-of-type { margin-top: 4px; }
+  .pair-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 10px; }
+  .pair-card { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid var(--du-line); border-radius: var(--du-r-sm); background: var(--du-surface); box-shadow: var(--du-shadow-sm); }
+  .pair-side { display: flex; align-items: center; gap: 6px; min-width: 0; flex: 1 1 0; }
+  .pair-word-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+  .pair-de { font-weight: 700; font-size: .85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pair-de.is-umlaut { color: var(--du-action-dark); }
+  .pair-en { color: var(--du-muted); font-size: .68rem; font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pair-arrow { flex: 0 0 auto; color: var(--du-action); font-weight: 700; }
+  .multi-umlaut-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+  .quiz-card { max-width: 540px; margin: 6px auto 0; padding: clamp(20px, 5vw, 34px); text-align: center; }
+  .quiz-eyebrow { color: var(--du-action-dark); font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .quiz-actions { margin-top: 16px; }
+
+  .compare-audio-btn { margin: 16px auto 6px; width: 76px; height: 76px; border-radius: 50%; border: none; background: var(--du-action); color: #fff; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--du-shadow); }
+  .compare-audio-btn:hover { background: var(--du-action-dark); }
+  .compare-audio-btn:active { transform: scale(.96); }
+  .compare-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 18px; }
+  .compare-option { padding: 16px 12px; border: 1px solid var(--du-line); border-radius: var(--du-r-sm); background: var(--du-surface); font: 700 1.15rem var(--du-font); color: var(--du-ink); cursor: pointer; transition: all .15s; }
+  .compare-option:hover:not(:disabled) { border-color: var(--du-action); }
+  .compare-option:disabled { cursor: default; }
+  .compare-option.correct { background: #e7f4ed; border-color: var(--du-success); color: #226147; }
+  .compare-option.incorrect { background: #fbebe6; border-color: var(--du-danger); color: #823b2c; }
+  .compare-feedback { min-height: 0; margin-top: 0; padding: 0; border-radius: var(--du-r-sm); font-size: .85rem; line-height: 1.45; text-align: left; }
+  .compare-feedback:not(:empty) { min-height: 20px; margin-top: 16px; padding: 10px 12px; }
+  .compare-feedback.correct { background: #e7f4ed; color: #226147; }
+  .compare-feedback.incorrect { background: #fbebe6; color: #823b2c; }
+
+  .speak-word { margin: 14px 0 2px; font-size: clamp(1.5rem, 5vw, 2.1rem); font-weight: 800; }
+  .speak-word-en { margin: 0 0 16px; color: var(--du-muted); font-style: italic; font-size: .85rem; }
+  .mic-btn { margin: 18px auto 10px; width: 84px; height: 84px; border-radius: 50%; border: none; background: var(--du-ink); color: #fff; font-size: 2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--du-shadow); transition: background .15s; }
+  .mic-btn:hover { background: var(--du-ink-deep); }
+  .mic-btn:disabled { opacity: .5; cursor: default; }
+  .mic-btn.is-listening { background: var(--du-danger); animation: mic-pulse 1.3s infinite; }
+  @keyframes mic-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(181, 73, 63, .45); } 50% { box-shadow: 0 0 0 14px rgba(181, 73, 63, 0); } }
+  .mic-status { margin: 0 0 6px; color: var(--du-muted); font-size: .8rem; min-height: 1.2em; }
+  .speak-result { margin-top: 14px; text-align: left; }
+  .speak-heard { margin: 0 0 12px; color: var(--du-ink-soft); font-size: .85rem; text-align: center; }
+  .speak-heard strong { color: var(--du-ink); }
+  .score-meter { height: 14px; border-radius: 999px; background: var(--du-surface-2); overflow: hidden; }
+  .score-meter-fill { height: 100%; width: 0; border-radius: 999px; background: var(--du-muted); transition: width .5s ease, background-color .3s ease; }
+  .score-meter-fill.is-great { background: var(--du-success); }
+  .score-meter-fill.is-good { background: var(--du-a2); }
+  .score-meter-fill.is-fair { background: var(--du-action); }
+  .score-meter-fill.is-poor { background: var(--du-danger); }
+  .score-pct { margin: 8px 0 0; font: 800 1.6rem var(--du-font); text-align: center; }
+  .speak-feedback { margin: 2px 0 0; font-size: .85rem; line-height: 1.4; text-align: center; color: var(--du-ink-soft); }
+  .speak-unsupported { max-width: 480px; margin: 12px auto 0; padding: 16px 18px; color: var(--du-muted); font-size: .85rem; line-height: 1.5; text-align: center; }
+
+  @media (max-width: 640px) {
+    main { padding: 10px 12px; }
+    h1 { font-size: 17px; }
+    .compare-options { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="site-navbar" aria-label="Practice activities">
+  <div class="site-links">
+    <a class="site-link active" href="pronunciation.html">Pronunciation Practice</a>
+    <a class="site-link" href="vocab.html">Dictionary</a>
+    <a class="site-link" href="articles.html">Article Trainer</a>
+    <a class="site-link" href="verbs.html">German Verbs</a>
+    <a class="site-link" href="pronouns.html">Pronoun Practice</a>
+    <a class="site-link" href="prep.html">Preposition Practice</a>
+    <a class="site-link" href="translation.html">Translation Practice</a>
+  </div>
+</nav>
+<script>if (window.top !== window.self) document.currentScript.previousElementSibling.style.display = "none";</script>
+<main>
+  <div class="top">
+    <div class="brand">
+      <svg class="sound-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 9.5h3.2L11 6v12l-3.8-3.5H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M14.5 8.2c1.1 1 1.1 6.6 0 7.6M17 6c2.6 2.4 2.6 9.6 0 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <h1>Pronunciation Practice</h1>
+    </div>
+    <div class="top-actions">
+      <div class="cat-tabs" id="modeTabs">
+        <button class="du-pill is-active" data-mode="learn" type="button">Learn</button>
+        <button class="du-pill" data-mode="compare" type="button">Compare</button>
+        <button class="du-pill" data-mode="speak" type="button">Speak</button>
+      </div>
+      <div class="score" id="compareScoreBadge" hidden><strong id="compareScore">0 / 0</strong> correct</div>
+      <div class="score" id="speakScoreBadge" hidden><strong id="speakScore">&mdash;</strong> avg match</div>
+    </div>
+  </div>
+  <p class="intro">Click any speaker icon to hear real pronunciation. Start with the alphabet, move on to the umlauts (ä ö ü) and ß, the letter combinations that sound nothing like you'd expect, and the phonetic rules behind stress and vowel length &mdash; then switch to Compare to train your ear on minimal pairs, or Speak to practice out loud with your microphone.</p>
+  <div class="cat-tabs" id="catTabs">
+    <button class="du-pill is-active" data-cat="alphabet" type="button">Alphabet</button>
+    <button class="du-pill" data-cat="umlauts" type="button">Umlauts &amp; ß</button>
+    <button class="du-pill" data-cat="combos" type="button">Sound Combinations</button>
+    <button class="du-pill" data-cat="phonetics" type="button">Phonetic Rules</button>
+    <button class="du-pill" data-cat="mixed" type="button">Mixed</button>
+  </div>
+  <div class="cat-tabs" id="compareTabs" hidden>
+    <button class="du-pill is-active" data-topic="all" type="button">All Pairs</button>
+    <button class="du-pill" data-topic="umlaut" type="button">Umlauts</button>
+    <button class="du-pill" data-topic="length" type="button">Vowel Length</button>
+    <button class="du-pill" data-topic="devoicing" type="button">Final Devoicing</button>
+  </div>
+  <div id="scrollArea">
+    <section id="learnView">
+      <div id="learnContent"></div>
+    </section>
+    <section id="compareView" hidden>
+      <div class="quiz-card du-card">
+        <div class="quiz-eyebrow">Listen carefully &mdash; which one did you hear?</div>
+        <button class="compare-audio-btn" id="comparePlay" type="button" title="Play sound">🔊</button>
+        <p class="quiz-replay-hint">Tap to hear it again</p>
+        <div class="compare-options" id="compareOptions"></div>
+        <div class="compare-feedback" id="compareFeedback" role="status"></div>
+        <div class="quiz-actions">
+          <button class="du-btn is-accent" id="compareNext" type="button">Next pair</button>
+        </div>
+      </div>
+    </section>
+    <section id="speakView" hidden>
+      <div class="quiz-card du-card" id="speakCard">
+        <div class="quiz-eyebrow">Say this word out loud</div>
+        <p class="speak-word" id="speakWord" lang="de">&nbsp;</p>
+        <p class="speak-word-en" id="speakWordEn"></p>
+        <button class="du-btn is-sm" id="speakHear" type="button">🔊 Hear it first</button>
+        <div>
+          <button class="mic-btn" id="micBtn" type="button" title="Start recording">🎤</button>
+        </div>
+        <p class="mic-status" id="micStatus">Tap the microphone and say the word.</p>
+        <div class="speak-result" id="speakResult" hidden>
+          <p class="speak-heard" id="speakHeard"></p>
+          <div class="score-meter"><div class="score-meter-fill" id="scoreMeterFill"></div></div>
+          <p class="score-pct" id="scorePct"></p>
+          <p class="speak-feedback" id="speakFeedback"></p>
+        </div>
+        <div class="quiz-actions">
+          <button class="du-btn is-accent" id="speakNext" type="button">Next word</button>
+        </div>
+      </div>
+      <p class="speak-unsupported" id="speakUnsupported" hidden>Speech recognition isn't available in this browser, so Speak mode can't listen to you here. It works in desktop Chrome or Edge (and Chrome on Android) &mdash; try opening this page there.</p>
+    </section>
+  </div>
+</main>
+<script>
+  // ---- data -----------------------------------------------------------
+  const ALPHABET = [
+    { letter: 'A', hint: '"ah" — like the a in "father"', examples: [{ de: 'Apfel', en: 'apple' }, { de: 'Wasser', en: 'water' }] },
+    { letter: 'B', hint: '"beh"', examples: [{ de: 'Buch', en: 'book' }, { de: 'Ball', en: 'ball' }] },
+    { letter: 'C', hint: '"tseh"', examples: [{ de: 'Café', en: 'café' }, { de: 'Computer', en: 'computer' }] },
+    { letter: 'D', hint: '"deh"', examples: [{ de: 'Dorf', en: 'village' }, { de: 'Danke', en: 'thanks' }] },
+    { letter: 'E', hint: '"eh" — a pure vowel, no glide like the English "ay"', examples: [{ de: 'Elefant', en: 'elephant' }, { de: 'Ende', en: 'end' }] },
+    { letter: 'F', hint: '"ef"', examples: [{ de: 'Fisch', en: 'fish' }, { de: 'Freund', en: 'friend' }] },
+    { letter: 'G', hint: '"geh"', examples: [{ de: 'Garten', en: 'garden' }, { de: 'Glück', en: 'luck' }] },
+    { letter: 'H', hint: '"hah"', examples: [{ de: 'Haus', en: 'house' }, { de: 'Hund', en: 'dog' }] },
+    { letter: 'I', hint: '"ih" — short, like the ee in "see" but clipped', examples: [{ de: 'Insel', en: 'island' }, { de: 'Igel', en: 'hedgehog' }] },
+    { letter: 'J', hint: '"yot" — the letter itself is named with a y-sound', examples: [{ de: 'Jahr', en: 'year' }, { de: 'Junge', en: 'boy' }] },
+    { letter: 'K', hint: '"kah"', examples: [{ de: 'Katze', en: 'cat' }, { de: 'Kind', en: 'child' }] },
+    { letter: 'L', hint: '"el"', examples: [{ de: 'Lampe', en: 'lamp' }, { de: 'Liebe', en: 'love' }] },
+    { letter: 'M', hint: '"em"', examples: [{ de: 'Mutter', en: 'mother' }, { de: 'Maus', en: 'mouse' }] },
+    { letter: 'N', hint: '"en"', examples: [{ de: 'Name', en: 'name' }, { de: 'Nacht', en: 'night' }] },
+    { letter: 'O', hint: '"oh"', examples: [{ de: 'Onkel', en: 'uncle' }, { de: 'Orange', en: 'orange' }] },
+    { letter: 'P', hint: '"peh"', examples: [{ de: 'Papier', en: 'paper' }, { de: 'Park', en: 'park' }] },
+    { letter: 'Q', hint: '"kuh" — almost always followed by u', examples: [{ de: 'Qualität', en: 'quality' }, { de: 'Quelle', en: 'spring / source' }] },
+    { letter: 'R', hint: '"er"', examples: [{ de: 'Rose', en: 'rose' }, { de: 'Regen', en: 'rain' }] },
+    { letter: 'S', hint: '"es"', examples: [{ de: 'Sonne', en: 'sun' }, { de: 'Salz', en: 'salt' }] },
+    { letter: 'T', hint: '"teh"', examples: [{ de: 'Tisch', en: 'table' }, { de: 'Tag', en: 'day' }] },
+    { letter: 'U', hint: '"uh" — like the oo in "moon"', examples: [{ de: 'Uhr', en: 'clock' }, { de: 'Universität', en: 'university' }] },
+    { letter: 'V', hint: '"fau" — but sounds like an English f inside native words', examples: [{ de: 'Vater', en: 'father' }, { de: 'Vogel', en: 'bird' }] },
+    { letter: 'W', hint: '"veh" — but sounds like an English v', examples: [{ de: 'Wasser', en: 'water' }, { de: 'Wald', en: 'forest' }] },
+    { letter: 'X', hint: '"iks"', examples: [{ de: 'Taxi', en: 'taxi' }, { de: 'Xylophon', en: 'xylophone' }] },
+    { letter: 'Y', hint: '"üpsilon"', examples: [{ de: 'Yoga', en: 'yoga' }, { de: 'System', en: 'system' }] },
+    { letter: 'Z', hint: '"tset" — always sounds like ts, even at the start of a word', examples: [{ de: 'Zeit', en: 'time' }, { de: 'Zug', en: 'train' }] }
+  ];
+
+  const UMLAUTS = [
+    { letter: 'Ä', speak: 'Ä', hint: 'short like the e in "bed"; long like the ai in "air" — round nothing, just relax the jaw', examples: [
+      { de: 'Äpfel', en: 'apples', level: 'A1' }, { de: 'Mädchen', en: 'girl', level: 'A1' }, { de: 'Käse', en: 'cheese', level: 'A1' }, { de: 'spät', en: 'late', level: 'A1' }, { de: 'Bäcker', en: 'baker', level: 'A1' }, { de: 'Zähne', en: 'teeth', level: 'A1' }, { de: 'Ärztin', en: 'doctor (f.)', level: 'A1' },
+      { de: 'Bär', en: 'bear', level: 'A2' }, { de: 'Wäsche', en: 'laundry', level: 'A2' }, { de: 'Gepäck', en: 'luggage', level: 'A2' }, { de: 'zählen', en: 'to count', level: 'A2' }, { de: 'hängen', en: 'to hang', level: 'A2' }, { de: 'Sänger', en: 'singer', level: 'A2' }, { de: 'Käufer', en: 'buyer', level: 'A2' },
+      { de: 'Jäger', en: 'hunter', level: 'B1' }, { de: 'nähen', en: 'to sew, stitch', level: 'B1' }, { de: 'Tänzer', en: 'dancer', level: 'B1' }, { de: 'ändern', en: 'to alter', level: 'B1' }, { de: 'Mäuse', en: 'mice', level: 'B1' }, { de: 'während', en: 'while, whereas', level: 'B1' }, { de: 'Lärm', en: 'noise', level: 'B1' }
+    ] },
+    { letter: 'Ö', speak: 'Ö', hint: 'say "eh" while rounding your lips like you would for "oh" — close to the ir in "bird"', examples: [
+      { de: 'Öl', en: 'oil', level: 'A1' }, { de: 'hören', en: 'to hear / listen', level: 'A1' }, { de: 'können', en: 'to be able to', level: 'A1' }, { de: 'Löffel', en: 'spoon', level: 'A1' }, { de: 'öffnen', en: 'to open', level: 'A1' }, { de: 'Möbel', en: 'furniture', level: 'A1' }, { de: 'König', en: 'king', level: 'A1' },
+      { de: 'schön', en: 'beautiful', level: 'A2' }, { de: 'mögen', en: 'to like', level: 'A2' }, { de: 'Größe', en: 'size', level: 'A2' }, { de: 'Hörer', en: 'listener / receiver', level: 'A2' }, { de: 'lösen', en: 'to solve', level: 'A2' }, { de: 'stören', en: 'to disturb', level: 'A2' }, { de: 'Lösung', en: 'solution', level: 'A2' },
+      { de: 'Löwe', en: 'lion', level: 'B1' }, { de: 'nötig', en: 'necessary, required', level: 'B1' }, { de: 'Flöte', en: 'flute', level: 'B1' }, { de: 'Erdöl', en: 'crude oil, petroleum', level: 'B1' }, { de: 'erhöhen', en: 'to raise, increase', level: 'B1' }, { de: 'löschen', en: 'to extinguish', level: 'B1' }, { de: 'bewölkt', en: 'cloudy', level: 'B1' }
+    ] },
+    { letter: 'Ü', speak: 'Ü', hint: 'say "ee" while rounding your lips like you would for "oo" — like the French u in "tu"', examples: [
+      { de: 'für', en: 'for', level: 'A1' }, { de: 'müde', en: 'tired', level: 'A1' }, { de: 'üben', en: 'to practice', level: 'A1' }, { de: 'Büro', en: 'office', level: 'A1' }, { de: 'früh', en: 'early', level: 'A1' }, { de: 'Küche', en: 'kitchen', level: 'A1' }, { de: 'Glück', en: 'luck / happiness', level: 'A1' },
+      { de: 'Tür', en: 'door', level: 'A2' }, { de: 'süß', en: 'sweet', level: 'A2' }, { de: 'Müll', en: 'trash', level: 'A2' }, { de: 'kühl', en: 'cool', level: 'A2' }, { de: 'Brücke', en: 'bridge', level: 'A2' }, { de: 'lügen', en: 'to lie', level: 'A2' }, { de: 'Gebühr', en: 'fee', level: 'A2' },
+      { de: 'dünn', en: 'thin', level: 'B1' }, { de: 'Mühe', en: 'effort', level: 'B1' }, { de: 'Süden', en: 'south', level: 'B1' }, { de: 'Münze', en: 'coin', level: 'B1' }, { de: 'kühlen', en: 'to cool', level: 'B1' }, { de: 'üblich', en: 'usual', level: 'B1' }, { de: 'Bürger', en: 'citizen', level: 'B1' }
+    ] },
+    { letter: 'ß', speak: 'Straße', hint: '"scharfes S" (sharp S) — always a crisp, voiceless s, like the ss in "hiss"', examples: [
+      { de: 'Straße', en: 'street', level: 'A1' }, { de: 'Fuß', en: 'foot', level: 'A1' }, { de: 'Spaß', en: 'fun', level: 'A1' }, { de: 'heiß', en: 'hot', level: 'A1' }, { de: 'Gruß', en: 'greeting', level: 'A1' }, { de: 'heißen', en: 'to be called', level: 'A1' }, { de: 'schließen', en: 'to close', level: 'A1' },
+      { de: 'groß', en: 'big / tall', level: 'A2' }, { de: 'außen', en: 'outside / exterior', level: 'A2' }, { de: 'grüßen', en: 'to greet', level: 'A2' }, { de: 'stoßen', en: 'to push / bump', level: 'A2' }, { de: 'schießen', en: 'to shoot', level: 'A2' }, { de: 'fließend', en: 'fluent', level: 'A2' }, { de: 'Fußgänger', en: 'pedestrian', level: 'A2' },
+      { de: 'Soße', en: 'sauce', level: 'B1' }, { de: 'Äußerung', en: 'statement', level: 'B1' }, { de: 'außerhalb', en: 'outside', level: 'B1' }, { de: 'Schließfach', en: 'lockbox, safe', level: 'B1' }, { de: 'unregelmäßig', en: 'irregular', level: 'B1' }, { de: 'Fußabdruck', en: 'footprint', level: 'B1' }, { de: 'Großfamilie', en: 'extended family', level: 'B1' }
+    ] }
+  ];
+
+  // Minimal pairs — the same word skeleton with and without the umlaut, so
+  // the vowel shift is the only thing that changes between the two.
+  const VOWEL_PAIRS = {
+    'A vs Ä': [
+      { base: 'Vater', baseEn: 'father', umlaut: 'Väter', umlautEn: 'fathers' },
+      { base: 'Apfel', baseEn: 'apple', umlaut: 'Äpfel', umlautEn: 'apples' },
+      { base: 'Nacht', baseEn: 'night', umlaut: 'Nächte', umlautEn: 'nights' },
+      { base: 'Hand', baseEn: 'hand', umlaut: 'Hände', umlautEn: 'hands' },
+      { base: 'Stadt', baseEn: 'city', umlaut: 'Städte', umlautEn: 'cities' },
+      { base: 'Land', baseEn: 'country', umlaut: 'Länder', umlautEn: 'countries' },
+      { base: 'Mann', baseEn: 'man', umlaut: 'Männer', umlautEn: 'men' },
+      { base: 'alt', baseEn: 'old', umlaut: 'älter', umlautEn: 'older' }
+    ],
+    'O vs Ö': [
+      { base: 'Sohn', baseEn: 'son', umlaut: 'Söhne', umlautEn: 'sons' },
+      { base: 'Ton', baseEn: 'sound / tone', umlaut: 'Töne', umlautEn: 'sounds / tones' },
+      { base: 'Ofen', baseEn: 'oven', umlaut: 'Öfen', umlautEn: 'ovens' },
+      { base: 'Koch', baseEn: 'cook', umlaut: 'Köche', umlautEn: 'cooks' },
+      { base: 'Loch', baseEn: 'hole', umlaut: 'Löcher', umlautEn: 'holes' },
+      { base: 'Kopf', baseEn: 'head', umlaut: 'Köpfe', umlautEn: 'heads' },
+      { base: 'Wort', baseEn: 'word', umlaut: 'Wörter', umlautEn: 'words' },
+      { base: 'groß', baseEn: 'big', umlaut: 'größer', umlautEn: 'bigger' }
+    ],
+    'U vs Ü': [
+      { base: 'Mutter', baseEn: 'mother', umlaut: 'Mütter', umlautEn: 'mothers' },
+      { base: 'Bruder', baseEn: 'brother', umlaut: 'Brüder', umlautEn: 'brothers' },
+      { base: 'Buch', baseEn: 'book', umlaut: 'Bücher', umlautEn: 'books' },
+      { base: 'Kuh', baseEn: 'cow', umlaut: 'Kühe', umlautEn: 'cows' },
+      { base: 'Stuhl', baseEn: 'chair', umlaut: 'Stühle', umlautEn: 'chairs' },
+      { base: 'Fuß', baseEn: 'foot', umlaut: 'Füße', umlautEn: 'feet' },
+      { base: 'jung', baseEn: 'young', umlaut: 'jünger', umlautEn: 'younger' },
+      { base: 'Hut', baseEn: 'hat', umlaut: 'Hüte', umlautEn: 'hats' }
+    ]
+  };
+
+  // Words that pack in two or more umlauts at once — a stress test for the sounds above.
+  const MULTI_UMLAUT = [
+    { de: 'Frühstück', en: 'breakfast', level: 'A1' },
+    { de: 'frühstücken', en: 'to have breakfast', level: 'A1' },
+    { de: 'Gänseblümchen', en: 'daisy', level: 'A1' },
+    { de: 'rückwärts', en: 'backwards', level: 'A2' },
+    { de: 'Führerscheinprüfung', en: 'driving test', level: 'A2' },
+    { de: 'Wörterbücher', en: 'dictionaries', level: 'A2' },
+    { de: 'überprüfen', en: 'to check, verify', level: 'B1' },
+    { de: 'Türöffner', en: 'door opener', level: 'B1' },
+    { de: 'zurückbrüllen', en: 'to yell back', level: 'B1' },
+    { de: 'zurückführen', en: 'to trace back to', level: 'B1' },
+    { de: 'übermäßig', en: 'excessive', level: 'B1' },
+    { de: 'überflüssig', en: 'superfluous, unnecessary', level: 'B1' },
+    { de: 'Löwenzähne', en: 'dandelions', level: 'B1' },
+    { de: 'übermütig', en: 'high-spirited, reckless', level: 'B1' }
+  ];
+
+  const COMBOS = [
+    { letter: 'CH (after a, o, u, au)', hint: 'the "ach-Laut" — a guttural rasp made at the very back of the throat, with no real English equivalent; think of gently clearing your throat, like the ch in Scottish "loch"', examples: [{ de: 'Bach', en: 'creek' }, { de: 'Buch', en: 'book' }, { de: 'auch', en: 'also' }, { de: 'Nacht', en: 'night' }, { de: 'doch', en: 'though, yet' }] },
+    { letter: 'CH (after e, i, ä, ö, ü)', hint: 'the "ich-Laut" — a soft hiss made at the front of the mouth, close to the h in "huge"; nothing like the throaty ach-sound above, even though it is the same two letters', examples: [{ de: 'ich', en: 'I' }, { de: 'nicht', en: 'not' }, { de: 'Milch', en: 'milk' }, { de: 'manchmal', en: 'sometimes' }] },
+    { letter: 'SCH', hint: 'a single, solid "sh" sound, exactly like the English sh in "shoe" — all three letters together make just one sound', examples: [{ de: 'Schule', en: 'school' }, { de: 'Fisch', en: 'fish' }, { de: 'waschen', en: 'to wash' }, { de: 'Tisch', en: 'table' }, { de: 'schlafen', en: 'to sleep' }] },
+    { letter: 'SP (word or syllable start)', hint: 'pronounced "shp", not "sp" as in English — the s borrows the sh-sound from sch whenever it opens a word or syllable', examples: [{ de: 'Sport', en: 'sport' }, { de: 'sprechen', en: 'to speak' }, { de: 'Spiel', en: 'game' }, { de: 'Sprache', en: 'language' }] },
+    { letter: 'ST (word or syllable start)', hint: 'pronounced "sht", not "st" as in English — the same rule as sp above applies here', examples: [{ de: 'Stadt', en: 'city' }, { de: 'Student', en: 'student' }, { de: 'stehen', en: 'to stand' }, { de: 'verstehen', en: 'to understand' }, { de: 'stark', en: 'strong' }] },
+    { letter: 'IE', hint: 'a long, pure "ee" sound, like in "see" — the i is silent and just tells you to hold the e sound longer', examples: [{ de: 'Liebe', en: 'love' }, { de: 'Bier', en: 'beer' }, { de: 'hier', en: 'here' }, { de: 'Familie', en: 'family' }, { de: 'Tier', en: 'animal' }, { de: 'Biene', en: 'bee' }, { de: 'Spiegel', en: 'mirror' }] },
+    { letter: 'EI', hint: 'like the English "eye" — the exact opposite of ie above, and the pair most learners mix up first', examples: [{ de: 'Ei', en: 'egg' }, { de: 'mein', en: 'my / mine' }, { de: 'zwei', en: 'two' }, { de: 'Arbeit', en: 'work' }, { de: 'Nein', en: 'no' }, { de: 'Wein', en: 'wine' }, { de: 'Reis', en: 'rice' }, { de: 'frei', en: 'free' }] },
+    { letter: 'EU / ÄU', hint: 'like the English "oy" in "boy" — eu and äu always sound identical to each other, no matter which one is written', examples: [{ de: 'Freund', en: 'friend' }, { de: 'Häuser', en: 'houses' }, { de: 'neun', en: 'nine' }, { de: 'Deutschland', en: 'Germany' }, { de: 'Europa', en: 'Europe' }, { de: 'Träume', en: 'dreams' }] },
+    { letter: 'PF', hint: 'both sounds blended into one quick burst — start with your lips together for p, then release straight into f without a gap', examples: [{ de: 'Pferd', en: 'horse' }, { de: 'Apfel', en: 'apple' }, { de: 'Kopf', en: 'head' }, { de: 'Pfeffer', en: 'pepper' }] },
+    { letter: 'TZ', hint: 'like the English "ts" in "cats" — always a quick, crisp double sound, never a soft z', examples: [{ de: 'Katze', en: 'cat' }, { de: 'Satz', en: 'sentence' }, { de: 'jetzt', en: 'now' }, { de: 'Platz', en: 'square / space' }] },
+    { letter: 'CK', hint: 'a hard, crisp k that also shortens and sharpens the vowel sitting right before it', examples: [{ de: 'Zucker', en: 'sugar' }, { de: 'Glück', en: 'luck' }, { de: 'Rock', en: 'skirt / jacket' }, { de: 'schmecken', en: 'to taste' }, { de: 'Rucksack', en: 'backpack' }, { de: 'backen', en: 'to bake' }] },
+    { letter: 'QU', hint: 'pronounced "kv", not "kw" as in English — q is almost always followed by u in German, and the u then sounds like an English v', examples: [{ de: 'Quelle', en: 'spring / source' }, { de: 'Quatsch', en: 'nonsense' }, { de: 'bequem', en: 'comfortable' }, { de: 'Qualität', en: 'quality' }] },
+    { letter: 'TH', hint: 'just a plain t — the h is completely silent here, so there is no English "th" sound anywhere in German', examples: [{ de: 'Theater', en: 'theatre' }, { de: 'Thema', en: 'topic' }, { de: 'Apotheke', en: 'pharmacy' }, { de: 'Mathematik', en: 'mathematics' }] },
+    { letter: 'NG', hint: 'a soft nasal "ng" like in "sing" — the g stays silent as its own sound and never gets pronounced separately afterwards', examples: [{ de: 'singen', en: 'to sing' }, { de: 'lang', en: 'long' }, { de: 'Zeitung', en: 'newspaper' }, { de: 'Übung', en: 'exercise' }, { de: 'bringen', en: 'to bring' }] },
+    { letter: 'V (in native words)', hint: 'sounds like an English f, not a v — the letter’s alphabet name is "fau" for exactly this reason', examples: [{ de: 'Vater', en: 'father' }, { de: 'viel', en: 'much / a lot' }, { de: 'verstehen', en: 'to understand' }, { de: 'vier', en: 'four' }] },
+    { letter: 'W', hint: 'sounds like an English v, not a w — German has no "w" sound the way English does', examples: [{ de: 'Wasser', en: 'water' }, { de: 'wichtig', en: 'important' }, { de: 'warum', en: 'why' }, { de: 'wir', en: 'we' }] },
+    { letter: 'J', hint: 'sounds like an English y, not a j — the same y-glide you hear in "yes"', examples: [{ de: 'Jahr', en: 'year' }, { de: 'ja', en: 'yes' }, { de: 'jung', en: 'young' }, { de: 'Jacke', en: 'jacket' }] },
+    { letter: 'Z', hint: 'always "ts", even at the very start of a word, where English speakers instinctively expect a soft z', examples: [{ de: 'Zeit', en: 'time' }, { de: 'Zahn', en: 'tooth' }, { de: 'zwölf', en: 'twelve' }, { de: 'zwischen', en: 'between' }] },
+    { letter: 'R', hint: 'a guttural sound made in the throat (closer to a French r than an English one), which softens to almost a vowel at the end of a syllable', examples: [{ de: 'rot', en: 'red' }, { de: 'Rose', en: 'rose' }, { de: 'Reise', en: 'trip' }, { de: 'Uhr', en: 'clock' }] },
+    { letter: 'AI', hint: 'the same "eye" sound as ei — just a much rarer spelling of the identical diphthong', examples: [{ de: 'Mai', en: 'May' }, { de: 'Hai', en: 'shark' }, { de: 'Kaiser', en: 'emperor' }] },
+    { letter: 'AU', hint: 'like the English "ow" in "how" — a single gliding sound, not an "a" followed by a separate "u"', examples: [{ de: 'Haus', en: 'house' }, { de: 'Baum', en: 'tree' }, { de: 'Frau', en: 'woman' }, { de: 'kaufen', en: 'to buy' }, { de: 'Auto', en: 'car' }, { de: 'blau', en: 'blue' }, { de: 'raus', en: 'out (colloquial)' }] },
+    { letter: '-IG (word ending)', hint: 'at the end of a word this sounds like the soft ich-Laut ("-ich"), not a hard g — in southern Germany and Austria you will also hear it said as "-ik"', examples: [{ de: 'richtig', en: 'right / correct' }, { de: 'billig', en: 'cheap' }, { de: 'zwanzig', en: 'twenty' }, { de: 'ruhig', en: 'calm / quiet' }] },
+    { letter: 'CHS', hint: 'collapses to a single "ks" sound, exactly like the x in the English word "fox"', examples: [{ de: 'sechs', en: 'six' }, { de: 'Fuchs', en: 'fox' }, { de: 'wachsen', en: 'to grow' }] },
+    { letter: 'TSCH', hint: 'like the English "ch" in "church" — the closest German gets to that exact English sound', examples: [{ de: 'Deutsch', en: 'German' }, { de: 'tschüss', en: 'bye' }, { de: 'rutschen', en: 'to slide' }] },
+    { letter: 'KN', hint: 'both letters are pronounced — unlike the silent k in the English "knee", the k is fully spoken right before the n', examples: [{ de: 'Knie', en: 'knee' }, { de: 'Knopf', en: 'button' }, { de: 'Knochen', en: 'bone' }] },
+    { letter: 'PS', hint: 'both letters are pronounced — unlike the silent p in the English "psychology", you say the p clearly before the s', examples: [{ de: 'Psychologie', en: 'psychology' }, { de: 'Pseudonym', en: 'pseudonym' }] },
+    { letter: 'PH', hint: 'sounds exactly like an English f — mostly appears in words borrowed from Greek', examples: [{ de: 'Philosophie', en: 'philosophy' }, { de: 'Physik', en: 'physics' }, { de: 'Fotografie', en: 'photography (also spelled with f)' }] },
+    { letter: '-TION (word ending)', hint: 'pronounced "tsi-OHN", with the stress landing on that final syllable, not "shun" as in English', examples: [{ de: 'Nation', en: 'nation' }, { de: 'Situation', en: 'situation' }, { de: 'Information', en: 'information' }] },
+    { letter: 'DT', hint: 'the d turns silent — only the t is heard, so dt sounds exactly like a plain t', examples: [{ de: 'Handtuch', en: 'towel' }, { de: 'verwandt', en: 'related' }, { de: 'Stadtmitte', en: 'city centre' }] }
+  ];
+
+  // Word-stress rules — the stressed syllable of each example is bolded via
+  // `mark`; the speaker button still always speaks the plain word in `de`.
+  const PHONETIC_RULES = [
+    { letter: 'The Basic Rule', hint: 'stress almost always falls on the first syllable of a word’s root — no accent marks needed, it’s just the default', examples: [
+      { de: 'wandern', mark: '<b>WAN</b>dern', en: 'to hike' },
+      { de: 'Fenster', mark: '<b>FENS</b>ter', en: 'window' },
+      { de: 'kommen', mark: '<b>KOM</b>men', en: 'to come' },
+      { de: 'Lehrerin', mark: '<b>LEH</b>rerin', en: 'teacher (f.)' },
+      { de: 'singen', mark: '<b>SIN</b>gen', en: 'to sing' }
+    ] },
+    { letter: 'Unstressed Prefixes', hint: 'be-, ge-, ver-, ent-, er-, zer-, emp-, and miss- are never stressed — the emphasis lands on the syllable right after them', examples: [
+      { de: 'bekommen', mark: 'be<b>KOM</b>men', en: 'to receive' },
+      { de: 'verstehen', mark: 'ver<b>STEH</b>en', en: 'to understand' },
+      { de: 'gehören', mark: 'ge<b>HÖ</b>ren', en: 'to belong' },
+      { de: 'erklären', mark: 'er<b>KLÄ</b>ren', en: 'to explain' },
+      { de: 'entscheiden', mark: 'ent<b>SCHEI</b>den', en: 'to decide' }
+    ] },
+    { letter: 'Stressed Separable Prefixes', hint: 'an-, auf-, aus-, mit-, vor-, zu-, and ein- are the opposite of be-/ver-/ge- — they always carry the stress, and they split off to the end of the clause', examples: [
+      { de: 'aufmachen', mark: '<b>AUF</b>machen', en: 'to open' },
+      { de: 'ausgehen', mark: '<b>AUS</b>gehen', en: 'to go out' },
+      { de: 'mitkommen', mark: '<b>MIT</b>kommen', en: 'to come along' },
+      { de: 'anfangen', mark: '<b>AN</b>fangen', en: 'to begin' },
+      { de: 'zumachen', mark: '<b>ZU</b>machen', en: 'to close' }
+    ] },
+    { letter: 'Compound Nouns', hint: 'German loves stacking nouns into one long word — stress almost always lands on the very first part, however long the compound gets', examples: [
+      { de: 'Haustür', mark: '<b>HAUS</b>tür', en: 'front door' },
+      { de: 'Handschuh', mark: '<b>HAND</b>schuh', en: 'glove' },
+      { de: 'Kühlschrank', mark: '<b>KÜHL</b>schrank', en: 'refrigerator' },
+      { de: 'Wörterbuch', mark: '<b>WÖR</b>terbuch', en: 'dictionary' },
+      { de: 'Regenschirm', mark: '<b>RE</b>genschirm', en: 'umbrella' }
+    ] },
+    { letter: 'Loanwords', hint: 'words borrowed from French or Latin often break the first-syllable rule and land the stress on a later syllable instead', examples: [
+      { de: 'Universität', mark: 'Universi<b>TÄT</b>', en: 'university' },
+      { de: 'Student', mark: 'Stu<b>DENT</b>', en: 'student' },
+      { de: 'Museum', mark: 'Mu<b>SE</b>um', en: 'museum' },
+      { de: 'Elefant', mark: 'Ele<b>FANT</b>', en: 'elephant' },
+      { de: 'Computer', mark: 'Com<b>PU</b>ter', en: 'computer' }
+    ] }
+  ];
+
+  // Minimal pairs contrasting a short vowel against the same vowel held long.
+  const VOWEL_LENGTH_PAIRS = {
+    'A: short vs long': [
+      { base: 'Stadt', baseEn: 'city (short a)', umlaut: 'Staat', umlautEn: 'state (long a)' },
+      { base: 'Kamm', baseEn: 'comb (short a)', umlaut: 'kam', umlautEn: 'came (long a)' },
+      { base: 'Ratte', baseEn: 'rat (short a)', umlaut: 'Rate', umlautEn: 'installment (long a)' },
+      { base: 'Bann', baseEn: 'ban, spell (short a)', umlaut: 'Bahn', umlautEn: 'train, track (long a)' }
+    ],
+    'E: short vs long': [
+      { base: 'Bett', baseEn: 'bed (short e)', umlaut: 'Beet', umlautEn: 'flowerbed (long e)' },
+      { base: 'wenn', baseEn: 'if / when (short e)', umlaut: 'wen', umlautEn: 'whom (long e)' },
+      { base: 'denn', baseEn: 'because (short e)', umlaut: 'den', umlautEn: 'the, masc. acc. (long e)' },
+      { base: 'Keller', baseEn: 'cellar (short e)', umlaut: 'Kehle', umlautEn: 'throat (long e)' }
+    ],
+    'I: short vs long': [
+      { base: 'in', baseEn: 'in (short i)', umlaut: 'ihn', umlautEn: 'him (long i)' },
+      { base: 'Mitte', baseEn: 'middle (short i)', umlaut: 'Miete', umlautEn: 'rent (long i)' },
+      { base: 'still', baseEn: 'quiet (short i)', umlaut: 'Stil', umlautEn: 'style (long i)' },
+      { base: 'Ritter', baseEn: 'knight (short i)', umlaut: 'Riese', umlautEn: 'giant (long i)' }
+    ],
+    'O: short vs long': [
+      { base: 'offen', baseEn: 'open (short o)', umlaut: 'Ofen', umlautEn: 'oven (long o)' },
+      { base: 'Sonne', baseEn: 'sun (short o)', umlaut: 'Sohn', umlautEn: 'son (long o)' },
+      { base: 'Rost', baseEn: 'rust (short o)', umlaut: 'Rose', umlautEn: 'rose (long o)' },
+      { base: 'Post', baseEn: 'mail, post office (short o)', umlaut: 'Boot', umlautEn: 'boat (long o)' }
+    ],
+    'U: short vs long': [
+      { base: 'muss', baseEn: 'must (short u)', umlaut: 'Mus', umlautEn: 'purée (long u)' },
+      { base: 'Mutter', baseEn: 'mother (short u)', umlaut: 'Mut', umlautEn: 'courage (long u)' },
+      { base: 'Nummer', baseEn: 'number (short u)', umlaut: 'Blume', umlautEn: 'flower (long u)' },
+      { base: 'Kuss', baseEn: 'kiss (short u)', umlaut: 'Kur', umlautEn: 'spa cure (long u)' }
+    ]
+  };
+
+  // b/d/g at the end of a word or syllable devoice to p/t/k — add an ending
+  // and the true, voiced sound comes back.
+  const DEVOICING_PAIRS = {
+    'B → P at the end': [
+      { base: 'gelb', baseEn: 'yellow (sounds like "gelp")', umlaut: 'gelbe', umlautEn: 'yellow, inflected (b is back)' },
+      { base: 'Lob', baseEn: 'praise (sounds like "Lop")', umlaut: 'loben', umlautEn: 'to praise (b is back)' },
+      { base: 'halb', baseEn: 'half (sounds like "halp")', umlaut: 'halbe', umlautEn: 'half, inflected (b is back)' },
+      { base: 'Staub', baseEn: 'dust (sounds like "Staup")', umlaut: 'stauben', umlautEn: 'to be dusty (b is back)' }
+    ],
+    'D → T at the end': [
+      { base: 'Hund', baseEn: 'dog (sounds like "Hunt")', umlaut: 'Hunde', umlautEn: 'dogs (d is back)' },
+      { base: 'Rad', baseEn: 'wheel / bike (sounds like "Rat")', umlaut: 'Räder', umlautEn: 'wheels / bikes (d is back)' },
+      { base: 'Bild', baseEn: 'picture (sounds like "Bilt")', umlaut: 'Bilder', umlautEn: 'pictures (d is back)' },
+      { base: 'Lied', baseEn: 'song (sounds like "Liet")', umlaut: 'Lieder', umlautEn: 'songs (d is back)' },
+      { base: 'Kind', baseEn: 'child (sounds like "Kint")', umlaut: 'Kinder', umlautEn: 'children (d is back)' }
+    ],
+    'G → K at the end': [
+      { base: 'Tag', baseEn: 'day (sounds like "Tak")', umlaut: 'Tage', umlautEn: 'days (g is back)' },
+      { base: 'Weg', baseEn: 'way / path (sounds like "Vek")', umlaut: 'Wege', umlautEn: 'ways / paths (g is back)' },
+      { base: 'Zug', baseEn: 'train (sounds like "Tsuk")', umlaut: 'Züge', umlautEn: 'trains (g is back)' },
+      { base: 'Berg', baseEn: 'mountain (sounds like "Berk")', umlaut: 'Berge', umlautEn: 'mountains (g is back)' },
+      { base: 'Krieg', baseEn: 'war (sounds like "Kriek")', umlaut: 'Kriege', umlautEn: 'wars (g is back)' }
+    ]
+  };
+
+  // Words where a glottal stop — a tiny catch of the breath, marked with · —
+  // separates a vowel-initial syllable from what comes before it.
+  const GLOTTAL_STOP_WORDS = {
+    'After an unstressed prefix': [
+      { de: 'beobachten', mark: 'be&middot;obachten', en: 'to observe' },
+      { de: 'geerbt', mark: 'ge&middot;erbt', en: 'inherited' },
+      { de: 'vereinbaren', mark: 'ver&middot;einbaren', en: 'to arrange, agree on' },
+      { de: 'unehrlich', mark: 'un&middot;ehrlich', en: 'dishonest' },
+      { de: 'erinnern', mark: 'er&middot;innern', en: 'to remind, remember' }
+    ],
+    'Inside a compound word': [
+      { de: 'Erdbeere', mark: 'Erd&middot;beere', en: 'strawberry' },
+      { de: 'Verein', mark: 'Ver&middot;ein', en: 'club, association' },
+      { de: 'Vorabend', mark: 'Vor&middot;abend', en: 'evening before, eve' }
+    ],
+    'In loanwords': [
+      { de: 'Theater', mark: 'The&middot;ater', en: 'theatre' },
+      { de: 'Koordination', mark: 'Ko&middot;ordination', en: 'coordination' },
+      { de: 'reagieren', mark: 're&middot;agieren', en: 'to react' },
+      { de: 'Museum', mark: 'Muse&middot;um', en: 'museum' }
+    ]
+  };
+
+  ALPHABET.forEach(it => { it.pool = 'alphabet'; it.quizAudio = it.letter; });
+  UMLAUTS.forEach(it => { it.pool = 'umlauts'; it.quizAudio = it.examples[0].de; });
+  COMBOS.forEach(it => { it.pool = 'combos'; it.quizAudio = it.examples[0].de; });
+  PHONETIC_RULES.forEach(it => { it.pool = 'phonetics'; it.quizAudio = it.examples[0].de; });
+
+  const CAT_META = {
+    alphabet: { label: 'Alphabet', pool: ALPHABET, desc: 'A to Z — the name of every letter, with words that start with it.' },
+    umlauts: { label: 'Umlauts & ß', pool: UMLAUTS, desc: 'The extra letters that change a word’s meaning entirely — graded from beginner (A1) through intermediate (B1).' },
+    combos: { label: 'Sound Combinations', pool: COMBOS, desc: 'Letter pairs and clusters that sound different from what you’d expect.' },
+    phonetics: { label: 'Phonetic Rules', pool: PHONETIC_RULES, desc: 'The patterns that decide how a whole word sounds, beyond any single letter — where the stress lands, vowel length, and more.' }
+  };
+
+  // ---- compare (minimal-pair ear training) --------------------------
+  // Every minimal pair already built for the Learn tab, flattened into one
+  // pool so Compare mode can quiz you on hearing the difference — the same
+  // "what do you hear?" exercise format from German textbooks.
+  const COMPARE_TOPIC_LABEL = { umlaut: 'Umlaut', length: 'Vowel length', devoicing: 'Final devoicing' };
+  const COMPARE_POOL = [
+    ...Object.values(VOWEL_PAIRS).flat().map(p => ({ ...p, topic: 'umlaut' })),
+    ...Object.values(VOWEL_LENGTH_PAIRS).flat().map(p => ({ ...p, topic: 'length' })),
+    ...Object.values(DEVOICING_PAIRS).flat().map(p => ({ ...p, topic: 'devoicing' }))
+  ];
+
+  // ---- speech -----------------------------------------------------------
+  // Primary voice: Google Translate's own "listen" audio (the same clip
+  // translate.google.com plays), fetched from its public, no-key endpoint.
+  // It is far more reliable than the OS voice picked by the browser's
+  // built-in speech synthesis, which varies wildly by device and often
+  // mangles German vowels. If that request ever fails — offline, blocked,
+  // rate-limited — we fall back to the browser's own speech synthesis,
+  // explicitly preferring a German "Google" network voice over whatever
+  // local voice the browser would otherwise default to, so a speaker
+  // button never goes completely silent.
+  // Debounced so a rapid tap on two buttons in a row doesn't overlap two
+  // clips or clip the new one before it starts.
+  let pendingSpeechTimer = null;
+  let currentAudio = null;
+  let germanVoice = null;
+  function pickGermanVoice() {
+    if (!('speechSynthesis' in window)) return null;
+    const voices = window.speechSynthesis.getVoices();
+    return voices.find(v => v.lang === 'de-DE' && /google/i.test(v.name))
+      || voices.find(v => /^de/i.test(v.lang) && /google/i.test(v.name))
+      || voices.find(v => v.lang === 'de-DE')
+      || voices.find(v => /^de/i.test(v.lang))
+      || null;
+  }
+  if ('speechSynthesis' in window) {
+    germanVoice = pickGermanVoice();
+    window.speechSynthesis.onvoiceschanged = () => { germanVoice = pickGermanVoice(); };
+  }
+  function speakWithBrowserVoice(text) {
+    if (!('speechSynthesis' in window)) return;
+    try {
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'de-DE';
+      u.rate = 0.85;
+      if (germanVoice) u.voice = germanVoice;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function speak(text) {
+    if (pendingSpeechTimer) { clearTimeout(pendingSpeechTimer); pendingSpeechTimer = null; }
+    if (currentAudio) { try { currentAudio.pause(); } catch (e) {} currentAudio = null; }
+    try { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); } catch (e) {}
+    pendingSpeechTimer = setTimeout(() => {
+      pendingSpeechTimer = null;
+      const url = 'https://translate.google.com/translate_tts?ie=UTF-8&tl=de&client=tw-ob&q=' + encodeURIComponent(text);
+      const audio = new Audio(url);
+      currentAudio = audio;
+      const fallback = () => { if (currentAudio === audio) { currentAudio = null; speakWithBrowserVoice(text); } };
+      audio.addEventListener('error', fallback);
+      audio.play().catch(fallback);
+    }, 120);
+  }
+
+  // ---- helpers -----------------------------------------------------------
+  function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+  // ex.mark, when present, is trusted static markup (e.g. a bolded stressed
+  // syllable) shown instead of the plain escaped word — the speaker button
+  // still always speaks the real, plain spelling in ex.de.
+  function exampleRowHtml(ex) {
+    return `<div class="example-row">
+      <button class="example-speak" data-de="${esc(ex.de)}" title="Hear '${esc(ex.de)}'">🔊</button>
+      <span class="example-de" lang="de">${ex.mark || esc(ex.de)}</span>
+      ${ex.level ? `<span class="du-level example-level ${esc(ex.level)}">${esc(ex.level)}</span>` : ''}
+      <span class="example-en">${esc(ex.en)}</span>
+    </div>`;
+  }
+
+  function cardHtml(item) {
+    const speakText = item.speak || item.quizAudio || item.letter;
+    const exRows = item.examples.map(exampleRowHtml).join('');
+    return `<div class="phoneme-card">
+      <div class="phoneme-head">
+        <span class="phoneme-glyph" lang="de">${esc(item.letter)}</span>
+        <button class="phoneme-play-btn" data-speak="${esc(speakText)}" title="Hear pronunciation">🔊</button>
+      </div>
+      <p class="phoneme-hint">${esc(item.hint)}</p>
+      <div class="example-list">${exRows}</div>
+    </div>`;
+  }
+
+  function pairGroupHtml(title, pairs) {
+    const rows = pairs.map(p => `
+      <div class="pair-card">
+        <div class="pair-side">
+          <button class="example-speak" data-de="${esc(p.base)}" title="Hear '${esc(p.base)}'">🔊</button>
+          <span class="pair-word-text"><span class="pair-de" lang="de">${esc(p.base)}</span><span class="pair-en">${esc(p.baseEn)}</span></span>
+        </div>
+        <span class="pair-arrow">&rarr;</span>
+        <div class="pair-side">
+          <button class="example-speak" data-de="${esc(p.umlaut)}" title="Hear '${esc(p.umlaut)}'">🔊</button>
+          <span class="pair-word-text"><span class="pair-de is-umlaut" lang="de">${esc(p.umlaut)}</span><span class="pair-en">${esc(p.umlautEn)}</span></span>
+        </div>
+      </div>`).join('');
+    return `<h3 class="pair-title">${esc(title)}</h3><div class="pair-grid">${rows}</div>`;
+  }
+
+  function compareHtml() {
+    const groups = Object.entries(VOWEL_PAIRS).map(([title, pairs]) => pairGroupHtml(title, pairs)).join('');
+    return `<div class="compare-block">
+      <h2 class="section-title">Compare: Plain Vowel vs Umlaut</h2>
+      <p class="section-desc">The same word, one letter apart — say each pair back to back and listen for how much just the umlaut changes the vowel (and often the meaning too).</p>
+      ${groups}
+    </div>`;
+  }
+
+  function multiUmlautHtml() {
+    const rows = MULTI_UMLAUT.map(exampleRowHtml).join('');
+    return `<div class="multi-umlaut-block">
+      <h2 class="section-title">Words with Two or More Umlauts</h2>
+      <p class="section-desc">Rarer, but a great stress-test for the sounds above — every word here packs in more than one ä, ö, or ü.</p>
+      <div class="phoneme-grid multi-umlaut-grid">${rows}</div>
+    </div>`;
+  }
+
+  function wordGroupHtml(title, words) {
+    return `<h3 class="pair-title">${esc(title)}</h3><div class="phoneme-grid multi-umlaut-grid">${words.map(exampleRowHtml).join('')}</div>`;
+  }
+
+  function glottalStopHtml() {
+    const groups = Object.entries(GLOTTAL_STOP_WORDS).map(([title, words]) => wordGroupHtml(title, words)).join('');
+    return `<div class="multi-umlaut-block">
+      <h2 class="section-title">The Glottal Stop (der Knacklaut)</h2>
+      <p class="section-desc">German inserts a tiny catch of the breath — a glottal stop — before any word or syllable that starts with a vowel, marked here with a middle dot ( &middot; ). It keeps vowel-initial syllables crisp and separate instead of blending into the sound before them, the way English or French often do.</p>
+      ${groups}
+    </div>`;
+  }
+
+  function vowelLengthHtml() {
+    const groups = Object.entries(VOWEL_LENGTH_PAIRS).map(([title, pairs]) => pairGroupHtml(title, pairs)).join('');
+    return `<div class="compare-block">
+      <h2 class="section-title">Short vs Long Vowels</h2>
+      <p class="section-desc">Every German vowel is either short or long, and the difference alone can change a word's meaning. A vowel is usually long before a single consonant, a silent h, or when doubled (aa/ee/oo) — and short before a doubled consonant or a consonant cluster.</p>
+      ${groups}
+    </div>`;
+  }
+
+  function devoicingHtml() {
+    const groups = Object.entries(DEVOICING_PAIRS).map(([title, pairs]) => pairGroupHtml(title, pairs)).join('');
+    return `<div class="compare-block">
+      <h2 class="section-title">Final Devoicing (Auslautverhärtung)</h2>
+      <p class="section-desc">At the very end of a word or syllable, b/d/g are devoiced — they sound like p/t/k instead. Add an ending and a vowel follows, and the original voiced sound comes right back, as these pairs show.</p>
+      ${groups}
+    </div>`;
+  }
+
+  function sectionHtml(catId) {
+    const meta = CAT_META[catId];
+    let extra = '';
+    if (catId === 'umlauts') extra = compareHtml() + multiUmlautHtml();
+    else if (catId === 'phonetics') extra = vowelLengthHtml() + devoicingHtml() + glottalStopHtml();
+    return `<section class="phoneme-section">
+      <h2 class="section-title">${esc(meta.label)}</h2>
+      <p class="section-desc">${esc(meta.desc)}</p>
+      <div class="phoneme-grid">${meta.pool.map(cardHtml).join('')}</div>
+      ${extra}
+    </section>`;
+  }
+
+  const REAL_CATEGORIES = Object.keys(CAT_META);
+
+  function renderLearnGrid() {
+    const el = document.getElementById('learnContent');
+    el.innerHTML = activeCategory === 'mixed'
+      ? REAL_CATEGORIES.map(sectionHtml).join('')
+      : sectionHtml(activeCategory);
+  }
+
+  document.getElementById('learnContent').addEventListener('click', e => {
+    const playBtn = e.target.closest('.phoneme-play-btn');
+    if (playBtn) { speak(playBtn.dataset.speak); return; }
+    const exBtn = e.target.closest('.example-speak');
+    if (exBtn) speak(exBtn.dataset.de);
+  });
+
+  // ---- compare (minimal-pair ear training) --------------------------
+  let compareTopic = 'all', currentCompare = null, compareAnswered = false;
+  let compareCorrect = 0, compareAttempts = 0;
+
+  function compareTopicPool(topic) {
+    return topic === 'all' ? COMPARE_POOL : COMPARE_POOL.filter(p => p.topic === topic);
+  }
+
+  function playCompare() { if (currentCompare) speak(currentCompare.target === 'base' ? currentCompare.pair.base : currentCompare.pair.umlaut); }
+
+  function nextCompare() {
+    const pool = compareTopicPool(compareTopic);
+    const pair = pool[Math.floor(Math.random() * pool.length)];
+    const target = Math.random() < 0.5 ? 'base' : 'umlaut';
+    currentCompare = { pair, target };
+    compareAnswered = false;
+    const options = shuffle([
+      { key: 'base', word: pair.base },
+      { key: 'umlaut', word: pair.umlaut }
+    ]);
+    document.getElementById('compareOptions').innerHTML = options
+      .map(o => `<button class="compare-option" data-key="${o.key}">${esc(o.word)}</button>`).join('');
+    const feedback = document.getElementById('compareFeedback');
+    feedback.textContent = '';
+    feedback.className = 'compare-feedback';
+    playCompare();
+  }
+
+  function selectCompare(key, btn) {
+    if (compareAnswered || !currentCompare) return;
+    compareAnswered = true;
+    compareAttempts++;
+    const isCorrect = key === currentCompare.target;
+    if (isCorrect) compareCorrect++;
+    document.querySelectorAll('.compare-option').forEach(b => {
+      b.disabled = true;
+      if (b.dataset.key === currentCompare.target) b.classList.add('correct');
+      else if (b === btn) b.classList.add('incorrect');
+    });
+    const p = currentCompare.pair;
+    const heardWord = currentCompare.target === 'base' ? p.base : p.umlaut;
+    const heardGloss = currentCompare.target === 'base' ? p.baseEn : p.umlautEn;
+    const feedback = document.getElementById('compareFeedback');
+    feedback.className = 'compare-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+    feedback.textContent = (isCorrect ? 'Correct! ' : 'Not quite. ') +
+      `You heard "${heardWord}" (${heardGloss}). Topic: ${COMPARE_TOPIC_LABEL[p.topic]}.`;
+    document.getElementById('compareScore').textContent = `${compareCorrect} / ${compareAttempts}`;
+  }
+
+  document.getElementById('compareOptions').addEventListener('click', e => {
+    const btn = e.target.closest('.compare-option');
+    if (btn) selectCompare(btn.dataset.key, btn);
+  });
+  document.getElementById('comparePlay').addEventListener('click', playCompare);
+  document.getElementById('compareNext').addEventListener('click', nextCompare);
+  document.getElementById('compareTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.du-pill');
+    if (!btn) return;
+    document.querySelectorAll('#compareTabs .du-pill').forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    compareTopic = btn.dataset.topic;
+    nextCompare();
+  });
+
+  // ---- speak (microphone pronunciation scoring) --------------------------
+  // Uses the browser's built-in speech recognition (Chrome/Edge only) to
+  // transcribe what you said, then scores it against the target word with
+  // a normalized edit-distance similarity. This is an approximation of how
+  // intelligible your pronunciation was to a speech recognizer — not a
+  // certified phonetic analysis — but it is honest, needs no server or API
+  // key, and degrades clearly (rather than silently) when unsupported.
+  const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const speechRecognitionSupported = !!SpeechRecognitionCtor;
+  let recognition = null;
+  if (speechRecognitionSupported) {
+    recognition = new SpeechRecognitionCtor();
+    recognition.lang = 'de-DE';
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 5;
+  }
+
+  function flatWordPool(catId) {
+    if (catId === 'mixed') return REAL_CATEGORIES.flatMap(flatWordPool);
+    const seen = new Set();
+    const words = [];
+    CAT_META[catId].pool.forEach(item => item.examples.forEach(ex => {
+      if (seen.has(ex.de)) return;
+      seen.add(ex.de);
+      words.push({ de: ex.de, en: ex.en });
+    }));
+    return words;
+  }
+
+  function normalizeSpeech(s) {
+    return String(s).toLowerCase().trim().replace(/[.,!?„“”"'’]/g, '').replace(/\s+/g, ' ');
+  }
+
+  function levenshtein(a, b) {
+    const m = a.length, n = b.length;
+    if (!m) return n;
+    if (!n) return m;
+    let prev = Array.from({ length: n + 1 }, (_, j) => j);
+    for (let i = 1; i <= m; i++) {
+      const row = [i];
+      for (let j = 1; j <= n; j++) {
+        row[j] = a[i - 1] === b[j - 1] ? prev[j - 1] : 1 + Math.min(prev[j - 1], prev[j], row[j - 1]);
+      }
+      prev = row;
+    }
+    return prev[n];
+  }
+
+  function wordSimilarity(target, heard) {
+    const t = normalizeSpeech(target).replace(/\s+/g, '');
+    const h = normalizeSpeech(heard).replace(/\s+/g, '');
+    const maxLen = Math.max(t.length, h.length) || 1;
+    return Math.max(0, 1 - levenshtein(t, h) / maxLen);
+  }
+
+  let currentSpeakWord = null, speakAttempts = 0, speakScoreSum = 0, recognizing = false;
+  const micBtn = document.getElementById('micBtn');
+  const micStatus = document.getElementById('micStatus');
+  const speakResult = document.getElementById('speakResult');
+
+  function nextSpeakWord() {
+    const pool = flatWordPool(activeCategory);
+    let next = pool[Math.floor(Math.random() * pool.length)];
+    if (pool.length > 1 && currentSpeakWord) while (next.de === currentSpeakWord.de) next = pool[Math.floor(Math.random() * pool.length)];
+    currentSpeakWord = next;
+    document.getElementById('speakWord').textContent = currentSpeakWord.de;
+    document.getElementById('speakWordEn').textContent = currentSpeakWord.en;
+    speakResult.hidden = true;
+    micStatus.textContent = 'Tap the microphone and say the word.';
+  }
+
+  function setMicState(state) {
+    micBtn.classList.toggle('is-listening', state === 'listening');
+    micBtn.textContent = state === 'listening' ? '⏺' : '🎤';
+  }
+
+  function feedbackFor(score) {
+    if (score >= 90) return { band: 'is-great', text: 'Excellent — that is spot on.' };
+    if (score >= 70) return { band: 'is-good', text: 'Good — very close to the real pronunciation.' };
+    if (score >= 45) return { band: 'is-fair', text: 'Getting there. Listen again and try once more.' };
+    return { band: 'is-poor', text: 'Not quite a match — slow down and try again.' };
+  }
+
+  function showSpeakResult(heardText, score) {
+    speakAttempts++;
+    speakScoreSum += score;
+    document.getElementById('speakScore').textContent = Math.round(speakScoreSum / speakAttempts) + '%';
+    const fb = feedbackFor(score);
+    document.getElementById('speakHeard').innerHTML = heardText
+      ? `You said: <strong lang="de">${esc(heardText)}</strong>`
+      : 'We couldn’t make out any words.';
+    const fill = document.getElementById('scoreMeterFill');
+    fill.className = 'score-meter-fill ' + fb.band;
+    fill.style.width = score + '%';
+    document.getElementById('scorePct').textContent = score + '% match';
+    document.getElementById('speakFeedback').textContent = fb.text;
+    speakResult.hidden = false;
+  }
+
+  if (recognition) {
+    recognition.onresult = event => {
+      const result = event.results[0];
+      let best = { transcript: '', score: -1 };
+      for (let i = 0; i < result.length; i++) {
+        const score = Math.round(wordSimilarity(currentSpeakWord.de, result[i].transcript) * 100);
+        if (score > best.score) best = { transcript: result[i].transcript, score };
+      }
+      showSpeakResult(best.transcript, Math.max(best.score, 0));
+    };
+    recognition.onerror = event => {
+      const messages = {
+        'not-allowed': 'Microphone access was blocked. Allow it in your browser settings to use Speak mode.',
+        'no-speech': 'Didn’t hear anything — tap the microphone and try again.',
+        'audio-capture': 'No microphone was found on this device.',
+        'network': 'Speech recognition needs an internet connection.'
+      };
+      micStatus.textContent = messages[event.error] || 'Something went wrong — tap the microphone to try again.';
+    };
+    recognition.onend = () => { recognizing = false; setMicState('idle'); };
+  }
+
+  function toggleRecording() {
+    if (!recognition || !currentSpeakWord) return;
+    if (recognizing) { recognition.abort(); return; }
+    if (currentAudio) { try { currentAudio.pause(); } catch (e) {} }
+    try { window.speechSynthesis && window.speechSynthesis.cancel(); } catch (e) {}
+    speakResult.hidden = true;
+    recognizing = true;
+    setMicState('listening');
+    try { recognition.start(); }
+    catch (e) { recognizing = false; setMicState('idle'); micStatus.textContent = 'Could not start the microphone — tap to try again.'; }
+  }
+
+  if (!speechRecognitionSupported) {
+    document.getElementById('speakCard').hidden = true;
+    document.getElementById('speakUnsupported').hidden = false;
+  } else {
+    micBtn.addEventListener('click', toggleRecording);
+    document.getElementById('speakHear').addEventListener('click', () => currentSpeakWord && speak(currentSpeakWord.de));
+    document.getElementById('speakNext').addEventListener('click', nextSpeakWord);
+  }
+
+  // ---- mode + category switching -----------------------------------------------------------
+  let currentMode = 'learn';
+  let activeCategory = 'alphabet';
+
+  function setMode(mode) {
+    if (currentMode === 'speak' && mode !== 'speak' && recognizing && recognition) recognition.abort();
+    currentMode = mode;
+    document.querySelectorAll('#modeTabs .du-pill').forEach(b => b.classList.toggle('is-active', b.dataset.mode === mode));
+    document.getElementById('learnView').hidden = mode !== 'learn';
+    document.getElementById('compareView').hidden = mode !== 'compare';
+    document.getElementById('speakView').hidden = mode !== 'speak';
+    document.getElementById('catTabs').hidden = mode === 'compare';
+    document.getElementById('compareTabs').hidden = mode !== 'compare';
+    document.getElementById('compareScoreBadge').hidden = mode !== 'compare';
+    document.getElementById('speakScoreBadge').hidden = mode !== 'speak';
+    if (mode === 'compare' && !currentCompare) nextCompare();
+    if (mode === 'speak' && !currentSpeakWord) nextSpeakWord();
+  }
+
+  document.getElementById('modeTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.du-pill');
+    if (btn) setMode(btn.dataset.mode);
+  });
+
+  document.getElementById('catTabs').addEventListener('click', e => {
+    const btn = e.target.closest('.du-pill');
+    if (!btn) return;
+    document.querySelectorAll('#catTabs .du-pill').forEach(b => b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    activeCategory = btn.dataset.cat;
+    if (currentMode === 'learn') renderLearnGrid();
+    else if (currentMode === 'speak') nextSpeakWord();
+  });
+
+  renderLearnGrid();
+</script>
+</body>
+</html>
