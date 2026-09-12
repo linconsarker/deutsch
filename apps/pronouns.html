@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
@@ -23,6 +23,7 @@
     --dat-dim:#e4eef6;
     --gen:#7A4FA0;
     --gen-dim:#F0E6F7;
+    --fem:#B23A6B;
     --success:var(--du-success);
     --success-dim:#e4f1ea;
     --error:var(--du-danger);
@@ -151,7 +152,7 @@
   .cue-chip b{font-weight:700;color:var(--text);}
   .cue-chip .cue-key{font-family:var(--du-mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-dim);}
 
-  .translation{font-size:12.5px;color:var(--text-dim);font-style:italic;margin-bottom:2px;}
+  .translation{font-size:clamp(16px,3.6vw,20px);color:var(--text);font-weight:700;font-style:normal;text-align:center;line-height:1.4;margin:2px 0 12px;}
 
   .feedback{display:none;margin-top:10px;padding:11px 14px;border-radius:10px;border:1px solid var(--border);flex-shrink:0;}
   .feedback.show{display:block;}
@@ -201,6 +202,7 @@
   table.gt tr:last-child td{border-bottom:none;}
   table.gt th{background:var(--surface-2);font-family:var(--du-mono);font-size:10px;letter-spacing:.03em;color:var(--text-muted);font-weight:600;}
   table.gt td:first-child,table.gt th:first-child{text-align:left;}
+  table.gt-grouped thead tr:nth-child(2) th:first-child{text-align:center;}
   table.gt td:first-child{font-weight:700;background:color-mix(in srgb,var(--surface-2) 55%,transparent);white-space:nowrap;}
   table.gt td b{font-family:var(--du-mono);color:var(--text);}
   table.gt .hl{background:var(--gen-dim);color:var(--gen);font-weight:700;}
@@ -208,6 +210,11 @@
   .col-nom{color:var(--nom);}
   .col-akk{color:var(--akk);}
   .col-dat{color:var(--dat);}
+  .gnd-m{color:var(--gen);}
+  .gnd-f{color:var(--fem);}
+  table.gt td.gnd-m b{color:var(--gen);}
+  table.gt td.gnd-f b{color:var(--fem);}
+  table.gt .hl.gnd-f{color:var(--fem);}
   .col-gen{color:var(--gen);}
 
   .ex-list{font-size:12.5px;line-height:1.7;color:var(--text-muted);margin:0 0 8px;padding-left:0;list-style:none;}
@@ -336,8 +343,8 @@
       <div class="modal-body" id="modalBody">
         <div class="ref-tab-nav" role="tablist" aria-label="Reference topics">
           <button class="ref-tab" type="button" role="tab" aria-selected="true" data-ref-tab="personal" data-i18n="typePersonal">Personal</button>
-          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="possessiv" data-i18n="typePossessiv">Possessiv</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="reflexiv" data-i18n="typeReflexiv">Reflexiv</button>
+          <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="possessiv" data-i18n="typePossessiv">Possessiv</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="relativ" data-i18n="typeRelativ">Relativ</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="demonstrativ" data-i18n="typeDemonstrativ">Demonstrativ</button>
           <button class="ref-tab" type="button" role="tab" aria-selected="false" data-ref-tab="interrogativ" data-i18n="typeInterrogativ">Frage</button>
@@ -350,28 +357,123 @@
           <div class="ref-section-head" data-i18n="refPersonalHead">Personalpronomen</div>
           <div class="ref-note" data-i18n-html="refPersonalNote">Nur <b>er</b> ändert im Akkusativ seine Form. Im Dativ ändert sich fast alles — das ist die Tabelle, die man wirklich auswendig können muss.</div>
           <div class="tbl-wrap">
-            <table class="gt">
-              <thead><tr>
-                <th data-i18n="thPerson">Person</th>
-                <th class="col-nom" data-i18n="caseNominativ">Nominativ</th>
-                <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
-                <th class="col-dat" data-i18n="caseDativ">Dativ</th>
-              </tr></thead>
+            <table class="gt gt-grouped">
+              <thead>
+                <tr>
+                  <th rowspan="2" data-i18n="thPerson">Person</th>
+                  <th colspan="3" data-i18n="thSingular">Singular</th>
+                  <th colspan="3" data-i18n="thPlural">Plural</th>
+                </tr>
+                <tr>
+                  <th class="col-nom" data-i18n="caseNominativ">Nominativ</th>
+                  <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
+                  <th class="col-dat" data-i18n="caseDativ">Dativ</th>
+                  <th class="col-nom" data-i18n="caseNominativ">Nominativ</th>
+                  <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
+                  <th class="col-dat" data-i18n="caseDativ">Dativ</th>
+                </tr>
+              </thead>
               <tbody>
-                <tr><td data-i18n="p1sg">1. Sg.</td><td><b>ich</b></td><td><b>mich</b></td><td class="hl">mir</td></tr>
-                <tr><td data-i18n="p2sg">2. Sg.</td><td><b>du</b></td><td><b>dich</b></td><td class="hl">dir</td></tr>
-                <tr><td data-i18n="p3sgm">3. Sg. m.</td><td><b>er</b></td><td class="hl">ihn</td><td class="hl">ihm</td></tr>
-                <tr><td data-i18n="p3sgf">3. Sg. f.</td><td><b>sie</b></td><td><b>sie</b></td><td class="hl">ihr</td></tr>
-                <tr><td data-i18n="p3sgn">3. Sg. n.</td><td><b>es</b></td><td><b>es</b></td><td class="hl">ihm</td></tr>
-                <tr><td data-i18n="p1pl">1. Pl.</td><td><b>wir</b></td><td><b>uns</b></td><td><b>uns</b></td></tr>
-                <tr><td data-i18n="p2pl">2. Pl.</td><td><b>ihr</b></td><td><b>euch</b></td><td><b>euch</b></td></tr>
-                <tr><td data-i18n="p3pl">3. Pl.</td><td><b>sie</b></td><td><b>sie</b></td><td class="hl">ihnen</td></tr>
-                <tr><td data-i18n="pformal">Höflich</td><td><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td></tr>
+                <tr>
+                  <td data-i18n="refPersonGroup1">1. Person</td>
+                  <td><b>ich</b></td><td><b>mich</b></td><td class="hl">mir</td>
+                  <td><b>wir</b></td><td><b>uns</b></td><td><b>uns</b></td>
+                </tr>
+                <tr>
+                  <td rowspan="2" data-i18n="refPersonGroup2">2. Person</td>
+                  <td><b>du</b></td><td><b>dich</b></td><td class="hl">dir</td>
+                  <td><b>ihr</b></td><td><b>euch</b></td><td><b>euch</b></td>
+                </tr>
+                <tr>
+                  <td><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td>
+                  <td><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td>
+                </tr>
+                <tr>
+                  <td rowspan="3" data-i18n="refPersonGroup3">3. Person</td>
+                  <td class="gnd-m"><b>er</b></td><td class="hl gnd-m">ihn</td><td class="hl gnd-m">ihm</td>
+                  <td rowspan="3"><b>sie</b></td><td rowspan="3"><b>sie</b></td><td rowspan="3" class="hl">ihnen</td>
+                </tr>
+                <tr>
+                  <td class="gnd-f"><b>sie</b></td><td class="gnd-f"><b>sie</b></td><td class="hl gnd-f">ihr</td>
+                </tr>
+                <tr>
+                  <td><b>es</b></td><td><b>es</b></td><td class="hl">ihm</td>
+                </tr>
               </tbody>
             </table>
           </div>
           <div class="ref-note" data-i18n-html="refPersonalGen">Der <b>Genitiv</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) ist heute praktisch ausgestorben und kommt nur in festen Wendungen vor: <i>Ich erinnere mich seiner.</i></div>
           <div class="ref-note" data-i18n-html="refPersonalGender">Deutsche Pronomen folgen dem <b>grammatischen</b> Geschlecht, nicht dem natürlichen: <i>Der Schlüssel? <b>Er</b> liegt dort.</i> — nicht <i>es</i>.</div>
+        </section>
+
+        <!-- ===== REFLEXIV ===== -->
+        <section class="ref-section" data-ref-panel="reflexiv" role="tabpanel" hidden>
+          <div class="ref-section-head" data-i18n="refReflHead">Reflexivpronomen</div>
+          <div class="ref-note" data-i18n-html="refReflNote">Gute Nachricht: Akkusativ und Dativ sind <b>überall gleich</b> — außer in der 1. und 2. Person Singular.</div>
+          <div class="tbl-wrap">
+            <table class="gt gt-grouped">
+              <thead>
+                <tr>
+                  <th rowspan="2" data-i18n="thPerson">Person</th>
+                  <th colspan="3" data-i18n="thSingular">Singular</th>
+                  <th colspan="3" data-i18n="thPlural">Plural</th>
+                </tr>
+                <tr>
+                  <th class="col-nom" data-i18n="caseNominativ">Nominativ</th>
+                  <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
+                  <th class="col-dat" data-i18n="caseDativ">Dativ</th>
+                  <th class="col-nom" data-i18n="caseNominativ">Nominativ</th>
+                  <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
+                  <th class="col-dat" data-i18n="caseDativ">Dativ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-i18n="refPersonGroup1">1. Person</td>
+                  <td><b>ich</b></td><td class="hl">mich</td><td class="hl">mir</td>
+                  <td><b>wir</b></td><td><b>uns</b></td><td><b>uns</b></td>
+                </tr>
+                <tr>
+                  <td rowspan="2" data-i18n="refPersonGroup2">2. Person</td>
+                  <td><b>du</b></td><td class="hl">dich</td><td class="hl">dir</td>
+                  <td><b>ihr</b></td><td><b>euch</b></td><td><b>euch</b></td>
+                </tr>
+                <tr>
+                  <td><b>Sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                  <td><b>Sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                </tr>
+                <tr>
+                  <td rowspan="3" data-i18n="refPersonGroup3">3. Person</td>
+                  <td class="gnd-m"><b>er</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                  <td rowspan="3"><b>sie</b></td><td rowspan="3"><b>sich</b></td><td rowspan="3"><b>sich</b></td>
+                </tr>
+                <tr>
+                  <td class="gnd-f"><b>sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                </tr>
+                <tr>
+                  <td><b>es</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-note" data-i18n-html="refReflWhen"><b>Wann Dativ?</b> Sobald der Satz schon ein Akkusativobjekt hat, rutscht das Reflexivpronomen in den Dativ: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i></div>
+          <div class="ref-section-head" data-i18n="refReflVerbsAkk">Häufige Verben mit Akkusativ</div>
+          <div class="verb-tags" style="margin-bottom:10px;">
+            <span class="verb-tag akk">sich freuen auf</span><span class="verb-tag akk">sich beeilen</span>
+            <span class="verb-tag akk">sich erinnern an</span><span class="verb-tag akk">sich interessieren für</span>
+            <span class="verb-tag akk">sich setzen</span><span class="verb-tag akk">sich fühlen</span>
+            <span class="verb-tag akk">sich entschuldigen</span><span class="verb-tag akk">sich ärgern über</span>
+            <span class="verb-tag akk">sich kümmern um</span><span class="verb-tag akk">sich vorbereiten auf</span>
+            <span class="verb-tag akk">sich gewöhnen an</span><span class="verb-tag akk">sich verlieben in</span>
+          </div>
+          <div class="ref-section-head" data-i18n="refReflVerbsDat">Häufige Verben mit Dativ</div>
+          <div class="verb-tags">
+            <span class="verb-tag dat">sich die Hände waschen</span><span class="verb-tag dat">sich die Zähne putzen</span>
+            <span class="verb-tag dat">sich etwas vorstellen</span><span class="verb-tag dat">sich etwas ansehen</span>
+            <span class="verb-tag dat">sich etwas kaufen</span><span class="verb-tag dat">sich etwas merken</span>
+            <span class="verb-tag dat">sich etwas überlegen</span><span class="verb-tag dat">sich etwas wünschen</span>
+            <span class="verb-tag dat">sich Sorgen machen</span><span class="verb-tag dat">sich etwas leisten</span>
+          </div>
         </section>
 
         <!-- ===== POSSESSIV ===== -->
@@ -479,48 +581,6 @@
                 </tbody>
               </table>
             </div>
-          </div>
-        </section>
-
-        <!-- ===== REFLEXIV ===== -->
-        <section class="ref-section" data-ref-panel="reflexiv" role="tabpanel" hidden>
-          <div class="ref-section-head" data-i18n="refReflHead">Reflexivpronomen</div>
-          <div class="ref-note" data-i18n-html="refReflNote">Gute Nachricht: Akkusativ und Dativ sind <b>überall gleich</b> — außer in der 1. und 2. Person Singular.</div>
-          <div class="tbl-wrap">
-            <table class="gt">
-              <thead><tr>
-                <th data-i18n="thPerson">Person</th>
-                <th class="col-akk" data-i18n="caseAkkusativ">Akkusativ</th>
-                <th class="col-dat" data-i18n="caseDativ">Dativ</th>
-              </tr></thead>
-              <tbody>
-                <tr><td data-i18n="p1sg">1. Sg.</td><td class="hl">mich</td><td class="hl">mir</td></tr>
-                <tr><td data-i18n="p2sg">2. Sg.</td><td class="hl">dich</td><td class="hl">dir</td></tr>
-                <tr><td data-i18n="p3sg">3. Sg.</td><td><b>sich</b></td><td><b>sich</b></td></tr>
-                <tr><td data-i18n="p1pl">1. Pl.</td><td><b>uns</b></td><td><b>uns</b></td></tr>
-                <tr><td data-i18n="p2pl">2. Pl.</td><td><b>euch</b></td><td><b>euch</b></td></tr>
-                <tr><td data-i18n="p3pl">3. Pl.</td><td><b>sich</b></td><td><b>sich</b></td></tr>
-                <tr><td data-i18n="pformal">Höflich</td><td><b>sich</b></td><td><b>sich</b></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="ref-note" data-i18n-html="refReflWhen"><b>Wann Dativ?</b> Sobald der Satz schon ein Akkusativobjekt hat, rutscht das Reflexivpronomen in den Dativ: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i></div>
-          <div class="ref-section-head" data-i18n="refReflVerbsAkk">Häufige Verben mit Akkusativ</div>
-          <div class="verb-tags" style="margin-bottom:10px;">
-            <span class="verb-tag akk">sich freuen auf</span><span class="verb-tag akk">sich beeilen</span>
-            <span class="verb-tag akk">sich erinnern an</span><span class="verb-tag akk">sich interessieren für</span>
-            <span class="verb-tag akk">sich setzen</span><span class="verb-tag akk">sich fühlen</span>
-            <span class="verb-tag akk">sich entschuldigen</span><span class="verb-tag akk">sich ärgern über</span>
-            <span class="verb-tag akk">sich kümmern um</span><span class="verb-tag akk">sich vorbereiten auf</span>
-            <span class="verb-tag akk">sich gewöhnen an</span><span class="verb-tag akk">sich verlieben in</span>
-          </div>
-          <div class="ref-section-head" data-i18n="refReflVerbsDat">Häufige Verben mit Dativ</div>
-          <div class="verb-tags">
-            <span class="verb-tag dat">sich die Hände waschen</span><span class="verb-tag dat">sich die Zähne putzen</span>
-            <span class="verb-tag dat">sich etwas vorstellen</span><span class="verb-tag dat">sich etwas ansehen</span>
-            <span class="verb-tag dat">sich etwas kaufen</span><span class="verb-tag dat">sich etwas merken</span>
-            <span class="verb-tag dat">sich etwas überlegen</span><span class="verb-tag dat">sich etwas wünschen</span>
-            <span class="verb-tag dat">sich Sorgen machen</span><span class="verb-tag dat">sich etwas leisten</span>
           </div>
         </section>
 
@@ -709,11 +769,12 @@ const STRINGS = {
     progTotal:"gesamt", progCorrect:"richtig", progWrong:"falsch", progUnsolved:"offen",
     progByType:"Nach Pronomenart", progByPerson:"Nach Person",
     langToggleLabel:"EN",
-    thPerson:"Person", thGenus:"Genus", thCase:"Kasus", thMasc:"maskulin", thFem:"feminin", thNeut:"neutrum", thPlural:"Plural",
+    thPerson:"Person", thGenus:"Genus", thCase:"Kasus", thMasc:"maskulin", thFem:"feminin", thNeut:"neutrum", thPlural:"Plural", thSingular:"Singular",
     thOwner:"Besitzer", thStem:"Stamm", thOwner2:"Besitzer", thStem2:"Stamm",
     thPeople:"Personen", thThings:"Sachen",
     p1sg:"1. Sg.", p2sg:"2. Sg.", p3sg:"3. Sg.", p3sgm:"3. Sg. m.", p3sgf:"3. Sg. f.", p3sgn:"3. Sg. n.",
     p1pl:"1. Pl.", p2pl:"2. Pl.", p3pl:"3. Pl.", pformal:"Höflich",
+    refPersonGroup1:"1. Person", refPersonGroup2:"2. Person", refPersonGroup3:"3. Person",
     refPersonalHead:"Personalpronomen",
     refPersonalNote:"Nur <b>er</b> ändert im Akkusativ seine Form. Im Dativ ändert sich fast alles — das ist die Tabelle, die man wirklich auswendig können muss.",
     refPersonalGen:"Der <b>Genitiv</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) ist heute praktisch ausgestorben und kommt nur in festen Wendungen vor: <i>Ich erinnere mich seiner.</i>",
@@ -779,11 +840,12 @@ const STRINGS = {
     progTotal:"total", progCorrect:"correct", progWrong:"wrong", progUnsolved:"unsolved",
     progByType:"By pronoun family", progByPerson:"By person",
     langToggleLabel:"DE",
-    thPerson:"Person", thGenus:"Gender", thCase:"Case", thMasc:"masculine", thFem:"feminine", thNeut:"neuter", thPlural:"plural",
+    thPerson:"Person", thGenus:"Gender", thCase:"Case", thMasc:"masculine", thFem:"feminine", thNeut:"neuter", thPlural:"plural", thSingular:"Singular",
     thOwner:"Owner", thStem:"Stem", thOwner2:"Owner", thStem2:"Stem",
     thPeople:"People", thThings:"Things",
     p1sg:"1st sg.", p2sg:"2nd sg.", p3sg:"3rd sg.", p3sgm:"3rd sg. m.", p3sgf:"3rd sg. f.", p3sgn:"3rd sg. n.",
     p1pl:"1st pl.", p2pl:"2nd pl.", p3pl:"3rd pl.", pformal:"Polite",
+    refPersonGroup1:"1st Person", refPersonGroup2:"2nd Person", refPersonGroup3:"3rd Person",
     refPersonalHead:"Personal pronouns",
     refPersonalNote:"Only <b>er</b> changes shape in the accusative. The dative changes almost everything — this is the table worth knowing by heart.",
     refPersonalGen:"The <b>genitive</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) is practically extinct today and survives only in fixed phrases: <i>Ich erinnere mich seiner.</i>",
@@ -879,7 +941,7 @@ const USER_SCOPE = (()=>{ try{ return localStorage.getItem("deutsch-auth-user-id
 const STORE_KEY = "pronomen_trainer_v1:" + USER_SCOPE;
 function defaultStore(lang){
   return {items:{}, streak:0, activeType:"all", activePerson:"all", activeCase:"all",
-          activeLevel:"all", activeStatus:"all", lang:lang || "de"};
+          activeLevel:"all", activeStatus:"all", lang:lang || "en"};
 }
 function loadStore(){
   try{
@@ -893,7 +955,7 @@ function saveStore(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)
 let store = Object.assign(defaultStore(), loadStore());
 if(!store.items) store.items = {};
 if(typeof store.streak !== "number") store.streak = 0;
-let uiLang = store.lang === "en" ? "en" : "de";
+let uiLang = store.lang === "de" ? "de" : "en";
 /* A stored combination like relativ + 2sg can never be produced by the UI,
    but a stale store should not leave the learner with an empty deck. */
 if(!personActiveAllowed()) store.activePerson = "all";
@@ -1188,12 +1250,12 @@ function renderCard(){
         <button class="btn btn-sm btn-link text-decoration-none text-muted" id="knownBtn">${t("knownBtn")}</button>
       </div>
     </div>
+    <div class="translation">${escapeHtml(current.tr)}</div>
     ${origHtml}
     <div class="sentence-row">
       <div class="sentence" id="sentenceLine"></div>
       <button class="btn btn-sm btn-outline-secondary pronunciation-btn" id="pronunciationBtn" type="button" aria-label="Play German pronunciation" title="Play German pronunciation" disabled>🔊</button>
     </div>
-    <div class="translation">${escapeHtml(current.tr)}</div>
     <div class="feedback" id="feedback"></div>
     <div class="d-flex gap-2 mt-3">
       <button class="btn btn-outline-secondary flex-fill" id="skipBtn">${t("skipBtn")}</button>
