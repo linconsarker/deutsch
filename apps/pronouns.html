@@ -922,8 +922,8 @@ function t(key){ return STRINGS[uiLang][key]; }
 const TYPES = [
   {id:"all",key:"typeAll"},
   {id:"personal",key:"typePersonal"},
-  {id:"possessiv",key:"typePossessiv"},
   {id:"reflexiv",key:"typeReflexiv"},
+  {id:"possessiv",key:"typePossessiv"},
   {id:"relativ",key:"typeRelativ"},
   {id:"demonstrativ",key:"typeDemonstrativ"},
   {id:"interrogativ",key:"typeInterrogativ"},
@@ -1088,6 +1088,7 @@ function escapeHtml(s){
    actually give you, given the other filters currently active. */
 function matchesFilters(d, overrides){
   overrides = overrides || {};
+  const caseFilter = overrides.case !== undefined ? overrides.case : store.activeCase;
   const level  = overrides.level  !== undefined ? overrides.level  : store.activeLevel;
   const status = overrides.status !== undefined ? overrides.status : store.activeStatus;
   /* The "replace the highlighted phrase with a pronoun" substitution
@@ -1096,7 +1097,7 @@ function matchesFilters(d, overrides){
   if(d.mode === "ersetzen") return false;
   if(store.activeType !== "all" && d.type !== store.activeType) return false;
   if(store.activePerson !== "all" && d.person !== store.activePerson) return false;
-  if(store.activeCase !== "all" && d.case !== store.activeCase) return false;
+  if(caseFilter !== "all" && d.case !== caseFilter) return false;
   if(level !== "all" && d.level !== level) return false;
   const stat = itemStat(d.id);
   if(stat.known) return false;
@@ -1164,7 +1165,7 @@ function fillSelect(id, options, activeValue, onChange, countKey){
   el.onchange = ()=>{ onChange(el.value); saveStore(); refresh(); };
 }
 function renderSelects(){
-  fillSelect("caseSelect",   CASES,    store.activeCase,   v=>{ store.activeCase = v; });
+  fillSelect("caseSelect",   CASES,    store.activeCase,   v=>{ store.activeCase = v; }, "case");
   fillSelect("levelSelect",  LEVELS,   store.activeLevel,  v=>{ store.activeLevel = v; }, "level");
   fillSelect("statusSelect", STATUSES, store.activeStatus, v=>{ store.activeStatus = v; }, "status");
 }
