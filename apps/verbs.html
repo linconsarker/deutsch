@@ -80,13 +80,25 @@ h1 {
 .search-box:focus { border-color: var(--du-line-strong); box-shadow: none; }
 .search-box::placeholder { color: var(--muted); }
 
-.subtype-tabs {
+.dropdown-filters-row {
   display: flex;
-  gap: 6px;
-  align-items: center;
+  gap: 20px;
   flex-wrap: wrap;
 }
-.filter-panel > .subtype-tabs + .subtype-tabs { margin-top: 8px; }
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 160px;
+}
+.filter-group-label {
+  font-family: var(--du-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
 .filter-panel {
   border-top: 1px solid var(--border);
   padding-top: 10px;
@@ -126,17 +138,6 @@ h1 {
   outline-offset: 3px;
   border-radius: 3px;
 }
-.subtype-label {
-  flex: 0 0 auto;
-  width: 132px;
-  font-family: var(--du-mono);
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--muted);
-}
-
 .filter-select {
   height: 32px;
   padding: 0 10px;
@@ -153,33 +154,6 @@ h1 {
 }
 .filter-select:hover { border-color: #b9b3aa; }
 .filter-select:focus { border-color: var(--du-line-strong); }
-
-.lvl-tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 54px;
-  height: 32px;
-  padding: 0 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-  font-family: var(--du-mono);
-  font-size: 0.76rem;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.15s;
-  letter-spacing: 0.2px;
-}
-.lvl-tab:hover:not(.active) { border-color: #b9b3aa; color: var(--text); }
-.lvl-tab.active { background: var(--du-ink); color: #fff; border-color: var(--du-ink); }
-.lvl-tab.active[data-lvl="A1"] { background: var(--du-a1); border-color: var(--du-a1); }
-.lvl-tab.active[data-lvl="A2"] { background: var(--du-a2); border-color: var(--du-a2); }
-.lvl-tab.active[data-lvl="B1"] { background: var(--du-b1); border-color: var(--du-b1); }
-.lvl-tab.active[data-lvl="B2"] { background: var(--du-b2); border-color: var(--du-b2); }
 
 .level-badge {
   font-size: 0.66rem;
@@ -864,7 +838,7 @@ main { padding: 24px 28px 32px; }
 .stats-bar {
   padding: 12px 28px;
   background: var(--du-surface-2);
-  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   font-size: 0.78rem;
   color: var(--muted);
   display: flex;
@@ -875,9 +849,6 @@ main { padding: 24px 28px 32px; }
 
 @media (max-width: 768px) {
   header, main { padding: 16px; }
-  /* let each filter group read as a labelled block instead of the
-     label sharing a line with the first button that fits */
-  .subtype-label { width: 100%; }
   .stats-bar { padding: 14px 20px; gap: 10px 16px; }
   .conj-grid { grid-template-columns: repeat(3, 1fr); }
   h1 { font-size: 1.8rem; }
@@ -914,52 +885,54 @@ main { padding: 24px 28px 32px; }
   </div>
   <details class="filter-panel">
     <summary>Filters</summary>
-  <div class="subtype-tabs">
-    <span class="subtype-label">Prefix Behaviour</span>
-    <select class="filter-select" id="sel-type" onchange="setType(this.value)">
-      <option value="all">All</option>
-      <option value="fundamental">⭐ Fundamental Verbs</option>
-      <option value="modal">🎯 Modal Verbs</option>
-      <option value="simple">◎ No Prefix</option>
-      <option value="inseparable">🔒 Inseparable Verbs</option>
-      <option value="separable">✂️ Separable Verbs</option>
-      <option value="ieren">🌐 -ieren Verbs</option>
-    </select>
-  </div>
-  <div class="subtype-tabs">
-    <span class="subtype-label">Conjugation Pattern</span>
-    <select class="filter-select" id="sel-subtype" onchange="setSubtype(this.value)">
-      <option value="all">All</option>
-      <option value="weak">Weak Verbs</option>
-      <option value="strong">Strong Verbs</option>
-      <option value="mixed">Mixed Verbs</option>
-    </select>
-  </div>
-  <div class="subtype-tabs">
-    <span class="subtype-label">Case Requirement</span>
-    <select class="filter-select" id="sel-casereq" onchange="setCaseReq(this.value)">
-      <option value="all">All</option>
-      <option value="accusative">Accusative Verbs</option>
-      <option value="dative">Dative Verbs</option>
-      <option value="ditransitive">Di-Transitive Verbs</option>
-      <option value="intransitive">Intransitive Verbs</option>
-      <option value="prepositional">Prepositional Verbs</option>
-      <option value="reflexive">Reflexive Verbs</option>
-      <option value="genitive">Genitive Verbs</option>
-    </select>
-  </div>
-  <div class="subtype-tabs">
-    <span class="subtype-label">Level</span>
-    <button class="btn btn-sm lvl-tab active" id="lvl-all" data-lvl="all" onclick="setLevel('all', this)">All</button>
-    <button class="btn btn-sm lvl-tab" id="lvl-A1" data-lvl="A1" onclick="setLevel('A1', this)">A1</button>
-    <button class="btn btn-sm lvl-tab" id="lvl-A2" data-lvl="A2" onclick="setLevel('A2', this)">A2</button>
-    <button class="btn btn-sm lvl-tab" id="lvl-B1" data-lvl="B1" onclick="setLevel('B1', this)">B1</button>
-    <button class="btn btn-sm lvl-tab" id="lvl-B2" data-lvl="B2" onclick="setLevel('B2', this)">B2</button>
+  <div class="dropdown-filters-row">
+    <div class="filter-group">
+      <span class="filter-group-label">Level</span>
+      <select class="filter-select" id="sel-level" onchange="setLevel(this.value)">
+        <option value="all">All</option>
+        <option value="A1">A1</option>
+        <option value="A2">A2</option>
+        <option value="B1">B1</option>
+        <option value="B2">B2</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Prefix Behaviour</span>
+      <select class="filter-select" id="sel-type" onchange="setType(this.value)">
+        <option value="all">All</option>
+        <option value="fundamental">⭐ Fundamental Verbs</option>
+        <option value="modal">🎯 Modal Verbs</option>
+        <option value="simple">◎ No Prefix</option>
+        <option value="inseparable">🔒 Inseparable Verbs</option>
+        <option value="separable">✂️ Separable Verbs</option>
+        <option value="ieren">🌐 -ieren Verbs</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Conjugation Pattern</span>
+      <select class="filter-select" id="sel-subtype" onchange="setSubtype(this.value)">
+        <option value="all">All</option>
+        <option value="weak">Weak Verbs</option>
+        <option value="strong">Strong Verbs</option>
+        <option value="mixed">Mixed Verbs</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Case Requirement</span>
+      <select class="filter-select" id="sel-casereq" onchange="setCaseReq(this.value)">
+        <option value="all">All</option>
+        <option value="accusative">Accusative Verbs</option>
+        <option value="dative">Dative Verbs</option>
+        <option value="ditransitive">Di-Transitive Verbs</option>
+        <option value="intransitive">Intransitive Verbs</option>
+        <option value="prepositional">Prepositional Verbs</option>
+        <option value="reflexive">Reflexive Verbs</option>
+        <option value="genitive">Genitive Verbs</option>
+      </select>
+    </div>
   </div>
   </details>
 </header>
-
-<main id="main"></main>
 
 <div class="stats-bar">
   <span>Showing <b id="shown">0</b> verbs</span>
@@ -970,6 +943,8 @@ main { padding: 24px 28px 32px; }
   <span><b style="color:var(--sep-accent)"    id="sep-count">0</b> Prefix (sep.)</span>
   <span><b style="color:var(--ieren-accent)"  id="ieren-count">0</b> -ieren</span>
 </div>
+
+<main id="main"></main>
 
 <div class="modal fade" id="word-overlay" tabindex="-1" aria-labelledby="word-dialog-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width:680px;">
@@ -1429,12 +1404,12 @@ function render() {
   const all = getAllVerbs();
   document.getElementById('root-words-btn').textContent = `Root Words (${getRootGroups().length})`;
   document.getElementById('shown').textContent        = filtered.length;
-  document.getElementById('fund-count').textContent  = all.filter(v=>v.type==='fundamental').length;
-  document.getElementById('modal-count').textContent  = all.filter(v=>v.type==='modal').length;
-  document.getElementById('simple-count').textContent = all.filter(v=>v.type==='simple').length;
-  document.getElementById('insep-count').textContent  = all.filter(v=>v.type==='inseparable').length;
-  document.getElementById('sep-count').textContent    = all.filter(v=>v.type==='separable').length;
-  document.getElementById('ieren-count').textContent  = all.filter(v=>v.type==='ieren').length;
+  document.getElementById('fund-count').textContent  = filtered.filter(v=>v.type==='fundamental').length;
+  document.getElementById('modal-count').textContent  = filtered.filter(v=>v.type==='modal').length;
+  document.getElementById('simple-count').textContent = filtered.filter(v=>v.type==='simple').length;
+  document.getElementById('insep-count').textContent  = filtered.filter(v=>v.type==='inseparable').length;
+  document.getElementById('sep-count').textContent    = filtered.filter(v=>v.type==='separable').length;
+  document.getElementById('ieren-count').textContent  = filtered.filter(v=>v.type==='ieren').length;
 
   setSelectOptionCounts('sel-type', {
     all: all.length,
@@ -1457,11 +1432,9 @@ function render() {
   Object.keys(CASEREQ_LABELS).forEach(k => { caseReqCounts[k] = all.filter(v=>caseReq(v)===k).length; });
   setSelectOptionCounts('sel-casereq', caseReqCounts, currentCaseReq);
 
-  document.getElementById('lvl-all').textContent = `All ${all.length}`;
-  ['A1','A2','B1','B2'].forEach(lvl => {
-    const el = document.getElementById('lvl-' + lvl);
-    if (el) el.textContent = `${lvl} (${all.filter(v=>v.level===lvl).length})`;
-  });
+  const levelCounts = { all: all.length };
+  ['A1','A2','B1','B2'].forEach(lvl => { levelCounts[lvl] = all.filter(v=>v.level===lvl).length; });
+  setSelectOptionCounts('sel-level', levelCounts, currentLevel);
 }
 
 function setSelectOptionCounts(selectId, counts, selectedValue) {
@@ -1569,10 +1542,8 @@ function setCaseReq(caseReqValue) {
   render();
 }
 
-function setLevel(level, btn) {
+function setLevel(level) {
   currentLevel = level;
-  document.querySelectorAll('.lvl-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
   render();
 }
 
