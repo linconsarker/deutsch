@@ -252,9 +252,15 @@
   .ex-list .good{color:var(--success);font-family:var(--du-mono);font-weight:700;}
   .ex-list .bad{color:var(--error);font-family:var(--du-mono);font-weight:700;text-decoration:line-through;}
   .verb-tags{display:flex;flex-wrap:wrap;gap:5px;}
-  .verb-tag{font-family:var(--du-mono);font-size:11.5px;padding:4px 9px;border-radius:999px;}
+  .verb-tag{
+    font-family:var(--du-mono);font-size:11.5px;padding:4px 9px;border-radius:999px;
+    cursor:pointer;transition:background .15s ease, color .15s ease;
+  }
   .verb-tag.akk{background:var(--akk-dim);color:var(--akk);}
   .verb-tag.dat{background:var(--dat-dim);color:var(--dat);}
+  .verb-tag.translated{font-style:italic;}
+  .verb-tag.akk.translated{background:var(--akk);color:#fff;}
+  .verb-tag.dat.translated{background:var(--dat);color:#fff;}
   .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;display:inline-block;}
   .dot.nom{background:var(--nom);}
   .dot.akk{background:var(--akk);}
@@ -506,20 +512,30 @@
           <div class="ref-note" data-i18n-html="refReflWhen"><b>Wann Dativ?</b> Sobald der Satz schon ein Akkusativobjekt hat, rutscht das Reflexivpronomen in den Dativ: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i></div>
           <div class="ref-section-head" data-i18n="refReflVerbsAkk">Häufige Verben mit Akkusativ</div>
           <div class="verb-tags" style="margin-bottom:10px;">
-            <span class="verb-tag akk">sich freuen auf</span><span class="verb-tag akk">sich beeilen</span>
-            <span class="verb-tag akk">sich erinnern an</span><span class="verb-tag akk">sich interessieren für</span>
-            <span class="verb-tag akk">sich setzen</span><span class="verb-tag akk">sich fühlen</span>
-            <span class="verb-tag akk">sich entschuldigen</span><span class="verb-tag akk">sich ärgern über</span>
-            <span class="verb-tag akk">sich kümmern um</span><span class="verb-tag akk">sich vorbereiten auf</span>
-            <span class="verb-tag akk">sich gewöhnen an</span><span class="verb-tag akk">sich verlieben in</span>
+            <span class="verb-tag akk" data-en="to look forward to">sich freuen auf</span><span class="verb-tag akk" data-en="to hurry">sich beeilen</span>
+            <span class="verb-tag akk" data-en="to remember">sich erinnern an</span><span class="verb-tag akk" data-en="to be interested in">sich interessieren für</span>
+            <span class="verb-tag akk" data-en="to sit down">sich setzen</span><span class="verb-tag akk" data-en="to feel (a certain way)">sich fühlen</span>
+            <span class="verb-tag akk" data-en="to apologize">sich entschuldigen</span><span class="verb-tag akk" data-en="to get angry about">sich ärgern über</span>
+            <span class="verb-tag akk" data-en="to take care of">sich kümmern um</span><span class="verb-tag akk" data-en="to prepare for">sich vorbereiten auf</span>
+            <span class="verb-tag akk" data-en="to get used to">sich gewöhnen an</span><span class="verb-tag akk" data-en="to fall in love with">sich verlieben in</span>
+            <span class="verb-tag akk" data-en="to enjoy oneself / have fun">sich amüsieren</span><span class="verb-tag akk" data-en="to thank (someone) for">sich bedanken für</span>
+            <span class="verb-tag akk" data-en="to be located">sich befinden</span><span class="verb-tag akk" data-en="to complain about">sich beschweren über</span>
+            <span class="verb-tag akk" data-en="to apply for">sich bewerben um</span><span class="verb-tag akk" data-en="to shower">sich duschen</span>
+            <span class="verb-tag akk" data-en="to relax">sich entspannen</span><span class="verb-tag akk" data-en="to recover / rest">sich erholen</span>
+            <span class="verb-tag akk" data-en="to catch a cold">sich erkälten</span><span class="verb-tag akk" data-en="to shave">sich rasieren</span>
+            <span class="verb-tag akk" data-en="to meet up with">sich treffen mit</span><span class="verb-tag akk" data-en="to say goodbye to">sich verabschieden von</span>
+            <span class="verb-tag akk" data-en="to be late">sich verspäten</span><span class="verb-tag akk" data-en="to introduce oneself">sich vorstellen</span>
+            <span class="verb-tag akk" data-en="to wash oneself">sich waschen</span>
           </div>
           <div class="ref-section-head" data-i18n="refReflVerbsDat">Häufige Verben mit Dativ</div>
           <div class="verb-tags">
-            <span class="verb-tag dat">sich die Hände waschen</span><span class="verb-tag dat">sich die Zähne putzen</span>
-            <span class="verb-tag dat">sich etwas vorstellen</span><span class="verb-tag dat">sich etwas ansehen</span>
-            <span class="verb-tag dat">sich etwas kaufen</span><span class="verb-tag dat">sich etwas merken</span>
-            <span class="verb-tag dat">sich etwas überlegen</span><span class="verb-tag dat">sich etwas wünschen</span>
-            <span class="verb-tag dat">sich Sorgen machen</span><span class="verb-tag dat">sich etwas leisten</span>
+            <span class="verb-tag dat" data-en="to wash one's hands">sich die Hände waschen</span><span class="verb-tag dat" data-en="to brush one's teeth">sich die Zähne putzen</span>
+            <span class="verb-tag dat" data-en="to imagine something">sich etwas vorstellen</span><span class="verb-tag dat" data-en="to watch / look at something">sich etwas ansehen</span>
+            <span class="verb-tag dat" data-en="to buy oneself something">sich etwas kaufen</span><span class="verb-tag dat" data-en="to memorize / keep in mind">sich etwas merken</span>
+            <span class="verb-tag dat" data-en="to think something over">sich etwas überlegen</span><span class="verb-tag dat" data-en="to wish for something">sich etwas wünschen</span>
+            <span class="verb-tag dat" data-en="to worry">sich Sorgen machen</span><span class="verb-tag dat" data-en="to afford / treat oneself to something">sich etwas leisten</span>
+            <span class="verb-tag dat" data-en="to put on (a piece of clothing)">sich etwas anziehen</span><span class="verb-tag dat" data-en="to comb one's hair">sich die Haare kämmen</span>
+            <span class="verb-tag dat" data-en="to brush one's hair">sich die Haare bürsten</span>
           </div>
         </section>
 
@@ -1573,6 +1589,22 @@ document.getElementById("langToggle").onclick = ()=>{
   if(document.getElementById("progressModal").classList.contains("show")) renderProgress();
   if(document.getElementById("allQaModal").classList.contains("show")){ renderQaFilters(); renderAllQa(); }
 };
+
+/* ============================================================
+   REFLEXIVE VERB-TAG MEANINGS
+   Each tag in the Reflexive overview carries its English gloss in
+   data-en. Hover shows it via the native title tooltip; clicking
+   (needed on touch devices, where hover doesn't exist) toggles the
+   tag's own text between the German phrase and its meaning.
+   ============================================================ */
+document.querySelectorAll(".verb-tag[data-en]").forEach(tag=>{
+  tag.dataset.de = tag.textContent;
+  tag.title = tag.dataset.en;
+  tag.addEventListener("click", ()=>{
+    const showingMeaning = tag.classList.toggle("translated");
+    tag.textContent = showingMeaning ? tag.dataset.en : tag.dataset.de;
+  });
+});
 
 /* ============================================================
    INIT

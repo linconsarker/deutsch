@@ -26832,5 +26832,221 @@
         "pp":  "genützt",
         "pp_aux":  "haben",
         "level":  "B1"
+    },
+    {
+        "sn":  969,
+        "type":  "ieren",
+        "inf":  "amüsieren",
+        "en":  "to enjoy oneself / have fun",
+        "bn":  "আনন্দ করা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "amüsiere",
+                         "du":  "amüsierst",
+                         "er":  "amüsiert",
+                         "wir":  "amüsieren",
+                         "ihr":  "amüsiert",
+                         "sie":  "amüsieren"
+                     },
+        "praeteritum":  {
+                            "ich":  "amüsierte",
+                            "du":  "amüsiertest",
+                            "er":  "amüsierte",
+                            "wir":  "amüsierten",
+                            "ihr":  "amüsiertet",
+                            "sie":  "amüsierten"
+                        },
+        "pp":  "amüsiert",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  970,
+        "type":  "inseparable",
+        "inf":  "befinden",
+        "en":  "to be located",
+        "bn":  "অবস্থিত হওয়া",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "befinde",
+                         "du":  "befindest",
+                         "er":  "befindet",
+                         "wir":  "befinden",
+                         "ihr":  "befindet",
+                         "sie":  "befinden"
+                     },
+        "praeteritum":  {
+                            "ich":  "befand",
+                            "du":  "befandst",
+                            "er":  "befand",
+                            "wir":  "befanden",
+                            "ihr":  "befandet",
+                            "sie":  "befanden"
+                        },
+        "pp":  "befunden",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  971,
+        "type":  "inseparable",
+        "inf":  "erholen",
+        "en":  "to recover / rest",
+        "bn":  "বিশ্রাম নেওয়া",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "erhole",
+                         "du":  "erholst",
+                         "er":  "erholt",
+                         "wir":  "erholen",
+                         "ihr":  "erholt",
+                         "sie":  "erholen"
+                     },
+        "praeteritum":  {
+                            "ich":  "erholte",
+                            "du":  "erholtest",
+                            "er":  "erholte",
+                            "wir":  "erholten",
+                            "ihr":  "erholtet",
+                            "sie":  "erholten"
+                        },
+        "pp":  "erholt",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  972,
+        "type":  "inseparable",
+        "inf":  "erkälten",
+        "en":  "to catch a cold",
+        "bn":  "সর্দি লাগা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "erkälte",
+                         "du":  "erkältest",
+                         "er":  "erkältet",
+                         "wir":  "erkälten",
+                         "ihr":  "erkältet",
+                         "sie":  "erkälten"
+                     },
+        "praeteritum":  {
+                            "ich":  "erkältete",
+                            "du":  "erkältetest",
+                            "er":  "erkältete",
+                            "wir":  "erkälteten",
+                            "ihr":  "erkältetet",
+                            "sie":  "erkälteten"
+                        },
+        "pp":  "erkältet",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  973,
+        "type":  "ieren",
+        "inf":  "rasieren",
+        "en":  "to shave (oneself)",
+        "bn":  "দাড়ি কামানো",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "rasiere",
+                         "du":  "rasierst",
+                         "er":  "rasiert",
+                         "wir":  "rasieren",
+                         "ihr":  "rasiert",
+                         "sie":  "rasieren"
+                     },
+        "praeteritum":  {
+                            "ich":  "rasierte",
+                            "du":  "rasiertest",
+                            "er":  "rasierte",
+                            "wir":  "rasierten",
+                            "ihr":  "rasiertet",
+                            "sie":  "rasierten"
+                        },
+        "pp":  "rasiert",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  974,
+        "type":  "inseparable",
+        "inf":  "verspäten",
+        "en":  "to be late",
+        "bn":  "দেরি করা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "verspäte",
+                         "du":  "verspätest",
+                         "er":  "verspätet",
+                         "wir":  "verspäten",
+                         "ihr":  "verspätet",
+                         "sie":  "verspäten"
+                     },
+        "praeteritum":  {
+                            "ich":  "verspätete",
+                            "du":  "verspätetest",
+                            "er":  "verspätete",
+                            "wir":  "verspäteten",
+                            "ihr":  "verspätetet",
+                            "sie":  "verspäteten"
+                        },
+        "pp":  "verspätet",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  975,
+        "type":  "simple",
+        "inf":  "kämmen",
+        "en":  "to comb (one's hair)",
+        "bn":  "চুল আঁচড়ানো",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "kämme",
+                         "du":  "kämmst",
+                         "er":  "kämmt",
+                         "wir":  "kämmen",
+                         "ihr":  "kämmt",
+                         "sie":  "kämmen"
+                     },
+        "praeteritum":  {
+                            "ich":  "kämmte",
+                            "du":  "kämmtest",
+                            "er":  "kämmte",
+                            "wir":  "kämmten",
+                            "ihr":  "kämmtet",
+                            "sie":  "kämmten"
+                        },
+        "pp":  "gekämmt",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  976,
+        "type":  "simple",
+        "inf":  "bürsten",
+        "en":  "to brush (one's hair)",
+        "bn":  "চুল ব্রাশ করা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "bürste",
+                         "du":  "bürstest",
+                         "er":  "bürstet",
+                         "wir":  "bürsten",
+                         "ihr":  "bürstet",
+                         "sie":  "bürsten"
+                     },
+        "praeteritum":  {
+                            "ich":  "bürstete",
+                            "du":  "bürstetest",
+                            "er":  "bürstete",
+                            "wir":  "bürsteten",
+                            "ihr":  "bürstetet",
+                            "sie":  "bürsteten"
+                        },
+        "pp":  "gebürstet",
+        "pp_aux":  "haben",
+        "level":  "B1"
     }
 ]
