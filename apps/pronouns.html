@@ -196,6 +196,16 @@
   .tbl-split{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
   .tbl-split .tbl-wrap{flex:1 1 260px;min-width:240px;margin-bottom:0;}
   .tbl-split table.gt{min-width:0;}
+  .poss-full-wrap{border:1px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:10px;}
+  .poss-full-title{background:var(--surface-2);text-align:center;font-weight:700;font-family:var(--du-font);font-size:13px;padding:8px;border-bottom:1px solid var(--border);}
+  .poss-full-wrap .tbl-split{margin-bottom:0;}
+  .poss-full-wrap .tbl-wrap{border:none;border-radius:0;}
+  .poss-full-wrap .tbl-wrap:first-child{border-right:1px solid var(--border);}
+  table.gt-poss-full td[data-i18n^="refPersonGroup"],
+  table.gt-poss-full td[data-i18n="thMasc"],
+  table.gt-poss-full td[data-i18n="thFem"],
+  table.gt-poss-full td[data-i18n="thNeut"],
+  table.gt-poss-full td[data-i18n="thPlural"]{color:var(--gen);}
   table.gt{width:100%;border-collapse:collapse;font-size:12.5px;min-width:380px;}
   table.gt th,table.gt td{padding:7px 9px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;}
   table.gt th:last-child,table.gt td:last-child{border-right:none;}
@@ -203,6 +213,18 @@
   table.gt th{background:var(--surface-2);font-family:var(--du-mono);font-size:10px;letter-spacing:.03em;color:var(--text-muted);font-weight:600;}
   table.gt td:first-child,table.gt th:first-child{text-align:left;}
   table.gt-grouped thead tr:nth-child(2) th:first-child{text-align:center;}
+  /* Rows that share their Person label via rowspan (Sie/sie/es continuation
+     rows) have no label cell of their own, so their Nominativ value becomes
+     the DOM's first td and would otherwise inherit the label column's
+     left-align — force it back to center with the .ctr marker class. */
+  table.gt-grouped td.ctr:first-child{text-align:center;}
+  /* Tables with a 4-row rowspan'd gender block (maskulin/feminin/neutrum/
+     Plural) per pronoun only carry the pronoun label on the first of every
+     4 rows, so the Genus cell becomes the spurious first td on the other
+     3 — reset it back to plain Genus-column styling instead of a label. */
+  table.gt-poss-full tbody tr:nth-child(4n+2) td:first-child,
+  table.gt-poss-full tbody tr:nth-child(4n+3) td:first-child,
+  table.gt-poss-full tbody tr:nth-child(4n) td:first-child{font-weight:400;background:transparent;}
   table.gt td:first-child{font-weight:700;background:color-mix(in srgb,var(--surface-2) 55%,transparent);white-space:nowrap;}
   table.gt td b{font-family:var(--du-mono);color:var(--text);}
   table.gt .hl{background:var(--gen-dim);color:var(--gen);font-weight:700;}
@@ -385,7 +407,7 @@
                   <td><b>ihr</b></td><td><b>euch</b></td><td><b>euch</b></td>
                 </tr>
                 <tr>
-                  <td><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td>
+                  <td class="ctr"><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td>
                   <td><b>Sie</b></td><td><b>Sie</b></td><td class="hl">Ihnen</td>
                 </tr>
                 <tr>
@@ -394,10 +416,10 @@
                   <td rowspan="3"><b>sie</b></td><td rowspan="3"><b>sie</b></td><td rowspan="3" class="hl">ihnen</td>
                 </tr>
                 <tr>
-                  <td class="gnd-f"><b>sie</b></td><td class="gnd-f"><b>sie</b></td><td class="hl gnd-f">ihr</td>
+                  <td class="ctr gnd-f"><b>sie</b></td><td class="gnd-f"><b>sie</b></td><td class="hl gnd-f">ihr</td>
                 </tr>
                 <tr>
-                  <td><b>es</b></td><td><b>es</b></td><td class="hl">ihm</td>
+                  <td class="ctr"><b>es</b></td><td><b>es</b></td><td class="hl">ihm</td>
                 </tr>
               </tbody>
             </table>
@@ -439,7 +461,7 @@
                   <td><b>ihr</b></td><td><b>euch</b></td><td><b>euch</b></td>
                 </tr>
                 <tr>
-                  <td><b>Sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                  <td class="ctr"><b>Sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
                   <td><b>Sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
                 </tr>
                 <tr>
@@ -448,10 +470,10 @@
                   <td rowspan="3"><b>sie</b></td><td rowspan="3"><b>sich</b></td><td rowspan="3"><b>sich</b></td>
                 </tr>
                 <tr>
-                  <td class="gnd-f"><b>sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                  <td class="ctr gnd-f"><b>sie</b></td><td><b>sich</b></td><td><b>sich</b></td>
                 </tr>
                 <tr>
-                  <td><b>es</b></td><td><b>sich</b></td><td><b>sich</b></td>
+                  <td class="ctr"><b>es</b></td><td><b>sich</b></td><td><b>sich</b></td>
                 </tr>
               </tbody>
             </table>
@@ -478,54 +500,22 @@
 
         <!-- ===== POSSESSIV ===== -->
         <section class="ref-section" data-ref-panel="possessiv" role="tabpanel" hidden>
-          <div class="ref-section-head" data-i18n="refPossStemHead">1. Stamm nach dem Besitzer wählen</div>
-          <div class="tbl-wrap">
-            <table class="gt">
-              <thead><tr><th data-i18n="thOwner">Besitzer</th><th data-i18n="thStem">Stamm</th><th data-i18n="thOwner2">Besitzer</th><th data-i18n="thStem2">Stamm</th></tr></thead>
-              <tbody>
-                <tr><td>ich</td><td><b>mein-</b></td><td>wir</td><td><b>unser-</b></td></tr>
-                <tr><td>du</td><td><b>dein-</b></td><td>ihr</td><td><b>euer- / eur-</b></td></tr>
-                <tr><td>er / es</td><td><b>sein-</b></td><td>sie (Pl.)</td><td><b>ihr-</b></td></tr>
-                <tr><td>sie (Sg.)</td><td><b>ihr-</b></td><td>Sie</td><td><b>Ihr-</b></td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="ref-section-head" data-i18n="refPossEndHead">2. Endung nach dem folgenden Nomen wählen</div>
-          <div class="ref-note" data-i18n-html="refPossEndNote">Die Endungen sind die <b>ein-Endungen</b>: kein/e in Nominativ m. und Nominativ/Akkusativ n.</div>
-          <div class="tbl-wrap">
-            <table class="gt">
-              <thead><tr>
-                <th data-i18n="thCase">Kasus</th>
-                <th data-i18n="thMasc">maskulin</th><th data-i18n="thFem">feminin</th>
-                <th data-i18n="thNeut">neutrum</th><th data-i18n="thPlural">Plural</th>
-              </tr></thead>
-              <tbody>
-                <tr><td class="col-nom" data-i18n="caseNominativ">Nominativ</td><td class="hl">mein</td><td>meine</td><td class="hl">mein</td><td>meine</td></tr>
-                <tr><td class="col-akk" data-i18n="caseAkkusativ">Akkusativ</td><td>meinen</td><td>meine</td><td class="hl">mein</td><td>meine</td></tr>
-                <tr><td class="col-dat" data-i18n="caseDativ">Dativ</td><td>meinem</td><td>meiner</td><td>meinem</td><td>meinen</td></tr>
-                <tr><td class="col-gen" data-i18n="caseGenitiv">Genitiv</td><td>meines</td><td>meiner</td><td>meines</td><td>meiner</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="ref-note" data-i18n-html="refPossEuer"><b>euer</b> verliert sein zweites e, sobald eine Endung dazukommt: <i>euer Garten</i>, aber <i>eure Wohnung</i>, <i>euren Brief</i>, <i>eurem Sohn</i>.</div>
-          <div class="ref-section-head" data-i18n="refPossAloneHead">Ohne Nomen: die vollen Endungen</div>
-          <div class="ref-note" data-i18n-html="refPossAloneNote">Steht das Possessivpronomen <b>allein</b>, bekommt es die Endung des bestimmten Artikels: <i>Dein Mantel ist schwarz, <b>meiner</b> ist blau.</i> — <i>Ist das dein Auto? Nein, das ist <b>meins</b>.</i></div>
-          <div class="ref-section-head" data-i18n="refPossFullHead">Alle Personen ausgeschrieben</div>
-          <div class="ref-note" data-i18n="refPossFullNote">Zum Nachschlagen: dieselbe Endungs-Regel von oben, aber für jede Person einmal komplett durchbuchstabiert.</div>
+          <div class="poss-full-wrap">
+          <div class="poss-full-title" data-i18n="refPossFullTitle">Possessivpronomen</div>
           <div class="tbl-split">
             <div class="tbl-wrap">
-              <table class="gt">
+              <table class="gt gt-poss-full">
                 <thead><tr>
-                  <th data-i18n="thPerson">Person</th><th data-i18n="thGenus">Genus</th>
+                  <th colspan="2" data-i18n="thPronoun">Pronomen</th><th data-i18n="thGenus">Genus</th>
                   <th data-i18n="caseNominativ">Nominativ</th><th data-i18n="caseAkkusativ">Akkusativ</th><th data-i18n="caseDativ">Dativ</th>
                 </tr></thead>
                 <tbody>
-                  <tr><td rowspan="4">ich</td><td data-i18n="thMasc">maskulin</td><td>mein</td><td>meinen</td><td>meinem</td></tr>
+                  <tr><td rowspan="4" data-i18n="refPersonGroup1">1. Person</td><td rowspan="4">ich</td><td data-i18n="thMasc">maskulin</td><td>mein</td><td>meinen</td><td>meinem</td></tr>
                   <tr><td data-i18n="thFem">feminin</td><td>meine</td><td>meine</td><td>meiner</td></tr>
                   <tr><td data-i18n="thNeut">neutrum</td><td>mein</td><td>mein</td><td>meinem</td></tr>
                   <tr><td data-i18n="thPlural">Plural</td><td>meine</td><td>meine</td><td>meinen</td></tr>
 
-                  <tr><td rowspan="4">du</td><td data-i18n="thMasc">maskulin</td><td>dein</td><td>deinen</td><td>deinem</td></tr>
+                  <tr><td rowspan="8" data-i18n="refPersonGroup2">2. Person</td><td rowspan="4">du</td><td data-i18n="thMasc">maskulin</td><td>dein</td><td>deinen</td><td>deinem</td></tr>
                   <tr><td data-i18n="thFem">feminin</td><td>deine</td><td>deine</td><td>deiner</td></tr>
                   <tr><td data-i18n="thNeut">neutrum</td><td>dein</td><td>dein</td><td>deinem</td></tr>
                   <tr><td data-i18n="thPlural">Plural</td><td>deine</td><td>deine</td><td>deinen</td></tr>
@@ -535,7 +525,7 @@
                   <tr><td data-i18n="thNeut">neutrum</td><td>Ihr</td><td>Ihr</td><td>Ihrem</td></tr>
                   <tr><td data-i18n="thPlural">Plural</td><td>Ihre</td><td>Ihre</td><td>Ihren</td></tr>
 
-                  <tr><td rowspan="4">er</td><td data-i18n="thMasc">maskulin</td><td>sein</td><td>seinen</td><td>seinem</td></tr>
+                  <tr><td rowspan="12" data-i18n="refPersonGroup3">3. Person</td><td rowspan="4">er</td><td data-i18n="thMasc">maskulin</td><td>sein</td><td>seinen</td><td>seinem</td></tr>
                   <tr><td data-i18n="thFem">feminin</td><td>seine</td><td>seine</td><td>seiner</td></tr>
                   <tr><td data-i18n="thNeut">neutrum</td><td>sein</td><td>sein</td><td>seinem</td></tr>
                   <tr><td data-i18n="thPlural">Plural</td><td>seine</td><td>seine</td><td>seinen</td></tr>
@@ -553,9 +543,9 @@
               </table>
             </div>
             <div class="tbl-wrap">
-              <table class="gt">
+              <table class="gt gt-poss-full">
                 <thead><tr>
-                  <th data-i18n="thPerson">Person</th><th data-i18n="thGenus">Genus</th>
+                  <th data-i18n="thPronoun">Pronomen</th><th data-i18n="thGenus">Genus</th>
                   <th data-i18n="caseNominativ">Nominativ</th><th data-i18n="caseAkkusativ">Akkusativ</th><th data-i18n="caseDativ">Dativ</th>
                 </tr></thead>
                 <tbody>
@@ -581,6 +571,7 @@
                 </tbody>
               </table>
             </div>
+          </div>
           </div>
         </section>
 
@@ -769,8 +760,7 @@ const STRINGS = {
     progTotal:"gesamt", progCorrect:"richtig", progWrong:"falsch", progUnsolved:"offen",
     progByType:"Nach Pronomenart", progByPerson:"Nach Person",
     langToggleLabel:"EN",
-    thPerson:"Person", thGenus:"Genus", thCase:"Kasus", thMasc:"maskulin", thFem:"feminin", thNeut:"neutrum", thPlural:"Plural", thSingular:"Singular",
-    thOwner:"Besitzer", thStem:"Stamm", thOwner2:"Besitzer", thStem2:"Stamm",
+    thPerson:"Person", thPronoun:"Pronomen", thGenus:"Genus", thCase:"Kasus", thMasc:"maskulin", thFem:"feminin", thNeut:"neutrum", thPlural:"Plural", thSingular:"Singular",
     thPeople:"Personen", thThings:"Sachen",
     p1sg:"1. Sg.", p2sg:"2. Sg.", p3sg:"3. Sg.", p3sgm:"3. Sg. m.", p3sgf:"3. Sg. f.", p3sgn:"3. Sg. n.",
     p1pl:"1. Pl.", p2pl:"2. Pl.", p3pl:"3. Pl.", pformal:"Höflich",
@@ -779,14 +769,7 @@ const STRINGS = {
     refPersonalNote:"Nur <b>er</b> ändert im Akkusativ seine Form. Im Dativ ändert sich fast alles — das ist die Tabelle, die man wirklich auswendig können muss.",
     refPersonalGen:"Der <b>Genitiv</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) ist heute praktisch ausgestorben und kommt nur in festen Wendungen vor: <i>Ich erinnere mich seiner.</i>",
     refPersonalGender:"Deutsche Pronomen folgen dem <b>grammatischen</b> Geschlecht, nicht dem natürlichen: <i>Der Schlüssel? <b>Er</b> liegt dort.</i> — nicht <i>es</i>.",
-    refPossStemHead:"1. Stamm nach dem Besitzer wählen",
-    refPossEndHead:"2. Endung nach dem folgenden Nomen wählen",
-    refPossEndNote:"Die Endungen sind die <b>ein-Endungen</b>: keine Endung in Nominativ m. und Nominativ/Akkusativ n.",
-    refPossEuer:"<b>euer</b> verliert sein zweites e, sobald eine Endung dazukommt: <i>euer Garten</i>, aber <i>eure Wohnung</i>, <i>euren Brief</i>, <i>eurem Sohn</i>.",
-    refPossAloneHead:"Ohne Nomen: die vollen Endungen",
-    refPossAloneNote:"Steht das Possessivpronomen <b>allein</b>, bekommt es die Endung des bestimmten Artikels: <i>Dein Mantel ist schwarz, <b>meiner</b> ist blau.</i> — <i>Ist das dein Auto? Nein, das ist <b>meins</b>.</i>",
-    refPossFullHead:"Alle Personen ausgeschrieben",
-    refPossFullNote:"Zum Nachschlagen: dieselbe Endungs-Regel von oben, aber für jede Person einmal komplett durchbuchstabiert.",
+    refPossFullTitle:"Possessivpronomen",
     refReflHead:"Reflexivpronomen",
     refReflNote:"Gute Nachricht: Akkusativ und Dativ sind <b>überall gleich</b> — außer in der 1. und 2. Person Singular.",
     refReflWhen:"<b>Wann Dativ?</b> Sobald der Satz schon ein Akkusativobjekt hat, rutscht das Reflexivpronomen in den Dativ: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i>",
@@ -840,8 +823,7 @@ const STRINGS = {
     progTotal:"total", progCorrect:"correct", progWrong:"wrong", progUnsolved:"unsolved",
     progByType:"By pronoun family", progByPerson:"By person",
     langToggleLabel:"DE",
-    thPerson:"Person", thGenus:"Gender", thCase:"Case", thMasc:"masculine", thFem:"feminine", thNeut:"neuter", thPlural:"plural", thSingular:"Singular",
-    thOwner:"Owner", thStem:"Stem", thOwner2:"Owner", thStem2:"Stem",
+    thPerson:"Person", thPronoun:"Pronoun", thGenus:"Gender", thCase:"Case", thMasc:"masculine", thFem:"feminine", thNeut:"neuter", thPlural:"plural", thSingular:"Singular",
     thPeople:"People", thThings:"Things",
     p1sg:"1st sg.", p2sg:"2nd sg.", p3sg:"3rd sg.", p3sgm:"3rd sg. m.", p3sgf:"3rd sg. f.", p3sgn:"3rd sg. n.",
     p1pl:"1st pl.", p2pl:"2nd pl.", p3pl:"3rd pl.", pformal:"Polite",
@@ -850,14 +832,7 @@ const STRINGS = {
     refPersonalNote:"Only <b>er</b> changes shape in the accusative. The dative changes almost everything — this is the table worth knowing by heart.",
     refPersonalGen:"The <b>genitive</b> (meiner, deiner, seiner, ihrer, unser, euer, ihrer) is practically extinct today and survives only in fixed phrases: <i>Ich erinnere mich seiner.</i>",
     refPersonalGender:"German pronouns follow <b>grammatical</b> gender, not natural gender: <i>Der Schlüssel? <b>Er</b> liegt dort.</i> — never <i>es</i>.",
-    refPossStemHead:"1. Pick the stem from the owner",
-    refPossEndHead:"2. Pick the ending from the noun that follows",
-    refPossEndNote:"The endings are the <b>ein- endings</b>: no ending in the masculine nominative and the neuter nominative/accusative.",
-    refPossEuer:"<b>euer</b> loses its second e as soon as an ending is added: <i>euer Garten</i>, but <i>eure Wohnung</i>, <i>euren Brief</i>, <i>eurem Sohn</i>.",
-    refPossAloneHead:"Without a noun: the full endings",
-    refPossAloneNote:"Standing <b>alone</b>, the possessive takes the definite article's ending: <i>Dein Mantel ist schwarz, <b>meiner</b> ist blau.</i> — <i>Ist das dein Auto? Nein, das ist <b>meins</b>.</i>",
-    refPossFullHead:"Every person spelled out",
-    refPossFullNote:"For quick lookup: the same ending rule from above, but fully spelled out for every person.",
+    refPossFullTitle:"Possessive Pronoun",
     refReflHead:"Reflexive pronouns",
     refReflNote:"Good news: accusative and dative are <b>identical everywhere</b> — except in the 1st and 2nd person singular.",
     refReflWhen:"<b>When dative?</b> As soon as the sentence already has a direct object, the reflexive moves to the dative: <i>Ich wasche <b>mich</b>.</i> → <i>Ich wasche <b>mir</b> die Hände.</i>",
