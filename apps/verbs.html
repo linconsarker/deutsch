@@ -79,42 +79,6 @@ h1 {
 }
 .search-box:focus { border-color: var(--du-line-strong); box-shadow: none; }
 .search-box::placeholder { color: var(--muted); }
-.filter-tabs {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.tab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 36px;
-  padding: 0 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-  font-family: var(--du-font);
-  font-size: 0.82rem;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.15s;
-  letter-spacing: 0.2px;
-}
-.tab.active-fund   { background: var(--fund-bg);   color: var(--fund-accent);   border-color: var(--fund-accent); }
-.tab.active-modal  { background: var(--modal-bg);  color: var(--modal-accent);  border-color: var(--modal-accent); }
-.tab.active-simple { background: var(--simple-bg); color: var(--simple-accent); border-color: var(--simple-accent); }
-.tab.active-insep  { background: var(--insep-bg);  color: var(--insep-accent);  border-color: var(--insep-accent); }
-.tab.active-sep    { background: var(--sep-bg);    color: var(--sep-accent);    border-color: var(--sep-accent); }
-.tab.active-ieren  { background: var(--ieren-bg);  color: var(--ieren-accent);  border-color: var(--ieren-accent); }
-.tab.active-all { background: var(--du-ink); color: #ffffff; border-color: var(--du-ink); }
-.tab:hover:not([class*="active-"]) { border-color: #b9b3aa; color: var(--text); }
 
 .subtype-tabs {
   display: flex;
@@ -164,7 +128,7 @@ h1 {
 }
 .subtype-label {
   flex: 0 0 auto;
-  width: 92px;
+  width: 132px;
   font-family: var(--du-mono);
   font-size: 0.68rem;
   font-weight: 600;
@@ -172,28 +136,23 @@ h1 {
   letter-spacing: 1px;
   color: var(--muted);
 }
-.stab {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 74px;
+
+.filter-select {
   height: 32px;
-  padding: 0 14px;
+  padding: 0 10px;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
-  color: var(--muted);
+  color: var(--text);
   font-family: var(--du-font);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
   cursor: pointer;
-  transition: all 0.15s;
-  letter-spacing: 0.2px;
+  outline: none;
+  max-width: 100%;
 }
-.stab.active { background: var(--du-ink); color: #fff; border-color: var(--du-ink); }
-.stab:hover:not(.active) { border-color: #b9b3aa; color: var(--text); }
+.filter-select:hover { border-color: #b9b3aa; }
+.filter-select:focus { border-color: var(--du-line-strong); }
 
 .lvl-tab {
   display: inline-flex;
@@ -956,23 +915,38 @@ main { padding: 24px 28px 32px; }
   <details class="filter-panel">
     <summary>Filters</summary>
   <div class="subtype-tabs">
-    <span class="subtype-label">Type</span>
-    <div class="filter-tabs">
-      <button class="btn btn-sm tab active-all" id="tab-all"    onclick="setType('all', this)">All 406</button>
-      <button class="btn btn-sm tab" id="tab-fund"   onclick="setType('fundamental', this)">⭐ Fundamental</button>
-      <button class="btn btn-sm tab" id="tab-modal"  onclick="setType('modal', this)">🎯 Modal</button>
-      <button class="btn btn-sm tab" id="tab-simple" onclick="setType('simple', this)">◎ No Prefix</button>
-      <button class="btn btn-sm tab" id="tab-insep"  onclick="setType('inseparable', this)">🔒 Prefix (fixed)</button>
-      <button class="btn btn-sm tab" id="tab-sep"    onclick="setType('separable', this)">✂️ Prefix (sep.)</button>
-      <button class="btn btn-sm tab" id="tab-ieren"  onclick="setType('ieren', this)">🌐 -ieren</button>
-    </div>
+    <span class="subtype-label">Prefix Behaviour</span>
+    <select class="filter-select" id="sel-type" onchange="setType(this.value)">
+      <option value="all">All</option>
+      <option value="fundamental">⭐ Fundamental Verbs</option>
+      <option value="modal">🎯 Modal Verbs</option>
+      <option value="simple">◎ No Prefix</option>
+      <option value="inseparable">🔒 Inseparable Verbs</option>
+      <option value="separable">✂️ Separable Verbs</option>
+      <option value="ieren">🌐 -ieren Verbs</option>
+    </select>
   </div>
   <div class="subtype-tabs">
-    <span class="subtype-label">Conjugation</span>
-    <button class="btn btn-sm stab active" id="stab-all"    onclick="setSubtype('all', this)">All</button>
-    <button class="btn btn-sm stab" id="stab-weak"   onclick="setSubtype('weak', this)">Weak</button>
-    <button class="btn btn-sm stab" id="stab-strong" onclick="setSubtype('strong', this)">Strong</button>
-    <button class="btn btn-sm stab" id="stab-mixed"  onclick="setSubtype('mixed', this)">Mixed</button>
+    <span class="subtype-label">Conjugation Pattern</span>
+    <select class="filter-select" id="sel-subtype" onchange="setSubtype(this.value)">
+      <option value="all">All</option>
+      <option value="weak">Weak Verbs</option>
+      <option value="strong">Strong Verbs</option>
+      <option value="mixed">Mixed Verbs</option>
+    </select>
+  </div>
+  <div class="subtype-tabs">
+    <span class="subtype-label">Case Requirement</span>
+    <select class="filter-select" id="sel-casereq" onchange="setCaseReq(this.value)">
+      <option value="all">All</option>
+      <option value="accusative">Accusative Verbs</option>
+      <option value="dative">Dative Verbs</option>
+      <option value="ditransitive">Di-Transitive Verbs</option>
+      <option value="intransitive">Intransitive Verbs</option>
+      <option value="prepositional">Prepositional Verbs</option>
+      <option value="reflexive">Reflexive Verbs</option>
+      <option value="genitive">Genitive Verbs</option>
+    </select>
   </div>
   <div class="subtype-tabs">
     <span class="subtype-label">Level</span>
@@ -1050,6 +1024,7 @@ const VERBS = loadJson("../data/verbs.json");
 // ─── STATE ───────────────────────────────────────────────────────────────────
 let currentType = 'all';
 let currentSubtype = 'all'; // 'all' | 'weak' | 'strong' | 'mixed'
+let currentCaseReq = 'all'; // 'all' | 'accusative' | 'dative' | 'ditransitive' | 'intransitive' | 'prepositional' | 'reflexive' | 'genitive'
 let currentLevel = 'all'; // 'all' | 'A1' | 'A2' | 'B1' | 'B2'
 let customVerbs = [];
 
@@ -1211,6 +1186,103 @@ function ppClass(v) {
 const PPCLASS_ORDER = ['weak', 'strong', 'mixed'];
 const PPCLASS_LABELS = { weak: 'Weak Verbs — Schwache Verben', strong: 'Strong Verbs — Starke Verben', mixed: 'Mixed Verbs — Gemischte Verben' };
 
+// ─── CASE REQUIREMENT (Rektion) ───────────────────────────────────────────────
+// Classifies each verb by the grammatical case(s) it governs. German verb valency
+// is a lexical property that can't be derived from conjugation forms, so this is
+// a curated lookup by infinitive (matched against v.inf directly — prefixed
+// compounds are listed individually since a prefix can change a verb's valency,
+// e.g. kommen [intransitive] vs bekommen [accusative]). Every verb not listed
+// below defaults to 'accusative', the statistically dominant category for
+// German verbs (a plain direct object, or the base sense of an ambitransitive verb).
+const GENITIVE_VERBS = ['bedürfen'];
+
+const DATIVE_VERBS = [
+  'helfen','aushelfen','mithelfen','weiterhelfen',
+  'schaden','danken','gefallen',
+  'gehören','dazugehören','zusammengehören',
+  'folgen','gelingen','misslingen','glauben','vertrauen','schmecken',
+  'widersprechen','widerstehen','unterliegen','entsprechen','zustimmen','zuhören',
+  'fehlen','gratulieren','gleichen','genügen','antworten','raten','verzeihen','drohen',
+  'auffallen','einfallen','leidtun','vorkommen','schmeicheln',
+];
+
+const DITRANSITIVE_VERBS = [
+  'geben','hergeben','weitergeben','zurückgeben','abgeben','mitbringen',
+  'bringen','vorschlagen','anbieten','hinterlassen','zeigen','schenken',
+  'empfehlen','erklären','erzählen','versprechen','verbieten','erlauben',
+  'beweisen','mitteilen','vorlesen','überweisen','leihen','ausleihen','stehlen',
+  'schicken','zuschicken','senden','verraten','beifügen','überreichen',
+  'vorspielen','vorsingen','weiterleiten','weiterschicken','zutrauen',
+  'schreiben','sagen','wünschen','abkaufen','diktieren','mailen','simsen','reichen',
+];
+
+const REFLEXIVE_VERBS = [
+  'beeilen','beschweren','entschuldigen','bedanken','verabreden','verabschieden',
+  'erinnern','freuen','konzentrieren','kümmern','gewöhnen',
+  'unterhalten','bewerben','entschließen','verirren','entspannen','vorstellen',
+  'benehmen','wohlfühlen','ausruhen','auskennen',
+  'abwechseln','abmelden','anmelden','einloggen','ausloggen','qualifizieren',
+  'engagieren','eincremen','verschlucken','umdrehen','schminken','überlegen',
+  'beruhigen','wundern',
+];
+
+const PREPOSITIONAL_VERBS = [
+  'nachdenken','warten','teilnehmen','hoffen','achten','zweifeln',
+  'reagieren','verzichten','kämpfen','sorgen','profitieren','leiden','träumen',
+  'aufpassen','auskommen','zurechtkommen','abhängen','austreten','telefonieren',
+  'berichten','diskutieren',
+];
+
+const INTRANSITIVE_VERBS = [
+  'sein','werden','gehen','kommen','stehen','bleiben','liegen','sitzen','fallen',
+  'sterben','laufen','fahren','wohnen','leben','existieren','arbeiten','schlafen',
+  'aufhören','ankommen','aufstehen','ausgehen','aussehen','durchgehen',
+  'einfahren','eingehen','fortfahren','fortgehen','herkommen','hinfahren',
+  'umsteigen','zunehmen','aufwachen','erwachen','einschlafen','ausschlafen',
+  'freihaben','heißen','klingen','zusagen','absagen','zusammenpassen',
+  'entstehen','erlöschen','erscheinen','frieren','gedeihen','geraten','scheiden',
+  'schleichen','schmelzen','schreiten','schwellen','schwinden','sprießen',
+  'kriechen','quellen','dringen','gelangen','vergehen','stürzen','spinnen','sinnen',
+  'weggehen','hochgehen','runtergehen','reingehen','rausgehen','rübergehen',
+  'zurückgehen','abfahren','abfliegen','abfließen','abreisen','ausrücken','anfahren',
+  'weglaufen','weiterfahren','weitergehen','weitermachen','weiterarbeiten',
+  'weitersuchen','weiterwissen','zurückfinden','zurückkommen','zurücklaufen',
+  'zurückreisen','zurückfahren','vorbeigehen','vorbeikommen','vorgehen',
+  'hineingehen','herausgehen','hereinkommen','herumgehen','hinunterrasen',
+  'hinhören','hineinschauen','mitkommen','fernsehen','stattfinden','handeln',
+  'aussteigen','einsteigen','umziehen','tauchen','schneien','regnen','verlaufen',
+  'wegfahren','losfahren','einziehen','eskalieren','faulenzen','übernachten',
+  'reisen','verreisen','tanzen','schwitzen','pendeln','wandern','klettern',
+  'dauern','basteln','angeln','klingeln','lächeln','landen','langlaufen','lauten',
+  'losgehen','mitarbeiten','mitspielen','musizieren','nachfragen','nieseln',
+  'passieren','pfeifen','duschen','trainieren','einkaufen','streiten',
+  'schauen','schaukeln','schimpfen','segeln','shoppen','skypen','staunen',
+  'stimmen','streiken','variieren','zusammenarbeiten','zusammenleben',
+  'zusammenwohnen','babysitten','baden','bellen','blicken','blitzen','bloggen',
+  'bremsen','chatten','dazukommen','dazulernen','donnern','drankommen',
+  'durchatmen','durcheinandergehen','enden','entlanggehen','flüchten',
+  'frühstücken','funktionieren','glattgehen','hageln','jobben','jodeln',
+  'joggen','jubeln','kaputtgehen','klappen','klicken','klopfen','wirken','zuhaben',
+  'kommunizieren','kreisen','mitmachen','reden','regieren','beten','gähnen','weinen','lachen',
+  'fischen','bluten','atmen','husten','kosten','wiegen','betragen','surfen',
+];
+
+function caseReq(v) {
+  const inf = v.inf;
+  if (GENITIVE_VERBS.includes(inf)) return 'genitive';
+  if (DITRANSITIVE_VERBS.includes(inf)) return 'ditransitive';
+  if (DATIVE_VERBS.includes(inf)) return 'dative';
+  if (REFLEXIVE_VERBS.includes(inf)) return 'reflexive';
+  if (PREPOSITIONAL_VERBS.includes(inf)) return 'prepositional';
+  if (INTRANSITIVE_VERBS.includes(inf)) return 'intransitive';
+  return 'accusative';
+}
+const CASEREQ_LABELS = {
+  accusative: 'Accusative Verbs', dative: 'Dative Verbs', ditransitive: 'Di-Transitive Verbs',
+  intransitive: 'Intransitive Verbs', prepositional: 'Prepositional Verbs',
+  reflexive: 'Reflexive Verbs', genitive: 'Genitive Verbs',
+};
+
 // ─── RENDER ───────────────────────────────────────────────────────────────────
 function renderInfName(v) {
   if (v.type==='trennbar' && v.prefix) {
@@ -1336,9 +1408,10 @@ function getFiltered() {
   return getAllVerbs().filter(v => {
     const typeOk = currentType==='all' || v.type===currentType;
     const subtypeOk = currentSubtype==='all' || ppClass(v)===currentSubtype;
+    const caseReqOk = currentCaseReq==='all' || caseReq(v)===currentCaseReq;
     const levelOk = currentLevel==='all' || v.level===currentLevel;
     const searchOk = !q || v.inf.toLowerCase().includes(q) || v.en.toLowerCase().includes(q) || v.bn.includes(q);
-    return typeOk && subtypeOk && levelOk && searchOk;
+    return typeOk && subtypeOk && caseReqOk && levelOk && searchOk;
   });
 }
 
@@ -1362,24 +1435,43 @@ function render() {
   document.getElementById('insep-count').textContent  = all.filter(v=>v.type==='inseparable').length;
   document.getElementById('sep-count').textContent    = all.filter(v=>v.type==='separable').length;
   document.getElementById('ieren-count').textContent  = all.filter(v=>v.type==='ieren').length;
-  document.getElementById('tab-all').textContent    = `All ${all.length}`;
-  document.getElementById('tab-fund').textContent   = `⭐ Fundamental (${all.filter(v=>v.type==='fundamental').length})`;
-  document.getElementById('tab-modal').textContent  = `🎯 Modal (${all.filter(v=>v.type==='modal').length})`;
-  document.getElementById('tab-simple').textContent = `◎ No Prefix (${all.filter(v=>v.type==='simple').length})`;
-  document.getElementById('tab-insep').textContent  = `🔒 Prefix fixed (${all.filter(v=>v.type==='inseparable').length})`;
-  document.getElementById('tab-sep').textContent    = `✂️ Prefix sep. (${all.filter(v=>v.type==='separable').length})`;
-  document.getElementById('tab-ieren').textContent  = `🌐 -ieren (${all.filter(v=>v.type==='ieren').length})`;
 
-  document.getElementById('stab-all').textContent    = `All ${all.length}`;
-  document.getElementById('stab-weak').textContent   = `Weak (${all.filter(v=>ppClass(v)==='weak').length})`;
-  document.getElementById('stab-strong').textContent = `Strong (${all.filter(v=>ppClass(v)==='strong').length})`;
-  document.getElementById('stab-mixed').textContent  = `Mixed (${all.filter(v=>ppClass(v)==='mixed').length})`;
+  setSelectOptionCounts('sel-type', {
+    all: all.length,
+    fundamental: all.filter(v=>v.type==='fundamental').length,
+    modal: all.filter(v=>v.type==='modal').length,
+    simple: all.filter(v=>v.type==='simple').length,
+    inseparable: all.filter(v=>v.type==='inseparable').length,
+    separable: all.filter(v=>v.type==='separable').length,
+    ieren: all.filter(v=>v.type==='ieren').length,
+  }, currentType);
+
+  setSelectOptionCounts('sel-subtype', {
+    all: all.length,
+    weak: all.filter(v=>ppClass(v)==='weak').length,
+    strong: all.filter(v=>ppClass(v)==='strong').length,
+    mixed: all.filter(v=>ppClass(v)==='mixed').length,
+  }, currentSubtype);
+
+  const caseReqCounts = { all: all.length };
+  Object.keys(CASEREQ_LABELS).forEach(k => { caseReqCounts[k] = all.filter(v=>caseReq(v)===k).length; });
+  setSelectOptionCounts('sel-casereq', caseReqCounts, currentCaseReq);
 
   document.getElementById('lvl-all').textContent = `All ${all.length}`;
   ['A1','A2','B1','B2'].forEach(lvl => {
     const el = document.getElementById('lvl-' + lvl);
     if (el) el.textContent = `${lvl} (${all.filter(v=>v.level===lvl).length})`;
   });
+}
+
+function setSelectOptionCounts(selectId, counts, selectedValue) {
+  const select = document.getElementById(selectId);
+  if (!select) return;
+  [...select.options].forEach(opt => {
+    const base = opt.textContent.replace(/\s*\(\d+\)$/, '');
+    opt.textContent = `${base} (${counts[opt.value] ?? 0})`;
+  });
+  select.value = selectedValue;
 }
 
 // ─── ACCORDION ────────────────────────────────────────────────────────────────
@@ -1442,11 +1534,11 @@ function jumpToOpposite(inf) {
   // Reset all filters so the target verb is guaranteed to be visible.
   currentType = 'all';
   currentSubtype = 'all';
+  currentCaseReq = 'all';
   document.getElementById('search').value = '';
-  document.querySelectorAll('.tab').forEach(t => t.className = 'btn btn-sm tab');
-  document.getElementById('tab-all').classList.add('active-all');
-  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
-  document.getElementById('stab-all').classList.add('active');
+  document.getElementById('sel-type').value = 'all';
+  document.getElementById('sel-subtype').value = 'all';
+  document.getElementById('sel-casereq').value = 'all';
   render();
   requestAnimationFrame(() => {
     const el = document.getElementById('card-' + target.sn);
@@ -1462,18 +1554,18 @@ function jumpToOpposite(inf) {
 }
 
 // ─── FILTER / SEARCH ─────────────────────────────────────────────────────────
-function setType(type, btn) {
+function setType(type) {
   currentType = type;
-  document.querySelectorAll('.tab').forEach(t => t.className = 'btn btn-sm tab');
-  const cls = {all:'all', fundamental:'fund', modal:'modal', simple:'simple', inseparable:'insep', separable:'sep', ieren:'ieren'}[type] || 'all';
-  btn.classList.add('active-' + cls);
   render();
 }
 
-function setSubtype(subtype, btn) {
+function setSubtype(subtype) {
   currentSubtype = subtype;
-  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
+  render();
+}
+
+function setCaseReq(caseReqValue) {
+  currentCaseReq = caseReqValue;
   render();
 }
 

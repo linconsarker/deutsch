@@ -1385,7 +1385,7 @@
     "cue": "my",
     "segments": [ { "blank": "pronomen", "ans": ["Mein"] }, { "text": " Vater arbeitet bei der Post." } ],
     "tr": "My father works at the post office.",
-    "ex": "Masculine nominative takes no ending on the possessive: mein Vater."
+    "ex": "Vater is masculine and is the subject of the sentence, so it's nominative, which takes no ending: mein Vater."
   },
   {
     "id": 112,
@@ -1397,7 +1397,7 @@
     "cue": "my",
     "segments": [ { "blank": "pronomen", "ans": ["Meine"] }, { "text": " Schwester wohnt in Köln." } ],
     "tr": "My sister lives in Cologne.",
-    "ex": "Feminine nominative takes -e: meine Schwester."
+    "ex": "Schwester is feminine and is the subject of the sentence, so it's nominative, which takes -e: meine Schwester."
   },
   {
     "id": 113,
@@ -1409,7 +1409,7 @@
     "cue": "my",
     "segments": [ { "blank": "pronomen", "ans": ["Mein"] }, { "text": " Fahrrad steht im Keller." } ],
     "tr": "My bicycle is in the cellar.",
-    "ex": "Neuter nominative takes no ending: mein Fahrrad."
+    "ex": "Fahrrad is neuter and is the subject of the sentence, so it's nominative, which takes no ending: mein Fahrrad."
   },
   {
     "id": 114,
@@ -1421,7 +1421,7 @@
     "cue": "my",
     "segments": [ { "blank": "pronomen", "ans": ["Meine"] }, { "text": " Eltern kommen morgen an." } ],
     "tr": "My parents arrive tomorrow.",
-    "ex": "Plural takes -e in the nominative: meine Eltern."
+    "ex": "Eltern is plural and is the subject of the sentence, so it's nominative, which takes -e: meine Eltern."
   },
   {
     "id": 115,
@@ -1433,7 +1433,7 @@
     "cue": "my",
     "segments": [ { "text": "Ich rufe " }, { "blank": "pronomen", "ans": ["meinen"] }, { "text": " Bruder jeden Sonntag an." } ],
     "tr": "I call my brother every Sunday.",
-    "ex": "Masculine accusative takes -en: meinen Bruder."
+    "ex": "Bruder is masculine and is the direct object of anrufen, so it's accusative, which takes -en: meinen Bruder."
   },
   {
     "id": 116,
@@ -1445,7 +1445,7 @@
     "cue": "my",
     "segments": [ { "text": "Ich habe " }, { "blank": "pronomen", "ans": ["meine"] }, { "text": " Tasche im Bus vergessen." } ],
     "tr": "I left my bag on the bus.",
-    "ex": "Feminine accusative takes -e, the same as the nominative."
+    "ex": "Tasche is feminine and is the direct object of vergessen, so it's accusative, which takes -e (the same as the nominative): meine Tasche."
   },
   {
     "id": 117,
@@ -1457,7 +1457,7 @@
     "cue": "my",
     "segments": [ { "text": "Ich suche " }, { "blank": "pronomen", "ans": ["mein"] }, { "text": " Handy schon seit einer Stunde." } ],
     "tr": "I have been looking for my phone for an hour.",
-    "ex": "Neuter accusative takes no ending, exactly like the nominative."
+    "ex": "Handy is neuter and is the direct object of suchen, so it's accusative, which takes no ending (the same as the nominative): mein Handy."
   },
   {
     "id": 118,
@@ -1469,7 +1469,7 @@
     "cue": "my",
     "segments": [ { "text": "Ich helfe " }, { "blank": "pronomen", "ans": ["meiner"] }, { "text": " Mutter beim Kochen." } ],
     "tr": "I help my mother with the cooking.",
-    "ex": "Feminine dative takes -er: meiner Mutter."
+    "ex": "Mutter is feminine; helfen governs the dative, which takes -er: meiner Mutter."
   },
   {
     "id": 119,
@@ -1481,7 +1481,7 @@
     "cue": "my",
     "segments": [ { "text": "Ich fahre mit " }, { "blank": "pronomen", "ans": ["meinem"] }, { "text": " Auto zur Arbeit." } ],
     "tr": "I drive to work in my car.",
-    "ex": "Neuter dative takes -em: meinem Auto."
+    "ex": "Auto is neuter; the preposition mit always takes the dative, which takes -em: meinem Auto."
   },
   {
     "id": 120,
@@ -1493,7 +1493,7 @@
     "cue": "my",
     "segments": [ { "text": "Ich schreibe " }, { "blank": "pronomen", "ans": ["meinen"] }, { "text": " Freunden jede Woche." } ],
     "tr": "I write to my friends every week.",
-    "ex": "Plural dative takes -en: meinen Freunden."
+    "ex": "Freunden is plural; as the indirect object of schreiben (who is written to), it's dative, which takes -en: meinen Freunden."
   },
   {
     "id": 121,
@@ -1505,7 +1505,7 @@
     "cue": "my",
     "segments": [ { "text": "Das Auto " }, { "blank": "pronomen", "ans": ["meines"] }, { "text": " Vaters ist schon sehr alt." } ],
     "tr": "My father's car is very old.",
-    "ex": "Masculine genitive takes -es, and the noun itself adds -s: meines Vaters."
+    "ex": "Vater is masculine and shows possession of the noun Auto, so it's genitive, which takes -es (and the noun itself adds -s): meines Vaters."
   },
   {
     "id": 122,
@@ -1517,7 +1517,7 @@
     "cue": "your",
     "segments": [ { "blank": "pronomen", "ans": ["Dein"] }, { "text": " Hund ist wirklich freundlich." } ],
     "tr": "Your dog is really friendly.",
-    "ex": "Masculine nominative takes no ending: dein Hund."
+    "ex": "Hund is masculine and is the subject of the sentence, so it's nominative, which takes no ending: dein Hund."
   },
   {
     "id": 123,
@@ -1529,7 +1529,7 @@
     "cue": "your",
     "segments": [ { "blank": "pronomen", "ans": ["Deine"] }, { "text": " Idee gefällt mir sehr." } ],
     "tr": "I really like your idea.",
-    "ex": "Feminine nominative takes -e: deine Idee."
+    "ex": "Idee is feminine and is the subject of the sentence, so it's nominative, which takes -e: deine Idee."
   },
   {
     "id": 124,
@@ -1541,7 +1541,7 @@
     "cue": "your",
     "segments": [ { "text": "Wo ist " }, { "blank": "pronomen", "ans": ["dein"] }, { "text": " Buch?" } ],
     "tr": "Where is your book?",
-    "ex": "Neuter nominative takes no ending: dein Buch."
+    "ex": "Buch is neuter and is the subject of the sentence (wo ist ...?), so it's nominative, which takes no ending: dein Buch."
   },
   {
     "id": 125,
@@ -1553,7 +1553,7 @@
     "cue": "your",
     "segments": [ { "text": "Ich habe " }, { "blank": "pronomen", "ans": ["deinen"] }, { "text": " Brief gestern bekommen." } ],
     "tr": "I received your letter yesterday.",
-    "ex": "Masculine accusative takes -en: deinen Brief."
+    "ex": "Brief is masculine and is the direct object of bekommen, so it's accusative, which takes -en: deinen Brief."
   },
   {
     "id": 126,
@@ -1565,7 +1565,7 @@
     "cue": "your",
     "segments": [ { "text": "Zeig mir bitte " }, { "blank": "pronomen", "ans": ["deine"] }, { "text": " neue Wohnung." } ],
     "tr": "Please show me your new flat.",
-    "ex": "Feminine accusative takes -e."
+    "ex": "Wohnung is feminine and is the direct object of zeigen, so it's accusative, which takes -e: deine Wohnung."
   },
   {
     "id": 127,
@@ -1577,7 +1577,7 @@
     "cue": "your",
     "segments": [ { "text": "Hast du " }, { "blank": "pronomen", "ans": ["deine"] }, { "text": " Schlüssel wieder gefunden?" } ],
     "tr": "Have you found your keys again?",
-    "ex": "Plural accusative takes -e: deine Schlüssel."
+    "ex": "Schlüssel is plural and is the direct object of finden, so it's accusative, which takes -e: deine Schlüssel."
   },
   {
     "id": 128,
@@ -1589,7 +1589,7 @@
     "cue": "your",
     "segments": [ { "text": "Wie geht es " }, { "blank": "pronomen", "ans": ["deinem"] }, { "text": " Bruder?" } ],
     "tr": "How is your brother?",
-    "ex": "Masculine dative takes -em: deinem Bruder."
+    "ex": "Bruder is masculine; the idiom es geht jemandem always takes the dative, which takes -em: deinem Bruder."
   },
   {
     "id": 129,
@@ -1601,7 +1601,7 @@
     "cue": "your",
     "segments": [ { "text": "Ich war gestern bei " }, { "blank": "pronomen", "ans": ["deiner"] }, { "text": " Schwester." } ],
     "tr": "I was at your sister's place yesterday.",
-    "ex": "Feminine dative takes -er: deiner Schwester."
+    "ex": "Schwester is feminine; the preposition bei always takes the dative, which takes -er: deiner Schwester."
   },
   {
     "id": 130,
@@ -1613,7 +1613,7 @@
     "cue": "your",
     "segments": [ { "text": "Was machst du mit " }, { "blank": "pronomen", "ans": ["deinem"] }, { "text": " alten Fahrrad?" } ],
     "tr": "What are you doing with your old bicycle?",
-    "ex": "Neuter dative takes -em: deinem Fahrrad."
+    "ex": "Fahrrad is neuter; the preposition mit always takes the dative, which takes -em: deinem Fahrrad."
   },
   {
     "id": 131,
@@ -1625,7 +1625,7 @@
     "cue": "your",
     "segments": [ { "text": "Der Name " }, { "blank": "pronomen", "ans": ["deiner"] }, { "text": " Firma klingt interessant." } ],
     "tr": "The name of your company sounds interesting.",
-    "ex": "Feminine genitive takes -er: deiner Firma."
+    "ex": "Firma is feminine and shows possession of the noun Name, so it's genitive, which takes -er: deiner Firma."
   },
   {
     "id": 132,
@@ -1637,7 +1637,7 @@
     "cue": "his",
     "segments": [ { "text": "Thomas ist verheiratet. " }, { "blank": "pronomen", "ans": ["Seine"] }, { "text": " Frau ist Lehrerin." } ],
     "tr": "Thomas is married. His wife is a teacher.",
-    "ex": "The possessor is masculine, so the stem is sein-; feminine nominative adds -e."
+    "ex": "The possessor Thomas is male, so the stem is sein-; Frau is feminine and is the subject of the second sentence, so it's nominative, which adds -e: seine Frau."
   },
   {
     "id": 133,
@@ -1649,7 +1649,7 @@
     "cue": "his",
     "segments": [ { "text": "Peter kommt später. " }, { "blank": "pronomen", "ans": ["Sein"] }, { "text": " Zug hat Verspätung." } ],
     "tr": "Peter is coming later. His train is delayed.",
-    "ex": "Stem sein- for a male possessor; masculine nominative takes no ending."
+    "ex": "The possessor Peter is male, so the stem is sein-; Zug is masculine and is the subject of the second sentence, so it's nominative, which takes no ending: sein Zug."
   },
   {
     "id": 134,
@@ -1661,7 +1661,7 @@
     "cue": "his",
     "segments": [ { "text": "Mein Onkel ist stolz. " }, { "blank": "pronomen", "ans": ["Sein"] }, { "text": " Haus ist endlich fertig." } ],
     "tr": "My uncle is proud. His house is finally finished.",
-    "ex": "Neuter nominative takes no ending: sein Haus."
+    "ex": "The possessor (der Onkel) is male, so the stem is sein-; Haus is neuter and is the subject of the second sentence, so it's nominative, which takes no ending: sein Haus."
   },
   {
     "id": 135,
@@ -1673,7 +1673,7 @@
     "cue": "his",
     "segments": [ { "text": "Der Chef hat " }, { "blank": "pronomen", "ans": ["seinen"] }, { "text": " Laptop im Büro gelassen." } ],
     "tr": "The boss left his laptop at the office.",
-    "ex": "Masculine accusative takes -en: seinen Laptop."
+    "ex": "Laptop is masculine and is the direct object of lassen, so it's accusative, which takes -en: seinen Laptop."
   },
   {
     "id": 136,
@@ -1685,7 +1685,7 @@
     "cue": "his",
     "segments": [ { "text": "Markus besucht " }, { "blank": "pronomen", "ans": ["seine"] }, { "text": " Großmutter jeden Monat." } ],
     "tr": "Markus visits his grandmother every month.",
-    "ex": "Feminine accusative takes -e: seine Großmutter."
+    "ex": "Großmutter is feminine and is the direct object of besuchen, so it's accusative, which takes -e: seine Großmutter."
   },
   {
     "id": 137,
@@ -1697,7 +1697,7 @@
     "cue": "his",
     "segments": [ { "text": "Der Junge macht " }, { "blank": "pronomen", "ans": ["seine"] }, { "text": " Hausaufgaben immer allein." } ],
     "tr": "The boy always does his homework alone.",
-    "ex": "Plural accusative takes -e: seine Hausaufgaben."
+    "ex": "Hausaufgaben is plural and is the direct object of machen, so it's accusative, which takes -e: seine Hausaufgaben."
   },
   {
     "id": 138,
@@ -1709,7 +1709,7 @@
     "cue": "his",
     "segments": [ { "text": "Er spielt gern mit " }, { "blank": "pronomen", "ans": ["seinem"] }, { "text": " Sohn im Park." } ],
     "tr": "He likes playing with his son in the park.",
-    "ex": "Masculine dative takes -em: seinem Sohn."
+    "ex": "Sohn is masculine; the preposition mit always takes the dative, which takes -em: seinem Sohn."
   },
   {
     "id": 139,
@@ -1721,7 +1721,7 @@
     "cue": "his",
     "segments": [ { "text": "Der Lehrer hilft " }, { "blank": "pronomen", "ans": ["seiner"] }, { "text": " Klasse bei dem Projekt." } ],
     "tr": "The teacher helps his class with the project.",
-    "ex": "Feminine dative takes -er: seiner Klasse."
+    "ex": "Klasse is feminine; helfen governs the dative, which takes -er: seiner Klasse."
   },
   {
     "id": 140,
@@ -1733,7 +1733,7 @@
     "cue": "his",
     "segments": [ { "text": "Er erzählt " }, { "blank": "pronomen", "ans": ["seinen"] }, { "text": " Kollegen von der Reise." } ],
     "tr": "He tells his colleagues about the trip.",
-    "ex": "Plural dative takes -en: seinen Kollegen."
+    "ex": "Kollegen is plural; as the indirect object of erzählen (who is told), it's dative, which takes -en: seinen Kollegen."
   },
   {
     "id": 141,
@@ -1745,7 +1745,7 @@
     "cue": "his",
     "segments": [ { "text": "Der Titel " }, { "blank": "pronomen", "ans": ["seines"] }, { "text": " Buches ist sehr lang." } ],
     "tr": "The title of his book is very long.",
-    "ex": "Neuter genitive takes -es, and the noun adds -es: seines Buches."
+    "ex": "Buch is neuter and shows possession of the noun Titel, so it's genitive, which takes -es (and the noun itself adds -es): seines Buches."
   },
   {
     "id": 142,
@@ -1757,7 +1757,7 @@
     "cue": "her",
     "segments": [ { "text": "Anna ist Ärztin. " }, { "blank": "pronomen", "ans": ["Ihr"] }, { "text": " Mann ist Ingenieur." } ],
     "tr": "Anna is a doctor. Her husband is an engineer.",
-    "ex": "A female possessor takes the stem ihr-; masculine nominative adds no ending."
+    "ex": "The possessor Anna is female, so the stem is ihr-; Mann is masculine and is the subject of the second sentence, so it's nominative, which adds no ending: ihr Mann."
   },
   {
     "id": 143,
@@ -1769,7 +1769,7 @@
     "cue": "her",
     "segments": [ { "text": "Meine Tante ist zufrieden. " }, { "blank": "pronomen", "ans": ["Ihre"] }, { "text": " Wohnung ist sehr hell." } ],
     "tr": "My aunt is happy. Her flat is very bright.",
-    "ex": "Feminine nominative takes -e: ihre Wohnung."
+    "ex": "The possessor (die Tante) is female, so the stem is ihr-; Wohnung is feminine and is the subject of the second sentence, so it's nominative, which adds -e: ihre Wohnung."
   },
   {
     "id": 144,
@@ -1781,7 +1781,7 @@
     "cue": "her",
     "segments": [ { "text": "Die Lehrerin ist neu. " }, { "blank": "pronomen", "ans": ["Ihr"] }, { "text": " Klassenzimmer liegt oben." } ],
     "tr": "The teacher is new. Her classroom is upstairs.",
-    "ex": "Neuter nominative takes no ending: ihr Klassenzimmer."
+    "ex": "The possessor (die Lehrerin) is female, so the stem is ihr-; Klassenzimmer is neuter and is the subject of the second sentence, so it's nominative, which adds no ending: ihr Klassenzimmer."
   },
   {
     "id": 145,
@@ -1793,7 +1793,7 @@
     "cue": "her",
     "segments": [ { "text": "Sarah sucht " }, { "blank": "pronomen", "ans": ["ihren"] }, { "text": " Regenschirm." } ],
     "tr": "Sarah is looking for her umbrella.",
-    "ex": "Masculine accusative takes -en: ihren Regenschirm."
+    "ex": "Regenschirm is masculine and is the direct object of suchen, so it's accusative, which takes -en: ihren Regenschirm."
   },
   {
     "id": 146,
@@ -1805,7 +1805,7 @@
     "cue": "her",
     "segments": [ { "text": "Sie hat " }, { "blank": "pronomen", "ans": ["ihre"] }, { "text": " Brille auf dem Tisch liegen lassen." } ],
     "tr": "She left her glasses on the table.",
-    "ex": "Feminine accusative takes -e: ihre Brille."
+    "ex": "Brille is feminine and is the direct object of liegen lassen, so it's accusative, which takes -e: ihre Brille."
   },
   {
     "id": 147,
@@ -1817,7 +1817,7 @@
     "cue": "her",
     "segments": [ { "text": "Meine Schwester ruft " }, { "blank": "pronomen", "ans": ["ihre"] }, { "text": " Freundinnen jeden Abend an." } ],
     "tr": "My sister calls her friends every evening.",
-    "ex": "Plural accusative takes -e: ihre Freundinnen."
+    "ex": "Freundinnen is plural and is the direct object of anrufen, so it's accusative, which takes -e: ihre Freundinnen."
   },
   {
     "id": 148,
@@ -1829,7 +1829,7 @@
     "cue": "her",
     "segments": [ { "text": "Sie fährt mit " }, { "blank": "pronomen", "ans": ["ihrem"] }, { "text": " Fahrrad zur Uni." } ],
     "tr": "She rides her bicycle to university.",
-    "ex": "Neuter dative takes -em: ihrem Fahrrad."
+    "ex": "Fahrrad is neuter; the preposition mit always takes the dative, which takes -em: ihrem Fahrrad."
   },
   {
     "id": 149,
@@ -1841,7 +1841,7 @@
     "cue": "her",
     "segments": [ { "text": "Julia hilft " }, { "blank": "pronomen", "ans": ["ihrer"] }, { "text": " Mutter im Garten." } ],
     "tr": "Julia helps her mother in the garden.",
-    "ex": "Feminine dative takes -er: ihrer Mutter."
+    "ex": "Mutter is feminine; helfen governs the dative, which takes -er: ihrer Mutter."
   },
   {
     "id": 150,
@@ -1853,7 +1853,7 @@
     "cue": "her",
     "segments": [ { "text": "Sie schreibt " }, { "blank": "pronomen", "ans": ["ihren"] }, { "text": " Eltern jede Woche eine Karte." } ],
     "tr": "She writes her parents a card every week.",
-    "ex": "Plural dative takes -en: ihren Eltern."
+    "ex": "Eltern is plural; as the indirect object of schreiben (who is written to), it's dative, which takes -en: ihren Eltern."
   },
   {
     "id": 151,
@@ -1865,7 +1865,7 @@
     "cue": "her",
     "segments": [ { "text": "Das Ende " }, { "blank": "pronomen", "ans": ["ihrer"] }, { "text": " Geschichte war überraschend." } ],
     "tr": "The ending of her story was surprising.",
-    "ex": "Feminine genitive takes -er: ihrer Geschichte."
+    "ex": "Geschichte is feminine and shows possession of the noun Ende, so it's genitive, which takes -er: ihrer Geschichte."
   },
   {
     "id": 152,
@@ -1877,7 +1877,7 @@
     "cue": "its",
     "segments": [ { "text": "Das Kind weint. " }, { "blank": "pronomen", "ans": ["Sein"] }, { "text": " Spielzeug ist kaputt." } ],
     "tr": "The child is crying. Its toy is broken.",
-    "ex": "A neuter possessor also takes the stem sein-; neuter nominative adds no ending."
+    "ex": "The possessor (das Kind) is neuter and also takes the stem sein-; Spielzeug is neuter and is the subject of the second sentence, so it's nominative, which adds no ending: sein Spielzeug."
   },
   {
     "id": 153,
@@ -1889,7 +1889,7 @@
     "cue": "its",
     "segments": [ { "text": "Das Baby schläft. " }, { "blank": "pronomen", "ans": ["Seine"] }, { "text": " Mutter ist nebenan." } ],
     "tr": "The baby is asleep. Its mother is next door.",
-    "ex": "Stem sein- for a neuter possessor; feminine nominative adds -e."
+    "ex": "The possessor (das Baby) is neuter and takes the stem sein-; Mutter is feminine and is the subject of the second sentence, so it's nominative, which adds -e: seine Mutter."
   },
   {
     "id": 154,
@@ -1901,7 +1901,7 @@
     "cue": "its",
     "segments": [ { "text": "Das Mädchen hat " }, { "blank": "pronomen", "ans": ["seinen", "ihren"] }, { "text": " Ball verloren." } ],
     "tr": "The girl lost her ball.",
-    "ex": "Das Mädchen is grammatically neuter, so strict grammar gives seinen; in everyday speech ihren is just as common when a real person is meant."
+    "ex": "Ball is masculine and is the direct object of verlieren, so it's accusative. Das Mädchen is grammatically neuter, so strict grammar gives seinen; in everyday speech ihren is just as common when a real person is meant."
   },
   {
     "id": 155,
@@ -1913,7 +1913,7 @@
     "cue": "its",
     "segments": [ { "text": "Das Kind spielt mit " }, { "blank": "pronomen", "ans": ["seinem"] }, { "text": " Hund im Hof." } ],
     "tr": "The child is playing with its dog in the yard.",
-    "ex": "Masculine dative takes -em, with the neuter possessor stem sein-."
+    "ex": "Hund is masculine; the preposition mit always takes the dative, which takes -em. The possessor (das Kind) is neuter, so the stem is sein-: seinem Hund."
   },
   {
     "id": 156,
@@ -1925,7 +1925,7 @@
     "cue": "its",
     "segments": [ { "text": "Das Pferd läuft zu " }, { "blank": "pronomen", "ans": ["seiner"] }, { "text": " Box zurück." } ],
     "tr": "The horse runs back to its stall.",
-    "ex": "Feminine dative takes -er: seiner Box."
+    "ex": "Box is feminine; the preposition zu always takes the dative, which takes -er. The possessor (das Pferd) is neuter, so the stem is sein-: seiner Box."
   },
   {
     "id": 157,
@@ -1937,7 +1937,7 @@
     "cue": "our",
     "segments": [ { "blank": "pronomen", "ans": ["Unser"] }, { "text": " Lehrer ist heute krank." } ],
     "tr": "Our teacher is ill today.",
-    "ex": "Masculine nominative takes no ending: unser Lehrer."
+    "ex": "Lehrer is masculine and is the subject of the sentence, so it's nominative, which takes no ending: unser Lehrer."
   },
   {
     "id": 158,
@@ -1949,7 +1949,7 @@
     "cue": "our",
     "segments": [ { "blank": "pronomen", "ans": ["Unsere"] }, { "text": " Wohnung liegt im dritten Stock." } ],
     "tr": "Our flat is on the third floor.",
-    "ex": "Feminine nominative takes -e: unsere Wohnung."
+    "ex": "Wohnung is feminine and is the subject of the sentence, so it's nominative, which takes -e: unsere Wohnung."
   },
   {
     "id": 159,
@@ -1961,7 +1961,7 @@
     "cue": "our",
     "segments": [ { "blank": "pronomen", "ans": ["Unser"] }, { "text": " Haus hat einen kleinen Garten." } ],
     "tr": "Our house has a small garden.",
-    "ex": "Neuter nominative takes no ending: unser Haus."
+    "ex": "Haus is neuter and is the subject of the sentence, so it's nominative, which takes no ending: unser Haus."
   },
   {
     "id": 160,
@@ -1973,7 +1973,7 @@
     "cue": "our",
     "segments": [ { "blank": "pronomen", "ans": ["Unsere"] }, { "text": " Nachbarn sind sehr freundlich." } ],
     "tr": "Our neighbours are very friendly.",
-    "ex": "Plural nominative takes -e: unsere Nachbarn."
+    "ex": "Nachbarn is plural and is the subject of the sentence, so it's nominative, which takes -e: unsere Nachbarn."
   },
   {
     "id": 161,
@@ -1985,7 +1985,7 @@
     "cue": "our",
     "segments": [ { "text": "Wir haben " }, { "blank": "pronomen", "ans": ["unseren"] }, { "text": " Urlaub schon gebucht." } ],
     "tr": "We have already booked our holiday.",
-    "ex": "Masculine accusative takes -en: unseren Urlaub."
+    "ex": "Urlaub is masculine and is the direct object of buchen, so it's accusative, which takes -en: unseren Urlaub."
   },
   {
     "id": 162,
@@ -1997,7 +1997,7 @@
     "cue": "our",
     "segments": [ { "text": "Wir laden " }, { "blank": "pronomen", "ans": ["unsere"] }, { "text": " Freunde zum Essen ein." } ],
     "tr": "We are inviting our friends to dinner.",
-    "ex": "Plural accusative takes -e: unsere Freunde."
+    "ex": "Freunde is plural and is the direct object of einladen, so it's accusative, which takes -e: unsere Freunde."
   },
   {
     "id": 163,
@@ -2009,7 +2009,7 @@
     "cue": "our",
     "segments": [ { "text": "Wir wohnen bei " }, { "blank": "pronomen", "ans": ["unserer"] }, { "text": " Tante in Bremen." } ],
     "tr": "We are staying with our aunt in Bremen.",
-    "ex": "Feminine dative takes -er: unserer Tante."
+    "ex": "Tante is feminine; the preposition bei always takes the dative, which takes -er: unserer Tante."
   },
   {
     "id": 164,
@@ -2021,7 +2021,7 @@
     "cue": "our",
     "segments": [ { "text": "Wir sprechen oft mit " }, { "blank": "pronomen", "ans": ["unserem"] }, { "text": " Vermieter." } ],
     "tr": "We often talk to our landlord.",
-    "ex": "Masculine dative takes -em: unserem Vermieter."
+    "ex": "Vermieter is masculine; the preposition mit always takes the dative, which takes -em: unserem Vermieter."
   },
   {
     "id": 165,
@@ -2033,7 +2033,7 @@
     "cue": "our",
     "segments": [ { "text": "Wir danken " }, { "blank": "pronomen", "ans": ["unseren"] }, { "text": " Gästen für den schönen Abend." } ],
     "tr": "We thank our guests for the lovely evening.",
-    "ex": "Plural dative takes -en: unseren Gästen."
+    "ex": "Gästen is plural; danken governs the dative, which takes -en: unseren Gästen."
   },
   {
     "id": 166,
@@ -2045,7 +2045,7 @@
     "cue": "our",
     "segments": [ { "text": "Die Farbe " }, { "blank": "pronomen", "ans": ["unseres"] }, { "text": " Autos gefällt mir nicht." } ],
     "tr": "I do not like the colour of our car.",
-    "ex": "Neuter genitive takes -es, and the noun adds -s: unseres Autos."
+    "ex": "Auto is neuter and shows possession of the noun Farbe, so it's genitive, which takes -es (and the noun itself adds -s): unseres Autos."
   },
   {
     "id": 167,
@@ -2057,7 +2057,7 @@
     "cue": "your",
     "segments": [ { "blank": "pronomen", "ans": ["Euer"] }, { "text": " Garten sieht wunderbar aus." } ],
     "tr": "Your garden looks wonderful.",
-    "ex": "Masculine nominative takes no ending, and euer keeps its e when unendinged."
+    "ex": "Garten is masculine and is the subject of the sentence, so it's nominative, which takes no ending; euer keeps its e when unendinged."
   },
   {
     "id": 168,
@@ -2069,7 +2069,7 @@
     "cue": "your",
     "segments": [ { "blank": "pronomen", "ans": ["Eure"] }, { "text": " Wohnung ist wirklich gemütlich." } ],
     "tr": "Your flat is really cosy.",
-    "ex": "Once an ending is added, euer drops the second e: eure Wohnung, not eurere."
+    "ex": "Wohnung is feminine and is the subject of the sentence, so it's nominative, which takes -e; once an ending is added, euer drops the second e: eure Wohnung, not eurere."
   },
   {
     "id": 169,
@@ -2081,7 +2081,7 @@
     "cue": "your",
     "segments": [ { "blank": "pronomen", "ans": ["Euer"] }, { "text": " Auto steht vor der Tür." } ],
     "tr": "Your car is parked outside.",
-    "ex": "Neuter nominative takes no ending: euer Auto."
+    "ex": "Auto is neuter and is the subject of the sentence, so it's nominative, which takes no ending: euer Auto."
   },
   {
     "id": 170,
@@ -2093,7 +2093,7 @@
     "cue": "your",
     "segments": [ { "text": "Ich habe " }, { "blank": "pronomen", "ans": ["euren"] }, { "text": " Brief gestern gelesen." } ],
     "tr": "I read your letter yesterday.",
-    "ex": "Masculine accusative takes -en and euer drops its e: euren Brief."
+    "ex": "Brief is masculine and is the direct object of lesen, so it's accusative, which takes -en; euer drops its e: euren Brief."
   },
   {
     "id": 171,
@@ -2105,7 +2105,7 @@
     "cue": "your",
     "segments": [ { "text": "Habt ihr " }, { "blank": "pronomen", "ans": ["eure"] }, { "text": " Fahrkarten dabei?" } ],
     "tr": "Have you got your tickets with you?",
-    "ex": "Plural accusative takes -e: eure Fahrkarten."
+    "ex": "Fahrkarten is plural and is the direct object of dabeihaben, so it's accusative, which takes -e: eure Fahrkarten."
   },
   {
     "id": 172,
@@ -2117,7 +2117,7 @@
     "cue": "your",
     "segments": [ { "text": "Wie geht es " }, { "blank": "pronomen", "ans": ["eurem"] }, { "text": " Sohn in der neuen Schule?" } ],
     "tr": "How is your son getting on at the new school?",
-    "ex": "Masculine dative takes -em and the stem shortens: eurem Sohn."
+    "ex": "Sohn is masculine; the idiom es geht jemandem always takes the dative, which takes -em, and the stem shortens: eurem Sohn."
   },
   {
     "id": 173,
@@ -2129,7 +2129,7 @@
     "cue": "your",
     "segments": [ { "text": "Ich habe mit " }, { "blank": "pronomen", "ans": ["eurer"] }, { "text": " Nachbarin gesprochen." } ],
     "tr": "I spoke to your neighbour.",
-    "ex": "Feminine dative takes -er: eurer Nachbarin."
+    "ex": "Nachbarin is feminine; the preposition mit always takes the dative, which takes -er: eurer Nachbarin."
   },
   {
     "id": 174,
@@ -2141,7 +2141,7 @@
     "cue": "your",
     "segments": [ { "text": "Wir kommen gern zu " }, { "blank": "pronomen", "ans": ["eurer"] }, { "text": " Party." } ],
     "tr": "We would love to come to your party.",
-    "ex": "Feminine dative takes -er: eurer Party."
+    "ex": "Party is feminine; the preposition zu always takes the dative, which takes -er: eurer Party."
   },
   {
     "id": 175,
@@ -2153,7 +2153,7 @@
     "cue": "your",
     "segments": [ { "text": "Der Preis " }, { "blank": "pronomen", "ans": ["eures"] }, { "text": " Hauses ist wirklich hoch." } ],
     "tr": "The price of your house is really high.",
-    "ex": "Neuter genitive takes -es: eures Hauses."
+    "ex": "Haus is neuter and shows possession of the noun Preis, so it's genitive, which takes -es: eures Hauses."
   },
   {
     "id": 176,
@@ -2165,7 +2165,7 @@
     "cue": "their",
     "segments": [ { "text": "Meine Nachbarn sind umgezogen. " }, { "blank": "pronomen", "ans": ["Ihr"] }, { "text": " Haus steht leer." } ],
     "tr": "My neighbours have moved. Their house is empty.",
-    "ex": "A plural possessor takes the stem ihr-; neuter nominative adds no ending."
+    "ex": "The possessor (die Nachbarn) is plural, so the stem is ihr-; Haus is neuter and is the subject of the second sentence, so it's nominative, which adds no ending: ihr Haus."
   },
   {
     "id": 177,
@@ -2177,7 +2177,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Studenten sind zufrieden. " }, { "blank": "pronomen", "ans": ["Ihre"] }, { "text": " Prüfung war leicht." } ],
     "tr": "The students are happy. Their exam was easy.",
-    "ex": "Feminine nominative takes -e: ihre Prüfung."
+    "ex": "The possessor (die Studenten) is plural, so the stem is ihr-; Prüfung is feminine and is the subject of the second sentence, so it's nominative, which adds -e: ihre Prüfung."
   },
   {
     "id": 178,
@@ -2189,7 +2189,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Kinder sind traurig. " }, { "blank": "pronomen", "ans": ["Ihr"] }, { "text": " Hund ist weggelaufen." } ],
     "tr": "The children are sad. Their dog has run away.",
-    "ex": "Masculine nominative takes no ending: ihr Hund."
+    "ex": "The possessor (die Kinder) is plural, so the stem is ihr-; Hund is masculine and is the subject of the second sentence, so it's nominative, which adds no ending: ihr Hund."
   },
   {
     "id": 179,
@@ -2201,7 +2201,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Gäste haben " }, { "blank": "pronomen", "ans": ["ihren"] }, { "text": " Mantel an der Garderobe gelassen." } ],
     "tr": "The guests left their coat in the cloakroom.",
-    "ex": "Masculine accusative takes -en: ihren Mantel."
+    "ex": "Mantel is masculine and is the direct object of lassen, so it's accusative, which takes -en: ihren Mantel."
   },
   {
     "id": 180,
@@ -2213,7 +2213,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Touristen fotografieren " }, { "blank": "pronomen", "ans": ["ihre"] }, { "text": " Lieblingsplätze." } ],
     "tr": "The tourists photograph their favourite spots.",
-    "ex": "Plural accusative takes -e: ihre Lieblingsplätze."
+    "ex": "Lieblingsplätze is plural and is the direct object of fotografieren, so it's accusative, which takes -e: ihre Lieblingsplätze."
   },
   {
     "id": 181,
@@ -2225,7 +2225,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Eltern holen " }, { "blank": "pronomen", "ans": ["ihre"] }, { "text": " Tochter vom Bahnhof ab." } ],
     "tr": "The parents pick their daughter up from the station.",
-    "ex": "Feminine accusative takes -e: ihre Tochter."
+    "ex": "Tochter is feminine and is the direct object of abholen, so it's accusative, which takes -e: ihre Tochter."
   },
   {
     "id": 182,
@@ -2237,7 +2237,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Kinder spielen mit " }, { "blank": "pronomen", "ans": ["ihren"] }, { "text": " neuen Freunden." } ],
     "tr": "The children are playing with their new friends.",
-    "ex": "Plural dative takes -en: ihren Freunden."
+    "ex": "Freunden is plural; the preposition mit always takes the dative, which takes -en: ihren Freunden."
   },
   {
     "id": 183,
@@ -2249,7 +2249,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Firma dankt " }, { "blank": "pronomen", "ans": ["ihren"] }, { "text": " Mitarbeitern für das Jahr." } ],
     "tr": "The company thanks its employees for the year.",
-    "ex": "Plural dative takes -en: ihren Mitarbeitern."
+    "ex": "Mitarbeitern is plural; danken governs the dative, which takes -en: ihren Mitarbeitern."
   },
   {
     "id": 184,
@@ -2261,7 +2261,7 @@
     "cue": "their",
     "segments": [ { "text": "Sie fahren mit " }, { "blank": "pronomen", "ans": ["ihrem"] }, { "text": " Wohnwagen nach Italien." } ],
     "tr": "They are driving to Italy in their caravan.",
-    "ex": "Masculine dative takes -em: ihrem Wohnwagen."
+    "ex": "Wohnwagen is masculine; the preposition mit always takes the dative, which takes -em: ihrem Wohnwagen."
   },
   {
     "id": 185,
@@ -2273,7 +2273,7 @@
     "cue": "their",
     "segments": [ { "text": "Die Meinung " }, { "blank": "pronomen", "ans": ["ihrer"] }, { "text": " Kollegen war eindeutig." } ],
     "tr": "Their colleagues' opinion was unambiguous.",
-    "ex": "Plural genitive takes -er: ihrer Kollegen."
+    "ex": "Kollegen is plural and shows possession of the noun Meinung, so it's genitive, which takes -er: ihrer Kollegen."
   },
   {
     "id": 186,
@@ -2285,7 +2285,7 @@
     "cue": "your (formal)",
     "segments": [ { "blank": "pronomen", "ans": ["Ihr"] }, { "text": " Termin ist am Dienstag um zehn Uhr." } ],
     "tr": "Your appointment is on Tuesday at ten.",
-    "ex": "The polite possessive is capitalised Ihr-; masculine nominative adds no ending."
+    "ex": "Termin is masculine and is the subject of the sentence, so it's nominative, which adds no ending; the polite possessive is capitalised Ihr-: Ihr Termin."
   },
   {
     "id": 187,
@@ -2297,7 +2297,7 @@
     "cue": "your (formal)",
     "segments": [ { "blank": "pronomen", "ans": ["Ihre"] }, { "text": " Bestellung ist gestern angekommen." } ],
     "tr": "Your order arrived yesterday.",
-    "ex": "Feminine nominative takes -e, with a capital I: Ihre Bestellung."
+    "ex": "Bestellung is feminine and is the subject of the sentence, so it's nominative, which takes -e, with a capital I: Ihre Bestellung."
   },
   {
     "id": 188,
@@ -2309,7 +2309,7 @@
     "cue": "your (formal)",
     "segments": [ { "blank": "pronomen", "ans": ["Ihr"] }, { "text": " Zimmer liegt im zweiten Stock." } ],
     "tr": "Your room is on the second floor.",
-    "ex": "Neuter nominative takes no ending: Ihr Zimmer."
+    "ex": "Zimmer is neuter and is the subject of the sentence, so it's nominative, which takes no ending: Ihr Zimmer."
   },
   {
     "id": 189,
@@ -2321,7 +2321,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Darf ich " }, { "blank": "pronomen", "ans": ["Ihren"] }, { "text": " Ausweis sehen?" } ],
     "tr": "May I see your identity card?",
-    "ex": "Masculine accusative takes -en: Ihren Ausweis."
+    "ex": "Ausweis is masculine and is the direct object of sehen, so it's accusative, which takes -en: Ihren Ausweis."
   },
   {
     "id": 190,
@@ -2333,7 +2333,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Bitte füllen Sie " }, { "blank": "pronomen", "ans": ["Ihre"] }, { "text": " Adresse hier ein." } ],
     "tr": "Please enter your address here.",
-    "ex": "Feminine accusative takes -e: Ihre Adresse."
+    "ex": "Adresse is feminine and is the direct object of ausfüllen, so it's accusative, which takes -e: Ihre Adresse."
   },
   {
     "id": 191,
@@ -2345,7 +2345,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Wir haben " }, { "blank": "pronomen", "ans": ["Ihre"] }, { "text": " Unterlagen bereits geprüft." } ],
     "tr": "We have already checked your documents.",
-    "ex": "Plural accusative takes -e: Ihre Unterlagen."
+    "ex": "Unterlagen is plural and is the direct object of prüfen, so it's accusative, which takes -e: Ihre Unterlagen."
   },
   {
     "id": 192,
@@ -2357,7 +2357,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Wie geht es " }, { "blank": "pronomen", "ans": ["Ihrer"] }, { "text": " Frau?" } ],
     "tr": "How is your wife?",
-    "ex": "Feminine dative takes -er: Ihrer Frau."
+    "ex": "Frau is feminine; the idiom es geht jemandem always takes the dative, which takes -er: Ihrer Frau."
   },
   {
     "id": 193,
@@ -2369,7 +2369,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Ich komme gern zu " }, { "blank": "pronomen", "ans": ["Ihrem"] }, { "text": " Vortrag." } ],
     "tr": "I would be glad to come to your talk.",
-    "ex": "Masculine dative takes -em: Ihrem Vortrag."
+    "ex": "Vortrag is masculine; the preposition zu always takes the dative, which takes -em: Ihrem Vortrag."
   },
   {
     "id": 194,
@@ -2381,7 +2381,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Wir helfen " }, { "blank": "pronomen", "ans": ["Ihren"] }, { "text": " Mitarbeitern bei dem Umzug." } ],
     "tr": "We are helping your staff with the move.",
-    "ex": "Plural dative takes -en: Ihren Mitarbeitern."
+    "ex": "Mitarbeitern is plural; helfen governs the dative, which takes -en: Ihren Mitarbeitern."
   },
   {
     "id": 195,
@@ -2393,7 +2393,7 @@
     "cue": "your (formal)",
     "segments": [ { "text": "Die Qualität " }, { "blank": "pronomen", "ans": ["Ihrer"] }, { "text": " Arbeit ist ausgezeichnet." } ],
     "tr": "The quality of your work is excellent.",
-    "ex": "Feminine genitive takes -er: Ihrer Arbeit."
+    "ex": "Arbeit is feminine and shows possession of the noun Qualität, so it's genitive, which takes -er: Ihrer Arbeit."
   },
   {
     "id": 196,
@@ -2405,7 +2405,7 @@
     "cue": "mine",
     "segments": [ { "text": "Ist das dein Auto? Nein, " }, { "blank": "pronomen", "ans": ["meins"] }, { "text": " steht dort drüben." } ],
     "tr": "Is that your car? No, mine is over there.",
-    "ex": "Standing alone, a neuter possessive takes the ending of das: meins."
+    "ex": "Referring back to das Auto (neuter) as the subject of the second sentence, the standalone possessive is nominative and takes the ending of das: meins."
   },
   {
     "id": 197,
@@ -2417,7 +2417,7 @@
     "cue": "mine",
     "segments": [ { "text": "Dein Mantel ist schwarz, " }, { "blank": "pronomen", "ans": ["meiner"] }, { "text": " ist blau." } ],
     "tr": "Your coat is black, mine is blue.",
-    "ex": "Standing alone, a masculine possessive takes -er, unlike the article form mein."
+    "ex": "Referring back to der Mantel (masculine) as the subject of the second clause, the standalone possessive is nominative and takes -er, unlike the article form mein: meiner."
   },
   {
     "id": 198,
@@ -2429,7 +2429,7 @@
     "cue": "yours",
     "segments": [ { "text": "Meine Tasche ist klein, " }, { "blank": "pronomen", "ans": ["deine"] }, { "text": " ist viel größer." } ],
     "tr": "My bag is small, yours is much bigger.",
-    "ex": "Feminine standalone possessives keep -e: deine."
+    "ex": "Referring back to die Tasche (feminine) as the subject of the second clause, the standalone possessive is nominative and keeps -e: deine."
   },
   {
     "id": 199,
@@ -2441,7 +2441,7 @@
     "cue": "yours",
     "segments": [ { "text": "Ich nehme meinen Schirm und du nimmst " }, { "blank": "pronomen", "ans": ["deinen"] }, { "text": "." } ],
     "tr": "I will take my umbrella and you take yours.",
-    "ex": "Masculine accusative standalone takes -en: deinen."
+    "ex": "Referring back to der Schirm (masculine) as the direct object of nehmen, the standalone possessive is accusative and takes -en: deinen."
   },
   {
     "id": 200,
@@ -2453,7 +2453,7 @@
     "cue": "his",
     "segments": [ { "text": "Mein Platz ist hier, " }, { "blank": "pronomen", "ans": ["seiner"] }, { "text": " ist da hinten." } ],
     "tr": "My seat is here, his is at the back.",
-    "ex": "Masculine standalone possessives take -er: seiner."
+    "ex": "Referring back to der Platz (masculine) as the subject of the second clause, the standalone possessive is nominative and takes -er: seiner."
   },
   {
     "id": 201,
@@ -2465,7 +2465,7 @@
     "cue": "hers",
     "segments": [ { "text": "Unsere Kinder sind schon groß, " }, { "blank": "pronomen", "ans": ["ihre"] }, { "text": " gehen noch zur Schule." } ],
     "tr": "Our children are grown up, hers are still at school.",
-    "ex": "Plural standalone possessives take -e: ihre."
+    "ex": "Referring back to die Kinder (plural) as the subject of the second clause, the standalone possessive is nominative and takes -e: ihre."
   },
   {
     "id": 202,
@@ -2477,7 +2477,7 @@
     "cue": "ours",
     "segments": [ { "text": "Euer Garten ist schön, aber " }, { "blank": "pronomen", "ans": ["unserer"] }, { "text": " ist größer." } ],
     "tr": "Your garden is lovely, but ours is bigger.",
-    "ex": "Masculine standalone takes -er, and unser keeps its e: unserer."
+    "ex": "Referring back to der Garten (masculine) as the subject of the second clause, the standalone possessive is nominative and takes -er, and unser keeps its e: unserer."
   },
   {
     "id": 203,
@@ -2489,7 +2489,7 @@
     "cue": "yours",
     "segments": [ { "text": "Unsere Zimmer sind oben, " }, { "blank": "pronomen", "ans": ["eure"] }, { "text": " sind unten." } ],
     "tr": "Our rooms are upstairs, yours are downstairs.",
-    "ex": "Plural standalone takes -e and euer shortens: eure."
+    "ex": "Referring back to die Zimmer (plural) as the subject of the second clause, the standalone possessive is nominative and takes -e, and euer shortens: eure."
   },
   {
     "id": 204,
@@ -2501,7 +2501,7 @@
     "cue": "theirs",
     "segments": [ { "text": "Wir haben unsere Karten dabei, sie haben " }, { "blank": "pronomen", "ans": ["ihre"] }, { "text": " vergessen." } ],
     "tr": "We have our tickets with us, they forgot theirs.",
-    "ex": "Plural accusative standalone takes -e: ihre."
+    "ex": "Referring back to die Karten (plural) as the direct object of vergessen, the standalone possessive is accusative and takes -e: ihre."
   },
   {
     "id": 205,
@@ -2513,7 +2513,7 @@
     "cue": "yours (formal)",
     "segments": [ { "text": "Mein Vorschlag ist einfach, " }, { "blank": "pronomen", "ans": ["Ihrer"] }, { "text": " ist besser." } ],
     "tr": "My proposal is simple, yours is better.",
-    "ex": "Masculine standalone takes -er, capitalised for the polite form: Ihrer."
+    "ex": "Referring back to der Vorschlag (masculine) as the subject of the second clause, the standalone possessive is nominative and takes -er, capitalised for the polite form: Ihrer."
   },
   {
     "id": 206,
@@ -3557,7 +3557,7 @@
     "cue": "whom",
     "segments": [ { "text": "Die Frau, " }, { "blank": "pronomen", "ans": ["die"] }, { "text": " du dort siehst, ist unsere Nachbarin." } ],
     "tr": "The woman you can see over there is our neighbour.",
-    "ex": "Feminine accusative object: die."
+    "ex": "Frau is feminine and is the direct object of siehst in the relative clause, so it's accusative: die."
   },
   {
     "id": 293,
@@ -3593,7 +3593,7 @@
     "cue": "which",
     "segments": [ { "text": "Das Lied, " }, { "blank": "pronomen", "ans": ["das"] }, { "text": " ich im Radio gehört habe, gefällt mir sehr." } ],
     "tr": "The song I heard on the radio pleases me a lot.",
-    "ex": "Neuter accusative object: das."
+    "ex": "Lied is neuter and is the direct object of gehört habe in the relative clause, so it's accusative: das."
   },
   {
     "id": 296,
@@ -3605,7 +3605,7 @@
     "cue": "whom",
     "segments": [ { "text": "Das Mädchen, " }, { "blank": "pronomen", "ans": ["das"] }, { "text": " wir eingeladen haben, kommt später." } ],
     "tr": "The girl we invited is coming later.",
-    "ex": "Das Mädchen is grammatically neuter, so the relative pronoun is das."
+    "ex": "Mädchen is grammatically neuter and is the direct object of eingeladen haben in the relative clause, so it's accusative: das."
   },
   {
     "id": 297,
@@ -3629,7 +3629,7 @@
     "cue": "whom",
     "segments": [ { "text": "Die Gäste, " }, { "blank": "pronomen", "ans": ["die"] }, { "text": " wir eingeladen haben, kommen um sieben." } ],
     "tr": "The guests we invited are coming at seven.",
-    "ex": "Plural accusative object: die."
+    "ex": "Gäste is plural and is the direct object of eingeladen haben in the relative clause, so it's accusative: die."
   },
   {
     "id": 299,
@@ -3677,7 +3677,7 @@
     "cue": "whom",
     "segments": [ { "text": "Der Student, " }, { "blank": "pronomen", "ans": ["dem"] }, { "text": " ich die Regel erklärt habe, hat alles verstanden." } ],
     "tr": "The student I explained the rule to understood everything.",
-    "ex": "The recipient of erklären stands in the dative: dem."
+    "ex": "Student is masculine; erklären governs the dative for its recipient, so it's dem."
   },
   {
     "id": 303,
@@ -3689,7 +3689,7 @@
     "cue": "whom",
     "segments": [ { "text": "Der Junge, " }, { "blank": "pronomen", "ans": ["dem"] }, { "text": " wir das Fahrrad geschenkt haben, freut sich sehr." } ],
     "tr": "The boy we gave the bicycle to is very happy.",
-    "ex": "The recipient of schenken stands in the dative: dem."
+    "ex": "Junge is masculine; schenken governs the dative for its recipient, so it's dem."
   },
   {
     "id": 304,
@@ -3701,7 +3701,7 @@
     "cue": "whom",
     "segments": [ { "text": "Die Frau, " }, { "blank": "pronomen", "ans": ["der"] }, { "text": " ich das Buch gegeben habe, wohnt in Bonn." } ],
     "tr": "The woman I gave the book to lives in Bonn.",
-    "ex": "The feminine dative relative pronoun is der, not die - a classic trap."
+    "ex": "Frau is feminine; geben governs the dative for its recipient, so it's der, not die - a classic trap."
   },
   {
     "id": 305,
@@ -3761,7 +3761,7 @@
     "cue": "whom",
     "segments": [ { "text": "Das Mädchen, " }, { "blank": "pronomen", "ans": ["dem"] }, { "text": " ich das Buch geliehen habe, hat es verloren." } ],
     "tr": "The girl I lent the book to has lost it.",
-    "ex": "Neuter antecedent with a dative role: dem."
+    "ex": "Mädchen is grammatically neuter; leihen governs the dative for its recipient, so it's dem."
   },
   {
     "id": 310,
@@ -3773,7 +3773,7 @@
     "cue": "whom",
     "segments": [ { "text": "Die Studenten, " }, { "blank": "pronomen", "ans": ["denen"] }, { "text": " ich die Aufgabe erklärt habe, waren dankbar." } ],
     "tr": "The students I explained the exercise to were grateful.",
-    "ex": "The dative plural relative pronoun is denen - the one form that differs from the article."
+    "ex": "Studenten is plural; erklären governs the dative for its recipient, so it's denen - the one relative form that differs from the article."
   },
   {
     "id": 311,
@@ -3797,7 +3797,7 @@
     "cue": "whom",
     "segments": [ { "text": "Die Kinder, " }, { "blank": "pronomen", "ans": ["denen"] }, { "text": " wir geholfen haben, kommen aus der Ukraine." } ],
     "tr": "The children we helped come from Ukraine.",
-    "ex": "Dative plural relative pronoun: denen."
+    "ex": "Kinder is plural; helfen governs the dative, so it's denen."
   },
   {
     "id": 313,
@@ -3821,7 +3821,7 @@
     "cue": "whose",
     "segments": [ { "text": "Der Mann, " }, { "blank": "pronomen", "ans": ["dessen"] }, { "text": " Auto kaputt ist, wartet draußen." } ],
     "tr": "The man whose car has broken down is waiting outside.",
-    "ex": "The masculine genitive relative pronoun is dessen, and the noun after it takes no article."
+    "ex": "Mann is masculine and Auto shows possession by him, so it's genitive: dessen (and the noun after it takes no article)."
   },
   {
     "id": 315,
@@ -3833,7 +3833,7 @@
     "cue": "whose",
     "segments": [ { "text": "Der Autor, " }, { "blank": "pronomen", "ans": ["dessen"] }, { "text": " Buch ich lese, kommt aus Österreich." } ],
     "tr": "The author whose book I am reading comes from Austria.",
-    "ex": "Masculine genitive: dessen."
+    "ex": "Autor is masculine and Buch shows possession by him, so it's genitive: dessen."
   },
   {
     "id": 316,
@@ -3845,7 +3845,7 @@
     "cue": "whose",
     "segments": [ { "text": "Der Kollege, " }, { "blank": "pronomen", "ans": ["dessen"] }, { "text": " Frau Ärztin ist, zieht nach Berlin." } ],
     "tr": "The colleague whose wife is a doctor is moving to Berlin.",
-    "ex": "Masculine genitive: dessen."
+    "ex": "Kollege is masculine and Frau shows possession by him, so it's genitive: dessen."
   },
   {
     "id": 317,
@@ -3857,7 +3857,7 @@
     "cue": "whose",
     "segments": [ { "text": "Die Frau, " }, { "blank": "pronomen", "ans": ["deren"] }, { "text": " Sohn hier studiert, ist Lehrerin." } ],
     "tr": "The woman whose son studies here is a teacher.",
-    "ex": "The feminine genitive relative pronoun is deren."
+    "ex": "Frau is feminine and Sohn shows possession by her, so it's genitive: deren."
   },
   {
     "id": 318,
@@ -3869,7 +3869,7 @@
     "cue": "whose",
     "segments": [ { "text": "Die Firma, " }, { "blank": "pronomen", "ans": ["deren"] }, { "text": " Chef ich kenne, sucht neue Mitarbeiter." } ],
     "tr": "The company whose boss I know is looking for new staff.",
-    "ex": "Feminine genitive: deren."
+    "ex": "Firma is feminine and Chef shows possession by it, so it's genitive: deren."
   },
   {
     "id": 319,
@@ -3881,7 +3881,7 @@
     "cue": "whose",
     "segments": [ { "text": "Die Studentin, " }, { "blank": "pronomen", "ans": ["deren"] }, { "text": " Vortrag wir gehört haben, ist sehr begabt." } ],
     "tr": "The student whose talk we heard is very gifted.",
-    "ex": "Feminine genitive: deren."
+    "ex": "Studentin is feminine and Vortrag shows possession by her, so it's genitive: deren."
   },
   {
     "id": 320,
@@ -3893,7 +3893,7 @@
     "cue": "whose",
     "segments": [ { "text": "Das Kind, " }, { "blank": "pronomen", "ans": ["dessen"] }, { "text": " Mutter Ärztin ist, war heute nicht da." } ],
     "tr": "The child whose mother is a doctor was not here today.",
-    "ex": "The neuter genitive is dessen, the same form as the masculine."
+    "ex": "Kind is neuter and Mutter shows possession by it, so it's genitive: dessen, the same form as the masculine."
   },
   {
     "id": 321,
@@ -3905,7 +3905,7 @@
     "cue": "whose",
     "segments": [ { "text": "Das Hotel, " }, { "blank": "pronomen", "ans": ["dessen"] }, { "text": " Garten so schön ist, war leider ausgebucht." } ],
     "tr": "The hotel whose garden is so beautiful was unfortunately fully booked.",
-    "ex": "Neuter genitive: dessen."
+    "ex": "Hotel is neuter and Garten shows possession by it, so it's genitive: dessen."
   },
   {
     "id": 322,
@@ -3917,7 +3917,7 @@
     "cue": "whose",
     "segments": [ { "text": "Die Nachbarn, " }, { "blank": "pronomen", "ans": ["deren"] }, { "text": " Hund immer bellt, sind ausgezogen." } ],
     "tr": "The neighbours whose dog always barks have moved out.",
-    "ex": "The plural genitive relative pronoun is deren, like the feminine."
+    "ex": "Nachbarn is plural and Hund shows possession by them, so it's genitive: deren, like the feminine."
   },
   {
     "id": 323,
@@ -3929,7 +3929,7 @@
     "cue": "whose",
     "segments": [ { "text": "Die Kinder, " }, { "blank": "pronomen", "ans": ["deren"] }, { "text": " Eltern arbeiten, essen in der Schule." } ],
     "tr": "The children whose parents work eat at school.",
-    "ex": "Plural genitive: deren."
+    "ex": "Kinder is plural and Eltern shows possession by them, so it's genitive: deren."
   },
   {
     "id": 324,
@@ -3941,7 +3941,7 @@
     "cue": "which",
     "segments": [ { "text": "Der Stuhl, auf " }, { "blank": "pronomen", "ans": ["dem"] }, { "text": " du sitzt, ist über hundert Jahre alt." } ],
     "tr": "The chair you are sitting on is over a hundred years old.",
-    "ex": "auf with a fixed position takes the dative, and the antecedent is masculine: dem."
+    "ex": "Stuhl is masculine; auf describing a fixed position takes the dative here, so it's dem."
   },
   {
     "id": 325,
@@ -3953,7 +3953,7 @@
     "cue": "which",
     "segments": [ { "text": "Die Firma, bei " }, { "blank": "pronomen", "ans": ["der"] }, { "text": " ich arbeite, hat dreihundert Mitarbeiter." } ],
     "tr": "The company I work for has three hundred employees.",
-    "ex": "bei always takes the dative, and the antecedent is feminine: der."
+    "ex": "Firma is feminine; the preposition bei always takes the dative, so it's der."
   },
   {
     "id": 326,
@@ -3965,7 +3965,7 @@
     "cue": "which",
     "segments": [ { "text": "Das Thema, über " }, { "blank": "pronomen", "ans": ["das"] }, { "text": " wir gesprochen haben, war kompliziert." } ],
     "tr": "The topic we talked about was complicated.",
-    "ex": "sprechen über takes the accusative, and the antecedent is neuter: das."
+    "ex": "Thema is neuter; sprechen über takes the accusative, so it's das."
   },
   {
     "id": 327,
@@ -3977,7 +3977,7 @@
     "cue": "whom",
     "segments": [ { "text": "Die Freunde, mit " }, { "blank": "pronomen", "ans": ["denen"] }, { "text": " ich reise, kommen aus Spanien." } ],
     "tr": "The friends I travel with come from Spain.",
-    "ex": "mit always takes the dative, and the plural dative relative pronoun is denen."
+    "ex": "Freunde is plural; the preposition mit always takes the dative, so it's denen."
   },
   {
     "id": 328,
@@ -3989,7 +3989,7 @@
     "cue": "whom",
     "segments": [ { "text": "Der Lehrer, von " }, { "blank": "pronomen", "ans": ["dem"] }, { "text": " ich viel gelernt habe, ist jetzt Rektor." } ],
     "tr": "The teacher I learnt a lot from is now the headmaster.",
-    "ex": "von always takes the dative, and the antecedent is masculine: dem."
+    "ex": "Lehrer is masculine; the preposition von always takes the dative, so it's dem."
   },
   {
     "id": 329,
@@ -4001,7 +4001,7 @@
     "cue": "which",
     "segments": [ { "text": "Die Reise, auf " }, { "blank": "pronomen", "ans": ["die"] }, { "text": " ich mich so freue, beginnt morgen." } ],
     "tr": "The trip I am so looking forward to starts tomorrow.",
-    "ex": "sich freuen auf takes the accusative, and the antecedent is feminine: die."
+    "ex": "Reise is feminine; sich freuen auf takes the accusative, so it's die."
   },
   {
     "id": 330,
@@ -4013,7 +4013,7 @@
     "cue": "what",
     "segments": [ { "text": "Alles, " }, { "blank": "pronomen", "ans": ["was"] }, { "text": " du gesagt hast, war völlig richtig." } ],
     "tr": "Everything you said was completely right.",
-    "ex": "After alles, nichts, etwas, vieles and das the relative pronoun is was, not das."
+    "ex": "Alles is the subject of the main clause (war völlig richtig), so it's nominative; after alles, nichts, etwas, vieles and das the relative pronoun is always was, not das."
   },
   {
     "id": 331,
@@ -4025,7 +4025,7 @@
     "cue": "what",
     "segments": [ { "text": "Es gibt nichts, " }, { "blank": "pronomen", "ans": ["was"] }, { "text": " mich heute noch überraschen könnte." } ],
     "tr": "There is nothing that could surprise me today.",
-    "ex": "After nichts the relative pronoun is was."
+    "ex": "nichts is the direct object of gibt, so it's accusative; after nichts the relative pronoun is was."
   },
   {
     "id": 332,
@@ -4037,7 +4037,7 @@
     "cue": "what",
     "segments": [ { "text": "Das ist das Beste, " }, { "blank": "pronomen", "ans": ["was"] }, { "text": " ich seit Langem gehört habe." } ],
     "tr": "That is the best thing I have heard in a long time.",
-    "ex": "After a neuter superlative used as a noun the relative pronoun is was."
+    "ex": "das Beste is a predicate noun after ist, so it's nominative; after a neuter superlative used as a noun, the relative pronoun is was."
   },
   {
     "id": 333,
@@ -4049,7 +4049,7 @@
     "cue": "what",
     "segments": [ { "text": "Er hat mir etwas erzählt, " }, { "blank": "pronomen", "ans": ["was"] }, { "text": " ich noch nicht wusste." } ],
     "tr": "He told me something I did not know yet.",
-    "ex": "After etwas the relative pronoun is was."
+    "ex": "etwas is the direct object of erzählt, so it's accusative; after etwas the relative pronoun is was."
   },
   {
     "id": 334,
@@ -4073,7 +4073,7 @@
     "cue": "for which",
     "segments": [ { "text": "Es gibt nichts, " }, { "blank": "pronomen", "ans": ["worauf"] }, { "text": " ich mich mehr freue." } ],
     "tr": "There is nothing I am looking forward to more.",
-    "ex": "After nichts, auf plus was becomes worauf."
+    "ex": "nichts is the direct object of gibt, so it's accusative; since the antecedent is a thing, was plus the preposition auf contracts to worauf (sich freuen auf takes the accusative)."
   },
   {
     "id": 336,
@@ -4085,7 +4085,7 @@
     "cue": "this",
     "segments": [ { "blank": "pronomen", "ans": ["Dieser"] }, { "text": " Mantel gefällt mir am besten." } ],
     "tr": "I like this coat best.",
-    "ex": "Masculine nominative takes -er, exactly like der: dieser Mantel."
+    "ex": "Mantel is masculine and is the subject of the sentence (with mir as the dative experiencer of gefallen), so it's nominative, which takes -er, exactly like der: dieser Mantel."
   },
   {
     "id": 337,
@@ -4097,7 +4097,7 @@
     "cue": "this",
     "segments": [ { "blank": "pronomen", "ans": ["Diese"] }, { "text": " Jacke ist leider zu klein." } ],
     "tr": "Unfortunately this jacket is too small.",
-    "ex": "Feminine nominative takes -e: diese Jacke."
+    "ex": "Jacke is feminine and is the subject of the sentence, so it's nominative, which takes -e: diese Jacke."
   },
   {
     "id": 338,
@@ -4109,7 +4109,7 @@
     "cue": "this",
     "segments": [ { "blank": "pronomen", "ans": ["Dieses"] }, { "text": " Restaurant hat sehr gute Bewertungen." } ],
     "tr": "This restaurant has very good reviews.",
-    "ex": "Neuter nominative takes -es: dieses Restaurant."
+    "ex": "Restaurant is neuter and is the subject of the sentence, so it's nominative, which takes -es: dieses Restaurant."
   },
   {
     "id": 339,
@@ -4121,7 +4121,7 @@
     "cue": "these",
     "segments": [ { "blank": "pronomen", "ans": ["Diese"] }, { "text": " Schuhe sind sehr bequem." } ],
     "tr": "These shoes are very comfortable.",
-    "ex": "Plural nominative takes -e: diese Schuhe."
+    "ex": "Schuhe is plural and is the subject of the sentence, so it's nominative, which takes -e: diese Schuhe."
   },
   {
     "id": 340,
@@ -4133,7 +4133,7 @@
     "cue": "this one",
     "segments": [ { "text": "Welches Hemd nimmst du? " }, { "blank": "pronomen", "ans": ["Dieses"] }, { "text": " hier." } ],
     "tr": "Which shirt are you taking? This one here.",
-    "ex": "Standing alone, the demonstrative keeps the full ending: dieses."
+    "ex": "Referring back to das Hemd (neuter) as the implied subject, the standalone demonstrative is nominative and keeps the full ending: dieses."
   },
   {
     "id": 341,
@@ -4145,7 +4145,7 @@
     "cue": "this",
     "segments": [ { "text": "Ich nehme " }, { "blank": "pronomen", "ans": ["diesen"] }, { "text": " Tisch am Fenster." } ],
     "tr": "I will take this table by the window.",
-    "ex": "Masculine accusative takes -en: diesen Tisch."
+    "ex": "Tisch is masculine and is the direct object of nehmen, so it's accusative, which takes -en: diesen Tisch."
   },
   {
     "id": 342,
@@ -4157,7 +4157,7 @@
     "cue": "this",
     "segments": [ { "text": "Kennst du " }, { "blank": "pronomen", "ans": ["diese"] }, { "text": " Frau dort drüben?" } ],
     "tr": "Do you know this woman over there?",
-    "ex": "Feminine accusative takes -e, the same as the nominative."
+    "ex": "Frau is feminine and is the direct object of kennen, so it's accusative, which takes -e (the same as the nominative): diese Frau."
   },
   {
     "id": 343,
@@ -4169,7 +4169,7 @@
     "cue": "this",
     "segments": [ { "text": "Ich habe " }, { "blank": "pronomen", "ans": ["dieses"] }, { "text": " Buch schon zweimal gelesen." } ],
     "tr": "I have read this book twice already.",
-    "ex": "Neuter accusative takes -es, the same as the nominative."
+    "ex": "Buch is neuter and is the direct object of lesen, so it's accusative, which takes -es (the same as the nominative): dieses Buch."
   },
   {
     "id": 344,
@@ -4181,7 +4181,7 @@
     "cue": "these",
     "segments": [ { "text": "Ich möchte " }, { "blank": "pronomen", "ans": ["diese"] }, { "text": " Blumen kaufen." } ],
     "tr": "I would like to buy these flowers.",
-    "ex": "Plural accusative takes -e: diese Blumen."
+    "ex": "Blumen is plural and is the direct object of kaufen, so it's accusative, which takes -e: diese Blumen."
   },
   {
     "id": 345,
@@ -4193,7 +4193,7 @@
     "cue": "this one",
     "segments": [ { "text": "Welchen Kuchen möchtest du? " }, { "blank": "pronomen", "ans": ["Diesen"] }, { "text": " bitte." } ],
     "tr": "Which cake would you like? This one, please.",
-    "ex": "Standing alone in the accusative, the masculine keeps -en: diesen."
+    "ex": "Referring back to den Kuchen (masculine) as the implied direct object, the standalone demonstrative is accusative and keeps -en: diesen."
   },
   {
     "id": 346,
@@ -4205,7 +4205,7 @@
     "cue": "this",
     "segments": [ { "text": "In " }, { "blank": "pronomen", "ans": ["diesem"] }, { "text": " Haus habe ich als Kind gewohnt." } ],
     "tr": "I lived in this house as a child.",
-    "ex": "Neuter dative takes -em: diesem Haus."
+    "ex": "Haus is neuter; describing a fixed location, the preposition in takes the dative here, which adds -em: diesem Haus."
   },
   {
     "id": 347,
@@ -4217,7 +4217,7 @@
     "cue": "this",
     "segments": [ { "text": "Mit " }, { "blank": "pronomen", "ans": ["diesem"] }, { "text": " Zug fahren wir nach Dresden." } ],
     "tr": "We are travelling to Dresden on this train.",
-    "ex": "Masculine dative takes -em: diesem Zug."
+    "ex": "Zug is masculine; the preposition mit always takes the dative, which adds -em: diesem Zug."
   },
   {
     "id": 348,
@@ -4229,7 +4229,7 @@
     "cue": "this",
     "segments": [ { "text": "Bei " }, { "blank": "pronomen", "ans": ["dieser"] }, { "text": " Hitze bleibe ich lieber drinnen." } ],
     "tr": "In this heat I would rather stay indoors.",
-    "ex": "Feminine dative takes -er: dieser Hitze."
+    "ex": "Hitze is feminine; the preposition bei always takes the dative, which adds -er: dieser Hitze."
   },
   {
     "id": 349,
@@ -4241,7 +4241,7 @@
     "cue": "these",
     "segments": [ { "text": "Mit " }, { "blank": "pronomen", "ans": ["diesen"] }, { "text": " Leuten arbeite ich sehr gern." } ],
     "tr": "I really like working with these people.",
-    "ex": "Plural dative takes -en: diesen Leuten."
+    "ex": "Leuten is plural; the preposition mit always takes the dative, which adds -en: diesen Leuten."
   },
   {
     "id": 350,
@@ -4253,7 +4253,7 @@
     "cue": "this",
     "segments": [ { "text": "An " }, { "blank": "pronomen", "ans": ["diesem"] }, { "text": " Wochenende bleiben wir zu Hause." } ],
     "tr": "We are staying at home this weekend.",
-    "ex": "Masculine dative after an: diesem Wochenende."
+    "ex": "Wochenende is neuter; describing a fixed point in time, the preposition an takes the dative here, which adds -em: diesem Wochenende."
   },
   {
     "id": 351,
@@ -4265,7 +4265,7 @@
     "cue": "this",
     "segments": [ { "text": "Der Preis " }, { "blank": "pronomen", "ans": ["dieses"] }, { "text": " Autos ist wirklich zu hoch." } ],
     "tr": "The price of this car is really too high.",
-    "ex": "Neuter genitive takes -es, and the noun adds -s: dieses Autos."
+    "ex": "Auto is neuter and shows possession of the noun Preis, so it's genitive, which takes -es (and the noun itself adds -s): dieses Autos."
   },
   {
     "id": 352,
@@ -4277,7 +4277,7 @@
     "cue": "this",
     "segments": [ { "text": "Die Bewohner " }, { "blank": "pronomen", "ans": ["dieser"] }, { "text": " Stadt sind sehr freundlich." } ],
     "tr": "The inhabitants of this city are very friendly.",
-    "ex": "Feminine genitive takes -er: dieser Stadt."
+    "ex": "Stadt is feminine and shows possession of the noun Bewohner, so it's genitive, which takes -er: dieser Stadt."
   },
   {
     "id": 353,
@@ -4289,7 +4289,7 @@
     "cue": "these",
     "segments": [ { "text": "Die Qualität " }, { "blank": "pronomen", "ans": ["dieser"] }, { "text": " Produkte ist ausgezeichnet." } ],
     "tr": "The quality of these products is excellent.",
-    "ex": "Plural genitive takes -er: dieser Produkte."
+    "ex": "Produkte is plural and shows possession of the noun Qualität, so it's genitive, which takes -er: dieser Produkte."
   },
   {
     "id": 354,
@@ -4301,7 +4301,7 @@
     "cue": "that one",
     "segments": [ { "text": "Wer ist das? " }, { "blank": "pronomen", "ans": ["Der"] }, { "text": " da drüben ist mein Bruder." } ],
     "tr": "Who is that? That one over there is my brother.",
-    "ex": "Used demonstratively and stressed, der replaces a masculine noun and stands first in the sentence."
+    "ex": "Standing for a masculine person and stressed for emphasis, der is the subject of the sentence, so it's nominative: Der da drüben ist mein Bruder."
   },
   {
     "id": 355,
@@ -4313,7 +4313,7 @@
     "cue": "that one",
     "segments": [ { "text": "Welche Tasche meinst du? " }, { "blank": "pronomen", "ans": ["Die"] }, { "text": " mit den roten Streifen." } ],
     "tr": "Which bag do you mean? The one with the red stripes.",
-    "ex": "The feminine demonstrative die stands alone in place of the noun."
+    "ex": "Referring back to die Tasche (feminine) as the subject of the sentence, the stressed demonstrative die is nominative."
   },
   {
     "id": 356,
@@ -4325,7 +4325,7 @@
     "cue": "that",
     "segments": [ { "text": "Kennst du das Café hier? " }, { "blank": "pronomen", "ans": ["Das"] }, { "text": " ist mein Lieblingscafé." } ],
     "tr": "Do you know this café? That is my favourite café.",
-    "ex": "The neuter demonstrative das points back to the whole noun phrase."
+    "ex": "Referring back to das Café (neuter) as the subject of the sentence, the stressed demonstrative das is nominative."
   },
   {
     "id": 357,
@@ -4337,7 +4337,7 @@
     "cue": "that one",
     "segments": [ { "text": "Kennst du den neuen Kollegen? " }, { "blank": "pronomen", "ans": ["Den"] }, { "text": " kenne ich noch nicht." } ],
     "tr": "Do you know the new colleague? I do not know him yet.",
-    "ex": "Fronted for emphasis, the masculine accusative demonstrative is den."
+    "ex": "Referring back to den Kollegen (masculine) as the direct object of kennen, the stressed demonstrative is accusative and fronted for emphasis: den."
   },
   {
     "id": 358,
@@ -4349,7 +4349,7 @@
     "cue": "that one",
     "segments": [ { "text": "Hast du die Rechnung bezahlt? " }, { "blank": "pronomen", "ans": ["Die"] }, { "text": " habe ich schon bezahlt." } ],
     "tr": "Have you paid the bill? I have already paid it.",
-    "ex": "The feminine accusative demonstrative die is fronted for emphasis."
+    "ex": "Referring back to die Rechnung (feminine) as the direct object of bezahlen, the stressed demonstrative is accusative (die is identical to the nominative here) and fronted for emphasis."
   },
   {
     "id": 359,
@@ -4361,7 +4361,7 @@
     "cue": "those",
     "segments": [ { "text": "Magst du diese Bilder? " }, { "blank": "pronomen", "ans": ["Die"] }, { "text": " finde ich wunderschön." } ],
     "tr": "Do you like these pictures? I find them beautiful.",
-    "ex": "The plural demonstrative die stands at the front of the clause."
+    "ex": "Referring back to die Bilder (plural) as the direct object of finden, the stressed demonstrative is accusative (die is identical to the nominative here) and fronted for emphasis."
   },
   {
     "id": 360,
@@ -4373,7 +4373,7 @@
     "cue": "that one",
     "segments": [ { "text": "Hast du dem Nachbarn Bescheid gesagt? " }, { "blank": "pronomen", "ans": ["Dem"] }, { "text": " habe ich schon geschrieben." } ],
     "tr": "Have you told the neighbour? I have already written to him.",
-    "ex": "The masculine dative demonstrative is dem, fronted for emphasis."
+    "ex": "Referring back to dem Nachbarn (masculine) as the indirect object of schreiben, the stressed demonstrative is dative and fronted for emphasis: dem."
   },
   {
     "id": 361,
@@ -4385,7 +4385,7 @@
     "cue": "those",
     "segments": [ { "text": "Traust du den Leuten? " }, { "blank": "pronomen", "ans": ["Denen"] }, { "text": " traue ich überhaupt nicht." } ],
     "tr": "Do you trust those people? I do not trust them at all.",
-    "ex": "The dative plural demonstrative is denen, exactly like the relative pronoun."
+    "ex": "Referring back to den Leuten (plural); trauen governs the dative, so the stressed demonstrative is denen, exactly like the relative pronoun."
   },
   {
     "id": 362,
@@ -4397,7 +4397,7 @@
     "cue": "whose",
     "segments": [ { "text": "Mein Bruder und " }, { "blank": "pronomen", "ans": ["dessen"] }, { "text": " Frau kommen morgen." } ],
     "tr": "My brother and his wife are coming tomorrow.",
-    "ex": "dessen refers unambiguously back to the nearer masculine noun, where sein could be ambiguous."
+    "ex": "Frau shows possession by Bruder (masculine); the genitive demonstrative dessen refers unambiguously back to the nearer masculine noun, where the possessive sein could be ambiguous."
   },
   {
     "id": 363,
@@ -4409,7 +4409,7 @@
     "cue": "whose",
     "segments": [ { "text": "Ich traf Anna und " }, { "blank": "pronomen", "ans": ["deren"] }, { "text": " Schwester am Bahnhof." } ],
     "tr": "I met Anna and her sister at the station.",
-    "ex": "deren refers back to the nearer feminine noun, avoiding the ambiguity of ihre."
+    "ex": "Schwester shows possession by Anna (feminine); the genitive demonstrative deren refers back to the nearer feminine noun, avoiding the ambiguity of the possessive ihre."
   },
   {
     "id": 364,
@@ -4421,7 +4421,7 @@
     "cue": "the same",
     "segments": [ { "text": "Wir haben " }, { "blank": "pronomen", "ans": ["denselben"] }, { "text": " Lehrer wie letztes Jahr." } ],
     "tr": "We have the same teacher as last year.",
-    "ex": "derselbe is written as one word; the first part declines like the article, so masculine accusative gives denselben."
+    "ex": "Lehrer is masculine and is the direct object of haben, so it's accusative; derselbe is written as one word, and its first part declines like the article, giving denselben."
   },
   {
     "id": 365,
@@ -4433,7 +4433,7 @@
     "cue": "the same",
     "segments": [ { "text": "Das ist genau " }, { "blank": "pronomen", "ans": ["dieselbe"] }, { "text": " Geschichte wie gestern." } ],
     "tr": "That is exactly the same story as yesterday.",
-    "ex": "Feminine nominative: dieselbe."
+    "ex": "Geschichte is feminine and is a predicate noun after ist, so it's nominative, giving dieselbe."
   },
   {
     "id": 366,
@@ -4445,7 +4445,7 @@
     "cue": "the same",
     "segments": [ { "text": "Wir wohnen immer noch in " }, { "blank": "pronomen", "ans": ["demselben"] }, { "text": " Haus." } ],
     "tr": "We still live in the same house.",
-    "ex": "Neuter dative after in with a fixed position: demselben."
+    "ex": "Haus is neuter; describing a fixed location, the preposition in takes the dative here, giving demselben."
   },
   {
     "id": 367,
@@ -4457,7 +4457,7 @@
     "cue": "the same",
     "segments": [ { "text": "Ich habe " }, { "blank": "pronomen", "ans": ["dasselbe"] }, { "text": " Problem wie du." } ],
     "tr": "I have the same problem as you.",
-    "ex": "Neuter accusative: dasselbe."
+    "ex": "Problem is neuter and is the direct object of haben, so it's accusative, giving dasselbe."
   },
   {
     "id": 368,
@@ -4469,7 +4469,7 @@
     "cue": "the same",
     "segments": [ { "text": "Wir fahren mit " }, { "blank": "pronomen", "ans": ["demselben"] }, { "text": " Bus wie immer." } ],
     "tr": "We take the same bus as always.",
-    "ex": "Masculine dative: demselben, written as one word."
+    "ex": "Bus is masculine; the preposition mit always takes the dative, giving demselben, written as one word."
   },
   {
     "id": 369,
@@ -4481,7 +4481,7 @@
     "cue": "the same",
     "segments": [ { "text": "Das sind " }, { "blank": "pronomen", "ans": ["dieselben"] }, { "text": " Leute wie auf dem Foto." } ],
     "tr": "Those are the same people as in the photo.",
-    "ex": "Plural nominative: dieselben."
+    "ex": "Leute is plural and is a predicate noun after sind, so it's nominative, giving dieselben."
   },
   {
     "id": 370,
@@ -4493,7 +4493,7 @@
     "cue": "the one who",
     "segments": [ { "blank": "pronomen", "ans": ["Derjenige"] }, { "text": ", der zuletzt geht, macht bitte das Licht aus." } ],
     "tr": "Whoever leaves last should turn off the light.",
-    "ex": "derjenige announces a following relative clause; masculine nominative is derjenige."
+    "ex": "Referring to a masculine person and the subject of macht...aus, derjenige is nominative; it announces the following relative clause (der zuletzt geht)."
   },
   {
     "id": 371,
@@ -4505,7 +4505,7 @@
     "cue": "those who",
     "segments": [ { "blank": "pronomen", "ans": ["Diejenigen"] }, { "text": ", die noch keine Karte haben, bitte hier anstellen." } ],
     "tr": "Those who do not have a ticket yet please queue here.",
-    "ex": "Plural nominative: diejenigen."
+    "ex": "Referring to a plural group and the implied subject of the instruction, diejenigen is nominative; it announces the following relative clause (die noch keine Karte haben)."
   },
   {
     "id": 372,
@@ -4517,7 +4517,7 @@
     "cue": "the one whom",
     "segments": [ { "text": "Ich meine " }, { "blank": "pronomen", "ans": ["denjenigen"] }, { "text": ", der gestern angerufen hat." } ],
     "tr": "I mean the one who called yesterday.",
-    "ex": "Masculine accusative: denjenigen."
+    "ex": "Referring to a masculine person as the direct object of meinen, denjenigen is accusative; it announces the following relative clause (der gestern angerufen hat)."
   },
   {
     "id": 373,
@@ -4529,7 +4529,7 @@
     "cue": "those to whom",
     "segments": [ { "text": "Wir helfen " }, { "blank": "pronomen", "ans": ["denjenigen"] }, { "text": ", die es wirklich brauchen." } ],
     "tr": "We help those who really need it.",
-    "ex": "Dative plural: denjenigen."
+    "ex": "helfen governs the dative, so the plural denjenigen is dative; it announces the following relative clause (die es wirklich brauchen)."
   },
   {
     "id": 374,
@@ -4541,7 +4541,7 @@
     "cue": "such a",
     "segments": [ { "blank": "pronomen", "ans": ["Solch ein"] }, { "text": " Wetter hatten wir lange nicht." } ],
     "tr": "We have not had weather like this for a long time.",
-    "ex": "solch stays uninflected in front of ein, and ein carries the ending."
+    "ex": "Wetter is neuter and is the direct object of haben, so it's accusative; solch stays uninflected in front of ein, and ein carries the ending: solch ein Wetter."
   },
   {
     "id": 375,
@@ -4553,7 +4553,7 @@
     "cue": "such",
     "segments": [ { "text": "Ich habe noch nie " }, { "blank": "pronomen", "ans": ["solche"] }, { "text": " Schuhe gesehen." } ],
     "tr": "I have never seen shoes like these.",
-    "ex": "Plural accusative: solche."
+    "ex": "Schuhe is plural and is the direct object of sehen, so it's accusative, giving solche."
   },
   {
     "id": 376,
@@ -4565,7 +4565,7 @@
     "cue": "such",
     "segments": [ { "text": "Bei " }, { "blank": "pronomen", "ans": ["solchem"] }, { "text": " Wetter bleibe ich lieber im Haus." } ],
     "tr": "In weather like this I would rather stay indoors.",
-    "ex": "Neuter dative: solchem."
+    "ex": "Wetter is neuter; the preposition bei always takes the dative, giving solchem."
   },
   {
     "id": 377,
@@ -4577,7 +4577,7 @@
     "cue": "that",
     "segments": [ { "blank": "pronomen", "ans": ["Jener"] }, { "text": " Sommer war der heißeste seit Jahren." } ],
     "tr": "That summer was the hottest for years.",
-    "ex": "jener declines like dieser but is largely literary; masculine nominative is jener."
+    "ex": "Sommer is masculine and is the subject of the sentence, so it's nominative; jener declines like dieser but is largely literary: jener."
   },
   {
     "id": 378,
@@ -4589,7 +4589,7 @@
     "cue": "that",
     "segments": [ { "text": "In " }, { "blank": "pronomen", "ans": ["jenem"] }, { "text": " Jahr zog die Familie nach Berlin." } ],
     "tr": "In that year the family moved to Berlin.",
-    "ex": "Neuter dative: jenem."
+    "ex": "Jahr is neuter; describing a fixed point in time, the preposition in takes the dative here, giving jenem."
   },
   {
     "id": 379,
@@ -4601,7 +4601,7 @@
     "cue": "that",
     "segments": [ { "text": "Nur wenige erinnern sich noch an " }, { "blank": "pronomen", "ans": ["jene"] }, { "text": " Zeit." } ],
     "tr": "Few people still remember that time.",
-    "ex": "Feminine accusative after an: jene Zeit."
+    "ex": "Zeit is feminine; erinnern sich an takes the accusative, giving jene Zeit."
   },
   {
     "id": 380,
@@ -4613,7 +4613,7 @@
     "cue": "the latter",
     "segments": [ { "text": "Er hat zwei Söhne. " }, { "blank": "pronomen", "ans": ["Dieser"] }, { "text": " studiert, jener arbeitet schon." } ],
     "tr": "He has two sons. The latter studies, the former already works.",
-    "ex": "In a dieser and jener pair, dieser points to the nearer item and jener to the further one."
+    "ex": "Referring to der Sohn (masculine) as the subject of studiert, dieser is nominative; in a dieser/jener pair, dieser points to the nearer item and jener to the further one."
   },
   {
     "id": 381,
