@@ -26445,5 +26445,365 @@
         "pp":  "übersetzt",
         "pp_aux":  "haben",
         "level":  "B1"
+    },
+    {
+        "sn":  955,
+        "type":  "inseparable",
+        "inf":  "gehorchen",
+        "en":  "to obey",
+        "bn":  "মান্য করা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "gehorche",
+                         "du":  "gehorchst",
+                         "er":  "gehorcht",
+                         "wir":  "gehorchen",
+                         "ihr":  "gehorcht",
+                         "sie":  "gehorchen"
+                     },
+        "praeteritum":  {
+                            "ich":  "gehorchte",
+                            "du":  "gehorchtest",
+                            "er":  "gehorchte",
+                            "wir":  "gehorchten",
+                            "ihr":  "gehorchtet",
+                            "sie":  "gehorchten"
+                        },
+        "pp":  "gehorcht",
+        "pp_aux":  "haben",
+        "level":  "A2"
+    },
+    {
+        "sn":  956,
+        "type":  "separable",
+        "inf":  "hinterherlaufen",
+        "prefix":  "hinterher",
+        "en":  "to run after (someone)",
+        "bn":  "পিছনে দৌড়ানো",
+        "aux":  "sein",
+        "praesens":  {
+                         "ich":  "laufe hinterher",
+                         "du":  "läufst hinterher",
+                         "er":  "läuft hinterher",
+                         "wir":  "laufen hinterher",
+                         "ihr":  "lauft hinterher",
+                         "sie":  "laufen hinterher"
+                     },
+        "praeteritum":  {
+                            "ich":  "lief hinterher",
+                            "du":  "liefst hinterher",
+                            "er":  "lief hinterher",
+                            "wir":  "liefen hinterher",
+                            "ihr":  "lieft hinterher",
+                            "sie":  "liefen hinterher"
+                        },
+        "pp":  "hinterhergelaufen",
+        "pp_aux":  "sein",
+        "level":  "A2"
+    },
+    {
+        "sn":  957,
+        "type":  "separable",
+        "inf":  "nachlaufen",
+        "prefix":  "nach",
+        "en":  "to run after (someone)",
+        "bn":  "পিছু দৌড়ানো",
+        "aux":  "sein",
+        "praesens":  {
+                         "ich":  "laufe nach",
+                         "du":  "läufst nach",
+                         "er":  "läuft nach",
+                         "wir":  "laufen nach",
+                         "ihr":  "lauft nach",
+                         "sie":  "laufen nach"
+                     },
+        "praeteritum":  {
+                            "ich":  "lief nach",
+                            "du":  "liefst nach",
+                            "er":  "lief nach",
+                            "wir":  "liefen nach",
+                            "ihr":  "lieft nach",
+                            "sie":  "liefen nach"
+                        },
+        "pp":  "nachgelaufen",
+        "pp_aux":  "sein",
+        "level":  "A2"
+    },
+    {
+        "sn":  958,
+        "type":  "separable",
+        "inf":  "zusehen",
+        "prefix":  "zu",
+        "en":  "to watch / look on",
+        "bn":  "দেখা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "sehe zu",
+                         "du":  "siehst zu",
+                         "er":  "sieht zu",
+                         "wir":  "sehen zu",
+                         "ihr":  "seht zu",
+                         "sie":  "sehen zu"
+                     },
+        "praeteritum":  {
+                            "ich":  "sah zu",
+                            "du":  "sahst zu",
+                            "er":  "sah zu",
+                            "wir":  "sahen zu",
+                            "ihr":  "saht zu",
+                            "sie":  "sahen zu"
+                        },
+        "pp":  "zugesehen",
+        "pp_aux":  "haben",
+        "level":  "A2"
+    },
+    {
+        "sn":  959,
+        "type":  "separable",
+        "inf":  "abraten",
+        "prefix":  "ab",
+        "en":  "to advise against",
+        "bn":  "নিরুৎসাহিত করা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "rate ab",
+                         "du":  "rätst ab",
+                         "er":  "rät ab",
+                         "wir":  "raten ab",
+                         "ihr":  "ratet ab",
+                         "sie":  "raten ab"
+                     },
+        "praeteritum":  {
+                            "ich":  "riet ab",
+                            "du":  "rietst ab",
+                            "er":  "riet ab",
+                            "wir":  "rieten ab",
+                            "ihr":  "rietet ab",
+                            "sie":  "rieten ab"
+                        },
+        "pp":  "abgeraten",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  960,
+        "type":  "inseparable",
+        "inf":  "begegnen",
+        "en":  "to meet / encounter",
+        "bn":  "সাক্ষাৎ হওয়া",
+        "aux":  "sein",
+        "praesens":  {
+                         "ich":  "begegne",
+                         "du":  "begegnest",
+                         "er":  "begegnet",
+                         "wir":  "begegnen",
+                         "ihr":  "begegnet",
+                         "sie":  "begegnen"
+                     },
+        "praeteritum":  {
+                            "ich":  "begegnete",
+                            "du":  "begegnetest",
+                            "er":  "begegnete",
+                            "wir":  "begegneten",
+                            "ihr":  "begegnetet",
+                            "sie":  "begegneten"
+                        },
+        "pp":  "begegnet",
+        "pp_aux":  "sein",
+        "level":  "B1"
+    },
+    {
+        "sn":  961,
+        "type":  "separable",
+        "inf":  "beistehen",
+        "prefix":  "bei",
+        "en":  "to stand by / support",
+        "bn":  "পাশে থাকা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "stehe bei",
+                         "du":  "stehst bei",
+                         "er":  "steht bei",
+                         "wir":  "stehen bei",
+                         "ihr":  "steht bei",
+                         "sie":  "stehen bei"
+                     },
+        "praeteritum":  {
+                            "ich":  "stand bei",
+                            "du":  "standst bei",
+                            "er":  "stand bei",
+                            "wir":  "standen bei",
+                            "ihr":  "standet bei",
+                            "sie":  "standen bei"
+                        },
+        "pp":  "beigestanden",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  962,
+        "type":  "separable",
+        "inf":  "beitreten",
+        "prefix":  "bei",
+        "en":  "to join",
+        "bn":  "যোগ দেওয়া",
+        "aux":  "sein",
+        "praesens":  {
+                         "ich":  "trete bei",
+                         "du":  "trittst bei",
+                         "er":  "tritt bei",
+                         "wir":  "treten bei",
+                         "ihr":  "tretet bei",
+                         "sie":  "treten bei"
+                     },
+        "praeteritum":  {
+                            "ich":  "trat bei",
+                            "du":  "tratst bei",
+                            "er":  "trat bei",
+                            "wir":  "traten bei",
+                            "ihr":  "tratet bei",
+                            "sie":  "traten bei"
+                        },
+        "pp":  "beigetreten",
+        "pp_aux":  "sein",
+        "level":  "B1"
+    },
+    {
+        "sn":  963,
+        "type":  "simple",
+        "inf":  "dienen",
+        "en":  "to serve",
+        "bn":  "সেবা করা",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "diene",
+                         "du":  "dienst",
+                         "er":  "dient",
+                         "wir":  "dienen",
+                         "ihr":  "dient",
+                         "sie":  "dienen"
+                     },
+        "praeteritum":  {
+                            "ich":  "diente",
+                            "du":  "dientest",
+                            "er":  "diente",
+                            "wir":  "dienten",
+                            "ihr":  "dientet",
+                            "sie":  "dienten"
+                        },
+        "pp":  "gedient",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  964,
+        "type":  "separable",
+        "inf":  "entgegenkommen",
+        "prefix":  "entgegen",
+        "en":  "to accommodate / meet halfway",
+        "bn":  "সহযোগিতা করা",
+        "aux":  "sein",
+        "praesens":  {
+                         "ich":  "komme entgegen",
+                         "du":  "kommst entgegen",
+                         "er":  "kommt entgegen",
+                         "wir":  "kommen entgegen",
+                         "ihr":  "kommt entgegen",
+                         "sie":  "kommen entgegen"
+                     },
+        "praeteritum":  {
+                            "ich":  "kam entgegen",
+                            "du":  "kamst entgegen",
+                            "er":  "kam entgegen",
+                            "wir":  "kamen entgegen",
+                            "ihr":  "kamt entgegen",
+                            "sie":  "kamen entgegen"
+                        },
+        "pp":  "entgegengekommen",
+        "pp_aux":  "sein",
+        "level":  "B1"
+    },
+    {
+        "sn":  965,
+        "type":  "separable",
+        "inf":  "zuwinken",
+        "prefix":  "zu",
+        "en":  "to wave at",
+        "bn":  "হাত নাড়া",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "winke zu",
+                         "du":  "winkst zu",
+                         "er":  "winkt zu",
+                         "wir":  "winken zu",
+                         "ihr":  "winkt zu",
+                         "sie":  "winken zu"
+                     },
+        "praeteritum":  {
+                            "ich":  "winkte zu",
+                            "du":  "winktest zu",
+                            "er":  "winkte zu",
+                            "wir":  "winkten zu",
+                            "ihr":  "winktet zu",
+                            "sie":  "winkten zu"
+                        },
+        "pp":  "zugewinkt",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  966,
+        "type":  "simple",
+        "inf":  "ähneln",
+        "en":  "to resemble",
+        "bn":  "সদৃশ হওয়া",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "ähnele",
+                         "du":  "ähnelst",
+                         "er":  "ähnelt",
+                         "wir":  "ähneln",
+                         "ihr":  "ähnelt",
+                         "sie":  "ähneln"
+                     },
+        "praeteritum":  {
+                            "ich":  "ähnelte",
+                            "du":  "ähneltest",
+                            "er":  "ähnelte",
+                            "wir":  "ähnelten",
+                            "ihr":  "ähneltet",
+                            "sie":  "ähnelten"
+                        },
+        "pp":  "geähnelt",
+        "pp_aux":  "haben",
+        "level":  "B1"
+    },
+    {
+        "sn":  967,
+        "type":  "separable",
+        "inf":  "wehtun",
+        "prefix":  "weh",
+        "en":  "to hurt",
+        "bn":  "ব্যথা দেওয়া",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "tue weh",
+                         "du":  "tust weh",
+                         "er":  "tut weh",
+                         "wir":  "tun weh",
+                         "ihr":  "tut weh",
+                         "sie":  "tun weh"
+                     },
+        "praeteritum":  {
+                            "ich":  "tat weh",
+                            "du":  "tatest weh",
+                            "er":  "tat weh",
+                            "wir":  "taten weh",
+                            "ihr":  "tatet weh",
+                            "sie":  "taten weh"
+                        },
+        "pp":  "wehgetan",
+        "pp_aux":  "haben",
+        "level":  "A1"
     }
 ]

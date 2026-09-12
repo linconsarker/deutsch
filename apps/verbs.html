@@ -314,7 +314,7 @@ main { padding: 24px 28px 32px; }
 
 .verb-header {
   display: grid;
-  grid-template-columns: 30px 150px 50px minmax(160px, 1fr) 66px 120px 66px 148px 178px 20px;
+  grid-template-columns: 50px 30px 150px minmax(160px, 1fr) 66px 120px 66px 148px 178px 20px;
   align-items: center;
   align-content: center;
   column-gap: 8px;
@@ -1179,6 +1179,9 @@ const DATIVE_VERBS = [
   'widersprechen','widerstehen','unterliegen','entsprechen','zustimmen','zuhören',
   'fehlen','gratulieren','gleichen','genügen','antworten','raten','verzeihen','drohen',
   'auffallen','einfallen','leidtun','vorkommen','schmeicheln',
+  'absagen','zusagen','passieren','befehlen',
+  'gehorchen','hinterherlaufen','nachlaufen','zusehen','abraten','begegnen',
+  'beistehen','beitreten','dienen','entgegenkommen','zuwinken','ähneln','wehtun',
 ];
 
 const DITRANSITIVE_VERBS = [
@@ -1189,12 +1192,13 @@ const DITRANSITIVE_VERBS = [
   'schicken','zuschicken','senden','verraten','beifügen','überreichen',
   'vorspielen','vorsingen','weiterleiten','weiterschicken','zutrauen',
   'schreiben','sagen','wünschen','abkaufen','diktieren','mailen','simsen','reichen',
+  'vorstellen',
 ];
 
 const REFLEXIVE_VERBS = [
   'beeilen','beschweren','entschuldigen','bedanken','verabreden','verabschieden',
   'erinnern','freuen','konzentrieren','kümmern','gewöhnen',
-  'unterhalten','bewerben','entschließen','verirren','entspannen','vorstellen',
+  'unterhalten','bewerben','entschließen','verirren','entspannen',
   'benehmen','wohlfühlen','ausruhen','auskennen',
   'abwechseln','abmelden','anmelden','einloggen','ausloggen','qualifizieren',
   'engagieren','eincremen','verschlucken','umdrehen','schminken','überlegen',
@@ -1214,7 +1218,7 @@ const INTRANSITIVE_VERBS = [
   'aufhören','ankommen','aufstehen','ausgehen','aussehen','durchgehen',
   'einfahren','eingehen','fortfahren','fortgehen','herkommen','hinfahren',
   'umsteigen','zunehmen','aufwachen','erwachen','einschlafen','ausschlafen',
-  'freihaben','heißen','klingen','zusagen','absagen','zusammenpassen',
+  'freihaben','heißen','klingen','zusammenpassen',
   'entstehen','erlöschen','erscheinen','frieren','gedeihen','geraten','scheiden',
   'schleichen','schmelzen','schreiten','schwellen','schwinden','sprießen',
   'kriechen','quellen','dringen','gelangen','vergehen','stürzen','spinnen','sinnen',
@@ -1230,7 +1234,7 @@ const INTRANSITIVE_VERBS = [
   'reisen','verreisen','tanzen','schwitzen','pendeln','wandern','klettern',
   'dauern','basteln','angeln','klingeln','lächeln','landen','langlaufen','lauten',
   'losgehen','mitarbeiten','mitspielen','musizieren','nachfragen','nieseln',
-  'passieren','pfeifen','duschen','trainieren','einkaufen','streiten',
+  'pfeifen','duschen','trainieren','einkaufen','streiten',
   'schauen','schaukeln','schimpfen','segeln','shoppen','skypen','staunen',
   'stimmen','streiken','variieren','zusammenarbeiten','zusammenleben',
   'zusammenwohnen','babysitten','baden','bellen','blicken','blitzen','bloggen',
@@ -1307,9 +1311,9 @@ function renderCard(v) {
   return `
     <div class="verb-card vt-${v.type}" id="card-${v.sn}" onclick="toggleCard(${v.sn})">
       <div class="verb-header">
+        <span class="level-badge lvl-${v.level}">${v.level}</span>
         <button class="speak-btn" onclick="speakGerman('${v.inf}', event, this)" title="Listen: ${v.inf}">🔊</button>
         <span class="inf">${renderInfName(v)}</span>
-        <span class="level-badge lvl-${v.level}">${v.level}</span>
         <div class="meanings">${enMeaning}${bnMeaning}</div>
         <span class="aux-col">aux: ${v.pp_aux}</span>
         <span class="opp-col">${oppHeaderBadge}</span>

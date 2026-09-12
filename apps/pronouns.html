@@ -198,20 +198,25 @@
   .tbl-split table.gt{min-width:0;}
   .poss-full-wrap{border:1px solid var(--border);border-radius:9px;overflow:hidden;margin-bottom:10px;}
   .poss-full-title{background:var(--surface-2);text-align:center;font-weight:700;font-family:var(--du-font);font-size:13px;padding:8px;border-bottom:1px solid var(--border);}
-  .poss-full-wrap .tbl-split{margin-bottom:0;}
-  .poss-full-wrap .tbl-wrap{border:none;border-radius:0;}
-  .poss-full-wrap .tbl-wrap:first-child{border-right:1px solid var(--border);}
-  table.gt-poss-full td[data-i18n^="refPersonGroup"],
-  table.gt-poss-full td[data-i18n="thMasc"],
-  table.gt-poss-full td[data-i18n="thFem"],
-  table.gt-poss-full td[data-i18n="thNeut"],
-  table.gt-poss-full td[data-i18n="thPlural"]{color:var(--gen);}
+  .poss-full-wrap .tbl-split{margin-bottom:0;gap:6px;}
+  .poss-full-wrap .tbl-wrap{border:none;border-radius:0;min-width:0;}
+  .poss-full-wrap .tbl-wrap:first-child{border-right:1px solid var(--border);flex:0 0 52%;}
+  .poss-full-wrap .tbl-wrap:last-child{flex:0 0 calc(48% - 6px);}
   table.gt{width:100%;border-collapse:collapse;font-size:12.5px;min-width:380px;}
   table.gt th,table.gt td{padding:7px 9px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;}
   table.gt th:last-child,table.gt td:last-child{border-right:none;}
   table.gt tr:last-child td{border-bottom:none;}
   table.gt th{background:var(--surface-2);font-family:var(--du-mono);font-size:10px;letter-spacing:.03em;color:var(--text-muted);font-weight:600;}
   table.gt td:first-child,table.gt th:first-child{text-align:left;}
+  table.gt-poss-full{min-width:0;}
+  table.gt-poss-full th,table.gt-poss-full td{padding:6px 4px;letter-spacing:0;}
+  table.gt-poss-wide{font-size:9.3px;table-layout:fixed;}
+  table.gt-poss-wide th,table.gt-poss-wide td{padding:5px 2px;overflow-wrap:break-word;letter-spacing:0;}
+  table.gt-poss-full td[data-i18n^="refPersonGroup"],
+  table.gt-poss-full td[data-i18n="thMasc"],
+  table.gt-poss-full td[data-i18n="thFem"],
+  table.gt-poss-full td[data-i18n="thNeut"],
+  table.gt-poss-full td[data-i18n="thPlural"]{color:var(--gen);}
   table.gt-grouped thead tr:nth-child(2) th:first-child{text-align:center;}
   /* Rows that share their Person label via rowspan (Sie/sie/es continuation
      rows) have no label cell of their own, so their Nominativ value becomes
@@ -504,7 +509,11 @@
           <div class="poss-full-title" data-i18n="refPossFullTitle">Possessivpronomen</div>
           <div class="tbl-split">
             <div class="tbl-wrap">
-              <table class="gt gt-poss-full">
+              <table class="gt gt-poss-full gt-poss-wide">
+                <colgroup>
+                  <col style="width:13%"><col style="width:13%"><col style="width:18.5%">
+                  <col style="width:18.5%"><col style="width:18.5%"><col style="width:18.5%">
+                </colgroup>
                 <thead><tr>
                   <th colspan="2" data-i18n="thPronoun">Pronomen</th><th data-i18n="thGenus">Genus</th>
                   <th data-i18n="caseNominativ">Nominativ</th><th data-i18n="caseAkkusativ">Akkusativ</th><th data-i18n="caseDativ">Dativ</th>
