@@ -963,7 +963,7 @@
                         },
         "pp":  "vorgeschlagen",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A2"
     },
     {
         "sn":  70,
@@ -1656,7 +1656,7 @@
                         },
         "pp":  "gebracht",
         "pp_aux":  "haben",
-        "level":  "A1"
+        "level":  "A2"
     },
     {
         "sn":  25,
@@ -1791,7 +1791,7 @@
                         },
         "pp":  "geholfen",
         "pp_aux":  "haben",
-        "level":  "B1",
+        "level":  "A1",
         "opp":  {
                     "inf":  "schaden",
                     "en":  "to harm / to damage",
@@ -2678,7 +2678,7 @@
                         },
         "pp":  "empfohlen",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A2"
     },
     {
         "sn":  95,
@@ -3061,7 +3061,7 @@
                         },
         "pp":  "geraten",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A1"
     },
     {
         "sn":  109,
@@ -3196,7 +3196,7 @@
                         },
         "pp":  "befohlen",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A2"
     },
     {
         "sn":  114,
@@ -4820,7 +4820,7 @@
                         },
         "pp":  "gefallen",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  173,
@@ -6758,7 +6758,7 @@
                         },
         "pp":  "gezeigt",
         "pp_aux":  "haben",
-        "level":  "A1",
+        "level":  "A2",
         "opp":  {
                     "inf":  "verstecken",
                     "en":  "to hide",
@@ -6957,7 +6957,7 @@
                         },
         "pp":  "gefolgt",
         "pp_aux":  "sein",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  251,
@@ -7178,7 +7178,7 @@
                         },
         "pp":  "gefehlt",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  259,
@@ -7264,7 +7264,7 @@
                         },
         "pp":  "erklärt",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A2"
     },
     {
         "sn":  262,
@@ -8087,7 +8087,7 @@
                         },
         "pp":  "erlaubt",
         "pp_aux":  "haben",
-        "level":  "B1",
+        "level":  "A2",
         "opp":  {
                     "inf":  "verbieten",
                     "en":  "to forbid",
@@ -8421,7 +8421,7 @@
                         },
         "pp":  "vertraut",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A2"
     },
     {
         "sn":  303,
@@ -8448,7 +8448,7 @@
                         },
         "pp":  "geschmeckt",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  304,
@@ -9612,7 +9612,7 @@
                         },
         "pp":  "gepasst",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  346,
@@ -10211,7 +10211,7 @@
                         },
         "pp":  "gratuliert",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  368,
@@ -10400,7 +10400,7 @@
                         },
         "pp":  "passiert",
         "pp_aux":  "sein",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  375,
@@ -10589,7 +10589,7 @@
                         },
         "pp":  "gehört",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  382,
@@ -10617,7 +10617,7 @@
                         },
         "pp":  "vorgestellt",
         "pp_aux":  "haben",
-        "level":  "B1"
+        "level":  "A2"
     },
     {
         "sn":  383,
@@ -10884,7 +10884,7 @@
                         },
         "pp":  "zugehört",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  392,
@@ -12047,7 +12047,7 @@
                         },
         "pp":  "zugesagt",
         "pp_aux":  "haben",
-        "level":  "B1",
+        "level":  "A2",
         "opp":  {
                     "inf":  "absagen",
                     "en":  "to cancel / decline",
@@ -12080,7 +12080,7 @@
                         },
         "pp":  "abgesagt",
         "pp_aux":  "haben",
-        "level":  "A2",
+        "level":  "A1",
         "opp":  {
                     "inf":  "zusagen",
                     "en":  "to agree / accept (an invitation)",
@@ -12113,7 +12113,7 @@
                         },
         "pp":  "zugestimmt",
         "pp_aux":  "haben",
-        "level":  "B1",
+        "level":  "A2",
         "opp":  {
                     "inf":  "widersprechen",
                     "en":  "to contradict",
@@ -13649,7 +13649,7 @@
                         },
         "pp":  "geantwortet",
         "pp_aux":  "haben",
-        "level":  "A2"
+        "level":  "A1"
     },
     {
         "sn":  487,
@@ -26805,5 +26805,32 @@
         "pp":  "wehgetan",
         "pp_aux":  "haben",
         "level":  "A1"
+    },
+    {
+        "sn":  968,
+        "type":  "simple",
+        "inf":  "nützen",
+        "en":  "to be of use / benefit",
+        "bn":  "উপকারী হওয়া",
+        "aux":  "haben",
+        "praesens":  {
+                         "ich":  "nütze",
+                         "du":  "nützt",
+                         "er":  "nützt",
+                         "wir":  "nützen",
+                         "ihr":  "nützt",
+                         "sie":  "nützen"
+                     },
+        "praeteritum":  {
+                            "ich":  "nützte",
+                            "du":  "nütztest",
+                            "er":  "nützte",
+                            "wir":  "nützten",
+                            "ihr":  "nütztet",
+                            "sie":  "nützten"
+                        },
+        "pp":  "genützt",
+        "pp_aux":  "haben",
+        "level":  "B1"
     }
 ]

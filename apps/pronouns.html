@@ -277,6 +277,24 @@
     color:var(--text-dim);margin:16px 0 2px;padding-top:12px;border-top:2px solid var(--border);
   }
 
+  /* ALL QUESTIONS / SOLUTIONS LIST */
+  .qa-count{font-family:var(--du-mono);font-size:10.5px;color:var(--text-dim);margin-bottom:8px;}
+  .qa-row{padding:11px 0;border-top:1px solid var(--border);}
+  .qa-row:first-of-type{border-top:none;}
+  .qa-status{
+    font-family:var(--du-mono);font-size:10px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;
+  }
+  .qa-status.solved{background:var(--success-dim);color:var(--success);}
+  .qa-status.wrong{background:var(--error-dim);color:var(--error);}
+  .qa-status.unsolved{background:var(--surface-2);color:var(--text-dim);}
+  .qa-status.known{background:var(--gen-dim);color:var(--gen);}
+  .qa-orig{font-size:13px;color:var(--text-muted);margin-top:7px;}
+  .qa-arrow{font-family:var(--du-mono);font-size:10px;color:var(--text-dim);margin:3px 0;}
+  .qa-sentence{font-size:14.5px;font-weight:500;color:var(--text);margin-top:3px;}
+  .qa-sentence .qa-ans{color:var(--gen);border-bottom:2px solid var(--gen);padding-bottom:1px;}
+  .qa-tr{font-size:12px;color:var(--text-dim);font-style:italic;margin-top:4px;}
+
   @media (max-width:560px){
     .app-header{flex-wrap:wrap;}
     .brand{flex:1 1 100%;}
@@ -328,10 +346,12 @@
         <div class="sub" data-i18n="appSubtitle">ich · mich · mir — wer, wen, wem?</div>
       </div>
     </div>
-    <div class="d-flex gap-1 flex-shrink-0">
+    <div class="d-flex gap-1 flex-shrink-0 flex-wrap justify-content-end">
       <button class="btn btn-sm btn-outline-secondary" id="langToggle" title="Switch language">EN</button>
       <button class="btn btn-sm btn-outline-secondary" id="progressToggle">📊 <span data-i18n="progressBtnLabel">Fortschritt</span></button>
       <button class="btn btn-sm btn-outline-secondary" id="refToggle">📖 <span data-i18n="refBtnLabel">Übersicht</span></button>
+      <button class="btn btn-sm btn-outline-secondary" id="allQaToggle">📋 <span data-i18n="allQaBtnLabel">Fragen</span></button>
+      <button class="btn btn-sm btn-outline-secondary" id="shuffleBtn" title="Mischen">🔀</button>
       <button class="btn btn-sm btn-outline-secondary" id="resetProgress" title="Fortschritt zurücksetzen">↺</button>
     </div>
   </div>
@@ -724,6 +744,27 @@
   </div>
 </div>
 
+<!-- ALL QUESTIONS / SOLUTIONS MODAL -->
+<div class="modal fade" id="allQaModal" tabindex="-1" aria-labelledby="allQaTitleText" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="allQaTitleText" data-i18n="allQaTitleText">Alle Fragen &amp; Lösungen</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="select-row" style="margin-bottom:8px;">
+          <select class="du-field" id="qaTypeSelect" aria-label="Art"></select>
+          <select class="du-field" id="qaLevelSelect" aria-label="Niveau"></select>
+          <select class="du-field" id="qaStatusSelect" aria-label="Status"></select>
+        </div>
+        <div class="qa-count" id="allQaCount"></div>
+        <div class="qa-list" id="allQaList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>function loadJson(path){var request=new XMLHttpRequest();request.open("GET",path,false);request.send(null);if(request.status!==200 && request.status!==0){throw new Error("Could not load " + path);}return JSON.parse(request.responseText);}</script><script>
 /* ============================================================
@@ -746,6 +787,9 @@ const STRINGS = {
   de: {
     appTitle:"Pronomen", appSubtitle:"ich · mich · mir — wer, wen, wem?",
     refBtnLabel:"Übersicht", progressBtnLabel:"Fortschritt", resetTitle:"Fortschritt zurücksetzen",
+    allQaBtnLabel:"Fragen", allQaTitleText:"Alle Fragen & Lösungen",
+    qaCount:n=>`${n} Fragen`, qaEmpty:"Keine Fragen für diese Filter.", qaSolutionPrefix:"Lösung:",
+    shuffleTitle:"Karten mischen",
     labelType:"Art", labelPerson:"Person",
     personNote:"Diese Pronomenart richtet sich nicht nach der Person.",
     typeAll:"Alle", typePersonal:"Personal", typePossessiv:"Possessiv", typeReflexiv:"Reflexiv",
@@ -753,7 +797,7 @@ const STRINGS = {
     personAll:"Alle",
     caseAll:"Alle Kasus", caseNominativ:"Nominativ", caseAkkusativ:"Akkusativ", caseDativ:"Dativ", caseGenitiv:"Genitiv",
     levelAll:"Alle Niveaus",
-    statusAll:"Alle", statusUnsolved:"Ungelöst", statusWrong:"Falsch",
+    statusAll:"Alle", statusUnsolved:"Ungelöst", statusWrong:"Falsch", statusSolved:"Gelöst", statusKnown:"Bekannt",
     labelStatCorrect:"Richtig", labelStatTotal:"Versuche", labelStatAcc:"Genauigkeit", labelStatStreak:"Serie",
     remaining:n=>`${n} übrig`,
     knownBtn:"✓ Kenne ich", skipBtn:"Überspringen", checkBtn:"Prüfen", nextBtn:"Weiter →",
@@ -767,7 +811,7 @@ const STRINGS = {
     tabWordOrder:"Wortstellung",
     resetConfirm:"Gesamten Fortschritt zurücksetzen? Dies kann nicht rückgängig gemacht werden.",
     progTotal:"gesamt", progCorrect:"richtig", progWrong:"falsch", progUnsolved:"offen",
-    progByType:"Nach Pronomenart", progByPerson:"Nach Person",
+    progByType:"Nach Pronomenart", progByPerson:"Nach Person", progByLevel:"Nach Niveau",
     langToggleLabel:"EN",
     thPerson:"Person", thPronoun:"Pronomen", thGenus:"Genus", thCase:"Kasus", thMasc:"maskulin", thFem:"feminin", thNeut:"neutrum", thPlural:"Plural", thSingular:"Singular",
     thPeople:"Personen", thThings:"Sachen",
@@ -809,6 +853,9 @@ const STRINGS = {
   en: {
     appTitle:"Pronouns", appSubtitle:"ich · mich · mir — who, whom, to whom?",
     refBtnLabel:"Overview", progressBtnLabel:"Progress", resetTitle:"Reset progress",
+    allQaBtnLabel:"Q&A", allQaTitleText:"All Questions & Solutions",
+    qaCount:n=>`${n} questions`, qaEmpty:"No questions match these filters.", qaSolutionPrefix:"Answer:",
+    shuffleTitle:"Shuffle cards",
     labelType:"Type", labelPerson:"Person",
     personNote:"This pronoun family does not change by person.",
     typeAll:"All", typePersonal:"Personal", typePossessiv:"Possessive", typeReflexiv:"Reflexive",
@@ -816,7 +863,7 @@ const STRINGS = {
     personAll:"All",
     caseAll:"All cases", caseNominativ:"Nominative", caseAkkusativ:"Accusative", caseDativ:"Dative", caseGenitiv:"Genitive",
     levelAll:"All levels",
-    statusAll:"All", statusUnsolved:"Unsolved", statusWrong:"Mistaken",
+    statusAll:"All", statusUnsolved:"Unsolved", statusWrong:"Mistaken", statusSolved:"Solved", statusKnown:"Known",
     labelStatCorrect:"Correct", labelStatTotal:"Attempts", labelStatAcc:"Accuracy", labelStatStreak:"Streak",
     remaining:n=>`${n} left`,
     knownBtn:"✓ I know this", skipBtn:"Skip", checkBtn:"Check", nextBtn:"Next →",
@@ -830,7 +877,7 @@ const STRINGS = {
     tabWordOrder:"Word order",
     resetConfirm:"Reset all progress? This cannot be undone.",
     progTotal:"total", progCorrect:"correct", progWrong:"wrong", progUnsolved:"unsolved",
-    progByType:"By pronoun family", progByPerson:"By person",
+    progByType:"By pronoun family", progByPerson:"By person", progByLevel:"By level",
     langToggleLabel:"DE",
     thPerson:"Person", thPronoun:"Pronoun", thGenus:"Gender", thCase:"Case", thMasc:"masculine", thFem:"feminine", thNeut:"neuter", thPlural:"plural", thSingular:"Singular",
     thPeople:"People", thThings:"Things",
@@ -917,6 +964,16 @@ const STATUSES = [
   {id:"unsolved",key:"statusUnsolved"},
   {id:"wrong",key:"statusWrong"},
 ];
+/* Status options for the "All Questions" answer-key modal — a superset of
+   STATUSES that also distinguishes solved-correctly from marked-known,
+   since that list is a reference view rather than a practice filter. */
+const QA_STATUSES = [
+  {id:"all",key:"statusAll"},
+  {id:"solved",key:"statusSolved"},
+  {id:"wrong",key:"statusWrong"},
+  {id:"unsolved",key:"statusUnsolved"},
+  {id:"known",key:"statusKnown"},
+];
 
 /* ============================================================
    STATE / STORAGE
@@ -949,6 +1006,35 @@ let currentIndex = 0;
 let current = null;
 let answered = false;
 let pronunciationAudio = null;
+/* Primary voice is Google Translate's own "listen" audio; if that request
+   ever fails (network policy, endpoint hiccup, CORS in some environments)
+   this falls back to the browser's own speechSynthesis with a preferred
+   German "Google" network voice, so the speaker button never goes silent. */
+let germanVoice = null;
+function pickGermanVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  return voices.find(v=>v.lang==="de-DE" && /google/i.test(v.name))
+    || voices.find(v=>/^de/i.test(v.lang) && /google/i.test(v.name))
+    || voices.find(v=>v.lang==="de-DE")
+    || voices.find(v=>/^de/i.test(v.lang))
+    || null;
+}
+if('speechSynthesis' in window){
+  germanVoice = pickGermanVoice();
+  window.speechSynthesis.onvoiceschanged = ()=>{ germanVoice = pickGermanVoice(); };
+}
+function speakWithBrowserVoice(text){
+  if(!('speechSynthesis' in window)) return;
+  try{
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "de-DE";
+    u.rate = 0.9;
+    if(germanVoice) u.voice = germanVoice;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
 
 /* ============================================================
    HELPERS
@@ -966,6 +1052,7 @@ function personActiveAllowed(){
 function playPronunciation(){
   if(!current) return;
   if(pronunciationAudio){ pronunciationAudio.pause(); pronunciationAudio = null; }
+  try{ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }catch(e){}
   const button = document.getElementById("pronunciationBtn");
   if(!button || button.disabled) return;
   const sentence = fullGermanSentence(current);
@@ -981,9 +1068,13 @@ function playPronunciation(){
       button.title = "Play German pronunciation";
     }
   };
+  const fallback = ()=>{
+    resetButton();
+    speakWithBrowserVoice(sentence);
+  };
   audio.addEventListener("ended", resetButton, {once:true});
-  audio.addEventListener("error", resetButton, {once:true});
-  audio.play().catch(resetButton);
+  audio.addEventListener("error", fallback, {once:true});
+  audio.play().catch(fallback);
 }
 function itemStat(id){
   if(!store.items[id]) store.items[id] = {correct:0, attempts:0, known:false, lastCorrect:null};
@@ -1154,6 +1245,11 @@ function renderProgress(){
     html += progRow(p.label + " · " + t(PERSON_LONG[p.id]), statsFor(items), `data-person="${p.id}"`);
   });
 
+  html += `<div class="prog-head">${t("progByLevel")}</div>`;
+  LEVELS.filter(l=>l.id!=="all").forEach(l=>{
+    html += progRow(l.label, statsFor(DATA.filter(d=>d.level===l.id)), `data-level="${l.id}"`);
+  });
+
   progressBody.innerHTML = html;
   progressBody.querySelectorAll(".prog-row").forEach(row=>{
     row.addEventListener("click", ()=>{
@@ -1163,15 +1259,90 @@ function renderProgress(){
       } else if(row.dataset.person){
         store.activePerson = row.dataset.person;
         if(!personActiveAllowed()) store.activeType = "all";
+      } else if(row.dataset.level){
+        store.activeLevel = row.dataset.level;
       }
       saveStore();
       renderTypeChips();
       renderPersonChips();
+      renderSelects();
       refresh();
       progressModal.hide();
     });
   });
 }
+
+/* ============================================================
+   ALL QUESTIONS / SOLUTIONS MODAL
+   A reference list of every sentence with its solution filled in,
+   so a learner can review answers or see at a glance what is
+   already solved vs. still open — independent of the practice
+   filters above, with its own Type/Level/Status selection.
+   ============================================================ */
+const allQaModal = new bootstrap.Modal(document.getElementById("allQaModal"));
+let qaType = "all", qaLevel = "all", qaStatus = "all";
+
+function qaItemStatusId(d){
+  const s = itemStat(d.id);
+  if(s.known) return "known";
+  if(s.attempts === 0) return "unsolved";
+  return s.lastCorrect ? "solved" : "wrong";
+}
+function qaMatches(d){
+  if(qaType !== "all" && d.type !== qaType) return false;
+  if(qaLevel !== "all" && d.level !== qaLevel) return false;
+  if(qaStatus !== "all" && qaItemStatusId(d) !== qaStatus) return false;
+  return true;
+}
+function qaRow(d){
+  const statusId = qaItemStatusId(d);
+  /* Built segment-by-segment (not via a text-search highlight) so that
+     items with two blanks — the "es ihm" / "sie ihr" word-order drills —
+     get both answers marked, not just the first occurrence. */
+  const sentenceHtml = d.segments.map(seg =>
+    seg.blank ? `<b class="qa-ans">${escapeHtml(seg.ans[0])}</b>` : escapeHtml(seg.text)
+  ).join("");
+  const origHtml = d.mode === "ersetzen" ? `
+    <div class="qa-orig">${d.orig.map(seg=>
+        seg.mark ? `<span class="orig-mark">${escapeHtml(seg.mark)}</span>` : escapeHtml(seg.text)
+      ).join("")}</div>
+    <div class="qa-arrow">→</div>` : "";
+  return `
+    <div class="qa-row">
+      <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+        <div class="tag-row">
+          <span class="type-tag ${d.type}">${typeLabel(d.type)}</span>
+          <span class="du-level ${d.level}">${d.level}</span>
+          <span class="case-badge badge rounded-pill ${d.case}">${caseLabel(d.case)}</span>
+        </div>
+        <span class="qa-status ${statusId}">${t("status" + statusId.charAt(0).toUpperCase() + statusId.slice(1))}</span>
+      </div>
+      ${origHtml}
+      <div class="qa-sentence">${sentenceHtml}</div>
+      <div class="qa-tr">${escapeHtml(d.tr)}</div>
+    </div>`;
+}
+function fillPlainSelect(id, options, activeValue, onChange){
+  const el = document.getElementById(id);
+  el.innerHTML = options.map(o=>{
+    const label = escapeHtml(o.key ? t(o.key) : o.label);
+    return `<option value="${o.id}"${o.id === activeValue ? " selected" : ""}>${label}</option>`;
+  }).join("");
+  el.onchange = ()=>{ onChange(el.value); renderAllQa(); };
+}
+function renderQaFilters(){
+  fillPlainSelect("qaTypeSelect", TYPES, qaType, v=>qaType=v);
+  fillPlainSelect("qaLevelSelect", LEVELS, qaLevel, v=>qaLevel=v);
+  fillPlainSelect("qaStatusSelect", QA_STATUSES, qaStatus, v=>qaStatus=v);
+}
+function renderAllQa(){
+  const items = DATA.filter(qaMatches);
+  document.getElementById("allQaCount").textContent = t("qaCount")(items.length);
+  document.getElementById("allQaList").innerHTML = items.length
+    ? items.map(qaRow).join("")
+    : `<div class="empty-state" style="padding:24px 12px;">${t("qaEmpty")}</div>`;
+}
+document.getElementById("allQaToggle").onclick = ()=>{ renderQaFilters(); renderAllQa(); allQaModal.show(); };
 
 /* ============================================================
    RENDER: STATS
@@ -1344,6 +1515,18 @@ function toggleKnown(){
 }
 
 /* ============================================================
+   SHUFFLE
+   buildPool() already reshuffles on every filter change and once
+   the deck is exhausted; this button lets the learner reshuffle
+   the current deck on demand, mid-session, without changing filters.
+   ============================================================ */
+document.getElementById("shuffleBtn").onclick = ()=>{
+  buildPool();
+  renderCard();
+  updateStats();
+};
+
+/* ============================================================
    RESET
    ============================================================ */
 document.getElementById("resetProgress").onclick = ()=>{
@@ -1372,6 +1555,7 @@ function applyLanguage(){
     if(typeof value === "string") el.innerHTML = value;
   });
   document.getElementById("resetProgress").title = t("resetTitle");
+  document.getElementById("shuffleBtn").title = t("shuffleTitle");
   document.getElementById("langToggle").textContent = t("langToggleLabel");
   document.documentElement.lang = uiLang;
 }
@@ -1386,6 +1570,7 @@ document.getElementById("langToggle").onclick = ()=>{
   renderCard();
   updateStats();
   if(document.getElementById("progressModal").classList.contains("show")) renderProgress();
+  if(document.getElementById("allQaModal").classList.contains("show")){ renderQaFilters(); renderAllQa(); }
 };
 
 /* ============================================================
